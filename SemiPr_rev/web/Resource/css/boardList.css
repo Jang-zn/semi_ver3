@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+#board_container * {
+	border: 1px skyblue solid;
+	margin: 0;
+}
+
+#board_container li {
+	list-style: none;
+}
+
+#board_head>ul, #board_body>ul {
+	display: flex;
+}
+
+#board_head>ul>li, #board_body>ul>li {
+	margin: 0.3%;
+}
+
+#content_count {
+	padding: 0.5%;
+	display: flex;
+}
+
+#board_body, #board_head {
+	font-size: 14px;
+}
+
+.board_sort {
+	width: 5%;
+	text-align: center;
+	align-self: center;
+}
+
+.board_title {
+	width: 70%;
+	display: flex;
+}
+
+.board_content_info {
+	width: 10%;
+	align-self: center;
+	text-align: center;
+}
+
+div.board_file_img {
+	width: 3%;
+}
+
+div.board_file_img>img {
+	width: 100%;
+	height: 100%;
+}
+
+#board_pageBar {
+	text-align: center;
+	margin: 1%;
+}

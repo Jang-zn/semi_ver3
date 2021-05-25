@@ -1,0 +1,48 @@
+body {
+  font-family: Dotum, '돋움', Helvetica, sans-serif;
+}
+
+.list li {
+  list-style: none;
+  padding-left: 0;
+}
+
+section p {
+  font-size: 12px;
+}
+
+legend {
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.label_txt {
+  margin: 6px 0 0;
+}
+
+.forgot {
+  width: 700px;
+  border: 3px solid rgba(156, 154, 154, 0.418);
+  margin-top: 7%;
+  margin-bottom:7%;
+  margin-left:25%;
+  padding :3%
+}
+.question {
+  padding: 0px 0px 0px 30px;
+  padding-top: 0;
+}
+
+.email {
+  padding: 0px 10px 10px 30px;
+  margin-top: 10px;
+}
+
+.forgot_btn {
+  padding: 0 0px 0 150px;
+  font-size: 16px;
+}
+
+input{
+  font-family: Dotum, '돋움', Helvetica, sans-serif;
+}
