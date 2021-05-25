@@ -1,0 +1,11 @@
+/classes/
+/Resource/driver/
+/Resource/sql/
+/web/upload/
+*.key
+*.class
+.classpath
+.project
+/target/
+/bin/
+/.settings/
