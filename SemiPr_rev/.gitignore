@@ -4,8 +4,3 @@
 /web/upload/
 *.key
 *.class
-.classpath
-.project
-/target/
-/bin/
-/.settings/

@@ -5,30 +5,30 @@
 }
 
 #weekly_container {
-	margin: 20px;
+	margin: 1%;
 	height: 250px;
 	display: flex;
 }
 
 #monthly_container {
-	margin: 20px;
+	margin: 1%;
 	height: 300px;
 }
 
 #noonbody_container_main {
-	margin: 20px;
+	margin: 1%;
 	height: 250px;
 }
 
 #daily_log_container_main {
-	margin: 20px;
+	margin: 1%;
 	height: 300px;
 	display: flex;
 }
 
 div#member_rank {
 	height: 150px;
-	margin: 20px;
+	margin: 1%;
 }
 
 div#member_info {
