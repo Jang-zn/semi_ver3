@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class DailyExcServlet
  */
-@WebServlet("/member/dailyExc")
+@WebServlet("/member/dailyLog")
 public class DailyLogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

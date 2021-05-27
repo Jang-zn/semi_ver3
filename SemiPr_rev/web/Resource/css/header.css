@@ -9,6 +9,7 @@
         #header_container {
             display: flex;
             border: 1px solid lightblue;
+            background-color:#ddd;
         }
 
         #aside_container {
