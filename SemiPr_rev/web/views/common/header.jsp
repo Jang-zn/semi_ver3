@@ -23,7 +23,7 @@
 
     <body>
         <header id="header_container">
-            <div id="logo_area"><a href="<%=request.getContextPath() %>"><img src="<%=request.getContextPath()%>/Resource/img/logo.png"></a></div>
+            <div id="logo_area"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
             <div id="menu_container">
                 <ul id="menu_line">
                     <li>
