@@ -15,6 +15,7 @@
 	<div id="n_content">
 		<div id="n_date">
 			<input type="text" name="title" value="21.5.26 / xxx님의 기록" readonly style="font-size:20px; font-weight:bold;">
+			<label>자유게시판 공유하기 : <input type = "checkbox" name="share"></label>
 		</div>
 		<div id="n_content_img">
 			<img src="">

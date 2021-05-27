@@ -15,7 +15,10 @@
 	width:50%;
 }
 #n_date{
-	text-align:center;
+	padding-left:10%;
+}
+#n_date>label{
+	margin-left:20%;
 }
 
 #n_content_img{
