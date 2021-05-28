@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.board.model.service.*;
+
 /**
  * Servlet implementation class Servlet
  */
@@ -26,6 +28,8 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//int boardListCount = new BoardService().boardListCount();
+		//request.setAttribute("boardListCount",boardListCount);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 	}
 
