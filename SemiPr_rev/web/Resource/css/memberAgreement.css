@@ -30,6 +30,7 @@
 
 .box {
 	margin: 0 auto;
+	border: 2px solid black;
 }
 p{
 	text-align: center;
