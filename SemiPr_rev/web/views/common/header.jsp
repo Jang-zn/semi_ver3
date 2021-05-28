@@ -33,7 +33,7 @@
                         <ul class="sub">
                         	<li class="plan_menu"><a href="<%=request.getContextPath()%>/member/myList">My List</a></li>
                             <li class="plan_menu"><a href="<%=request.getContextPath()%>/member/excPlan">운동 계획 관리</a></li>
-                            <li class="plan_menu"><a href="">식단 계획 관리</a></li>
+                            <li class="plan_menu"><a href="<%=request.getContextPath()%>/member/dietPlan">식단 계획 관리</a></li>
                         </ul>
                     </li>
                     <li>Progress
