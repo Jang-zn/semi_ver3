@@ -7,7 +7,7 @@
 	<h2>ForMuscle</h2>
 </div>
 
-<form action="" method="post">
+<form action="<%=request.getContextPath()%>/memberSignup" method="post">
 	<!-- wrapper -->
 	<div id="wrapper">
 
@@ -17,12 +17,15 @@
 			<!-- ID -->
 			<div>
 				<h3 class="join_title">
-					<label for="id">아이디</label>
+					<label for="userId">아이디</label>
 				</h3>
-				<span class="box int_id"> <input type="text" id="id"
-					class="int" maxlength="20">
-
-				</span> <span class="error_next_box"></span>
+				<div id="wrap-idchk">
+				<span class="box int_id" style="width: 100%;"> <input type="text" id="userId" name="userId" 
+					class="int" maxlength="12" style="width: 100%; HEIGHT: 100%"></span>
+					<input type="hidden" name="idDuplication" value="idUncheck">
+				</div>
+					 <input type="button" id="id-chk"  onclick="" value="아이디 중복확인" style="width: 110px; HEIGHT: 25px">
+				 <span class="error_next_box"></span>
 			</div>
 
 			<!-- PW1 -->
@@ -138,14 +141,23 @@
 
 			<!-- weight-->
 			<div>
+
 				<h3>체중</h3>
-				<span> <input type="text" id="weight" placeholder="체중 입력"
-					maxlength="3"> <span class="sta_weight">Kg</span>
-				</span>
+				
+					<span> <input type="text" id="weight" placeholder="체중 입력"
+						maxlength="3"></span> <span class="sta_weight">Kg</span>
+					
+			
+
+
 				<!-- height -->
 				<h3>키</h3>
-				<span> <input type="text" id="height" placeholder="키 입력"
-					maxlength="3"> <span class="sta_height">cm</span>
+				
+					<span > <input type="text" id="height" placeholder="키 입력"
+						maxlength="3"></span> <span class="sta_height">cm</span>
+			
+
+
 			</div>
 
 			<!-- JOIN BTN-->
@@ -190,7 +202,7 @@ var mobile = document.querySelector('#mobile');
 
 var error = document.querySelectorAll('.error_next_box');
 
-id.addEventListener("change", checkId);
+userId.addEventListener("change", checkId);
 pw1.addEventListener("change", checkPw);
 pw2.addEventListener("change", comparePw);
 userName.addEventListener("change", checkName);

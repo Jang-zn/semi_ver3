@@ -53,7 +53,7 @@ h3 {
 }
 
 .int {
-  display: block;
+  display:inline-flex;
   position: relative;
   width: 100%;
   height: 29px;
@@ -62,12 +62,14 @@ h3 {
   font-size: 15px;
 }
 
+
+
 input {
   font-family: Dotum, '돋움', Helvetica, sans-serif;
 }
 
 .box.int_id {
-  padding-right: 110px;
+  padding-right: 40px;
 }
 
 .box.int_pass {
@@ -79,16 +81,16 @@ input {
 }
 
 .sta_weight {
-  position: absolute;
-  top: 810px;
-  right: 9px;
+
+  top: 822px;
+  left: 1330px;
   font-size: 18px;
   color: #8e8e8e;
 }
 .sta_height {
-  position: absolute;
-  top: 905px;
-  right: 9px;
+ 
+  top: 822px;
+  left: 1330px;
   font-size: 18px;
   color: #8e8e8e;
 }
@@ -166,6 +168,16 @@ select {
 
 /* 버튼 */
 
+#id-chk{
+	display:flex;
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+#wrap-idchk{
+	display:flex;
+}
+
 .btn_area {
   margin: 30px 0 91px;
 }
@@ -183,23 +195,27 @@ select {
 }
 
 /* 체중 키 */
+
+
+
+
 #height {
-  display: block;
+
   width: 100%;
   height: 51px;
   border: solid 1px #dadada;
   padding: 10px 14px 10px 14px;
   box-sizing: border-box;
   background: #fff;
-  position: relative;
+
 }
 #weight {
-  display: block;
+
   width: 100%;
   height: 51px;
   border: solid 1px #dadada;
   padding: 10px 14px 10px 14px;
   box-sizing: border-box;
   background: #fff;
-  position: relative;
+  
 }
