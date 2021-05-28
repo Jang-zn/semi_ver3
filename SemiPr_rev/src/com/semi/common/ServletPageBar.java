@@ -2,7 +2,7 @@ package com.semi.common;
 
 import javax.servlet.http.*;
 
-public class PageBar {
+public class ServletPageBar {
 
 	private String pageBar;
 	private int cPage;
@@ -10,7 +10,7 @@ public class PageBar {
 	
 	
 
-	public PageBar(HttpServletRequest request, int totalData, int pageBarSize, String location) {
+	public ServletPageBar(HttpServletRequest request, int totalData, int pageBarSize, String location) {
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));

@@ -3,10 +3,9 @@ package com.semi.member.daily.model.vo;
 import java.util.*;
 
 public class DailyExercise {
+	private int eLogNo;
+	private int excNo;
 	private Date excDate;
-	private String memberId;
-	private String excId;
-	private String excId_c;
 	private String excPlanCheck;
 	private String reason;
 	
@@ -14,15 +13,29 @@ public class DailyExercise {
 	
 	}
 
-	public DailyExercise(Date excDate, String memberId, String excId, String excId_c, String excPlanCheck,
-			String reason) {
+	public DailyExercise(int eLogNo, int excNo, Date excDate, String excPlanCheck, String reason) {
 		super();
+		this.eLogNo = eLogNo;
+		this.excNo = excNo;
 		this.excDate = excDate;
-		this.memberId = memberId;
-		this.excId = excId;
-		this.excId_c = excId_c;
 		this.excPlanCheck = excPlanCheck;
 		this.reason = reason;
+	}
+
+	public int geteLogNo() {
+		return eLogNo;
+	}
+
+	public void seteLogNo(int eLogNo) {
+		this.eLogNo = eLogNo;
+	}
+
+	public int getExcNo() {
+		return excNo;
+	}
+
+	public void setExcNo(int excNo) {
+		this.excNo = excNo;
 	}
 
 	public Date getExcDate() {
@@ -31,30 +44,6 @@ public class DailyExercise {
 
 	public void setExcDate(Date excDate) {
 		this.excDate = excDate;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getExcId() {
-		return excId;
-	}
-
-	public void setExcId(String excId) {
-		this.excId = excId;
-	}
-
-	public String getExcId_c() {
-		return excId_c;
-	}
-
-	public void setExcId_c(String excId_c) {
-		this.excId_c = excId_c;
 	}
 
 	public String getExcPlanCheck() {
@@ -72,7 +61,6 @@ public class DailyExercise {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	
-	
-	
+
+		
 }
