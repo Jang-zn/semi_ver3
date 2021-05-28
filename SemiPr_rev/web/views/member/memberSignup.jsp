@@ -20,12 +20,14 @@
 					<label for="userId">아이디</label>
 				</h3>
 				<div id="wrap-idchk">
-				<span class="box int_id" style="width: 100%;"> <input type="text" id="userId" name="userId" 
-					class="int" maxlength="12" style="width: 100%; HEIGHT: 100%"></span>
-					<input type="hidden" name="idDuplication" value="idUncheck">
+					<span class="box int_id" style="width: 100%;"> <input
+						type="text" id="userId_" name="userId" class="int" maxlength="12"
+						style="width: 100%; HEIGHT: 100%"></span> <input type="hidden"
+						name="idDuplication" value="idUncheck">
 				</div>
-					 <input type="button" id="id-chk"  onclick="" value="아이디 중복확인" style="width: 110px; HEIGHT: 25px">
-				 <span class="error_next_box"></span>
+				<button type="button" id="id-chk" onclick="fn_duplicateId();"
+					value="아이디 중복확인" style="width: 110px; HEIGHT: 25px">아이디중복확인</button>
+				<span class="error_next_box"></span>
 			</div>
 
 			<!-- PW1 -->
@@ -55,7 +57,7 @@
 				<h3 class="join_title">
 					<label for="name">이름</label>
 				</h3>
-				<span class="box int_name"> <input type="text" id="name"
+				<span class="box int_name"> <input type="text" id="name_"
 					class="int" maxlength="20">
 				</span> <span class="error_next_box"></span>
 			</div>
@@ -143,42 +145,83 @@
 			<div>
 
 				<h3>체중</h3>
-				
-					<span> <input type="text" id="weight" placeholder="체중 입력"
-						maxlength="3"></span> <span class="sta_weight">Kg</span>
-					
-			
+
+				<span> <input type="text" id="weight" placeholder="체중 입력"
+					maxlength="3"></span> <span class="sta_weight">Kg</span>
+
+
 
 
 				<!-- height -->
 				<h3>키</h3>
-				
-					<span > <input type="text" id="height" placeholder="키 입력"
-						maxlength="3"></span> <span class="sta_height">cm</span>
-			
 
+				<span> <input type="text" id="height" placeholder="키 입력"
+					maxlength="3"></span> <span class="sta_height">cm</span>
 
 			</div>
 
+			<div id="profile2-wrap">
+				<h3>프로필 사진</h3>
+				<input type="file" id="image" accept="image/*"
+					onchange="setThumbnail(event);" multiple />
+				<div id="image_container"></div>
+
+
+			</div>
 			<!-- JOIN BTN-->
 			<div class="btn_area">
 				<button type="submit" id="btnJoin">
 					<span>가입하기</span>
 				</button>
 			</div>
-
-
-
+			<!-- content-->
 		</div>
-		<!-- content-->
 
+		<!-- wrapper -->
 	</div>
-	<!-- wrapper -->
-
+</form>
+<form name="duplicateFrm" action="" method="post">
+	<input type="hidden" name="userId">
 </form>
 
+
+
+
+
+
+
 <script>
-        var id = document.querySelector('#id');
+
+
+const fn_duplicateId=()=>{
+	const status="width=300px,height=250px,left=500px,top=500px";
+	const title="duplicateId";
+	const url="<%=request.getContextPath()%>/checkDuplicateId";
+	
+	open("",title,status);
+	duplicateFrm.userId.value=$("#userId_").val();
+	duplicateFrm.target=title;
+	duplicateFrm.action=url;
+	duplicateFrm.submit();
+	
+
+}
+
+
+function setThumbnail(event) { 
+	var reader = new FileReader(); reader.onload = function(event) {
+		var img = document.createElement("img"); 
+		img.setAttribute("src", event.target.result); 
+		document.querySelector("div#image_container").appendChild(img); 
+		};
+		
+		reader.readAsDataURL(event.target.files[0]); 
+		}
+
+
+
+
+var id = document.querySelector('#id');
 
 var pw1 = document.querySelector('#pswd1');
 var pwMsg = document.querySelector('#alertTxt');

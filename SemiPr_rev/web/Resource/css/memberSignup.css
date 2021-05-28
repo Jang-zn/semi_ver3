@@ -219,3 +219,13 @@ select {
   background: #fff;
   
 }
+
+/* 프로필 사진 */
+
+
+
+img{
+	margin-top:10px;
+	width:120px;
+	height:120px;
+}
