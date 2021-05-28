@@ -150,26 +150,24 @@
 					<label for="phoneNo">휴대전화</label>
 				</h3>
 				<span class="box int_mobile"> <input type="tel" id="mobile"
-					class="int" maxlength="16" placeholder="전화번호 입력">
+					class="int" maxlength="11" placeholder="(-)하이픈 없이 입력">
 				</span> <span class="error_next_box"></span>
 			</div>
 
-			<!-- weight-->
+				<!-- height -->
 			<div>
+				<h3>키</h3>
+
+				<span> <input type="text" id="height" placeholder="키 입력"
+					maxlength="3"></span> <span class="sta_height">cm</span>
+
+
+			<!-- weight-->
 
 				<h3>체중</h3>
 
 				<span> <input type="text" id="weight" placeholder="체중 입력"
 					maxlength="3"></span> <span class="sta_weight">Kg</span>
-
-
-
-
-				<!-- height -->
-				<h3>키</h3>
-
-				<span> <input type="text" id="height" placeholder="키 입력"
-					maxlength="3"></span> <span class="sta_height">cm</span>
 
 			</div>
 

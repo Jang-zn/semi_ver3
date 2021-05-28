@@ -204,23 +204,25 @@ select {
 
 
 #height {
-
+font-size : 15px;
   width: 100%;
   height: 51px;
   border: solid 1px #dadada;
   padding: 10px 14px 10px 14px;
   box-sizing: border-box;
   background: #fff;
+  
 
 }
 #weight {
-
+	font-size : 15px;
   width: 100%;
   height: 51px;
   border: solid 1px #dadada;
   padding: 10px 14px 10px 14px;
   box-sizing: border-box;
   background: #fff;
+ 
   
 }
 
