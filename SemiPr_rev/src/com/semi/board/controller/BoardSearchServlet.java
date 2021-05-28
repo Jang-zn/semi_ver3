@@ -36,10 +36,10 @@ public class BoardSearchServlet extends HttpServlet {
 		String searchKeyword = request.getParameter("searchKeyword");
 		int totalData = 3;//new BoardService().boardSearchCount();
 		PageBar p = new PageBar(request, totalData, 5, "/board/boardSearch");
-		//List<Board> list = new BoardService().boardsearch(searchType,searchKeyword,cPage,numPerpage);
+		//List<Board> list = new BoardService().boardsearch(searchType,searchKeyword,p.getCPage(),p.getNumPerpage());
 		request.setAttribute("searchKeyword", searchKeyword);
 		request.setAttribute("searchType", searchType);
-		request.setAttribute("pageBar", p);
+		//request.setAttribute("pageBar", p);
 		//request.setAttribute("BoardList", list);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 		

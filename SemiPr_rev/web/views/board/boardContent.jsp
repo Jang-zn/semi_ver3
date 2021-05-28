@@ -1,36 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/boardList.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/boardList.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/boardContent.css">
 <div id="board_container">
-	<div id="content_count">
-		<p style="font-weight: bolder; width: 75%;">
-			글 수 <span style="color: orange; font-weight: bolder;">124214</span>
-		</p>
-		<div id="board_search">
-			<form action="" method="GET">
-				<input type="text"> <select>
-					<option>제목</option>
-					<option>내용</option>
-					<option>제목+내용</option>
-					<option>닉네임</option>
-				</select> <input type="submit" value="검색">
-			</form>
-		</div>
-	</div>
-	
-	
-	
-	
-	
-	
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/boardContent.css">
+	<%@ include file="/views/board/boardListSearch.jsp" %>
 	<section id = "board_content_area">
 		<div id="content_title">
 		<span id="title">제목</span><span class="content_info">작성자</span><span class="content_info">21.05.27</span><span class="content_info">13</span>
 		</div>
-		
 		<div id="content_file">
 			첨부파일 (누르면 슬라이드 / 파일명 보여줌)
 			<ul>
@@ -45,19 +23,16 @@
 					<div class="content_btn"><button>삭제하기</button></div>
 				</div>
 		</div>
-		
 		<div id="reply_area">
 			
 			<div id="reply_count">
 				<span> 댓글 : x개</span>
 			</div>
-			
 			<ul class="reply_content_area">
 				<li class="reply">
 					<div class="lv1"><img src="<%=request.getContextPath()%>/Resource/img/list-arrow.png"></div>
 					<div class="reply_img"><img src="<%=request.getContextPath()%>/Resource/img/no_image.png">
 					</div>
-					
 					<div class="reply_writer_info">
 						<p class="reply_writer_info_nickname">닉네임01</p>
 						<p class="reply_writer_info_etc">2021.05.28 17:35:28</p>
@@ -123,7 +98,6 @@
 					</div>
 					<div class="reply_img"><img src="<%=request.getContextPath()%>/Resource/img/no_image.png">
 					</div>
-					
 					<div class="reply_writer_info">
 						<p class="reply_writer_info_nickname">닉네임01</p>
 						<p class="reply_writer_info_etc">2021.05.28 17:35:28</p>
@@ -139,10 +113,7 @@
 					</div>	
 				</li>			
 			</ul>
-			
-			
 		</div>
-		
 		<div id="reply_write_area">
 			<form action="" method="post">
 				<div class="reply_write_content"><textarea rows="10" cols="180" style="resize:none"></textarea></div>
@@ -153,14 +124,6 @@
 			</form>
 		</div>	
 	</section>
-	
-	
-	
-	
-	
-	
-	
-	
 	<div id="board_head">
 		<ul>
 			<li class="board_sort"><select>
@@ -191,162 +154,6 @@
 		</ul>
 		<ul>
 			<li class="board_sort">눈바디</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">자유</li>
 			<li class="board_title">
 				<div class="board_file_img">
 					<img src="">
