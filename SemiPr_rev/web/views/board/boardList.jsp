@@ -6,6 +6,7 @@
 	String searchKeyword=(String)request.getAttribute("searchKeyword");
 	String searchType=(String)request.getAttribute("searchType");
 	List<Board> list = (List<Board>)request.getAttribute("BoardList");
+	String pageBar = (String)request.getAttribute("pageBar");
 %>
 
 <%@ include file="/views/common/header.jsp"%>
@@ -87,7 +88,9 @@
 			</ul>
 		</div>
 		<div id="board_pageBar">
-			<span>◀ 1 2 3 4 5 6 7 8 9 10 ▶</span><button onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</button>
+			<%=pageBar %>
+		<!-- 	<span>◀ 1 2 3 4 5 6 7 8 9 10 ▶</span> -->
+			<button onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</button>
 		</div>
 	</div>
 	<script>

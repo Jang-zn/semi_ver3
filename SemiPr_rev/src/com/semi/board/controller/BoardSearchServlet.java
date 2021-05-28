@@ -9,6 +9,7 @@ import javax.servlet.http.*;
 
 import com.semi.board.model.service.*;
 import com.semi.board.model.vo.*;
+import com.semi.common.*;
 
 /**
  * Servlet implementation class BoardSearchServlet
@@ -33,10 +34,12 @@ public class BoardSearchServlet extends HttpServlet {
 		
 		String searchType = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
-		
+		int totalData = 3;//new BoardService().boardSearchCount();
+		PageBar p = new PageBar(request, totalData, 5, "/board/boardSearch");
 		//List<Board> list = new BoardService().boardsearch(searchType,searchKeyword,cPage,numPerpage);
 		request.setAttribute("searchKeyword", searchKeyword);
 		request.setAttribute("searchType", searchType);
+		request.setAttribute("pageBar", p);
 		//request.setAttribute("BoardList", list);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 		
