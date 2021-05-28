@@ -63,7 +63,7 @@
 			<!-- NAME -->
 			<div>
 				<h3 class="join_title">
-					<label for="name">닉네임</label>
+					<label for="name">이름</label>
 				</h3>
 				<span class="box int_name"> <input type="text" id="name_" name="name" placeholder="이름"
 					class="int" maxlength="20">
@@ -73,9 +73,9 @@
 				<!--NickName -->
 			<div>
 				<h3 class="join_title">
-					<label for="Nickname">이름</label>
+					<label for="Nickname">닉네임</label>
 				</h3>
-				<span class="box int_Nickname"> <input type="text" id="Nickname_" name="Nickname" placeholder="닉네임"
+				<span class="box int_Nickname"> <input type="text" id="nickName_" name="nickName" placeholder="닉네임"
 					class="int" maxlength="12">
 				</span> <span class="error_next_box"></span>
 			</div>
@@ -195,6 +195,7 @@
 </form>
 <form name="duplicateFrm" action="" method="post">
 	<input type="hidden" name="userId">
+	<input type="hidden" name="nickName">
 </form>
 
 
@@ -204,6 +205,19 @@
 
 
 <script>
+const fn_duplicateNick=()=>{
+	const status="width=350px,height=250px, left=500px, top=500px";
+	const title="duplicateNick";
+	const url="<%=request.getContextPath()%>/views/member/checkDuplicateNick.jsp";
+	
+	open("",title,status);
+	console.log(duplicateFrm.nickName);
+	duplicateFrm.nickName.value=$("#nickName_").val();
+	duplicateFrm.target=title;
+	duplicateFrm.action=url;
+	duplicateFrm.submit();
+}
+
 
 
 const fn_duplicateId=()=>{
