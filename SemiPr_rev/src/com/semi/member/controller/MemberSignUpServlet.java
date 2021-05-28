@@ -6,7 +6,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-import com.common.*;
+
 import com.oreilly.servlet.*;
 import com.semi.member.model.vo.*;
 
