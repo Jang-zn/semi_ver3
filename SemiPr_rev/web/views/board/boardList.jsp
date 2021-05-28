@@ -7,6 +7,7 @@
 	String searchType=(String)request.getAttribute("searchType");
 	List<Board> list = (List<Board>)request.getAttribute("BoardList");
 	String pageBar = (String)request.getAttribute("pageBar");
+	//int boardListCount = (int)request.getAttribute("boardListCount");
 %>
 
 <%@ include file="/views/common/header.jsp"%>
@@ -15,7 +16,7 @@
 	<div id="board_container">
 		<div id="content_count">
 			<p style="font-weight: bolder; width: 75%;">
-				글 수 <span style="color: orange; font-weight: bolder;"><%-- <%= %> --%></span>
+				글 수 <span style="color: orange; font-weight: bolder;"><%-- <%=boardListCount %> --%></span>
 			</p>
 			<div id="board_search">
 					<select id="search-Type">
