@@ -21,7 +21,7 @@
 				</h3>
 				<div id="wrap-idchk">
 					<span class="box int_id" style="width: 100%;"> <input
-						type="text" id="userId_" name="userId" class="int" maxlength="12"
+						type="text" id="userId_" name="userId" class="int" maxlength="12" placeholder="아이디"
 						style="width: 100%; HEIGHT: 100%"></span> <input type="hidden"
 						name="idDuplication" value="idUncheck">
 				</div>
@@ -35,7 +35,7 @@
 				<h3 class="join_title">
 					<label for="pswd1">비밀번호</label>
 				</h3>
-				<span class="box int_pass"> <input type="password" id="pswd1"
+				<span class="box int_pass"> <input type="password" id="pswd1" name="password" placeholder="비밀번호"
 					class="int" maxlength="16"> <span id="alertTxt">사용불가</span>
 
 				</span> <span class="error_next_box"></span>
@@ -51,17 +51,38 @@
 
 				</span> <span class="error_next_box"></span>
 			</div>
-
+				<!-- EMAIL -->
+			<div>
+				<h3 class="join_title">
+					<label for="email">본인확인 이메일<span class="optional"></span></label>
+				</h3>
+				<span class="box int_email"> <input type="text" id="email" name="email"
+					class="int" maxlength="100" placeholder="이메일입력">
+				</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
+			</div>
 			<!-- NAME -->
 			<div>
 				<h3 class="join_title">
-					<label for="name">이름</label>
+					<label for="name">닉네임</label>
 				</h3>
-				<span class="box int_name"> <input type="text" id="name_"
+				<span class="box int_name"> <input type="text" id="name_" name="name" placeholder="이름"
 					class="int" maxlength="20">
 				</span> <span class="error_next_box"></span>
 			</div>
-
+	
+				<!--NickName -->
+			<div>
+				<h3 class="join_title">
+					<label for="Nickname">이름</label>
+				</h3>
+				<span class="box int_Nickname"> <input type="text" id="Nickname_" name="Nickname" placeholder="닉네임"
+					class="int" maxlength="12">
+				</span> <span class="error_next_box"></span>
+			</div>
+				<button type="button" id="Nick-chk" onclick="fn_duplicateNick();"
+					value="닉네임 중복확인" style="width: 110px; HEIGHT: 25px">닉네임중복확인</button>
+				<span class="error_next_box"></span>
+	
 			<!-- BIRTH -->
 			<div>
 				<h3 class="join_title">
@@ -121,15 +142,7 @@
 				</span> <span class="error_next_box">필수 정보입니다.</span>
 			</div>
 
-			<!-- EMAIL -->
-			<div>
-				<h3 class="join_title">
-					<label for="email">본인확인 이메일<span class="optional">(선택)</span></label>
-				</h3>
-				<span class="box int_email"> <input type="text" id="email"
-					class="int" maxlength="100" placeholder="선택입력">
-				</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
-			</div>
+		
 
 			<!-- MOBILE -->
 			<div>
@@ -196,7 +209,7 @@
 const fn_duplicateId=()=>{
 	const status="width=300px,height=250px,left=500px,top=500px";
 	const title="duplicateId";
-	const url="<%=request.getContextPath()%>/checkDuplicateId";
+	const url="<%=request.getContextPath()%>/views/member/checkDuplicateId.jsp";
 	
 	open("",title,status);
 	duplicateFrm.userId.value=$("#userId_").val();
@@ -221,7 +234,7 @@ function setThumbnail(event) {
 
 
 
-var id = document.querySelector('#id');
+var id = document.querySelector('#userId_');
 
 var pw1 = document.querySelector('#pswd1');
 var pwMsg = document.querySelector('#alertTxt');
@@ -231,7 +244,7 @@ var pw2 = document.querySelector('#pswd2');
 var pwImg2 = document.querySelector('#pswd2_img1');
 var pwMsgArea = document.querySelector('.int_pass');
 
-var userName = document.querySelector('#name');
+var userName = document.querySelector('#name_');
 
 var yy = document.querySelector('#yy');
 var mm = document.querySelector('#mm');
@@ -245,7 +258,7 @@ var mobile = document.querySelector('#mobile');
 
 var error = document.querySelectorAll('.error_next_box');
 
-userId.addEventListener("change", checkId);
+userId_.addEventListener("change", checkId);
 pw1.addEventListener("change", checkPw);
 pw2.addEventListener("change", comparePw);
 userName.addEventListener("change", checkName);
@@ -287,7 +300,7 @@ function checkPw() {
         error[1].innerHTML = "필수 정보입니다.";
         pwMsg.style.display = "block";
         pwMsgArea.style.paddingRight = "40px";
-        pwImg1.src = "m_icon_pass.png";
+        
         error[1].style.display = "block";
     } else if(!pwPattern.test(pw1.value)) {
         error[1].innerHTML = "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.";
@@ -296,7 +309,7 @@ function checkPw() {
         error[1].style.display = "block";
         pwMsg.style.color = "red";
         pwMsg.style.display = "block";
-        pwImg1.src = "m_icon_not_use.png";
+       
     } else {
         error[1].style.display = "none";
         pwMsg.innerHTML = "안전";
@@ -309,10 +322,10 @@ function checkPw() {
 
 function comparePw() {
     if(pw2.value === pw1.value) {
-        pwImg2.src = "m_icon_check_enable.png";
+        
         error[2].style.display = "none";
     } else if(pw2.value !== pw1.value) {
-        pwImg2.src = "m_icon_check_disable.png";
+        
         error[2].innerHTML = "비밀번호가 일치하지 않습니다.";
         error[2].style.display = "block";
     } 
@@ -424,7 +437,7 @@ function checkPw() {
         error[1].innerHTML = "필수 정보입니다.";
         pwMsg.style.display = "block";
         pwMsgArea.style.paddingRight = "40px";
-        pwImg1.src = "m_icon_pass.png";
+       
         error[1].style.display = "block";
     } else if(!pwPattern.test(pw1.value)) {
         error[1].innerHTML = "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.";
@@ -433,14 +446,14 @@ function checkPw() {
         error[1].style.display = "block";
         pwMsg.style.color = "red";
         pwMsg.style.display = "block";
-        pwImg1.src = "m_icon_not_use.png";
+      
     } else {
         error[1].style.display = "none";
         pwMsg.innerHTML = "안전";
         pwMsgArea.style.paddingRight = "93px";
         pwMsg.style.color = "#03c75a";
         pwMsg.style.display = "block";
-        pwImg1.src = "m_icon_safe.png";
+       
     }
 }
     </script>

@@ -169,7 +169,11 @@ select {
 /* 버튼 */
 
 #id-chk{
-	display:flex;
+	
+	margin-top: 5px;
+	margin-left: 5px;
+}
+#Nick-chk{
 	margin-top: 5px;
 	margin-left: 5px;
 }
