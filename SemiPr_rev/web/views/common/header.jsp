@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import = "com.semi.member.model.vo.*" %>
+<%
+	Member loginMember = (Member)session.getAttribute("login");
+%>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -18,6 +22,9 @@
                     $(this).children(".sub").stop().slideUp(200);
                 });
             });
+            const login=()=>{
+            	location.assign("<%=request.getContextPath()%>/member/login");
+            }
         </script>
     </head>
 
@@ -52,7 +59,14 @@
                     </li>
                 </ul>
             </div>
-            <div id="profile_area"><img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="border-radius:100%;"></div>
+            <% if(loginMember!=null){ %>
+            	<div id="profile_area"><img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="border-radius:100%;"></div>
+            <%}else{ %>
+            	<div id="login_area">
+            		<span onclick="login();">&#9786;로그인</span>
+            	</div>
+            <%} %>
+            
         </header>
         <section id="aside_content">
             <div id="content_container">
