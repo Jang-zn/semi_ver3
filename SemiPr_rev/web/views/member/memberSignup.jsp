@@ -92,14 +92,14 @@
 				<div id="bir_wrap">
 					<!-- BIRTH_YY -->
 					<div id="bir_yy">
-						<span class="box"> <input type="text" id="yy" class="int"
+						<span class="box"> <input type="text" id="yy" name="yy" class="int"
 							maxlength="4" placeholder="년(4자)">
 						</span>
 					</div>
 
 					<!-- BIRTH_MM -->
 					<div id="bir_mm">
-						<span class="box"> <select id="mm" class="sel">
+						<span class="box"> <select id="mm" class="sel" name="mm">
 								<option>월</option>
 								<option value="01">1</option>
 								<option value="02">2</option>
@@ -119,7 +119,7 @@
 
 					<!-- BIRTH_DD -->
 					<div id="bir_dd">
-						<span class="box"> <input type="text" id="dd" class="int"
+						<span class="box"> <input type="text" id="dd" class="int" name="dd"
 							maxlength="2" placeholder="일">
 						</span>
 					</div>
@@ -133,7 +133,7 @@
 				<h3 class="join_title">
 					<label for="gender">성별</label>
 				</h3>
-				<span class="box gender_code"> <select id="gender"
+				<span class="box gender_code"> <select id="gender" name="gender"
 					class="sel">
 						<option>성별</option>
 						<option value="M">남자</option>
@@ -149,7 +149,7 @@
 				<h3 class="join_title">
 					<label for="phoneNo">휴대전화</label>
 				</h3>
-				<span class="box int_mobile"> <input type="tel" id="mobile"
+				<span class="box int_mobile"> <input type="tel" id="mobile" name="phone"
 					class="int" maxlength="11" placeholder="(-)하이픈 없이 입력">
 				</span> <span class="error_next_box"></span>
 			</div>
@@ -158,7 +158,7 @@
 			<div>
 				<h3>키</h3>
 
-				<span> <input type="text" id="height" placeholder="키 입력"
+				<span> <input type="number" id="height" placeholder="키 입력" name="height"
 					maxlength="3"></span> <span class="sta_height">cm</span>
 
 
@@ -166,7 +166,7 @@
 
 				<h3>체중</h3>
 
-				<span> <input type="text" id="weight" placeholder="체중 입력"
+				<span> <input type="number" id="weight" placeholder="체중 입력" name="weight"
 					maxlength="3"></span> <span class="sta_weight">Kg</span>
 
 			</div>
