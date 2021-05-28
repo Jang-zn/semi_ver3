@@ -5,6 +5,10 @@ import javax.servlet.http.*;
 public class PageBar {
 
 	private String pageBar;
+	private int cPage;
+	private int numPerpage;
+	
+	
 
 	public PageBar(HttpServletRequest request, int totalData, int pageBarSize, String location) {
 		int cPage;
@@ -13,13 +17,19 @@ public class PageBar {
 		} catch (NumberFormatException e) {
 			cPage = 1;
 		}
+		this.cPage = cPage;
+		
+		
+		
 		int numPerpage;
 		try {
 			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
 		} catch (NumberFormatException e) {
 			numPerpage = 5;
 		}
-
+		this.numPerpage = numPerpage;
+		
+		
 		int totalPage = (int) Math.ceil((double) totalData / numPerpage);
 
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
@@ -60,6 +70,18 @@ public class PageBar {
 	public String getPageBar() {
 		return pageBar;
 	}
+
+
+	public int getCPage() {
+		return cPage;
+	}
+
+	public int getNumPerpage() {
+		return numPerpage;
+	}
+
+
+
 
 
 
