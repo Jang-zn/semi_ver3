@@ -6,19 +6,22 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-import com.semi.common.*;
+import org.apache.tomcat.util.http.fileupload.servlet.*;
+
+import com.oreilly.servlet.*;
+import com.oreilly.servlet.multipart.*;
 
 /**
- * Servlet implementation class BoardSearchServlet
+ * Servlet implementation class BoardWriteEndServlet
  */
-@WebServlet("/board/boardSearch")
-public class BoardSearchServlet extends HttpServlet {
+@WebServlet("/board/boardWriteEnd")
+public class BoardWriteEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardSearchServlet() {
+    public BoardWriteEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,21 +30,13 @@ public class BoardSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		String searchType = request.getParameter("searchType");
-		String searchKeyword = request.getParameter("searchKeyword");
-		int totalData = 3;//new BoardService().boardSearchCount();
-		ServletPageBar p = new ServletPageBar(request, totalData, 5, "/board/boardSearch");
-		//List<Board> list = new BoardService().boardsearch(searchType,searchKeyword,p.getCPage(),p.getNumPerpage());
-		request.setAttribute("searchKeyword", searchKeyword);
-		request.setAttribute("searchType", searchType);
-		//request.setAttribute("pageBar", p);
-		//request.setAttribute("BoardList", list);
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			
+			return;
+		}
+		String path = getServletContext().getRealPath("");
+		MultipartRequest mr = new MultipartRequest(request, path,1024*1024*10,"utf-8",new DefaultFileRenamePolicy());
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
-		
-		
-		
 	}
 
 	/**

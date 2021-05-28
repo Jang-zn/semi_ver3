@@ -16,8 +16,8 @@
 		<div id="board_head">
 			<ul>
 				<li class="board_sort">
-					<select>
-							<option>-분류-</option>
+					<select id="classfication">
+							<option value="전체">전체</option>
 							<option value="자유">자유</option>
 							<option value="눈바디">눈바디</option>
 					</select>
@@ -29,8 +29,64 @@
 			</ul>
 		</div>
 		<div id="board_body">
+		<%-- <%if(list.isEmpty()){ %>
 			<ul>
-				<li class="board_sort">자유</li>
+				<li>데이터가 없습니다.</li>
+			</ul>
+		<%}else{ %>
+			<%for(Board b : list) {%> --%>
+				<ul>
+					<li class="board_type">자유</li>
+					<li class="board_title">
+						<div class="board_file_img">
+							<img src="">
+						</div>
+						<span>asfsafsafasfasfasf</span>
+					</li>
+					<li class="board_content_info"><span>글쓴이</span></li>
+					<li class="board_content_info"><span>날짜</span></li>
+					<li class="board_content_info"><span>13</span></li>
+				</ul>
+		<%-- 	 <%} %>
+		 <%} %> --%>
+			<ul>
+				<li class="board_type">눈바디</li>
+				<li class="board_title">
+					<div class="board_file_img">
+						<img src="">
+					</div>
+					<span>asfsafsafasfasfasf</span>
+				</li>
+				<li class="board_content_info"><span>글쓴이</span></li>
+				<li class="board_content_info"><span>날짜</span></li>
+				<li class="board_content_info"><span>13</span></li>
+			</ul>
+			<ul>
+				<li class="board_type">눈바디</li>
+				<li class="board_title">
+					<div class="board_file_img">
+						<img src="">
+					</div>
+					<span>asfsafsafasfasfasf</span>
+				</li>
+				<li class="board_content_info"><span>글쓴이</span></li>
+				<li class="board_content_info"><span>날짜</span></li>
+				<li class="board_content_info"><span>13</span></li>
+			</ul>
+			<ul>
+				<li class="board_type">눈바디</li>
+				<li class="board_title">
+					<div class="board_file_img">
+						<img src="">
+					</div>
+					<span>asfsafsafasfasfasf</span>
+				</li>
+				<li class="board_content_info"><span>글쓴이</span></li>
+				<li class="board_content_info"><span>날짜</span></li>
+				<li class="board_content_info"><span>13</span></li>
+			</ul>
+			<ul>
+				<li class="board_type">눈바디</li>
 				<li class="board_title">
 					<div class="board_file_img">
 						<img src="">
@@ -52,6 +108,25 @@
 		$(".board_title").click(e=>{
 			location.assign("<%=request.getContextPath()%>/board/content");
 		});
+		$("#classfication").change(e=>{
+			const type = $(e.target).val();
+			if(type=="전체"){
+				$("[class=board_type]").each((i,v)=>{
+						$(v).parent("ul").css("display","flex");
+				})
+			}else{
+			$("[class=board_type]").each((i,v)=>{
+				$(v).parent("ul").css("display","flex");
+				if($(v).html()!=type){
+					$(v).parent("ul").css("display","none");
+				}
+			})
+				
+			}
+			
+		});
+		
+		
 	
 	</script>
 	<%@ include file="/views/common/footer.jsp"%>
