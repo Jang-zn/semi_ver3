@@ -48,7 +48,7 @@
 <div id="monthly_container">
 	<div id="monthly_check_title_main">
 		<span>월간 달성 현황</span>
-		<button>상세보기</button>
+		<button onclick="location.assign('<%=request.getContextPath()%>/member/monthlyTrend')">상세보기</button>
 	</div>
 	<div id="monthly_check_content">
 		<div id="monthly_plan_trend">월간 트렌드 넣을것</div>
@@ -58,7 +58,7 @@
 <div id="noonbody_container_main">
 	<div id="noonbody_title_main">
 		<span>눈바디</span>
-		<button>상세보기</button>
+		<button onclick="location.assign('<%=request.getContextPath()%>/gallary/list')">상세보기</button>
 	</div>
 	<div id="noonbody_thumb_area">
 		<div id="noonbody_left"></div>
@@ -74,7 +74,7 @@
 	<div id="daily_log_exc_area">
 		<div id="daily_log_exc_title_main">
 			<span>운동일지</span>
-			<button>상세보기</button>
+			<button onclick="location.assign('<%=request.getContextPath()%>/member/dailyLog')">상세보기</button>
 		</div>
 		<div id="daily_log_exc_list">
 			<p></p>
@@ -92,7 +92,7 @@
 	<div id="daily_log_menu_area">
 		<div id="daily_log_menu_title_main">
 			<span>식단일지</span>
-			<button>상세보기</button>
+			<button onclick="location.assign('<%=request.getContextPath()%>/member/dailyLog')">상세보기</button>
 		</div>
 		<div id="daily_log_menu_list">
 			<p></p>

@@ -2,7 +2,6 @@
 
 #board_container * {
 	border: 1px skyblue solid;
-	margin: 0;
 }
 
 #board_container li {

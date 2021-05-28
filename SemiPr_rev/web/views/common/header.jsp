@@ -23,7 +23,7 @@
 
     <body>
         <header id="header_container">
-            <div id="logo_area"><a href="<%=request.getContextPath() %>"><img src="<%=request.getContextPath()%>/Resource/img/logo.png"></a></div>
+            <div id="logo_area"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
             <div id="menu_container">
                 <ul id="menu_line">
                     <li>
@@ -38,7 +38,7 @@
                     </li>
                     <li>Progress
                         <ul class="sub">
-                        	<li class="progress_menu"><a href="<%=request.getContextPath()%>/member/dailyExc">일일 기록</a></li>
+                        	<li class="progress_menu"><a href="<%=request.getContextPath()%>/member/dailyLog">일일 기록</a></li>
                             <li class="progress_menu"><a href="">주간 실천 현황</a></li>
                             <li class="progress_menu"><a href="<%=request.getContextPath()%>/member/monthlyTrend">월간 실천 현황</a></li>
                             <li class="progress_menu"><a href="">My Data</a></li>

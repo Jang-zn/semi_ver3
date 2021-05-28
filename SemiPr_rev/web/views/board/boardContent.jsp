@@ -19,6 +19,148 @@
 			</form>
 		</div>
 	</div>
+	
+	
+	
+	
+	
+	
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/boardContent.css">
+	<section id = "board_content_area">
+		<div id="content_title">
+		<span id="title">제목</span><span class="content_info">작성자</span><span class="content_info">21.05.27</span><span class="content_info">13</span>
+		</div>
+		
+		<div id="content_file">
+			첨부파일 (누르면 슬라이드 / 파일명 보여줌)
+			<ul>
+				<li>사진1.jpg</li>
+				<li>사진2.jpg</li>
+			</ul>
+		</div>
+		<div id="content_detail">
+				<div id="content_text"><textarea rows="30" cols="100"></textarea></div>
+				<div id="content_btn_area">
+					<div class="content_btn"><button>수정하기</button></div>
+					<div class="content_btn"><button>삭제하기</button></div>
+				</div>
+		</div>
+		
+		<div id="reply_area">
+			
+			<div id="reply_count">
+				<span> 댓글 : x개</span>
+			</div>
+			
+			<ul class="reply_content_area">
+				<li class="reply">
+					<div class="lv1"><img src="<%=request.getContextPath()%>/Resource/img/list-arrow.png"></div>
+					<div class="reply_img"><img src="<%=request.getContextPath()%>/Resource/img/no_image.png">
+					</div>
+					
+					<div class="reply_writer_info">
+						<p class="reply_writer_info_nickname">닉네임01</p>
+						<p class="reply_writer_info_etc">2021.05.28 17:35:28</p>
+					</div>
+						
+					<div class="reply_content">
+						<div class="reply_content_area">
+							<p>lv1:dddddd</p>
+						</div>
+						<div class="reply_btn_area">
+							<div class="reply_btn"><button>댓글달기</button></div>
+							<div class="reply_btn"><button>삭제하기</button></div>
+							<div class="reply_btn"><button>수정하기</button></div>
+						</div>
+					</div>
+				</li>
+				<li class="reply">
+					<div class="lv2"><img src="<%=request.getContextPath()%>/Resource/img/list-arrow.png">
+					</div>
+					<div class="reply_img"><img src="<%=request.getContextPath()%>/Resource/img/no_image.png">
+					</div>
+					
+					<div class="reply_writer_info">
+						<p class="reply_writer_info_nickname">닉네임01</p>
+						<p class="reply_writer_info_etc">2021.05.28 17:35:28</p>
+					</div>
+						
+					<div class="reply_content">
+						<div class="reply_content_area">
+							<p>lv2:dddddd</p>
+						</div>
+						<div class="reply_btn_area">
+							<div class="reply_btn"><button>댓글달기</button></div>
+							<div class="reply_btn"><button>삭제하기</button></div>
+							<div class="reply_btn"><button>수정하기</button></div>
+						</div>
+					</div>	
+				</li>
+				<li class="reply">
+					<div class="lv3"><img src="<%=request.getContextPath()%>/Resource/img/list-arrow.png">
+					</div>
+					<div class="reply_img"><img src="<%=request.getContextPath()%>/Resource/img/no_image.png">
+					</div>
+					
+					<div class="reply_writer_info">
+						<p class="reply_writer_info_nickname">닉네임01</p>
+						<p class="reply_writer_info_etc">2021.05.28 17:35:28</p>
+					</div>
+						
+					<div class="reply_content">
+						<div class="reply_content_area">
+							<p>lv3:dddddd</p>
+						</div>
+						<div class="reply_btn_area">
+							<div class="reply_btn"><button>댓글달기</button></div>
+							<div class="reply_btn"><button>삭제하기</button></div>
+							<div class="reply_btn"><button>수정하기</button></div>
+						</div>
+					</div>	
+				</li>
+				<li class="reply">
+					<div class="lv1"><img src="<%=request.getContextPath()%>/Resource/img/list-arrow.png">
+					</div>
+					<div class="reply_img"><img src="<%=request.getContextPath()%>/Resource/img/no_image.png">
+					</div>
+					
+					<div class="reply_writer_info">
+						<p class="reply_writer_info_nickname">닉네임01</p>
+						<p class="reply_writer_info_etc">2021.05.28 17:35:28</p>
+					</div>
+						
+					<div class="reply_content">
+						<div class="reply_content_area">
+							<p>lv1:dddddd</p>
+						</div>
+						<div class="reply_btn_area">
+							<div class="reply_btn"><button>댓글달기</button></div>
+						</div>
+					</div>	
+				</li>			
+			</ul>
+			
+			
+		</div>
+		
+		<div id="reply_write_area">
+			<form action="" method="post">
+				<div class="reply_write_content"><textarea rows="10" cols="180" style="resize:none"></textarea></div>
+				<hr>
+				<div class="reply_write_btn"><input type="submit" value="댓글 등록"></div>
+				<input type="hidden" name="userId" value="">
+				<input type="hidden" name="boardNo" value="">
+			</form>
+		</div>	
+	</section>
+	
+	
+	
+	
+	
+	
+	
+	
 	<div id="board_head">
 		<ul>
 			<li class="board_sort"><select>
