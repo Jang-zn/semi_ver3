@@ -3,19 +3,21 @@ package com.semi.member.exc.model.vo;
 public class ExerciseCustom {
 	private String excId_c;
 	private String excSort;
-	private String excName;
+	private String excName_c;
+	private String excManual_c;
 	
 	
 	public ExerciseCustom() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 
-	public ExerciseCustom(String excId_c, String excSort, String excName) {
+	public ExerciseCustom(String excId_c, String excSort, String excName_c, String excManual_c) {
 		super();
 		this.excId_c = excId_c;
 		this.excSort = excSort;
-		this.excName = excName;
+		this.excName_c = excName_c;
+		this.excManual_c = excManual_c;
 	}
 
 
@@ -39,14 +41,30 @@ public class ExerciseCustom {
 	}
 
 
-	public String getExcName() {
-		return excName;
+	public String getExcName_c() {
+		return excName_c;
 	}
 
 
-	public void setExcName(String excName) {
-		this.excName = excName;
+	public void setExcName_c(String excName_c) {
+		this.excName_c = excName_c;
 	}
+
+
+	public String getExcManual_c() {
+		return excManual_c;
+	}
+
+
+	public void setExcManual_c(String excManual_c) {
+		this.excManual_c = excManual_c;
+	}
+
+	
+	
+	
+	
+	
 }
 	
 	
