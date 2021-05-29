@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.semi.board.model.vo.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -7,6 +8,8 @@
 	String searchType=(String)request.getAttribute("searchType");
 	int boardListCount = (int)request.getAttribute("boardListCount");
 	Board b = (Board)request.getAttribute("board");
+	List<Board> list = (List<Board>)request.getAttribute("boardList");
+	String pageBar = (String)request.getAttribute("pageBar");
 %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/boardList.css">
@@ -183,6 +186,7 @@
 		</section>
 	<%} %>
 	<div id="board_head">
+		
 		<ul>
 			<li class="board_sort"><select>
 					<option>-분류-</option>
@@ -198,39 +202,39 @@
 		</ul>
 	</div>
 	<div id="board_body">
-		<ul>
-			<li class="board_sort">자유</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
-		<ul>
-			<li class="board_sort">눈바디</li>
-			<li class="board_title">
-				<div class="board_file_img">
-					<img src="">
-				</div>
-				<span>asfsafsafasfasfasf</span>
-			</li>
-			<li class="board_content_info"><span>글쓴이</span></li>
-			<li class="board_content_info"><span>날짜</span></li>
-			<li class="board_content_info"><span>13</span></li>
-		</ul>
+	 <%if(list==null){ %>
+			<ul>
+				<li>데이터가 없습니다.</li>
+			</ul>
+		<%}else{ %>
+			<%for(Board b1 : list) {%> 
+				<ul>
+					<li class="board_type"><%=b1.getCategory() %></li>
+					<li class="board_title" onclick="boardContent(<%=b1.getContentNo()%>);">
+						<div class="board_file_img">
+							<img src="">
+						</div>
+						<span><%=b1.getTitle() %></span>
+					</li>
+					<li class="board_content_info"><span><%=b1.getWriter() %></span></li>
+					<li class="board_content_info"><span><%=b1.getWriteDate() %></span></li>
+					<li class="board_content_info"><span><%=b1.getReadCount() %></span></li>
+					<%--<%if(loginm.getUserId().equlas("admin")){ 
+					<li><button>삭제</button></li>
+					<%} %>--%>
+				</ul>
+		 	 <%} %>
+		 <%} %> 
 	</div>
 	<div id="board_pageBar">
-		<span>◀ 1 2 3 4 5 6 7 8 9 10 ▶</span><button onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</button>
+		<%=pageBar %>
+		<%--<span>◀ 1 2 3 4 5 6 7 8 9 10 ▶</span> --%><button onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</button>
 	</div>
 </div>
 <script>
-	$(".board_title").click(e=>{
-		location.assign("<%=request.getContextPath()%>/board/content");
-	});
+	const boardContent=(e)=>{
+		location.assign("<%=request.getContextPath()%>/board/content?no="+e);
+	}
 	$("#search-Type").change(e=>{
 		const Title = $("#search-Title");
 		const Content = $("#search-Content");	

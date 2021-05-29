@@ -25,7 +25,7 @@
 						<option value="Title" <%=searchType!=null&&searchType.equals("title")?"selected":"" %>>제목</option>
 						<option value="Content"  <%=searchType!=null&&searchType.equals("content")?"selected":"" %>>내용</option>
 						<option value="TitleContent" <%=searchType!=null&&searchType.equals("titlecontent")?"selected":"" %>>제목+내용</option>
-						<option value="Nickname"  <%=searchType!=null&&searchType.equals("nickname")?"selected":"" %>>닉네임</option>
+						<option value="Writer"  <%=searchType!=null&&searchType.equals("Writer")?"selected":"" %>>작성자</option>
 					</select> 
 			</div>
 			<div id="search-Title">
@@ -52,11 +52,11 @@
 					<input type="submit" value="검색" >
 				</form>
 			</div>
-				<div id="search-Nickname">
+				<div id="search-Writer">
 				<form action="<%=request.getContextPath()%>/board/boardSearch" method="GET">
-					<input type="text" placeholder="닉네임을 입력하세요" name="searchKeyword"
-					value=<%=searchType!=null&&searchType.equals("nickname")?searchKeyword:"" %>>  
-					<input type="hidden" name="searchType" value="nickname">
+					<input type="text" placeholder="작성자를 입력하세요" name="searchKeyword"
+					value=<%=searchType!=null&&searchType.equals("writer")?searchKeyword:"" %>>  
+					<input type="hidden" name="searchType" value="writer">
 					<input type="submit" value="검색" >
 				</form>
 			</div>
@@ -136,12 +136,12 @@
 			const Title = $("#search-Title");
 			const Content = $("#search-Content");	
 			const TitleContent = $("#search-TitleContent");	
-			const Nickname = $("#search-Nickname");
+			const Writer = $("#search-Writer");
 			
 			Title.css("display","none");
 			Content.css("display","none");
 			TitleContent.css("display","none");
-			Nickname.css("display","none");
+			Writer.css("display","none");
 			
 			$("#search-"+$(e.target).val()).css("display","inline-block");
 		});

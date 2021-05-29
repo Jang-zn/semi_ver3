@@ -139,17 +139,5 @@ public class ServletPageBar {
 	public int getNumPerpage() {
 		return numPerpage;
 	}
-
-
-
-
-	
-
-
-
-
-	
-	
-	
 	
 }

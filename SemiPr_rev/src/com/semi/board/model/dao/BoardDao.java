@@ -75,31 +75,64 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Board> list = new ArrayList();
-		String sql =prop.getProperty("boardSearch");
-		try {
-			pstmt = conn.prepareStatement(sql.replace("#", searchType));
-			pstmt.setString(1, "%"+searchKeyword+"%");
-			pstmt.setInt(2, (cPage-1)*numPerpage+1);
-			pstmt.setInt(3, cPage*numPerpage);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				Board b = new Board();
-				b.setContentNo(rs.getInt("content_no"));
-				b.setMemberId(rs.getString("member_id"));
-				b.setTitle(rs.getString("title"));
-				b.setCategory(rs.getString("category"));
-				b.setContent(rs.getString("content"));
-				b.setWriter(rs.getString("writer"));
-				b.setReadCount(rs.getInt("read_count"));
-				b.setWriteDate(rs.getDate("write_date"));
-				list.add(b);
+		String sql="";
+		System.out.println(searchType);
+		if(searchType.equals("titlecontent")) {
+			sql = prop.getProperty("titlecontent");
+			
+			try {
+				pstmt = conn.prepareStatement(sql.replace("#", "title").replace("^", "content"));
+				pstmt.setString(1, "%"+searchKeyword+"%");
+				pstmt.setString(2, "%"+searchKeyword+"%");
+				pstmt.setInt(3, (cPage-1)*numPerpage+1);
+				pstmt.setInt(4, cPage*numPerpage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Board b = new Board();
+					b.setContentNo(rs.getInt("content_no"));
+					b.setMemberId(rs.getString("member_id"));
+					b.setTitle(rs.getString("title"));
+					b.setCategory(rs.getString("category"));
+					b.setContent(rs.getString("content"));
+					b.setWriter(rs.getString("writer"));
+					b.setReadCount(rs.getInt("read_count"));
+					b.setWriteDate(rs.getDate("write_date"));
+					list.add(b);
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
+		}else {
+			sql =prop.getProperty("boardSearch");
+			try {
+				pstmt = conn.prepareStatement(sql.replace("#", searchType));
+				pstmt.setString(1, "%"+searchKeyword+"%");
+				pstmt.setInt(2, (cPage-1)*numPerpage+1);
+				pstmt.setInt(3, cPage*numPerpage);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Board b = new Board();
+					b.setContentNo(rs.getInt("content_no"));
+					b.setMemberId(rs.getString("member_id"));
+					b.setTitle(rs.getString("title"));
+					b.setCategory(rs.getString("category"));
+					b.setContent(rs.getString("content"));
+					b.setWriter(rs.getString("writer"));
+					b.setReadCount(rs.getInt("read_count"));
+					b.setWriteDate(rs.getDate("write_date"));
+					list.add(b);
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
 		}
+		
 		return list;
 	}
 
@@ -107,19 +140,37 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result =0;
-		System.out.println(searchType);
-		String sql = prop.getProperty("boardSearchCount");
-		try {
-			pstmt=conn.prepareStatement(sql.replace("#", searchType));
-			pstmt.setString(1, "%"+searchKeyword+"%");
-			rs=pstmt.executeQuery();
-			if(rs.next()) result = rs.getInt(1);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(conn);
+		String sql ="";
+		if(searchType.equals("titlecontent")) {
+			sql = prop.getProperty("titlecontentcount");
+			try {
+				pstmt = conn.prepareStatement(sql.replace("#", "title").replace("^", "content"));
+				pstmt.setString(1, "%"+searchKeyword+"%");
+				pstmt.setString(2, "%"+searchKeyword+"%");
+				rs=pstmt.executeQuery();
+				if(rs.next()) result = rs.getInt(1);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(conn);
+			}
+		}else {
+			sql = prop.getProperty("boardSearchCount");
+			try {
+				pstmt=conn.prepareStatement(sql.replace("#", searchType));
+				pstmt.setString(1, "%"+searchKeyword+"%");
+				rs=pstmt.executeQuery();
+				if(rs.next()) result = rs.getInt(1);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(conn);
+			}
 		}
+		
+	
 		
 		return result;
 	}

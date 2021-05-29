@@ -69,6 +69,8 @@ public class BoardContentServlet extends HttpServlet {
 		  List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
 		  request.setAttribute("boardList", list);
 		  
+		  
+		  
 		  request.getRequestDispatcher("/views/board/boardContent.jsp").forward(request, response);
 	}
 
