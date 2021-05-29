@@ -55,3 +55,6 @@ div.board_file_img>img {
 	text-align: center;
 	margin: 1%;
 }
+#board_pageBar>a {
+	color:black;
+}

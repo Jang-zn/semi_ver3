@@ -1,11 +1,14 @@
 package com.semi.board.controller;
 
 import java.io.*;
+import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
+import com.semi.board.model.service.*;
+import com.semi.board.model.vo.*;
 import com.semi.common.*;
 
 /**
@@ -31,13 +34,14 @@ public class BoardSearchServlet extends HttpServlet {
 		
 		String searchType = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
-		int totalData = 3;//new BoardService().boardSearchCount();
-		ServletPageBar p = new ServletPageBar(request, totalData, 5, "/board/boardSearch");
-		//List<Board> list = new BoardService().boardsearch(searchType,searchKeyword,p.getCPage(),p.getNumPerpage());
+		int totalData = new BoardService().boardSearchCount(searchType,searchKeyword);
+		ServletPageBar p = new ServletPageBar(request, totalData, 5, "/board/boardSearch?searchKey="+searchKeyword+"&searchType="+searchType);
+		List<Board> list = new BoardService().boardsearch(searchType,searchKeyword,p.getCPage(),p.getNumPerpage());
 		request.setAttribute("searchKeyword", searchKeyword);
 		request.setAttribute("searchType", searchType);
-		//request.setAttribute("pageBar", p);
-		//request.setAttribute("BoardList", list);
+		request.setAttribute("pageBar", p.getPageBar());
+		request.setAttribute("boardList", list);
+		request.setAttribute("boardListCount", totalData);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 		
 		

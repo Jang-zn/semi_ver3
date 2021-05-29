@@ -1,13 +1,15 @@
 package com.semi.board.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.*;
+
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
 
 import com.semi.board.model.service.*;
+import com.semi.board.model.vo.*;
+import com.semi.common.*;
 
 /**
  * Servlet implementation class Servlet
@@ -28,8 +30,15 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//int boardListCount = new BoardService().boardListCount();
-		//request.setAttribute("boardListCount",boardListCount);
+		int boardListCount = new BoardService().boardListCount();
+		request.setAttribute("boardListCount",boardListCount);
+		
+		ServletPageBar sp = new ServletPageBar(request, boardListCount, 5, "/board/boardList");
+		
+		request.setAttribute("pageBar",sp.getPageBar());
+		
+		List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
+		request.setAttribute("boardList", list);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 	}
 
