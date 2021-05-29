@@ -1,6 +1,7 @@
 package com.semi.member.model.vo;
 
 public class MemberExcList {
+	private int excNo;
 	private String memberId;
 	private String excId;
 	private String excId_c;
@@ -13,9 +14,10 @@ public class MemberExcList {
 	
 	}
 
-	public MemberExcList(String memberId, String excId, String excId_c, int reps, int sets, double weight,
+	public MemberExcList(int excNo, String memberId, String excId, String excId_c, int reps, int sets, double weight,
 			String excWeek) {
 		super();
+		this.excNo = excNo;
 		this.memberId = memberId;
 		this.excId = excId;
 		this.excId_c = excId_c;
@@ -23,6 +25,14 @@ public class MemberExcList {
 		this.sets = sets;
 		this.weight = weight;
 		this.excWeek = excWeek;
+	}
+
+	public int getExcNo() {
+		return excNo;
+	}
+
+	public void setExcNo(int excNo) {
+		this.excNo = excNo;
 	}
 
 	public String getMemberId() {
@@ -80,7 +90,7 @@ public class MemberExcList {
 	public void setExcWeek(String excWeek) {
 		this.excWeek = excWeek;
 	}
-	
+
 	
 	
 }
