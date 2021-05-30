@@ -33,7 +33,7 @@
     </head>
 
     <body>
-        <header id="header_container">
+        <div id="header_container" class="row">
             <div id="logo_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
             <div id="menu_container" class="col-md-6">
                 <div id="menu_line">
@@ -71,7 +71,7 @@
             	</div>
             <%} %>
             
-        </header>
-        <section id="aside_content">
-            <div id="content_container">
+        </div>
+		<div id="aside_content" class="row">
+      	  <div id="content_container" class="col-md-10">
                 <!-- 이 위까지 header -->
