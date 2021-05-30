@@ -15,8 +15,8 @@
         <script src="<%=request.getContextPath()%>/Resource/js/chart.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <script src="js/bootstrap.min.js"></script>
+        <link href="<%=request.getContextPath()%>/Resource/css/bootstrap.min.css" rel="stylesheet">	
+        <script src="<%=request.getContextPath()%>/Resource/js/bootstrap.min.js"></script>
         <script>
             $(document).ready(function () {
                 $("#menu_line>div").mouseover(function () {

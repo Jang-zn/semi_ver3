@@ -32,13 +32,11 @@ div#member_rank {
 }
 
 div#member_info {
-	width: 43%;
 	margin-right: 2%;
 	display: flex;
 }
 
 div#profile_area_content {
-	width: 46%;
 	margin: 2%
 }
 
@@ -48,12 +46,10 @@ div#profile_area_content>img {
 }
 
 div#member_info_area {
-	width: 46%;
 	margin: 2%
 }
 
 div#weekly_check {
-	width: 60%;
 }
 
 div#weekly_check_title_main {
@@ -64,11 +60,9 @@ div#weekly_check_title_main {
 
 div#weekly_check_title_main>span {
 	display: inline-block;
-	width: 80%;
 }
 
 div#weekly_check_title_main>button {
-	width: 20%;
 }
 
 div#weekly_check_daybyday_exc {
@@ -88,14 +82,12 @@ div#weekly_check_daybyday_menu {
 div.day {
 	border-radius: 100%;
 	border: 3px black solid;
-	width: 10%;
 	margin-left: 1%;
 	margin-right: 1%;
 	text-align: center;
 }
 
 div.text_plan {
-	width: 16%;
 	text-align: center;
 }
 
@@ -110,11 +102,9 @@ div#monthly_check_main {
 
 div#monthly_check_title_main>span {
 	display: inline-block;
-	width: 88%;
 }
 
 div#monthly_check_title_main>button {
-	width: 12%;
 }
 
 div#monthly_check_content {
@@ -123,11 +113,9 @@ div#monthly_check_content {
 }
 
 div#monthly_plan_trend {
-	width: 60%;
 }
 
 div#monthly_plan_analysis {
-	width: 40%;
 }
 
 div#noonbody_title_main {
@@ -137,11 +125,9 @@ div#noonbody_title_main {
 
 div#noonbody_title_main>span {
 	display: inline-block;
-	width: 87%;
 }
 
 div#noonbody_title_main>button {
-	width: 13%;
 }
 
 div#noonbody_thumb_area {
@@ -150,21 +136,17 @@ div#noonbody_thumb_area {
 }
 
 div.noonbody_thumb {
-	width: 18%;
 }
 
 div#noonbody_left, div#noonbody_right {
-	width: 5%;
 }
 
 div#daily_log_exc_area {
 	height: 100%;
-	width: 50%;
 }
 
 div#daily_log_menu_area {
 	height: 100%;
-	width: 50%;
 }
 
 div#daily_log_exc_title_main {
@@ -174,11 +156,9 @@ div#daily_log_exc_title_main {
 
 div#daily_log_exc_title_main>span {
 	display: inline-block;
-	width: 87%;
 }
 
 div#daily_log_exc_title_main>button {
-	width: 13%;
 }
 
 div#daily_log_exc_list {
@@ -196,9 +176,8 @@ div#daily_log_menu_list {
 
 div#daily_log_menu_title_main>span {
 	display: inline-block;
-	width: 87%;
 }
 
 div#daily_log_menu_title_main>button {
-	width: 13%;
+	
 }
