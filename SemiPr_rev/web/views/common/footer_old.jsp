@@ -4,12 +4,12 @@
 </div>
 <div id="aside_container">
     <div id="navigator">
-        <div>
-            <div class="navigator_menu"></div>
-            <div class="navigator_menu"></div>
-            <div class="navigator_menu"></div>
-            <div class="navigator_menu"></div>
-        </div>
+        <ul>
+            <li class="navigator_menu"></li>
+            <li class="navigator_menu"></li>
+            <li class="navigator_menu"></li>
+            <li class="navigator_menu"></li>
+        </ul>
     </div>
 </div>
 </section>
