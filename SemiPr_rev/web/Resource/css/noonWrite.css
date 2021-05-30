@@ -8,18 +8,6 @@
 	display:flex;
 }
 
-#n_content {
-	
-}
-#n_list{
-	
-}
-#n_date{
-	
-}
-#n_date>label{
-	
-}
 
 #n_content_img{
 	
@@ -59,22 +47,12 @@
 #submit_area img{
 	width:100%;
 }
-#submit_area>button span{
 
-}
-#comment_area{
-	
-}
 .img_obj{
 	height:200px;
 }
-
-#n_pageBar{
-	
-}
-
-#n_img_list{
-	
+.btnb{
+	border:1px solid black;
 }
 
 
