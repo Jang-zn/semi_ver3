@@ -60,11 +60,11 @@
 
         a {
             text-decoration: none;
-            color:white;
+            color:gray;
         }
 
         a:visited{
-            color:white;
+            color:gray;
         }
         div#menu_line {
             display: flex;
