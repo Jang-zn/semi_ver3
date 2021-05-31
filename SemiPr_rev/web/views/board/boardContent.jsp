@@ -9,6 +9,7 @@
 	int boardListCount = (int)request.getAttribute("boardListCount");
 	Board b = (Board)request.getAttribute("board");
 	List<Board> list = (List<Board>)request.getAttribute("boardList");
+	String[] list2 = (String[])request.getAttribute("selectBoardFile");
 	String pageBar = (String)request.getAttribute("pageBar");
 %>
 <%@ include file="/views/common/header.jsp"%>
@@ -70,11 +71,25 @@
 			<span id="title"><%=b.getTitle() %></span><span class="content_info"><%=b.getWriter() %></span><span class="content_info"><%=b.getWriteDate() %></span><span class="content_info"><%=b.getReadCount() %></span>
 			</div>
 			<div id="content_file">
-				첨부파일 (누르면 슬라이드 / 파일명 보여줌)
-				<ul>
-					<li>사진1.jpg</li>
-					<li>사진2.jpg</li>
-				</ul>
+				<p class="slidefile">첨부파일 보기</p>
+				<%if(list2==null){ %>
+					<ul>
+							<li>첨부파일이 없습니다.</li>
+					</ul>
+				<%}else{ %>
+						<ul>
+							<%for(int i=0; i<list2.length; i++) {%>
+									<%if(i==0&&list2[i]==null){ %> 
+									<li>첨부파일이 없습니다.</li>
+									<%break;} else{ %>
+										<%if(list2[i]==null) {%>
+										<%break; }%>
+										<li><%=list2[i] %></li>
+									<%} %>
+							<%} %>
+						</ul>
+				<%} %>
+				
 			</div>
 			<div id="content_detail">
 					<div id="content_text"><div style="height:400px;"><%=b.getContent()%></div><!-- <textarea rows="30" cols="100" readonly></textarea> --></div>
@@ -233,8 +248,12 @@
 	</div>
 </div>
 <script>
+	$(".slidefile").next("ul").css("display","none");
 	
-
+	$(".slidefile").click(e=>{
+		$(e.target).next("ul").slideDown(800);
+	})
+	
 	const boardContent=(e)=>{
 		location.assign("<%=request.getContextPath()%>/board/content?no="+e);
 	}

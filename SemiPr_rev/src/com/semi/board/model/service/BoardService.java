@@ -63,10 +63,27 @@ public class BoardService {
 		return result;
 	}
 
-	public void boardfile(int contentNo,String file) {
+	public int boardfile(int contentNo,String file) {
 		Connection conn = getConnection();
-		dao.boardfile(contentNo,file,conn);
+		int result = dao.boardfile(contentNo,file,conn);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
+		return result;
+	}
+
+	public int boardContentNo() {
+		Connection conn = getConnection();
+		int cNo = dao.boardContentNo(conn);
+		close(conn);
+		return cNo;
+	}
+
+	public String[] selectBoardfile(int no) {
+		Connection conn = getConnection();
+		String[] list = dao.selectBoardFile(conn,no);
+		close(conn);
+		return list;
 	}
 
 

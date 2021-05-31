@@ -1,12 +1,12 @@
 package com.semi.board.model.dao;
 
+import static com.semi.common.JdbcTemplate.*;
+
 import java.io.*;
 import java.sql.*;
 import java.util.*;
 
 import com.semi.board.model.vo.*;
-
-import static com.semi.common.JdbcTemplate.close;
 public class BoardDao {
 	
 	
@@ -243,13 +243,14 @@ public class BoardDao {
 		return result;
 	}
 
-	public void boardfile(int contentNo,String file,Connection conn) {
+	public int boardfile(int contentNo,String file,Connection conn) {
 		PreparedStatement pstmt = null;
+		int result = 0;
 		try {
 			pstmt =conn.prepareStatement(prop.getProperty("boardfile"));
 			pstmt.setInt(1, contentNo);
 			pstmt.setString(2, file);
-			
+			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -257,7 +258,52 @@ public class BoardDao {
 			
 		}
 		
+		return result;
+	}
+
+	public int boardContentNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cNo =0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("boardContentNo"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) cNo = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
 		
+		return cNo;
+	}
+
+	public String[] selectBoardFile(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String[] list = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectBoardFile"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnCount = rsmd.getColumnCount();
+			list = new String[5];
+			System.out.println(columnCount);
+			int count=0;
+			while(rs.next()) {
+				list[count++] = rs.getString(3);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return list;
 	}
 
 	

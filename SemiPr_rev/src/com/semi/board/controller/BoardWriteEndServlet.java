@@ -43,9 +43,9 @@ public class BoardWriteEndServlet extends HttpServlet {
 		b.setTitle(mr.getParameter("title"));
 		b.setWriter(mr.getParameter("writer"));
 		b.setContent(mr.getParameter("content"));
-		System.out.println(b.getContent());
 		b.setMemberId(mr.getParameter("memberId"));
 		int result = new BoardService().insertBoard(b);
+		int cNo = new BoardService().boardContentNo();
 		String f1 = mr.getFilesystemName("upload");
 		String f2 = mr.getFilesystemName("upload2");
 		String f3 = mr.getFilesystemName("upload3");
@@ -57,16 +57,17 @@ public class BoardWriteEndServlet extends HttpServlet {
 		f[2] = f3;
 		f[3] = f4;
 		f[4] = f5;
-		for(int i=0; i<5; i++) {
-			if(f[i]==null) {
-				break;
-			}
-			//new BoardService().boardfile(f[i]);
-			
-			
-		}
 		
-		System.out.println(mr.getFilesystemName("upload5"));
+		if(cNo!=0) {
+			for(int i=0; i<5; i++) {
+					if(f[i]==null) {
+						break;
+					}
+				result = new BoardService().boardfile(cNo,f[i]);
+			}
+		}else {
+			result = 0;
+		}
 		String msg ="";
 		String loc ="";
 		if(result>0) {
@@ -76,6 +77,7 @@ public class BoardWriteEndServlet extends HttpServlet {
 			msg="등록실패!";
 			loc="/board/boardWriteEnd";
 		}
+		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/error/errorPage.jsp").forward(request, response);

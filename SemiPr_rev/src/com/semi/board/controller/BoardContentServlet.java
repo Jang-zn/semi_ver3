@@ -61,6 +61,7 @@ public class BoardContentServlet extends HttpServlet {
 	      
 	      
 	      Board b = new BoardService().boardContent(no,readFlag);
+	      String[] list2 = new BoardService().selectBoardfile(no);
 	      request.setAttribute("boardListCount",boardListCount);
 	      request.setAttribute("board", b);
 	      
@@ -68,6 +69,8 @@ public class BoardContentServlet extends HttpServlet {
 		  request.setAttribute("pageBar",sp.getPageBar());
 		  List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
 		  request.setAttribute("boardList", list);
+		  request.setAttribute("selectBoardFile", list2);
+		  	
 		  
 		  
 		  
