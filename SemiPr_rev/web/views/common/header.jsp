@@ -39,6 +39,7 @@
                 <div id="menu_line">
                     <div class="col-md-3">
                         <a href="<%=request.getContextPath()%>/member/main">My Page</a>
+
                     </div>
                     <div class="col-md-3">Plan
                         <div class="sub">

@@ -12,16 +12,16 @@ import com.semi.board.model.vo.*;
 import com.semi.common.*;
 
 /**
- * Servlet implementation class Servlet
+ * Servlet implementation class BoardSearchServlet
  */
-@WebServlet(urlPatterns = { "/board/boardList" })
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/board/boardSearch")
+public class BoardSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public BoardSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +30,22 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boardListCount = new BoardService().boardListCount();
-		request.setAttribute("boardListCount",boardListCount);
 		
-		ServletPageBar sp = new ServletPageBar(request, boardListCount, 5, "/board/boardList");
 		
-		request.setAttribute("pageBar",sp.getPageBar());
-		
-		List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
+		String searchType = request.getParameter("searchType");
+		String searchKeyword = request.getParameter("searchKeyword");
+		int totalData = new BoardService().boardSearchCount(searchType,searchKeyword);
+		ServletPageBar p1 = new ServletPageBar(request, totalData, 5, "/board/boardSearch", "&searchKeyword="+searchKeyword+"&searchType="+searchType);
+		List<Board> list = new BoardService().boardsearch(searchType,searchKeyword,p1.getCPage(),p1.getNumPerpage());
+		request.setAttribute("searchKeyword", searchKeyword);
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("pageBar",p1.getPageBar());
 		request.setAttribute("boardList", list);
+		request.setAttribute("boardListCount", totalData);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
+		
+		
+		
 	}
 
 	/**
