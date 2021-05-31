@@ -9,7 +9,7 @@
 	<h2>눈바디</h2>
 </div>
 
-<form action="" method="post" enctype="multipart/form-data">
+<form action="<%=request.getContextPath() %>/gallary/writeEnd" method="post" enctype="multipart/form-data" id="frm">
 <div id="n_content_area">
 	
 	<div id="n_content">
@@ -18,7 +18,7 @@
 			<label>자유게시판 공유하기 : <input type = "checkbox" name="share"></label>
 		</div>
 		<div id="n_content_img">
-			<img src="">
+			<img id="img_preview" src="#">
 		</div>
 	</div>
 	
@@ -34,13 +34,14 @@
 		
 		
 		<div id="upload_area">
-			<button> + </button>
-			<input type="file" name="imgUp">
+			<button > + </button>
+			<input type="file" name="imgUp" id="imgInput"/>
+			<img id="img_section" src="#" >
 		</div>
 		
 		
 		<div id="submit_area">
-			<button type="submit"><img src="<%=request.getContextPath()%>/Resource/img/btn-check.png"><span>등록</span></button>
+			<button type="submit" id="submit"><img src="<%=request.getContextPath()%>/Resource/img/btn-check.png"><span>등록</span></button>
 		</div>
 	</div>
 	
@@ -57,6 +58,31 @@
  		sSkinURI: "<%=request.getContextPath()%>/views/board/editor/SmartEditor2Skin.html",
  		fCreator: "createSEditor2"
 		});
+		
+		$("#submit").click(function(){ 
+			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); 
+			$("#frm").submit(); 
+			})
+
+		
+		
+		//업로드이미지 미리보기 
+		function readURL(input) {
+			 if (input.files && input.files[0]) {
+			  var reader = new FileReader();
+			  
+			  reader.onload = function (e) {
+			   $('#img_preview').attr('src', e.target.result);  
+			  }
+			  
+			  reader.readAsDataURL(input.files[0]);
+			  }
+			}			 
+			// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행.
+			$("#imgInput").change(function(){
+			   readURL(this);
+			});
+		
 </script>
 
 

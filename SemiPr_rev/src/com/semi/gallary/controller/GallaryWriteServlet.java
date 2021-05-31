@@ -27,6 +27,7 @@ public class GallaryWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		request.getRequestDispatcher("/views/gallary/noonWrite.jsp").forward(request, response);
 	}
 
