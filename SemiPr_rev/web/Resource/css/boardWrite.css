@@ -21,19 +21,23 @@
 #write_upload_area {
 	padding-top: 1%;
 	padding-bottom: 1%;
-	padding-left: 1%;
+	
 	border: 1px solid lightgreen;
 }
 
 #write_btn_area {
-	padding-left: 34%;
+	
 }
 
 #write_btn_area>button {
-	margin-right: 3%;
-	width:10%;
+	
+	
 }
 #write_btn_area>button>img {
-	width:28%;
 	
+	
+}
+
+.btnb{
+	border:1px solid black;
 }
