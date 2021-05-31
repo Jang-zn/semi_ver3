@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+
+
+
+#agreement-wrap {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#submit-btn {
+	position: absolute;
+	top: 90%;
+	left: 46.5%;
+	border: solid 1px greenyellow;
+}
+
+.sub-btn {
+	position: relative;
+	font-size: 18px;
+	color: #fff;
+	background: #226de6;
+}
+
+.agreement1 {
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.box {
+	margin: 0 auto;
+	border: 2px solid black;
+}
+p{
+	text-align: center;
+	font-size:18px;
+}
+
+.inner-agreement{
+	
+	width:1000px;
+	height:300px;
+}

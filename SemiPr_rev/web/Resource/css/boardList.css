@@ -25,8 +25,12 @@
 	font-size: 14px;
 }
 
+
 .board_sort,.board_type {
 	width: 5%;
+
+
+.board_sort {
 	text-align: center;
 	align-self: center;
 }
@@ -53,8 +57,11 @@ div.board_file_img>img {
 
 #board_pageBar {
 	text-align: center;
+
 	margin: 1%;
 }
 #board_pageBar>a {
 	color:black;
+
+
 }

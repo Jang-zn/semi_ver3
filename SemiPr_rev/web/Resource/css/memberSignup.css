@@ -52,8 +52,8 @@ h3 {
 }
 
 .int {
+
   display: block;
-  
   width: 100%;
   height: 29px;
   border: none;
@@ -61,12 +61,14 @@ h3 {
   font-size: 15px;
 }
 
+
+
 input {
   font-family: Dotum, '돋움', Helvetica, sans-serif;
 }
 
 .box.int_id {
-  
+
 }
 
 .box.int_pass {
@@ -78,14 +80,11 @@ input {
 }
 
 .sta_weight {
-  
-  
+
   font-size: 18px;
   color: #8e8e8e;
 }
 .sta_height {
-  
- 
   font-size: 18px;
   color: #8e8e8e;
 }
@@ -163,6 +162,20 @@ select {
 
 /* 버튼 */
 
+#id-chk{
+	
+	margin-top: 5px;
+	margin-left: 5px;
+}
+#Nick-chk{
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+#wrap-idchk{
+	display:flex;
+}
+
 .btn_area {
   margin: 30px 0 91px;
 }
@@ -180,8 +193,22 @@ select {
 }
 
 /* 체중 키 */
+
+
+
+
 #height {
-  display: block;
+font-size : 15px;
+  width: 100%;
+  height: 51px;
+  border: solid 1px #dadada;
+  padding: 10px 14px 10px 14px;
+  box-sizing: border-box;
+  background: #fff;
+ 
+}
+#weight {
+	font-size : 15px;
   width: 100%;
   height: 51px;
   border: solid 1px #dadada;
@@ -190,13 +217,13 @@ select {
   background: #fff;
   
 }
-#weight {
-  display: block;
-  width: 100%;
-  height: 51px;
-  border: solid 1px #dadada;
-  padding: 10px 14px 10px 14px;
-  box-sizing: border-box;
-  background: #fff;
-  
+
+/* 프로필 사진 */
+
+
+
+img{
+	margin-top:10px;
+	width:120px;
+	height:120px;
 }
