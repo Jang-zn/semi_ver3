@@ -49,6 +49,7 @@ label {
 
 #sign_page {
   text-align: center;
+ 
 }
 
 #sns_page {
@@ -71,3 +72,9 @@ label {
 input{
   font-family: Dotum, '돋움', Helvetica, sans-serif;
 }
+a{
+	color: black;
+}
+ a:visited{
+            color:black;
+        }

@@ -22,14 +22,10 @@
 		</ul>
 	</form>
 	<div id="sign_page">
-		<a href="">회원가입 | </a> <a href="">아이디 찾기 | </a> <a href="">비밀번호 찾기
-			|</a>
+		<a href="<%=request.getContextPath()%>/views/member/memberSignup.jsp">회원가입 | </a> <a href="<%=request.getContextPath()%>/views/member/memberForgot.jsp">아이디 찾기 | 비밀번호 찾기 </a>
+			
 	</div>
-	<br>
-	<div id="sns_page">
-		<a href="">구글로그인</a><br> <a href="">네이버로그인</a><br> <a
-			href="">카카오로그인</a>
-	</div>
+
 </section>
 
 
