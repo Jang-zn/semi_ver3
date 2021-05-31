@@ -222,6 +222,44 @@ public class BoardDao {
 		return result;
 	}
 
+	public int insertBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertBoard"));
+			pstmt.setString(1, b.getMemberId());
+			pstmt.setString(2, b.getTitle());
+			pstmt.setString(3, b.getCategory());
+			pstmt.setString(4, b.getContent());
+			pstmt.setString(5, b.getWriter());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public void boardfile(int contentNo,String file,Connection conn) {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt =conn.prepareStatement(prop.getProperty("boardfile"));
+			pstmt.setInt(1, contentNo);
+			pstmt.setString(2, file);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		}
+		
+		
+	}
+
 	
 	 
 }

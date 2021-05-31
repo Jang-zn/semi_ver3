@@ -55,6 +55,20 @@ public class BoardService {
 		return b;
 	}
 
+	public int insertBoard(Board b) {
+		Connection conn = getConnection();
+		int result = dao.insertBoard(conn,b);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
+	public void boardfile(int contentNo,String file) {
+		Connection conn = getConnection();
+		dao.boardfile(contentNo,file,conn);
+		close(conn);
+	}
+
 
 	
 

@@ -77,7 +77,7 @@
 				</ul>
 			</div>
 			<div id="content_detail">
-					<div id="content_text"><textarea rows="30" cols="100"></textarea></div>
+					<div id="content_text"><div style="height:400px;"><%=b.getContent()%></div><!-- <textarea rows="30" cols="100" readonly></textarea> --></div>
 					<div id="content_btn_area">
 						<div class="content_btn"><button>수정하기</button></div>
 						<div class="content_btn"><button>삭제하기</button></div>
@@ -110,7 +110,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="reply">
+					<%-- <li class="reply">
 						<div class="lv2"><img src="<%=request.getContextPath()%>/Resource/img/list-arrow.png">
 						</div>
 						<div class="reply_img"><img src="<%=request.getContextPath()%>/Resource/img/no_image.png">
@@ -131,8 +131,9 @@
 								<div class="reply_btn"><button>수정하기</button></div>
 							</div>
 						</div>	
-					</li>
-					<li class="reply">
+					</li> --%>
+					
+					<%-- <li class="reply">
 						<div class="lv3"><img src="<%=request.getContextPath()%>/Resource/img/list-arrow.png">
 						</div>
 						<div class="reply_img"><img src="<%=request.getContextPath()%>/Resource/img/no_image.png">
@@ -152,7 +153,7 @@
 								<div class="reply_btn"><button>수정하기</button></div>
 							</div>
 						</div>	
-					</li>
+					</li> --%>
 					<li class="reply">
 						<div class="lv1"><img src="<%=request.getContextPath()%>/Resource/img/list-arrow.png">
 						</div>
@@ -189,7 +190,7 @@
 		
 		<ul>
 			<li class="board_sort"><select>
-					<option>-분류-</option>
+					<option value="">전체</option>
 					<option value="자유">자유</option>
 					<option value="눈바디">눈바디</option>
 			</select></li>
@@ -232,9 +233,13 @@
 	</div>
 </div>
 <script>
+	
+
 	const boardContent=(e)=>{
 		location.assign("<%=request.getContextPath()%>/board/content?no="+e);
 	}
+	
+	
 	$("#search-Type").change(e=>{
 		const Title = $("#search-Title");
 		const Content = $("#search-Content");	
