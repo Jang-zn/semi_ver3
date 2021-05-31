@@ -168,7 +168,6 @@ public class MemberDao {
 
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
-		ResultSet rs=null;
 		String sql="INSERT INTO VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,NULL)";
 		int result=0;
 		try {
@@ -187,6 +186,8 @@ public class MemberDao {
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		return result;
 	}
