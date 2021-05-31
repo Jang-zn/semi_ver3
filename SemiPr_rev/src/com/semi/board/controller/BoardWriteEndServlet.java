@@ -1,27 +1,27 @@
 package com.semi.board.controller;
 
 import java.io.*;
-import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-import com.semi.board.model.service.*;
-import com.semi.board.model.vo.*;
-import com.semi.common.*;
+import org.apache.tomcat.util.http.fileupload.servlet.*;
+
+import com.oreilly.servlet.*;
+import com.oreilly.servlet.multipart.*;
 
 /**
- * Servlet implementation class Servlet
+ * Servlet implementation class BoardWriteEndServlet
  */
-@WebServlet(urlPatterns = { "/board/boardList" })
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/board/boardWriteEnd")
+public class BoardWriteEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public BoardWriteEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +30,12 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boardListCount = new BoardService().boardListCount();
-		request.setAttribute("boardListCount",boardListCount);
-		
-		ServletPageBar sp = new ServletPageBar(request, boardListCount, 5, "/board/boardList");
-		
-		request.setAttribute("pageBar",sp.getPageBar());
-		
-		List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
-		request.setAttribute("boardList", list);
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			
+			return;
+		}
+		String path = getServletContext().getRealPath("");
+		MultipartRequest mr = new MultipartRequest(request, path,1024*1024*10,"utf-8",new DefaultFileRenamePolicy());
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 	}
 
