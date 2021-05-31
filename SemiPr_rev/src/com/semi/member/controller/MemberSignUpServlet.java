@@ -2,7 +2,7 @@ package com.semi.member.controller;
 
 import java.io.*;
 import java.text.*;
-import java.util.*;
+
 import java.sql.Date;
 
 
@@ -55,9 +55,9 @@ public class MemberSignUpServlet extends HttpServlet {
 		
 		
 		SimpleDateFormat sdf= new SimpleDateFormat("yyyy/mm/dd");
-		Date memberAge=null;
+		java.util.Date memberAge=null;
 		try {
-			memberAge=(Date) sdf.parse(memberAgeyy+"/"+memberAgemm+"/"+memberAgedd);
+			memberAge=sdf.parse(memberAgeyy+"/"+memberAgemm+"/"+memberAgedd);
 			
 		}catch(ParseException e) {
 			e.printStackTrace();
