@@ -182,6 +182,7 @@ public class MemberDao {
 			pstmt.setDate(7, (Date) m.getBirth());
 			pstmt.setDouble(8, m.getHeight());
 			pstmt.setDouble(9, m.getWeight());
+			pstmt.setString(10,m.getGender());
 			result=pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
