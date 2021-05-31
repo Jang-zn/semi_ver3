@@ -3,6 +3,7 @@ package com.semi.member.model.dao;
 import static com.semi.common.JdbcTemplate.*;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 import com.semi.member.exc.model.vo.*;
@@ -163,6 +164,30 @@ public class MemberDao {
 		}
 		
 		return m;
+	}
+
+	public int insertMember(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="INSERT INTO VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,NULL)";
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPw());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getName());
+			pstmt.setString(5, m.getNickname());
+			pstmt.setString(6, m.getPhone());
+			pstmt.setDate(7, (Date) m.getBirth());
+			pstmt.setDouble(8, m.getHeight());
+			pstmt.setDouble(9, m.getWeight());
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
