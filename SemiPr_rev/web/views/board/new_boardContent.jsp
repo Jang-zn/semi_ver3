@@ -102,7 +102,7 @@
 			<p class="slidefile">첨부파일 보기</p>
 				<%if(list2==null){ %>
 					
-						첨부파일이 없습니다.
+						첨부파일을 불러올수 없습니다.(서버이상)
 				
 				<%}else{ %>
 						<ul>
@@ -129,7 +129,7 @@
 
 		<div id="content_btn_area" class="row">
 			<div class="col-md-5"></div>
-			<div class="btn col-md-1">수정하기</div>
+			<div class="btn col-md-1" onclick="location.assign('<%=request.getContextPath()%>/board/update?no=<%=b.getContentNo()%>');">수정하기</div>
 			<div class="btn col-md-1">삭제하기</div>
 			<div class="col-md-5"></div>
 		</div>
@@ -333,16 +333,16 @@
 											<%} %>
 										<%} %>
 								</div>
-								<div class="col-md-11"><%=b.getTitle() %></div>
+								<div class="col-md-11"><%=bb.getTitle() %></div>
 							</div>
 							<div class="board_content_info col-md-1">
-								<%=b.getWriter() %>
+								<%=bb.getWriter() %>
 							</div>
 							<div class="board_content_info col-md-1">
-								<%=b.getWriteDate() %>
+								<%=bb.getWriteDate() %>
 							</div>
 							<div class="board_content_info col-md-1">
-								<%=b.getReadCount() %>
+								<%=bb.getReadCount() %>
 							</div>
 						</div>
 					<%} %>

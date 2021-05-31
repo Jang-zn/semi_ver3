@@ -2,9 +2,11 @@ package com.semi.board.controller;
 
 import java.io.*;
 
-import javax.servlet.*;
-import javax.servlet.annotation.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.*;
 
@@ -14,16 +16,16 @@ import com.semi.board.model.service.*;
 import com.semi.board.model.vo.*;
 
 /**
- * Servlet implementation class BoardWriteEndServlet
+ * Servlet implementation class BoardUpdateEndServlet
  */
-@WebServlet("/board/boardWriteEnd")
-public class BoardWriteEndServlet extends HttpServlet {
+@WebServlet("/board/updateEnd")
+public class BoardUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardWriteEndServlet() {
+    public BoardUpdateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +34,7 @@ public class BoardWriteEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!ServletFileUpload.isMultipartContent(request)) {
+	if(!ServletFileUpload.isMultipartContent(request)) {
 			
 			return;
 		}
@@ -43,44 +45,44 @@ public class BoardWriteEndServlet extends HttpServlet {
 		b.setTitle(mr.getParameter("title"));
 		b.setWriter(mr.getParameter("writer"));
 		b.setContent(mr.getParameter("content"));
+		b.setContentNo(Integer.parseInt(mr.getParameter("contentNo")));
 		b.setMemberId(mr.getParameter("memberId"));
-		int result = new BoardService().insertBoard(b);
+		int result = new BoardService().updateBoard(b);
+		System.out.println("결과는:"+result);
 		int cNo = new BoardService().boardContentNo();
-		String f1 = mr.getFilesystemName("upload0");
-		String f2 = mr.getFilesystemName("upload1");
-		String f3 = mr.getFilesystemName("upload2");
-		String f4 = mr.getFilesystemName("upload3");
-		String f5 = mr.getFilesystemName("upload4");
-		String[] f = new String[5];
-		f[0] = f1;
-		f[1] = f2;
-		f[2] = f3;
-		f[3] = f4;
-		f[4] = f5;
 		
-		if(cNo!=0) {
-			for(int i=0; i<5; i++) {
-					if(f[i]==null) {
-						break;
-					}
-				result = new BoardService().boardfile(cNo,f[i]);
-			}
+		File f0= mr.getFile("upload0");
+		File f1= mr.getFile("upload1");
+		File f2= mr.getFile("upload2");
+		File f3= mr.getFile("upload3");
+		File f4= mr.getFile("upload4");
+		if(f0!=null&&f0.length()>0) {
+			//만약 새로운 파일명이 한다면 이전파일을 삭제함
+			//새로운파일이 전달 됨.
+			//전에파일 삭제함
+			File del = new File(path+mr.getParameter("oldFile"));
+			//if문 안해줘도 되긴함
+				del.delete();
+			
+			
 		}else {
-			result = 0;
+			//새로운 파일이 없을경우
 		}
+		
 		String msg ="";
 		String loc ="";
 		if(result>0) {
-			msg ="등록성공!";
+			msg ="수정성공!";
 			loc ="/board/boardList";
 		}else {
-			msg="등록실패!";
-			loc="/board/boardWriteEnd";
+			msg="수정실패!";
+			loc="/board/update?no="+b.getContentNo();
 		}
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/error/errorPage.jsp").forward(request, response);
+		
 	}
 
 	/**

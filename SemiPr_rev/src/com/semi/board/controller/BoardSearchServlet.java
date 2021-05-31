@@ -46,6 +46,15 @@ public class BoardSearchServlet extends HttpServlet {
 		for(Boolean c : a) {
 			System.out.println("데이터가 있는지? 있으면 false 없으면 true"+c);
 		}
+		
+		List<Boolean> fileyumu = new ArrayList();
+		for(Board b : list) {
+			int result = new BoardService().fileyumu(b.getContentNo());
+		
+			fileyumu.add(result!=0?false:true);
+		};
+		
+		request.setAttribute("fileyumu", fileyumu); 
 		request.setAttribute("searchKeyword", searchKeyword);
 		request.setAttribute("searchType", searchType);
 		request.setAttribute("pageBar",p1.getPageBar());

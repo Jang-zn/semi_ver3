@@ -102,7 +102,7 @@
 					<li><button>삭제</button></li>
 					<%} %>--%>
 				</ul>
-		 	 <%} %>
+		 	 <%}%>
 		 <%} %> 
 		</div>
 		<div id="board_pageBar">
