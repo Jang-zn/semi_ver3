@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-body {
-	margin-left: 100px;
-	margin-right: 100px;
-}
-
-* {
-	border: 1px solid black;
-}
-
-
 #temp_header {
 	height: 200px;
 	margin-top: 50px;
@@ -20,31 +10,24 @@ body {
 	margin-top: 50px;
 }
 
-#encourage {
-	height: 200px;
-	margin-top: 50px;
-	margin-left: 100px;
-	margin-right: 100px;
-	margin-bottom: 30px;
-}
 
 #container_progress_trend{
 	margin-top:1%
 }
 
+#container_progress_trend *{
+	border : 1px solid #aaa;
+	
+}
+
 
 #container_content_progress_trend {
 	display: flex;
-	margin-left: 100px;
-	margin-right: 100px;
 	align-items: center;
 	;
 }
 
-#container_progress_trend>nav {
-	margin-left: 100px;
-	margin-right: 100px;
-}
+
 
 #container_progress_trend>nav>ul {
 	display: flex;
@@ -52,16 +35,13 @@ body {
 
 #container_progress_trend>nav>ul>li {
 	height: 40px;
-	width: 150px;
 	list-style: none;
 	padding-top: 17px;
 	text-align: center;
 }
 
 #PracticeRate_img {
-	width: 250px;
 	height: 250px;
-	margin-left: 30px;
 	margin-top: 30px;
 }
 
@@ -71,14 +51,11 @@ body {
 }
 
 #Practice_trend {
-	width: 800px;
 	height: 250px;
-	margin-left: 30px;
 	margin-top: 30px;
 }
 
 #select_sort {
-	margin-left: 30px;
 	margin-top: 30px;
 }
 
@@ -97,15 +74,11 @@ body {
 }
 
 #calendar {
-	margin-left: 100px;
-	margin-right: 100px;
 	margin-top: 50px;
 	height: 600px;
 }
 
 #statistics_container {
-	margin-left: 100px;
-	margin-right: 100px;
 	margin-top: 30px;
 }
 
@@ -114,7 +87,6 @@ body {
 }
 
 #pieChart, #rank {
-	width: 50%;
 	height: 300px;
 	margin: 20px;
 }

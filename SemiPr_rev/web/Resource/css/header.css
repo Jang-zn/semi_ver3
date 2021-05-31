@@ -60,23 +60,19 @@
 
         a {
             text-decoration: none;
-            color:white;
+            color:gray;
         }
 
         a:visited{
-            color:white;
+            color:gray;
         }
-		ul{
-			padding:0;
-			margin:0;
-		}
-        ul#menu_line {
+        div#menu_line {
             display: flex;
             padding-bottom: 5px;
         }
 
 		/* 주메뉴 */
-        ul#menu_line>li{
+        div#menu_line>div{
             text-align: center;
             font-size: 25px;
             margin-left: 1%;
@@ -90,7 +86,7 @@
             transition: all 0.3s;
             position:relative;
         }
-        ul#menu_line>li:hover {
+        div#menu_line>div:hover {
             background: #009688;
             color: #fff;
         }
@@ -121,7 +117,7 @@
             position:absolute;
             z-index: 200;
         }
-        .sub>li:hover {
+        .sub>div:hover {
             background: #009688;
             color: #fff;
         }
@@ -132,7 +128,7 @@
             border: 1px solid lightblue;
         }
 
-        section#aside_content {
+        #aside_content {
             display: flex;
         }
         footer#footer_container{
@@ -146,11 +142,11 @@
             font-size: 20px;
         }
         #login_area{
-        	padding-top:7%;
+        	padding-top:4.5%;
         	padding-left:2%;
         	color:gray;
         	font-weight:bold;
-        	font-size:20el;
+        	font-size:2rem;
         	width: 10%;
         }
         #login_area>span{
