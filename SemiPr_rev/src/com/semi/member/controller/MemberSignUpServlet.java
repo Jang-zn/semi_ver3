@@ -1,13 +1,14 @@
 package com.semi.member.controller;
 
 import java.io.*;
+import java.text.*;
+import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-
-import com.oreilly.servlet.*;
+import com.semi.member.model.service.*;
 import com.semi.member.model.vo.*;
 
 /**
@@ -45,15 +46,32 @@ public class MemberSignUpServlet extends HttpServlet {
 //		String path=getServletContext().getRealPath("/upload/board/");
 //		MultipartRequest mr=new MultipartRequest(request, path,
 //				1024*1024*200,"utf-8",new MyRenameFile());
+		String memberAgeyy=request.getParameter("yy");
+		String memberAgemm=request.getParameter("mm");
+		String memberAgedd=request.getParameter("dd");
+		
+		
+		
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy/mm/dd");
+		Date memberAge=null;
+		try {
+			memberAge=sdf.parse(memberAgeyy+"/"+memberAgemm+"/"+memberAgedd);
+			
+		}catch(ParseException e) {
+			e.printStackTrace();
+		}
 		Member m = new Member();
 		m.setMemberId(request.getParameter("userId"));
 		m.setMemberPw(request.getParameter("password"));
 		m.setEmail(request.getParameter("email"));
 		m.setName(request.getParameter("name"));
 		m.setNickname(request.getParameter("nickName"));
-	
-		m.setMemberId(request.getParameter("gender"));
-		m.setMemberId(request.getParameter("userId"));
+		m.setBirth(memberAge);
+		m.setGender(request.getParameter("gender"));
+		m.setPhone(request.getParameter("phone"));
+		m.setHeight(Double.parseDouble(request.getParameter("height")));
+		m.setWeight(Double.parseDouble(request.getParameter("height")));
+		int result = new MemberService().insertMember(m);
 		
 	}
 
