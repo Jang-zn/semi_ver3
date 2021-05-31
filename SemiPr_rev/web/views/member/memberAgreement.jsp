@@ -46,8 +46,8 @@
             </section>
                
                     <div id="submit-btn">
-                        <input class="sub-btn" type="submit" value="동의" onclick="">
-                        <input class="sub-btn" type="reset" value="미동의">
+                        <input class="sub-btn" type="submit" value="다음단계로" onclick="">
+                        <input class="sub-btn" type="reset" value="뒤로">
                     </div>
 </body>
 </html>
