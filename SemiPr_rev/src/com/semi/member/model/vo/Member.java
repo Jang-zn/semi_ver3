@@ -8,31 +8,33 @@ public class Member {
 	private String email;
 	private String name;
 	private String nickname;
-	private int age;
+	private String phone;
+	private Date birth;
 	private double height;
 	private double weight;
 	private String gender;
 	private Date enrollDate;
-	private String imgName;
+	private String profileImg;
 	
 	
 	public Member() {}
 
 
-	public Member(String memberId, String memberPw, String email, String name, String nickname, int age, double height,
-			double weight, String gender, Date enrollDate, String imgName) {
+	public Member(String memberId, String memberPw, String email, String name, String nickname, String phone,
+			Date birth, double height, double weight, String gender, Date enrollDate, String profileImg) {
 		super();
 		this.memberId = memberId;
 		this.memberPw = memberPw;
 		this.email = email;
 		this.name = name;
 		this.nickname = nickname;
-		this.age = age;
+		this.phone = phone;
+		this.birth = birth;
 		this.height = height;
 		this.weight = weight;
 		this.gender = gender;
 		this.enrollDate = enrollDate;
-		this.imgName = imgName;
+		this.profileImg = profileImg;
 	}
 
 
@@ -86,13 +88,23 @@ public class Member {
 	}
 
 
-	public int getAge() {
-		return age;
+	public String getPhone() {
+		return phone;
 	}
 
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
+	public Date getBirth() {
+		return birth;
+	}
+
+
+	public void setBirth(Date birth) {
+		this.birth = birth;
 	}
 
 
@@ -136,16 +148,16 @@ public class Member {
 	}
 
 
-	public String getImgName() {
-		return imgName;
+	public String getProfileImg() {
+		return profileImg;
 	}
 
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
 	}
+
 	
-	
-	
+		
 	
 }

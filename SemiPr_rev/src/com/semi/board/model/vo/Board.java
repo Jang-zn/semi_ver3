@@ -7,24 +7,23 @@ public class Board {
 	private String title;
 	private String category;
 	private String content;
-	private String nickname;
+	private String writer;
 	private int readCount;
-	private int goodCount;
 	private Date writeDate;
+	private String memberId;
 	
 	public Board() {}
 
-	public Board(int contentNo, String title, String category, String content, String nickname, int readCount,
-			int goodCount, Date writeDate) {
-		super();
+	public Board(int contentNo, String title, String category, String content, String writer, int readCount,
+			Date writeDate, String memberId) {
 		this.contentNo = contentNo;
 		this.title = title;
 		this.category = category;
 		this.content = content;
-		this.nickname = nickname;
+		this.writer = writer;
 		this.readCount = readCount;
-		this.goodCount = goodCount;
 		this.writeDate = writeDate;
+		this.memberId = memberId;
 	}
 
 	public int getContentNo() {
@@ -59,12 +58,12 @@ public class Board {
 		this.content = content;
 	}
 
-	public String getnickname() {
-		return nickname;
+	public String getWriter() {
+		return writer;
 	}
 
-	public void setnickname(String nickname) {
-		this.nickname = nickname;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public int getReadCount() {
@@ -75,14 +74,6 @@ public class Board {
 		this.readCount = readCount;
 	}
 
-	public int getGoodCount() {
-		return goodCount;
-	}
-
-	public void setGoodCount(int goodCount) {
-		this.goodCount = goodCount;
-	}
-
 	public Date getWriteDate() {
 		return writeDate;
 	}
@@ -90,6 +81,15 @@ public class Board {
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	
 	
 	
 }

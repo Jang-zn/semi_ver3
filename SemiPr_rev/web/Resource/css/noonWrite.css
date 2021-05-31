@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+#n_content_area * {
+	border: 1px skyblue solid;
+}
+
+#n_content_area{
+	display:flex;
+}
+
+
+#n_content_img{
+	
+	padding-top:3%;
+	padding-bottom:2%;
+	
+	height:600px;
+}
+
+#n_content_img>img {
+	width:100%;
+	height:100%;
+}
+#n_comment{
+	margin-top:6.5%;
+	padding:2%;
+	
+}
+#upload_area{
+	padding:1%;
+	margin:1%;
+		
+	
+}
+
+#submit_area{
+	padding-top:1%;
+	padding-bottom:1%;
+	
+}
+#submit_area>button{
+	margin:1%;
+	
+	display:flex;
+	
+}
+#submit_area img{
+	width:100%;
+}
+
+.img_obj{
+	height:200px;
+}
+.btnb{
+	border:1px solid black;
+}
+
+

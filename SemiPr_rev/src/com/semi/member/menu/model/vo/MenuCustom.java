@@ -3,7 +3,8 @@ package com.semi.member.menu.model.vo;
 public class MenuCustom {
 	private String menuId_c;
 	private String menuSort;
-	private String menuName;
+	private String menuName_c;
+	private String menuManual_c;
 	
 	
 	public MenuCustom() {
@@ -11,11 +12,12 @@ public class MenuCustom {
 	}
 
 
-	public MenuCustom(String menuId_c, String menuSort, String menuName) {
+	public MenuCustom(String menuId_c, String menuSort, String menuName_c, String menuManual_c) {
 		super();
 		this.menuId_c = menuId_c;
 		this.menuSort = menuSort;
-		this.menuName = menuName;
+		this.menuName_c = menuName_c;
+		this.menuManual_c = menuManual_c;
 	}
 
 
@@ -39,15 +41,25 @@ public class MenuCustom {
 	}
 
 
-	public String getMenuName() {
-		return menuName;
+	public String getMenuName_c() {
+		return menuName_c;
 	}
 
 
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
+	public void setMenuName_c(String menuName_c) {
+		this.menuName_c = menuName_c;
 	}
-	
+
+
+	public String getMenuManual_c() {
+		return menuManual_c;
+	}
+
+
+	public void setMenuManual_c(String menuManual_c) {
+		this.menuManual_c = menuManual_c;
+	}
+
 	
 	
 }

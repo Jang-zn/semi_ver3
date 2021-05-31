@@ -3,10 +3,9 @@ package com.semi.member.daily.model.vo;
 import java.util.*;
 
 public class DailyMenu {
+	private int mLogNo;
+	private int menuNo;
 	private Date menuDate;
-	private String memberId;
-	private String menuId;
-	private String menuId_c;
 	private String menuPlanCheck;
 	private String reason;
 	
@@ -14,15 +13,29 @@ public class DailyMenu {
 	
 	}
 
-	public DailyMenu(Date menuDate, String memberId, String menuId, String menuId_c, String menuPlanCheck,
-			String reason) {
+	public DailyMenu(int mLogNo, int menuNo, Date menuDate, String menuPlanCheck, String reason) {
 		super();
+		this.mLogNo = mLogNo;
+		this.menuNo = menuNo;
 		this.menuDate = menuDate;
-		this.memberId = memberId;
-		this.menuId = menuId;
-		this.menuId_c = menuId_c;
 		this.menuPlanCheck = menuPlanCheck;
 		this.reason = reason;
+	}
+
+	public int getmLogNo() {
+		return mLogNo;
+	}
+
+	public void setmLogNo(int mLogNo) {
+		this.mLogNo = mLogNo;
+	}
+
+	public int getMenuNo() {
+		return menuNo;
+	}
+
+	public void setMenuNo(int menuNo) {
+		this.menuNo = menuNo;
 	}
 
 	public Date getMenuDate() {
@@ -31,30 +44,6 @@ public class DailyMenu {
 
 	public void setMenuDate(Date menuDate) {
 		this.menuDate = menuDate;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-
-	public String getMenuId() {
-		return menuId;
-	}
-
-	public void setMenuId(String menuId) {
-		this.menuId = menuId;
-	}
-
-	public String getMenuId_c() {
-		return menuId_c;
-	}
-
-	public void setMenuId_c(String menuId_c) {
-		this.menuId_c = menuId_c;
 	}
 
 	public String getMenuPlanCheck() {
@@ -72,8 +61,7 @@ public class DailyMenu {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	
-	
+
 	
 	
 	
