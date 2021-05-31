@@ -24,13 +24,12 @@ body {
   text-align: center;
 }
 #wrapper {
-  position: relative;
+  
   height: 100%;
 }
 
 #content {
-  margin-left:38%;
-  width: 25%;
+  
 }
 
 /* 입력폼 */
@@ -49,12 +48,12 @@ h3 {
   padding: 10px 14px 10px 14px;
   box-sizing: border-box;
   background: #fff;
-  position: relative;
+  
 }
 
 .int {
-  display:inline-flex;
-  position: relative;
+
+  display: block;
   width: 100%;
   height: 29px;
   border: none;
@@ -69,28 +68,23 @@ input {
 }
 
 .box.int_id {
-  padding-right: 40px;
+
 }
 
 .box.int_pass {
-  padding-right: 40px;
+  
 }
 
 .box.int_pass_check {
-  padding-right: 40px;
+  
 }
 
 .sta_weight {
 
-  top: 822px;
-  left: 1330px;
   font-size: 18px;
   color: #8e8e8e;
 }
 .sta_height {
- 
-  top: 822px;
-  left: 1330px;
   font-size: 18px;
   color: #8e8e8e;
 }
@@ -99,7 +93,7 @@ input {
   width: 18px;
   height: 20px;
   display: inline-block;
-  position: absolute;
+  
   top: 50%;
   right: 16px;
   margin-top: -10px;
@@ -112,19 +106,19 @@ input {
 }
 
 #bir_yy {
-  display: table-cell;
-  width: 147px;
+  
+  
 }
 
 #bir_mm {
-  display: table-cell;
-  width: 147px;
-  vertical-align: middle;
+  
+  
+  
 }
 
 #bir_dd {
-  display: table-cell;
-  width: 147px;
+  
+  
 }
 
 #bir_mm,
@@ -158,7 +152,7 @@ select {
 }
 
 #alertTxt {
-  position: absolute;
+  
   top: 19px;
   right: 38px;
   font-size: 12px;
@@ -211,8 +205,7 @@ font-size : 15px;
   padding: 10px 14px 10px 14px;
   box-sizing: border-box;
   background: #fff;
-  
-
+ 
 }
 #weight {
 	font-size : 15px;
@@ -222,7 +215,6 @@ font-size : 15px;
   padding: 10px 14px 10px 14px;
   box-sizing: border-box;
   background: #fff;
- 
   
 }
 

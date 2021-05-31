@@ -9,10 +9,10 @@
 }
 
 #n_content {
-	width:60%;
+	
 }
 #n_list{
-	width:40%;
+	
 }
 #n_date{
 	text-align:center;
@@ -23,7 +23,6 @@
 	padding-left:15%;
 	padding-top:3%;
 	padding-bottom:2%;
-	width:70%;
 	height:400px;
 }
 
@@ -32,8 +31,7 @@
 	height:100%;
 }
 #n_comment{
-	padding:2%;
-	padding-left:9%;
+
 }
 #date_search{
 	padding-top:1%;
@@ -43,21 +41,21 @@
 #date_search>button{
 	margin-left:2%;
 	margin-right:2%;
-	width:24%;
+	
 }
 #comment_area{
-	width:94%;
+	
 }
 .img_obj{
 	height:200px;
 }
 
 #n_pageBar{
-	padding-left:40%;
+	
 }
 
 #n_img_list{
-	padding:1%;
+	
 }
 #n_img_list>table{
 	width:100%;

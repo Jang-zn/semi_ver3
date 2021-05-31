@@ -23,38 +23,35 @@
 
 #mylist_info_container {
 	display: flex;
+	margin:1%;
 }
 
 .list_title_area {
-	width: 50%;
+	
 	margin-left: 1%;
 	margin-right: 1%;
 }
 
 div#select_weekday {
 	display: flex;
-	padding-left: 13%;
+	
 	height: 120px;
 }
 
 .day_myList {
 	border-radius: 100%;
-	width: 7.5%;
 	margin-top: 1%;
 	margin-bottom: 1%;
-	margin-left: 2%;
-	margin-right: 2%;
 	text-align: center;
-	padding-top: 2.7%;
 }
 
 div#my_list_exc {
-	width: 50%;
+	
 	margin: 1%;
 }
 
 div#my_list_menu {
-	width: 50%;
+	
 	margin: 1%;
 }
 
@@ -66,7 +63,7 @@ li.weekDay_list {
 }
 
 li.weekDay_list>.list_img_area {
-	width: 15%;
+	
 	height: 80px;
 	margin: 1%;
 }
@@ -77,8 +74,8 @@ li.weekDay_list>.list_img_area>img {
 }
 
 div.list_name_area {
-	margin: 1%;
-	width: 70%;
+	
+	
 }
 
 div.list_name_area span {
@@ -87,8 +84,7 @@ div.list_name_area span {
 }
 
 div.list_button_area {
-	width: 7%;
-	margin: 1%;
+	padding:0;
 }
 
 #mymenu {
@@ -96,17 +92,22 @@ div.list_button_area {
 }
 
 #mymenu>h3 {
-	width: 80%;
+	
 }
 
 #mymenu>select {
-	width: 20%;
+	
 }
 
 .mylist_info {
-	width: 48%;
-	margin: 1%;
+	
 }
+#myExc_info, #myMenu_info{
+	margin-left:1%;
+	margin-right:1%;
+	
+}
+
 
 .mylist_box {
 	height: 300px;
