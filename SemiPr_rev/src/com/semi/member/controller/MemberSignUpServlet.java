@@ -3,6 +3,8 @@ package com.semi.member.controller;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import java.sql.Date;
+
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
@@ -55,7 +57,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		SimpleDateFormat sdf= new SimpleDateFormat("yyyy/mm/dd");
 		Date memberAge=null;
 		try {
-			memberAge=sdf.parse(memberAgeyy+"/"+memberAgemm+"/"+memberAgedd);
+			memberAge=(Date) sdf.parse(memberAgeyy+"/"+memberAgemm+"/"+memberAgedd);
 			
 		}catch(ParseException e) {
 			e.printStackTrace();
@@ -73,7 +75,22 @@ public class MemberSignUpServlet extends HttpServlet {
 		m.setWeight(Double.parseDouble(request.getParameter("height")));
 		int result = new MemberService().insertMember(m);
 		
+		String msg="";
+		String loc="";
+		if(result>0) {
+			msg="회원가입을 성공했습니다.";
+			loc="/views/member/memberLogin.jsp";
+		}else {
+			msg="회원가입을 실패하였습니다.";
+			loc="/views/member/memberSignup.jsp";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common.msg.jsp").forward(request, response);
+	
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
