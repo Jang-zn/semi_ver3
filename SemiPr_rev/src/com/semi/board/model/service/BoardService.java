@@ -86,6 +86,13 @@ public class BoardService {
 		return list;
 	}
 
+	public int fileyumu(int contentNo) {
+		Connection conn = getConnection();
+		int result = dao.fileyumu(conn,contentNo);
+		close(conn);
+		return result;
+	}
+
 
 	
 

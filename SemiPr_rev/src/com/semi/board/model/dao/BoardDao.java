@@ -287,14 +287,14 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(prop.getProperty("selectBoardFile"));
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int columnCount = rsmd.getColumnCount();
 			list = new String[5];
-			System.out.println(columnCount);
 			int count=0;
 			while(rs.next()) {
 				list[count++] = rs.getString(3);
 			}
+			for(int i=0; i<5; i++)
+			System.out.println(list[i]);
+			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -304,6 +304,25 @@ public class BoardDao {
 			
 		}
 		return list;
+	}
+
+	public int fileyumu(Connection conn, int contentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rs = null;
+		try {
+			pstmt =conn.prepareStatement(prop.getProperty("fileyumu"));
+			pstmt.setInt(1, contentNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

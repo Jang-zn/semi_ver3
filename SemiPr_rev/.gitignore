@@ -1,6 +1,5 @@
 /classes/
-/Resource/driver/
-/Resource/sql/
+*.properties
 /web/upload/
 *.key
 *.class

@@ -90,6 +90,7 @@
 					<li class="board_type"><%=b.getCategory() %></li>
 					<li class="board_title" onclick="boardContent(<%=b.getContentNo()%>);">
 						<div class="board_file_img">
+						
 							<img src="">
 						</div>
 						<span><%=b.getTitle() %></span>

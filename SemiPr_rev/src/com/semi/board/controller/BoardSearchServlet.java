@@ -37,12 +37,21 @@ public class BoardSearchServlet extends HttpServlet {
 		int totalData = new BoardService().boardSearchCount(searchType,searchKeyword);
 		ServletPageBar p1 = new ServletPageBar(request, totalData, 5, "/board/boardSearch", "&searchKeyword="+searchKeyword+"&searchType="+searchType);
 		List<Board> list = new BoardService().boardsearch(searchType,searchKeyword,p1.getCPage(),p1.getNumPerpage());
+		List<Boolean> a = new ArrayList();
+		for(Board b : list) {
+			int result = new BoardService().fileyumu(b.getContentNo());
+		
+			a.add(result!=0?false:true);
+		};
+		for(Boolean c : a) {
+			System.out.println("데이터가 있는지? 있으면 false 없으면 true"+c);
+		}
 		request.setAttribute("searchKeyword", searchKeyword);
 		request.setAttribute("searchType", searchType);
 		request.setAttribute("pageBar",p1.getPageBar());
 		request.setAttribute("boardList", list);
 		request.setAttribute("boardListCount", totalData);
-		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/board/new_boardList.jsp").forward(request, response);
 		
 		
 		
