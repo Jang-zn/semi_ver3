@@ -16,26 +16,29 @@ public class dummy {
 			 //board에는 bfile1.png~ / excList에는 efile1.png~ / gallary에는 gfile1.png~ / menuList에는 mfile1.png~ 로 들어갑니다.
 			
 			
-			 fis = new FileInputStream("C:/Users/Jang/git/semi_ver3/SemiPr_rev/web/upload/gallary/gfile1.png");
-			 int data=-1;
+			 byte[] img = new byte[(int)(new File("C:/Users/Jang/git/semi_ver3/SemiPr_rev/web/upload/menuList/mfile1.png").length())];
+			 
+			 fis = new FileInputStream("C:/Users/Jang/git/semi_ver3/SemiPr_rev/web/upload/menuList/mfile1.png");
+			 fis.read(img);
+			 
+			 
 			 
 			 //i 범위는 더미 데이터셋에서 desc로 정렬해서 확인하시고 본인이 넣은 파일명 참고해서 넣어주세요
-			 for(int i=4;i<=1530;i++) {
+			 for(int i=2;i<=120;i++) {
 				 
 				 //경로 및 파일명 수정해서 쓰면 됩니다
-				 String path = "C:/Users/Jang/git/semi_ver3/SemiPr_rev/web/upload/gallary/";
-				 String name = "gfile"+i+".png";
-				 
+				 String path = "C:/Users/Jang/git/semi_ver3/SemiPr_rev/web/upload/menuList/";
+				 String name = "mfile"+i+".png";
 				 
 				 File f = new File(path+name);
-				 f.createNewFile();
 				 fos = new FileOutputStream(f);
-				 while((data=fis.read())!=-1) {
-					 fos.write(data);
-				 }
+				 boolean t = f.createNewFile();
+				 System.out.println(t+" "+i);
+				 fos.write(img);
+				 				 
 			 }
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}finally {
 			try {
 				fis.close();
