@@ -112,7 +112,7 @@
 									<%break;} else{ %>
 										<%if(list2[i]==null) {%>
 										<%break; }%>
-										<li><%=list2[i] %></li>
+										<li><a href="<%=request.getContextPath()%>//board/fileDonwLoad?filename=<%=list2[i]%>"><%=list2[i] %></a></li>
 									<%} %>
 							<%} %>
 						</ul>
