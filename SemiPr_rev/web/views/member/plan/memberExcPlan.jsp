@@ -62,7 +62,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 	                <div id="exc_img" class="col-md-8"><img src="<%=request.getContextPath()%>/upload/excList/<%=list.get(0).getFileList().get(0)%>"></div>
 	                <div class="col-md-1"></div>
 	                <div id="exc_submit" class="col-md-3">
-	                    <form action="" method="post" onsubmit="return excSubmit();">
+	                    <form action="<%=request.getContextPath()%>/member/excPlan/submit" method="post" onsubmit="return excSubmit();">
 	                        <select name="week">
 	                            <option value="월">월</option>
 	                            <option value="화">화</option>
@@ -75,8 +75,8 @@ String pageBar = (String)request.getAttribute("pageBar");
 	                        <input type="number" name="weight" placeholder="kg / 불필요시 미입력"><br>
 	                        <input type="number" name="reps" placeholder="횟수" required><br>
 	                        <input type="number" name="sets" placeholder="세트수" required><br>
-	                        <input type="hidden" name="excName"><br>
-	                        <input type="submit" value="등록하기">
+	                        <input type="submit" value="등록하기"><br>
+	                        <input id="excName" type="hidden" name="excName">
 	                    </form>
 	                </div>
 	            </div>
@@ -97,7 +97,7 @@ String pageBar = (String)request.getAttribute("pageBar");
     </div>
     
     
-<!-- 운동 중복등록시의 처리도 필요 (덮어쓰기 하는게 나을듯) --> 
+
 <script>
 	$(".clickcheck").click(e=>{
 		let name =$(e.target).parents(".clickcheck").find("#exc_box_name").text();
@@ -105,7 +105,6 @@ String pageBar = (String)request.getAttribute("pageBar");
 			url:"<%=request.getContextPath()%>/ajax/excListClick.do?name="+name,
 			dataType:"json",
 			success:data=>{
-				console.log(data);
 				$("#exc_name").text(data.excName);
 				$("#exc_img>img").attr("src","<%=request.getContextPath()%>/upload/excList/"+data.fileList[0]);
 				for(let i=1;i<data.fileList.length;i++){
@@ -130,9 +129,12 @@ String pageBar = (String)request.getAttribute("pageBar");
 		location.assign("<%=request.getContextPath()%>/member/excPlan?numPerpage=10&excSort="+excSort);
 	});
 	
+	// 운동 중복등록시 처리 / 숫자 음수 / 0일때 처리
+	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리
+	
 	const excSubmit=()=>{
-		
-		
+		$("#excName").val($("#exc_name").text());
+		return true;
 	}
 	
 </script>	

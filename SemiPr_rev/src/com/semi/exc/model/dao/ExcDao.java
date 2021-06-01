@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.semi.member.exc.model.vo.Exercise;
+import com.semi.member.exc.model.vo.MemberExercise;
 import com.semi.member.model.dao.MemberDao;
 
 public class ExcDao {
@@ -165,5 +166,31 @@ public class ExcDao {
 		return exc;
 	}
 	
+	
+	public int insertMemberExc(Connection conn, MemberExercise me) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("insertMemberExc"));
+			pstmt.setString(1, me.getMemberId());
+			pstmt.setString(2, me.getExcId());
+			pstmt.setString(3, me.getExcId_c());
+			pstmt.setInt(4, me.getReps());
+			pstmt.setInt(5, me.getSets());
+			pstmt.setInt(6, me.getWeight());
+			pstmt.setString(7, me.getExcWeek());
+			result=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

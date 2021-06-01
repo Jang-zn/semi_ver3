@@ -1,5 +1,7 @@
 package com.semi.exc.model.service;
 
+import static com.semi.common.JdbcTemplate.rollback;
+import static com.semi.common.JdbcTemplate.commit;
 import static com.semi.common.JdbcTemplate.close;
 import static com.semi.common.JdbcTemplate.getConnection;
 
@@ -8,6 +10,7 @@ import java.util.List;
 
 import com.semi.exc.model.dao.ExcDao;
 import com.semi.member.exc.model.vo.Exercise;
+import com.semi.member.exc.model.vo.MemberExercise;
 
 public class ExcService {
 	ExcDao dao = new ExcDao();
@@ -34,7 +37,19 @@ public class ExcService {
 		close(conn);		
 		return result;
 	}
-	
+	public int insertMemberExc(MemberExercise me) {
+		Connection conn = getConnection();
+		int result = dao.insertMemberExc(conn, me);
+		if(result!=0) {
+			commit(conn);
+			close(conn);
+		}else {
+			rollback(conn);
+			close(conn);
+		}
+		return result;
+		
+	}
 	
 	
 	
