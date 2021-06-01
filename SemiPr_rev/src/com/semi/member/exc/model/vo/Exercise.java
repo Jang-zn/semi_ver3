@@ -6,18 +6,20 @@ public class Exercise {
 	private String excName;
 	private String excManual;
 	private String excVideo;
+	private String imgpath;
 	
 	public Exercise() {
 	
 	}
 
-	public Exercise(String excId, String excSort, String excName, String excManual, String excVideo) {
+	public Exercise(String excId, String excSort, String excName, String excManual, String excVideo,String imgpath) {
 		super();
 		this.excId = excId;
 		this.excSort = excSort;
 		this.excName = excName;
 		this.excManual = excManual;
 		this.excVideo = excVideo;
+		this.imgpath=imgpath;
 	}
 
 	public String getExcId() {
@@ -58,6 +60,14 @@ public class Exercise {
 
 	public void setExcVideo(String excVideo) {
 		this.excVideo = excVideo;
+	}
+
+	public String getImgpath() {
+		return imgpath;
+	}
+
+	public void setImgpath(String imgpath) {
+		this.imgpath = imgpath;
 	}
 	
 	
