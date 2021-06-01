@@ -7,7 +7,7 @@
 	<h2>ForMuscle</h2>
 </div>
 
-<form action="<%=request.getContextPath()%>/memberSignup" method="post">
+<form action="<%=request.getContextPath()%>/memberSignup" method="post" onsubmit="return fn_invalidate();">
 	<!-- wrapper -->
 	<div id="wrapper">
 
@@ -99,7 +99,7 @@
 
 					<!-- BIRTH_MM -->
 					<div id="bir_mm">
-						<span class="box"> <select id="mm" class="sel" name="mm">
+						<span class="box"> <select id="mm" class="sel" name="mm" onchange="test();">
 								<option>월</option>
 								<option value="01">1</option>
 								<option value="02">2</option>
@@ -203,6 +203,11 @@
 
 
 <script>
+const test=()=>{
+	
+console.log($("#mm").val());
+}
+
 const fn_duplicateNick=()=>{
 	const status="width=350px,height=250px, left=500px, top=500px";
 	const title="duplicateNick";
@@ -269,6 +274,17 @@ var email = document.querySelector('#email');
 var mobile = document.querySelector('#mobile');
 
 var error = document.querySelectorAll('.error_next_box');
+
+
+
+const fn_invalidate=()=>{
+	
+if(nickname.trim()==null){
+	const nickname = $("#nickName_").val();
+	alert("닉네임을 입력해주세요.");
+	return false;
+	}
+}
 
 userId_.addEventListener("change", checkId);
 pw1.addEventListener("change", checkPw);

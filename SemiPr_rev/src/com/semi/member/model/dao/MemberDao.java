@@ -1,14 +1,22 @@
 package com.semi.member.model.dao;
 
-import static com.semi.common.JdbcTemplate.*;
+import static com.semi.common.JdbcTemplate.close;
 
-import java.sql.*;
-import java.sql.Date;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.semi.member.exc.model.vo.*;
-import com.semi.member.menu.model.vo.*;
-import com.semi.member.model.vo.*;
+import com.semi.member.exc.model.vo.Exercise;
+import com.semi.member.menu.model.vo.Menu;
+import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.MemberExcList;
+import com.semi.member.model.vo.MemberMenuList;
+
+
 
 public class MemberDao {
 
@@ -168,7 +176,7 @@ public class MemberDao {
 
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
-		String sql="INSERT INTO VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,NULL)";
+		String sql="INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,NULL)";
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -177,8 +185,9 @@ public class MemberDao {
 			pstmt.setString(3, m.getEmail());
 			pstmt.setString(4, m.getName());
 			pstmt.setString(5, m.getNickname());
-			pstmt.setString(6, m.getPhone());
-			pstmt.setDate(7, (Date) m.getBirth());
+			pstmt.setDate(6,new java.sql.Date((m.getBirth()).getTime()));
+//			pstmt.setString(6, new SimpleDateFormat("yy/MM/dd").format(m.getBirth()));
+			pstmt.setString(7, m.getPhone());
 			pstmt.setDouble(8, m.getHeight());
 			pstmt.setDouble(9, m.getWeight());
 			pstmt.setString(10,m.getGender());

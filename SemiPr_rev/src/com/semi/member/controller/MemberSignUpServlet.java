@@ -1,17 +1,19 @@
 package com.semi.member.controller;
 
-import java.io.*;
-import java.text.*;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import java.sql.Date;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.semi.member.model.service.MemberService;
+import com.semi.member.model.vo.Member;
 
-import javax.servlet.*;
-import javax.servlet.annotation.*;
-import javax.servlet.http.*;
-
-import com.semi.member.model.service.*;
-import com.semi.member.model.vo.*;
 
 /**
  * Servlet implementation class MemberEnrollServlet
@@ -32,36 +34,27 @@ public class MemberSignUpServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String userId=request.getParameter("userId");
-//		String password = request.getParameter("password");
-//		String email =request.getParameter("email");
-//		String name = request.getParameter("name");
-//		String nickName = request.getParameter("nickName");
-//		String yy =request.getParameter("yy");
-//		String mm =request.getParameter("mm");
-//		String dd = request.getParameter("dd");
-//		String gender = request.getParameter("gender");
-//		String phone = request.getParameter("phone");
-//		double height = Double.parseDouble(request.getParameter("height"));
-//		double weight = Double.parseDouble(request.getParameter("weight"));
-		
+
 //		String path=getServletContext().getRealPath("/upload/board/");
 //		MultipartRequest mr=new MultipartRequest(request, path,
 //				1024*1024*200,"utf-8",new MyRenameFile());
+		
+		
 		String memberAgeyy=request.getParameter("yy");
 		String memberAgemm=request.getParameter("mm");
 		String memberAgedd=request.getParameter("dd");
 		
 		
 		
-		SimpleDateFormat sdf= new SimpleDateFormat("yyyy/mm/dd");
-		java.util.Date memberAge=null;
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd");
+		Date memberAge=null;
 		try {
 			memberAge=sdf.parse(memberAgeyy+"/"+memberAgemm+"/"+memberAgedd);
 			
 		}catch(ParseException e) {
 			e.printStackTrace();
 		}
+		System.out.println(memberAge);
 		Member m = new Member();
 		m.setMemberId(request.getParameter("userId"));
 		m.setMemberPw(request.getParameter("password"));
@@ -72,7 +65,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		m.setGender(request.getParameter("gender"));
 		m.setPhone(request.getParameter("phone"));
 		m.setHeight(Double.parseDouble(request.getParameter("height")));
-		m.setWeight(Double.parseDouble(request.getParameter("height")));
+		m.setWeight(Double.parseDouble(request.getParameter("weight")));
 		int result = new MemberService().insertMember(m);
 		
 		String msg="";
@@ -87,7 +80,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		
-		request.getRequestDispatcher("/views/common.msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	
 	}
 	

@@ -1,6 +1,6 @@
 package com.semi.member.model.vo;
 
-import java.util.*;
+import java.util.Date;
 
 public class Member {
 	private String memberId;
@@ -8,8 +8,8 @@ public class Member {
 	private String email;
 	private String name;
 	private String nickname;
-	private String phone;
 	private Date birth;
+	private String phone;
 	private double height;
 	private double weight;
 	private String gender;
