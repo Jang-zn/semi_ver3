@@ -22,6 +22,7 @@ div#exc_list {
 div#exc_list_info {
 	
 	border: 1px solid black;
+	transition:all 0.2s;
 	
 
 }
@@ -72,4 +73,5 @@ img{
 }
 .clickcheck:hover{
 	cursor:pointer;
+	border:3px solid gold;
 }

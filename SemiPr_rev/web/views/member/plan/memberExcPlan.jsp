@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "/views/common/header.jsp"%>
 <%@ page import ="com.semi.member.exc.model.vo.Exercise"%>
+<%@ page import ="com.semi.member.model.vo.Member"%>
 <%@ page import ="java.util.List" %>
 <%
 List<Exercise> list =(List<Exercise>)request.getAttribute("excList");
-
+Member m = (Member)session.getAttribute("loginMember");
 String pageBar = (String)request.getAttribute("pageBar");
 %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberExcPlan.css">
@@ -24,10 +25,11 @@ String pageBar = (String)request.getAttribute("pageBar");
 	    <div id="list_container" class="col-md-10">
 	        <div id="exc_list" class="col-md-5">
 	            <div id="sort_container" class="row">
-	                <div class="col-md-2">
+	                <div class="col-md-3">
 	                	<select id="excSort">
-		                    <option name="chest" value="상체">상체</option>
-		                    <option name="lowerbody" value="하체">하체</option>
+	                		<option>분류 선택</option>
+		                    <option value="상체">- 상체 -</option>
+		                    <option value="하체">- 하체 -</option>
 	                	</select>
 	                </div>
 	                <div class="btn col-md-2">인기 운동</div>
@@ -38,7 +40,11 @@ String pageBar = (String)request.getAttribute("pageBar");
 	            	<div id="sort_list" class="row clickcheck">
 	            		<div class="border col-md-2 listimgbox"><img src="<%=request.getContextPath()%>/upload/excList/<%=e.getFileList().get(0)%>"></div>
 	            		<!-- Exercise에 요약정보 row 추가해줘야됨 -->
-	            		<div class="border col-md-10" style="padding-top:1%;padding-bottom:1%; "><%=e.getExcName() %><br><%=e.getExcManual()%> <br><%=e.getExcSort() %></div>
+	            		<div id="exc_box" class="border col-md-10" style="padding-top:1%;padding-bottom:1%; ">
+	            			<div id="exc_box_name" class="col-md-12"><%=e.getExcName() %></div>
+	            			<div id="exc_box_info" class="col-md-12"><%=e.getExcManual()%></div>
+	            			<div id="exc_box_sort" class="col-md-12"><%=e.getExcSort() %></div>
+	            		</div>
 	            	</div>
 	            <%} %>
 	            <div id="sort_list" class="row">
@@ -56,7 +62,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 	                <div id="exc_img" class="col-md-8"><img src="<%=request.getContextPath()%>/upload/excList/<%=list.get(0).getFileList().get(0)%>"></div>
 	                <div class="col-md-1"></div>
 	                <div id="exc_submit" class="col-md-3">
-	                    <form action="" method="post">
+	                    <form action="" method="post" onsubmit="return excSubmit();">
 	                        <select name="week">
 	                            <option value="월">월</option>
 	                            <option value="화">화</option>
@@ -66,24 +72,19 @@ String pageBar = (String)request.getAttribute("pageBar");
 	                            <option value="토">토</option>
 	                            <option value="일">일</option>
 	                        </select><br>
-	                        <input type="number" name="weight" placeholder="kg"><br>
-	                        <input type="number" name="reps" placeholder="횟수"><br>
-	                        <input type="number" name="sets" placeholder="세트수"><br>
-	                        <input type="submit" onclick="" value="등록하기">
+	                        <input type="number" name="weight" placeholder="kg / 불필요시 미입력"><br>
+	                        <input type="number" name="reps" placeholder="횟수" required><br>
+	                        <input type="number" name="sets" placeholder="세트수" required><br>
+	                        <input type="hidden" name="excName"><br>
+	                        <input type="submit" value="등록하기">
 	                    </form>
 	                </div>
 	            </div>
 	            <div id="exc_detail_info_container" class="row">
-	                <p><%=list.get(0).getExcManual()%></p>
-	                <p>1</p>
-	                <p>1</p>
-	                <p>1</p>
-	                <p>1</p>
-	                <p>1</p>
-	                <p>1</p>
-	                <p>1</p>
-	                <p>1</p>
-	                <p>1</p>
+	            	<%for(int i=1;i<list.get(0).getFileList().size();i++){ %>
+	            		<div class="col-md-12"><img style="width:40%" src="<%=request.getContextPath()%>/upload/excList/<%=list.get(0).getFileList().get(i)%>"></div>
+	            	<%} %>
+	                <div class="col-md-12"><%=list.get(0).getExcManual()%></div>
 	            </div>
 	            <div id="exc_video" class="row">
 					<a href="<%=list.get(0).getExcVideo()%>">참고 영상 : <%=list.get(0).getExcVideo()%></a><br>
@@ -95,9 +96,45 @@ String pageBar = (String)request.getAttribute("pageBar");
 	    </div>
     </div>
     
+    
+<!-- 운동 중복등록시의 처리도 필요 (덮어쓰기 하는게 나을듯) --> 
 <script>
 	$(".clickcheck").click(e=>{
-		$(e.target).parents(".clickcheck").attr("style","border:3px solid gold");
+		let name =$(e.target).parents(".clickcheck").find("#exc_box_name").text();
+		$.ajax({
+			url:"<%=request.getContextPath()%>/ajax/excListClick.do?name="+name,
+			dataType:"json",
+			success:data=>{
+				console.log(data);
+				$("#exc_name").text(data.excName);
+				$("#exc_img>img").attr("src","<%=request.getContextPath()%>/upload/excList/"+data.fileList[0]);
+				for(let i=1;i<data.fileList.length;i++){
+					let div = $("<div>").addClass("col-md-12");
+					let img = $("<img>").attr("src","<%=request.getContextPath()%>/upload/excList/"+data.fileList[i]).attr("style","width:40%");
+					div.append(img);
+					if(i==1){
+						$("#exc_detail_info_container").html(div);
+					}else{
+						$("#exc_detail_info_container").append(div);
+					}
+				}
+				let div = $("<div>").addClass("col-md-12");
+				div.text(data.excManual);
+				$("#exc_video").html($("<a>").attr("href",data.excVideo).text("참고영상 : "+data.excVideo));
+			}
+		});
 	});
-</script>
+	
+	$("#excSort").change(e=>{
+		let excSort = $(e.target).val();
+		location.assign("<%=request.getContextPath()%>/member/excPlan?numPerpage=10&excSort="+excSort);
+	});
+	
+	const excSubmit=()=>{
+		
+		
+	}
+	
+</script>	
+
 <%@ include file = "/views/common/footer.jsp"%>

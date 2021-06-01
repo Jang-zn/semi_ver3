@@ -70,18 +70,7 @@ public class MemberService {
 	
 	
 	
-	public List<Exercise> getExcList(String sort, int cPage, int numPerpage) {
-		Connection conn = getConnection();
-		List<Exercise> list = dao.getExcList(conn, sort, cPage, numPerpage);
-		close(conn);		
-		return list;
-	}
-	public int getExcListCount(String sort) {
-		Connection conn = getConnection();
-		int result = dao.getExcListCount(conn, sort);
-		close(conn);		
-		return result;
-	}
+
 
 	
 	
