@@ -28,7 +28,9 @@ public class InsertBoardCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String CommentContent = request.getParameter("CommentContent");
+		
 		System.out.println(CommentContent);
 		String userId = request.getParameter("userId");
 		int replyNoRef = Integer.parseInt(request.getParameter("replyNoRef"));
@@ -42,7 +44,7 @@ public class InsertBoardCommentServlet extends HttpServlet {
 			msg="댓글 등록 성공!";
 			
 		}else {
-			msg="댓글 등록 실패!";
+			msg="댓글 장난 경고 1회 1/5";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", "/board/content?no="+boardNo);

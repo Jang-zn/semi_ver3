@@ -120,7 +120,7 @@
 											<%for(int j=0; j<fileyumu.size(); j++){ %>
 				 								<%Boolean f = (Boolean)fileyumu.get(j); %>
 												<%if((i==j)&&f==false){ %>
-													<img style="width:30px" src="">
+													<img style="width: 25px;position: absolute; height: 20px;" src="">
 												<%break;} else{%>
 													
 												<%} %>

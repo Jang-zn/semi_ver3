@@ -36,7 +36,7 @@ public class BoardWriteEndServlet extends HttpServlet {
 			
 			return;
 		}
-		String path = getServletContext().getRealPath("/Resource/upload/board");
+		String path = getServletContext().getRealPath("/Resource/upload/board/");
 		MultipartRequest mr = new MultipartRequest(request, path,1024*1024*10,"utf-8",new DefaultFileRenamePolicy());
 		Board b = new Board();
 		b.setCategory(mr.getParameter("classfication"));

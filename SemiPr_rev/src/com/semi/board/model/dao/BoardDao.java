@@ -410,6 +410,98 @@ public class BoardDao {
 		return list;
 	}
 
+	public int commentCount(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rs = null;
+		System.out.println(no);
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("commentCount"));
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int commentDelete(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("commentDelete"));
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int boardDelete(Connection conn, int boardNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardDelete"));
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int fileDelete(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("fileDelete"));
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(result+"결과는 ?");
+		return result;
+	}
+
+	public String[] filesName(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String[] list = null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("filesName"));
+			pstmt.setInt(1, boardNo);
+			rs=pstmt.executeQuery();
+			list = new String[5];
+			int count=0;
+			while(rs.next()) {
+				list[count++] = rs.getString(1);
+			}
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+
 	
 	
 	 
