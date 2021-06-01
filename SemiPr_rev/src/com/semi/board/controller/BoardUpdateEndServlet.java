@@ -52,12 +52,19 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		
 		for(int i=0; i<5; i++) {
 			if(mr.getFilesystemName("upload"+i)!=null) {
+				System.out.println("업로드가 널이 아닐때");
 				result = new BoardService().boardfile(b.getContentNo(), mr.getFilesystemName("upload"+i));
-				File del = new File(path+mr.getParameter("oldfileR"+i));
-				del.delete();
-				new BoardService().deleteFile(mr.getParameter("oldfileR"+i));
+				
+				 File del = new File(path+mr.getParameter("oldfileR"+i)); del.delete();
+				 new BoardService().deleteFile(mr.getParameter("oldfileR"+i));
+				 
 			}
-			else if(mr.getParameter("oldfile"+i)==null) {
+			else if(mr.getFilesystemName("upload"+i)==null&&mr.getFilesystemName("oldfile"+i)!=null) {
+				
+				
+			}
+			else if(mr.getFilesystemName("upload"+i)==null&&mr.getFilesystemName("oldfile"+i)==null) {
+				System.out.println("업로드가 널이고 오래된것도 널일때");
 				File del = new File(path+mr.getParameter("oldfileR"+i));
 				del.delete();
 				new BoardService().deleteFile(mr.getParameter("oldfileR"+i));

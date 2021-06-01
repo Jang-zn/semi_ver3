@@ -30,7 +30,7 @@ public class BoardWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.getRequestDispatcher("/views/board/new_boardWrite.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/board/boardWrite.jsp").forward(request, response);
 		
 	}
 

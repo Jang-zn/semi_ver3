@@ -47,7 +47,7 @@ public class BoardListServlet extends HttpServlet {
 		
 		request.setAttribute("fileyumu", fileyumu); 
 		request.setAttribute("boardList", list);
-		request.getRequestDispatcher("/views/board/new_boardList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 	}
 
 	/**

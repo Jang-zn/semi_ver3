@@ -30,7 +30,6 @@ public class BoardContentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int boardListCount = new BoardService().boardListCount();
 		
 		
@@ -80,10 +79,11 @@ public class BoardContentServlet extends HttpServlet {
 		  request.setAttribute("boardList", list);
 		  request.setAttribute("selectBoardFile", list2);
 		  	
+		  //댓글
+		  List<Reply> re = new BoardService().commentList(no);
+		  request.setAttribute("commentList", re);
 		  
-		  
-		  
-		  request.getRequestDispatcher("/views/board/new_boardContent.jsp").forward(request, response);
+		  request.getRequestDispatcher("/views/board/boardContent.jsp").forward(request, response);
 	}
 
 	/**

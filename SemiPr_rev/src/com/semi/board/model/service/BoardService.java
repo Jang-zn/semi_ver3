@@ -118,6 +118,22 @@ public class BoardService {
 		return result;
 	}
 
+	public int insertComment(Reply re) {
+		Connection conn = getConnection();
+		int result = dao.insertComment(conn,re);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public List<Reply> commentList(int no) {
+		Connection conn = getConnection();
+		List<Reply> list = dao.commentList(conn,no);
+		close(conn);
+		return list;
+	}
+
 
 
 

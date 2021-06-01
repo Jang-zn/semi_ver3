@@ -60,7 +60,7 @@ public class BoardSearchServlet extends HttpServlet {
 		request.setAttribute("pageBar",p1.getPageBar());
 		request.setAttribute("boardList", list);
 		request.setAttribute("boardListCount", totalData);
-		request.getRequestDispatcher("/views/board/new_boardList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 		
 		
 		

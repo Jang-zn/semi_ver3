@@ -54,7 +54,7 @@
 									<button type="button" onclick="bbb(event);">삭제</button>
 							</div>
 				</div>
-			<%} %>
+			<%} else{%>
 			<%for(int i=0; i<5; i++) {%>
 				<%if(filelist[i]==null) break; else{%>
 					<div id="write_upload_area" class="row filecount">
@@ -68,9 +68,12 @@
 						<div class="col-md-4">
 								<button type="button" onclick="bbb(event);">삭제</button>
 						</div>
+						<%if(filelist[i]!=null){ %>	
+							<input type="hidden" name="oldfileR<%=i%>" value="<%=filelist[i]%>">
+						<%} %>
 					</div>
-					<input type="hidden" name="oldfileR<%=i%>" value="<%=filelist[i]%>">
 				<%} %>
+			<%} %>
 			<%} %>
 			
 
@@ -119,7 +122,7 @@
 				for1.each((i,v)=>{
 					const zz =$(v).find("input").attr("name");
 					if(zz!='upload'+i){
-						$(v).find("input").attr("name","upload"+i);
+						$(v).find("input[type=file]").attr("name","upload"+i);
 					}
 				})
 			
@@ -133,6 +136,8 @@
 		const bbb=(e)=>{
 			const filecount = $(".filecount").length;
 			if(filecount==1){
+				$(".spanstr").remove();
+				$("input[type=file]").val("");
 				$(e.target).off("click");
 			}else{
 				alert($(e.target).parent().siblings().find("input").attr("name")+"삭제");
@@ -145,7 +150,7 @@
     		if($(e.target).val()==""){
     			$(e.target).parent().next().find("span").show();
     		}else{
-    			$(e.target).parent().next(".spanstr").remove();
+    			$(e.target).parent().next(".spanstr").hide();
     		}
     	})
 		
@@ -154,7 +159,7 @@
 		const submitContents=()=>{
 			const ir1 = oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("[name=content]").html(ir1);
-			
+		
 		}
 </script>
 <%@ include file="/views/common/footer.jsp"%>

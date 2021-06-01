@@ -359,6 +359,57 @@ public class BoardDao {
 		return result;
 	}
 
+	public int insertComment(Connection conn, Reply re) {
+		PreparedStatement pstmt =null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertComment"));
+			pstmt.setInt(1, re.getContentNo());
+			pstmt.setString(2, re.getWriter());
+			pstmt.setString(3, re.getReplyContent());
+			pstmt.setInt(4, re.getReplyLevel());
+			pstmt.setString(5, re.getReplyNoRef()==0?null:String.valueOf(re.getReplyNoRef()));
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public List<Reply> commentList(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Reply nc = null;
+		List<Reply> list = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("commentList"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				nc=new Reply();
+				nc.setReplyNo(rs.getInt("reply_no"));
+				nc.setContentNo(rs.getInt("content_no"));
+				nc.setWriter(rs.getString("writer"));
+				nc.setReplyContent(rs.getString("reply_content"));
+				nc.setReplyDate(rs.getDate("reply_date"));
+				nc.setReplyLevel(rs.getInt("reply_level"));
+				nc.setReplyNoRef(rs.getInt("reply_no_ref"));
+				list.add(nc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
 	
 	
 	 
