@@ -36,6 +36,7 @@ public class StatisticDao {
 		List<MemberExcList> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("todayExcList"));
+			pstmt.setString(1, "memberId");
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				MemberExcList m=new MemberExcList();				
@@ -63,6 +64,7 @@ public class StatisticDao {
 		List<MemberMenuList> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("todayMenuList"));
+			pstmt.setString(1, "memberId");
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				MemberMenuList m=new MemberMenuList();				
@@ -80,5 +82,25 @@ public class StatisticDao {
 			close(rs);
 			close(pstmt);
 		}return list;
+	}
+	
+	public String weekMenuCheck(Connection conn, String weekCheck) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("todayMenuList"));
+			pstmt.setString(1, weekCheck);
+			pstmt.setString(2, "memberId");			
+			rs=pstmt.executeQuery();
+					
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return toString();
 	}
 }

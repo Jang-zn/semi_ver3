@@ -1,22 +1,12 @@
 @charset "UTF-8";
 
-element{
-	--goal-default-color: lightgray;
-	--goal-achieve-color: green;
-	--goal-failure-color: red;
-	--goal-middle-color: yellow;
-	
-	--btn-select-color:lightgray;
-	--btn-deselect-color:gray;
-}
 
-
-.weeklyStatus {
+.weeklyMenuStatus { 
+	/* default */
 	width:100%;
 	height:auto;
    	border-radius:50%;
    	border: 1px solid black;
-   	background-color: --goal-default-color;
    	text-align:center;  		
 }
     	

@@ -8,22 +8,29 @@
 	// 오늘 날짜 생성
 	Calendar today=Calendar.getInstance();
 
-	int su=today.get(Calendar.DAY_OF_WEEK-1);
+	int su=today.get(Calendar.DAY_OF_WEEK); //요일-숫자
 	String week=""; //요일
 	
-	//몇째주? - > 수정 필요
-	/* switch(su){
-		case 1: week="첫"; break;
-		case 2: week="두"; break;
-		case 3: week="세"; break;
-		case 4: week="네"; break;
-		case 5: week="다섯"; break;
-		default: week="null"; break;
-	} */
+	int su2=today.get(Calendar.WEEK_OF_MONTH);	
+	String ju=""; //해당 월 몇주차?
+	
+	//몇째주?
+	 switch(su2){
+		case 1: ju="첫"; break;
+		case 2: ju="두"; break;
+		case 3: ju="세"; break;
+		case 4: ju="네"; break;
+		case 5: ju="다섯"; break;
+		default: ju="null"; break;
+	} 
 	
 	// 일간 계획 가져오기
 	List<MemberExcList> excList=(List<MemberExcList>)request.getAttribute("list01");
 	List<MemberMenuList> menuList=(List<MemberMenuList>)request.getAttribute("list02");
+	
+	//주간 현황 가져오기
+	
+	
 %>
 	
 
@@ -51,19 +58,19 @@
         <!-- 주간 달성 현황 -->
         <div class="row">
             <div class="col-md-3">
-                <%=today.get(Calendar.MONTH)+1 %>월 n번째 주 달성 현황
+                <%=today.get(Calendar.MONTH)+1 %>월 <%=ju %>번째 주 달성 현황
             </div>
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-2">운동</div>
                     <div class="weeklyLog">
-                        <div class="col-md-1"><a>월</a></div>
-                        <div class="col-md-1"><a>화</a></div>
-                        <div class="col-md-1"><a>수</a></div>
-                        <div class="col-md-1"><a>목</a></div>
-                        <div class="col-md-1"><a>금</a></div>
-                        <div class="col-md-1"><a>토</a></div>
-                        <div class="col-md-1"><a>일</a></div>
+                        <div class="col-md-1"><div class="weeklyExcStatus">월</div></div>
+                        <div class="col-md-1"><div class="weeklyExcStatus">화</div></div>
+                        <div class="col-md-1"><div class="weeklyExcStatus">수</div></div>
+                        <div class="col-md-1"><div class="weeklyExcStatus">목</div></div>
+                        <div class="col-md-1"><div class="weeklyExcStatus">금</div></div>
+                        <div class="col-md-1"><div class="weeklyExcStatus">토</div></div>
+                        <div class="col-md-1"><div class="weeklyExcStatus">일</div></div>
                     </div>
                     <div class="col-md-3">연속 n일 달성</div>
                 </div>
@@ -71,14 +78,14 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-2">식단</div>
-                    <div class="weeklyLog">
-                        <div class="col-md-1"><div class="weeklyStatus">월</div></div>
-                        <div class="col-md-1"><div class="weeklyStatus">화</div></div>
-                        <div class="col-md-1"><div class="weeklyStatus">수</div></div>
-                        <div class="col-md-1"><div class="weeklyStatus">목</div></div>
-                        <div class="col-md-1"><div class="weeklyStatus">금</div></div>
-                        <div class="col-md-1"><div class="weeklyStatus">토</div></div>
-                        <div class="col-md-1"><div class="weeklyStatus">일</div></div>
+                    <div id="weeklyMenuStatus">
+                        <div class="col-md-1"><div class="weeklyMenuStatus">월</div></div>
+                        <div class="col-md-1"><div class="weeklyMenuStatus">화</div></div>
+                        <div class="col-md-1"><div class="weeklyMenuStatus">수</div></div>
+                        <div class="col-md-1"><div class="weeklyMenuStatus">목</div></div>
+                        <div class="col-md-1"><div class="weeklyMenuStatus">금</div></div>
+                        <div class="col-md-1"><div class="weeklyMenuStatus">토</div></div>
+                        <div class="col-md-1"><div class="weeklyMenuStatus">일</div></div>
                         
                         <!-- #weeklyStatus
                         	1. 오늘 포함 이후 날짜 -> 연회색
@@ -94,7 +101,58 @@
             </div>         
         </div>
         <br><br><br>
-
+	<script>
+		$("div.weeklyMenuStatus").each(function(){
+			var weekNum=0;
+			const weekCheck=$(this).html(); //어느 요일?
+			/* if(weekCheck.equals("월")) weekNum=1;
+			else if(weekCheck.equals("화")) weekNum=2;
+			else if(weekCheck.equals("수")) weekNum=3;
+			else if(weekCheck.equals("목")) weekNum=4;
+			else if(weekCheck.equals("금")) weekNum=5;
+			else if(weekCheck.equals("토")) weekNum=6;
+			else if(weekCheck.equals("일")) weekNum=7; */
+			
+			 switch(weekCheck){
+				case '월': weekNum=1; break;
+				case '화': weekNum=2; break;
+				case '수': weekNum=3; break;
+				case '목': weekNum=4; break;
+				case '금': weekNum=5; break;
+				case '토': weekNum=6; break;
+				case '일': weekNum=7; break;
+			}	 
+			
+			if( weekNum < <%=su%>){ //오늘 날짜가 n요일 이전이라면 -> DB값에 따라 색상 변함
+				
+				//해당 요일 메뉴 계획 달성 여부 체크
+				//요일을 service로 보내야됨
+				
+				const weekMenuCheck=""; //해당 요일 달성 여부는?
+				$.ajax({
+					url:"<%=request.getContextPath()%>/ajax/weeklyCheck",
+					type:"post",
+					data:{"weekCheck":weekCheck},
+					success:data=>{
+						if(weekMenuCheck.equals("Y")){ //달성했을 경우 green
+							$(this).css('background-color','green'); 
+						}else if(weekMenuCheck.equals("N")){ //달성하지 못했을 경우 red
+							$(this).css('background-color','red');
+						}else{//체크되지 않았을 경우 yellow
+							$(this).css('background-color','yellow');
+						}
+					}
+				})		
+				// -> 조회된 값을 제대로 가져오지 못하고 있는 듯. 확인 필요
+				
+				
+			}else{ //이후라면 -> default 색상
+				$(this).css('background-color','gray');
+			}
+			
+		});
+	
+	</script>
         <!-- 일일 계획 -->
         <div class="row">
             <div class="col-md-6">
@@ -145,7 +203,7 @@
 	                    <span>식단이름</span><span>양</span><span>아침/점심/저녁</span>
 		                    	<!-- 식단 이름은 식단 id로 가져와야 됨 -->
 	                    <%for( MemberMenuList m : menuList){%>
-	                    <span><%=m.getMenuId() %></span><span><%=m.getAmount() %> 양</span><span><%=m.getMenuDaytime()%> </span>
+	                    <span><%=m.getMenuId()%></span><span><%=m.getAmount() %> 양</span><span><%=m.getMenuDaytime()%> </span>
 	                    <%}
 	                    }%>
                     </div>

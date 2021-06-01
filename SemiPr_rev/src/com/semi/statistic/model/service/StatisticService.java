@@ -25,4 +25,11 @@ public class StatisticService {
 		close(conn);		
 		return list02;
 	}
+	public String weekMenuCheck(String weekCheck) {
+		Connection conn = getConnection();
+		String result = dao.weekMenuCheck(conn, weekCheck);
+		close(conn);		
+		System.out.println(weekCheck+"ø‰¿œ : "+result);
+		return result;
+	}
 }
