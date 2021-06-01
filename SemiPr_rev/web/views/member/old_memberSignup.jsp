@@ -7,7 +7,7 @@
 	<h2>ForMuscle</h2>
 </div>
 
-<form action="<%=request.getContextPath()%>/memberSignup" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
+<form action="<%=request.getContextPath()%>/memberSignu" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
 	<!-- wrapper -->
 	<div id="wrapper">
 
