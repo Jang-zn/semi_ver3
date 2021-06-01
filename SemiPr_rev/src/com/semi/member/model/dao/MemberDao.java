@@ -2,12 +2,12 @@ package com.semi.member.model.dao;
 
 import static com.semi.common.JdbcTemplate.close;
 
-
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -181,9 +181,18 @@ public class MemberDao {
 
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
-		String sql="INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,NULL)";
+		//String sql="INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,NULL)";
 		int result=0;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
 		try {
+			p.load(new FileReader(path));
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			
+			
 			pstmt=conn.prepareStatement(p.getProperty("insertMember"));
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
@@ -196,6 +205,7 @@ public class MemberDao {
 			pstmt.setDouble(8, m.getHeight());
 			pstmt.setDouble(9, m.getWeight());
 			pstmt.setString(10,m.getGender());
+			pstmt.setString(11, m.getProfileImg());
 			result=pstmt.executeUpdate();
 			
 		}catch(SQLException e) {

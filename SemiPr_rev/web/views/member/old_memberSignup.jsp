@@ -7,7 +7,7 @@
 	<h2>ForMuscle</h2>
 </div>
 
-<form action="<%=request.getContextPath()%>/memberSignup" method="post" onsubmit="return fn_invalidate();">
+<form action="<%=request.getContextPath()%>/memberSignup" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
 	<!-- wrapper -->
 	<div id="wrapper">
 
@@ -99,7 +99,7 @@
 
 					<!-- BIRTH_MM -->
 					<div id="bir_mm">
-						<span class="box"> <select id="mm" class="sel" name="mm" onchange="test();">
+						<span class="box"> <select id="mm" class="sel" name="mm">
 								<option>월</option>
 								<option value="01">1</option>
 								<option value="02">2</option>
@@ -159,7 +159,8 @@
 				<h3>키</h3>
 
 				<span> <input type="number" id="height" placeholder="키 입력" name="height"
-					maxlength="3"></span> <span class="sta_height">cm</span>
+					maxlength="3" oninput="numberMaxLength(this);"></span> <span class="sta_height">cm</span>
+
 
 
 			<!-- weight-->
@@ -167,18 +168,20 @@
 				<h3>체중</h3>
 
 				<span> <input type="number" id="weight" placeholder="체중 입력" name="weight"
-					maxlength="3"></span> <span class="sta_weight">Kg</span>
+					maxlength="3" oninput="numberMaxLength(this);"></span> <span class="sta_weight">Kg</span>
 
 			</div>
 
 			<div id="profile2-wrap">
 				<h3>프로필 사진</h3>
-				<input type="file" id="image" accept="image/*"
-					onchange="setThumbnail(event);" multiple />
+				<input type="file" id="image" accept="image/*" name="userProfile"
+					onchange="setThumbnail(event);" />
+					
 				<div id="image_container"></div>
 
 
 			</div>
+		
 			<!-- JOIN BTN-->
 			<div class="btn_area">
 				<button type="submit" id="btnJoin">
@@ -203,10 +206,12 @@
 
 
 <script>
-const test=()=>{
-	
-console.log($("#mm").val());
+function numberMaxLength(e){
+    if(e.value.length > e.maxLength){
+        e.value = e.value.slice(0, e.maxLength);
+    }
 }
+
 
 const fn_duplicateNick=()=>{
 	const status="width=350px,height=250px, left=500px, top=500px";
@@ -245,7 +250,21 @@ function setThumbnail(event) {
 		document.querySelector("div#image_container").appendChild(img); 
 		};
 		
+		var f = event.target.files[0];
+		if(!f.type.match("image*")){
+			alert("이미지만 첨부할 수 있습니다.");
+			$("#image").val();
+			return;
+		}
+		
+		if(f.size>1024*1024*2){
+			alert("2mb까지의 사지만 업데이트 할 수 있습니다.");
+			return;
+		}
+		
+		
 		reader.readAsDataURL(event.target.files[0]); 
+	
 		}
 
 
