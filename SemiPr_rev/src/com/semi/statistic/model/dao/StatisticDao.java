@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.semi.member.daily.model.vo.DailyMenu;
 import com.semi.member.model.vo.MemberExcList;
 import com.semi.member.model.vo.MemberMenuList;
 
@@ -87,20 +88,28 @@ public class StatisticDao {
 	public String weekMenuCheck(Connection conn, String weekCheck) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
+		String result="";
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("todayMenuList"));
+			pstmt=conn.prepareStatement(prop.getProperty("weekMenuCheck"));
 			pstmt.setString(1, weekCheck);
 			pstmt.setString(2, "memberId");			
 			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				DailyMenu dm=new DailyMenu();				
+				dm.setMenuPlanCheck(rs.getString("menuPlanCheck"));
+				result=dm.getMenuPlanCheck();
+			}
 					
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}catch(NullPointerException e){
 			e.printStackTrace();
+			result="";
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
-		return toString();
+		return result;
+		
 	}
 }

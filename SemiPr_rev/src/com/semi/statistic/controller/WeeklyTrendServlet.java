@@ -39,6 +39,8 @@ public class WeeklyTrendServlet extends HttpServlet {
 		request.setAttribute("list02", list02);
 		request.getRequestDispatcher("/views/member/weeklyTrend.jsp").forward(request, response);
 		
+		
+		
 	}
 
 	/**

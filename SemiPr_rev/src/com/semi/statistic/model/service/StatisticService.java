@@ -29,7 +29,7 @@ public class StatisticService {
 		Connection conn = getConnection();
 		String result = dao.weekMenuCheck(conn, weekCheck);
 		close(conn);		
-		System.out.println(weekCheck+"ø‰¿œ : "+result);
+		System.out.println(weekCheck+" : "+result);
 		return result;
 	}
 }

@@ -105,14 +105,6 @@
 		$("div.weeklyMenuStatus").each(function(){
 			var weekNum=0;
 			const weekCheck=$(this).html(); //어느 요일?
-			/* if(weekCheck.equals("월")) weekNum=1;
-			else if(weekCheck.equals("화")) weekNum=2;
-			else if(weekCheck.equals("수")) weekNum=3;
-			else if(weekCheck.equals("목")) weekNum=4;
-			else if(weekCheck.equals("금")) weekNum=5;
-			else if(weekCheck.equals("토")) weekNum=6;
-			else if(weekCheck.equals("일")) weekNum=7; */
-			
 			 switch(weekCheck){
 				case '월': weekNum=1; break;
 				case '화': weekNum=2; break;
@@ -128,22 +120,31 @@
 				//해당 요일 메뉴 계획 달성 여부 체크
 				//요일을 service로 보내야됨
 				
-				const weekMenuCheck=""; //해당 요일 달성 여부는?
 				$.ajax({
 					url:"<%=request.getContextPath()%>/ajax/weeklyCheck",
 					type:"post",
 					data:{"weekCheck":weekCheck},
-					success:data=>{
-						if(weekMenuCheck.equals("Y")){ //달성했을 경우 green
+					dataType:"text",
+					success:function(data){ //해당 요일 달성 여부를 data로 받아옴
+						console.log(data);
+						if(data.equals("Y")){ //달성했을 경우 green
 							$(this).css('background-color','green'); 
-						}else if(weekMenuCheck.equals("N")){ //달성하지 못했을 경우 red
+						}else if(data.equals("N")){ //달성하지 못했을 경우 red
 							$(this).css('background-color','red');
 						}else{//체크되지 않았을 경우 yellow
 							$(this).css('background-color','yellow');
 						}
+					},
+					error : function(request,status,error){
+						console.log(request);
+						console.log(status);
+						console.log(error);
+						console.log("--------------------");
+						//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); //에러 출력용
 					}
 				})		
 				// -> 조회된 값을 제대로 가져오지 못하고 있는 듯. 확인 필요
+				//경로 확인 필요
 				
 				
 			}else{ //이후라면 -> default 색상
@@ -203,7 +204,7 @@
 	                    <span>식단이름</span><span>양</span><span>아침/점심/저녁</span>
 		                    	<!-- 식단 이름은 식단 id로 가져와야 됨 -->
 	                    <%for( MemberMenuList m : menuList){%>
-	                    <span><%=m.getMenuId()%></span><span><%=m.getAmount() %> 양</span><span><%=m.getMenuDaytime()%> </span>
+	                    <span><%=m.getMenuId() %></span><span><%=m.getAmount() %> 양</span><span><%=m.getMenuDaytime() %> </span>
 	                    <%}
 	                    }%>
                     </div>
