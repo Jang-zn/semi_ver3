@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="com.semi.member.model.vo.Member" %>
+	<%
+	
+	Member m = (Member)request.getAttribute("logged");
+	
+	Cookie[] cookies= request.getCookies();
+	String saveId="";
+	if(cookies!=null){
+		for(Cookie c : cookies){
+			if(c.getName().equals("saveId")){
+				saveId=c.getValue();
+			}
+		}
+	}
+	%>
 <%@ include file="/../views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/memberLogin.css">
@@ -15,12 +30,12 @@
 	</div>
 
 	<div class="row">
-		<form action="" method="POST">
+		<form action="<%=request.getContextPath()%>/member/memberLogin" method="post">
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 					<input type="text" name="userId" id="userId" placeholder="아이디"
-						title="아이디입력">
+						title="아이디입력" value="<%=saveId==null?"":saveId%>">
 				</div>
 				<div class="col-md-1"></div>
 			</div><br>
@@ -35,8 +50,9 @@
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
-					<input type="checkbox" name="saveId" id="saveId"><label
-						for="saveId">아이디저장</label>
+					<input type="checkbox" name="saveId" id="saveId" <%=saveId!=null? "checked" : ""%>>
+					<label for="saveId">아이디저장</label>
+						
 				</div><br>
 				<div class="col-md-1"></div>
 			</div>

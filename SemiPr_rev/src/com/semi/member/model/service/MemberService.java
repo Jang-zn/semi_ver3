@@ -67,5 +67,11 @@ public class MemberService {
 		}
 		return result;
 	}
+	public Member login(String userId, String password) {
+		Connection conn = getConnection();
+		Member m = dao.login(conn, userId,password);
+		close(conn);
+		return m;
+	}
 
 }
