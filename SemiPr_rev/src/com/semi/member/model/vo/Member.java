@@ -157,6 +157,15 @@ public class Member {
 		this.profileImg = profileImg;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", memberPw=" + memberPw + ", email=" + email + ", name=" + name
+				+ ", nickname=" + nickname + ", birth=" + birth + ", phone=" + phone + ", height=" + height
+				+ ", weight=" + weight + ", gender=" + gender + ", enrollDate=" + enrollDate + ", profileImg="
+				+ profileImg + "]";
+	}
+
 	
 		
 	
