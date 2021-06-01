@@ -343,6 +343,22 @@ public class BoardDao {
 		return result;
 	}
 
+	public int deleteFile(Connection conn, String parameter) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("deleteFile"));
+			pstmt.setString(1, parameter);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 	
 	 

@@ -109,6 +109,15 @@ public class BoardService {
 		return result;
 	}
 
+	public int deleteFile(String parameter) {
+		Connection conn = getConnection();
+		int result = dao.deleteFile(conn,parameter);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
 
 
 

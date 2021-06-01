@@ -48,26 +48,28 @@
 			<%if(filelist[0]==null){ %>
 				<div id="write_upload_area" class="row filecount">
 							<div class="col-md-4">
-								<input type="file" id="write_upload" name="upload" style="width: 100%">	
+								<input type="file" id="write_upload" name="upload0" style="width: 100%">	
 							</div>
 							<div class="col-md-8">
 									<button type="button" onclick="bbb(event);">삭제</button>
 							</div>
 				</div>
 			<%} %>
-			<%for(String str : filelist) {%>
-				<%if(str==null) break; else{%>
+			<%for(int i=0; i<5; i++) {%>
+				<%if(filelist[i]==null) break; else{%>
 					<div id="write_upload_area" class="row filecount">
 						<div class="col-md-4">
-							<input type="file" id="write_upload" name="upload" style="width: 100%">	
+							<input type="file" id="write_upload" name="upload<%=i %>" style="width: 100%">	
 						</div>
 						<div class="col-md-4 spanstr" style="position: absolute; margin-left: 91px; padding-bottom: 12px; ">
-							<span style="background: white; font-size: 19px"><%=str %></span>
+							<span style="background: white; font-size: 19px"><%=filelist[i] %></span>
+							<input type="hidden" name="oldfile<%=i%>" value="<%=filelist[i]%>">
 						</div>
 						<div class="col-md-4">
 								<button type="button" onclick="bbb(event);">삭제</button>
 						</div>
 					</div>
+					<input type="hidden" name="oldfileR<%=i%>" value="<%=filelist[i]%>">
 				<%} %>
 			<%} %>
 			
@@ -141,9 +143,9 @@
 		}
 		$("input[type=file]").change(e=>{
     		if($(e.target).val()==""){
-    			$(e.target).perent().next().find("span").show();
+    			$(e.target).parent().next().find("span").show();
     		}else{
-    			$(".spanstr").hide();
+    			$(e.target).parent().next(".spanstr").remove();
     		}
     	})
 		

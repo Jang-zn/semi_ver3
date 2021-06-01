@@ -38,37 +38,31 @@ public class BoardUpdateEndServlet extends HttpServlet {
 			
 			return;
 		}
-		String path = getServletContext().getRealPath("/Resource/upload/board");
+		String path = getServletContext().getRealPath("/Resource/upload/board/");
 		MultipartRequest mr = new MultipartRequest(request, path,1024*1024*10,"utf-8",new DefaultFileRenamePolicy());
 		Board b = new Board();
 		b.setCategory(mr.getParameter("classfication"));
+		b.setContentNo(Integer.parseInt(mr.getParameter("contentNo")));
 		b.setTitle(mr.getParameter("title"));
 		b.setWriter(mr.getParameter("writer"));
 		b.setContent(mr.getParameter("content"));
 		b.setContentNo(Integer.parseInt(mr.getParameter("contentNo")));
 		b.setMemberId(mr.getParameter("memberId"));
 		int result = new BoardService().updateBoard(b);
-		System.out.println("결과는:"+result);
-		int cNo = new BoardService().boardContentNo();
 		
-		File f0= mr.getFile("upload0");
-		File f1= mr.getFile("upload1");
-		File f2= mr.getFile("upload2");
-		File f3= mr.getFile("upload3");
-		File f4= mr.getFile("upload4");
-		if(f0!=null&&f0.length()>0) {
-			//만약 새로운 파일명이 한다면 이전파일을 삭제함
-			//새로운파일이 전달 됨.
-			//전에파일 삭제함
-			File del = new File(path+mr.getParameter("oldFile"));
-			//if문 안해줘도 되긴함
+		for(int i=0; i<5; i++) {
+			if(mr.getFilesystemName("upload"+i)!=null) {
+				result = new BoardService().boardfile(b.getContentNo(), mr.getFilesystemName("upload"+i));
+				File del = new File(path+mr.getParameter("oldfileR"+i));
 				del.delete();
-			
-			
-		}else {
-			//새로운 파일이 없을경우
+				new BoardService().deleteFile(mr.getParameter("oldfileR"+i));
+			}
+			else if(mr.getParameter("oldfile"+i)==null) {
+				File del = new File(path+mr.getParameter("oldfileR"+i));
+				del.delete();
+				new BoardService().deleteFile(mr.getParameter("oldfileR"+i));
+			}
 		}
-		
 		String msg ="";
 		String loc ="";
 		if(result>0) {
