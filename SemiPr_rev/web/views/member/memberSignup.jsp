@@ -17,7 +17,7 @@
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
 		
-	<form action="<%=request.getContextPath()%>/memberSignup" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
+	<form action="<%=request.getContextPath()%>/member/memberSignup" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
 
 
 			<!-- content-->
@@ -99,7 +99,7 @@
 						</h3>
 					</div>
 					<div class="col-md-12">
-						<span class="box int_name"> <input type="text" id="name"
+						<span class="box int_name"> <input type="text" id="name" name="name"
 							class="int" maxlength="12">
 						</span> <span class="error_next_box"></span>
 					</div>
@@ -135,7 +135,7 @@
 					<div id="bir_wrap" class="col-md-12">
 						<!-- BIRTH_YY -->
 						<div id="bir_yy" class="col-md-4">
-							<span class="box"> <input type="text" id="yy" class="int"
+							<span class="box"> <input type="text" id="yy" class="int" name="yy"
 								maxlength="4" placeholder="년(4자)">
 							</span>
 						</div>

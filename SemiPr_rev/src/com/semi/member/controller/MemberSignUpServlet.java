@@ -23,7 +23,7 @@ import com.semi.member.model.vo.Member;
 /**
  * Servlet implementation class MemberEnrollServlet
  */
-@WebServlet("/memberSignup")
+@WebServlet("/member/memberSignup")
 public class MemberSignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
