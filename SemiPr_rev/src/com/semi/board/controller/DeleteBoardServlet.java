@@ -34,7 +34,6 @@ public class DeleteBoardServlet extends HttpServlet {
 		for(int i=0; i<5; i++) {
 			String a = files[i];
 			File f = new File(path+a);
-			System.out.println(path+a);
 			if(f.exists())
 				f.delete();
 		}

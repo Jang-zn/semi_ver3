@@ -76,7 +76,6 @@ public class BoardDao {
 		ResultSet rs = null;
 		List<Board> list = new ArrayList();
 		String sql="";
-		System.out.println(searchType);
 		if(searchType.equals("titlecontent")) {
 			sql = prop.getProperty("titlecontent");
 			
@@ -292,8 +291,7 @@ public class BoardDao {
 			while(rs.next()) {
 				list[count++] = rs.getString(3);
 			}
-			for(int i=0; i<5; i++)
-			System.out.println(list[i]);
+			
 			
 			
 		}catch(SQLException e) {
@@ -414,7 +412,6 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		ResultSet rs = null;
-		System.out.println(no);
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("commentCount"));
 			pstmt.setInt(1, no);
@@ -472,7 +469,6 @@ public class BoardDao {
 		}finally {
 			close(pstmt);
 		}
-		System.out.println(result+"결과는 ?");
 		return result;
 	}
 
@@ -498,6 +494,23 @@ public class BoardDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int updateComment(Connection conn, int commentNo, String updateContent) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt =conn.prepareStatement(prop.getProperty("updateComment"));
+			pstmt.setString(1, updateContent);
+			pstmt.setInt(2, commentNo);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

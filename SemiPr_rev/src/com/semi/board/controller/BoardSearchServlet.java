@@ -43,9 +43,7 @@ public class BoardSearchServlet extends HttpServlet {
 		
 			a.add(result!=0?false:true);
 		};
-		for(Boolean c : a) {
-			System.out.println("데이터가 있는지? 있으면 false 없으면 true"+c);
-		}
+		
 		
 		List<Boolean> fileyumu = new ArrayList();
 		for(Board b : list) {

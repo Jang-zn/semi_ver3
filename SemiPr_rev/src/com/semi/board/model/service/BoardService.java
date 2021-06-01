@@ -177,6 +177,14 @@ public class BoardService {
 		return file;
 	}
 
+	public int updateComment(int commentNo, String updateContent) {
+		Connection conn = getConnection();
+		int result = dao.updateComment(conn,commentNo,updateContent);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
 
 
 

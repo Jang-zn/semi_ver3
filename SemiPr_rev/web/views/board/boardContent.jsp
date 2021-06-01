@@ -362,6 +362,73 @@
 	<div class="col-md-1"></div>
 </div>
 <script>
+	$(".updateComment").off("click");
+	$(".updateComment").click(e=>{
+		const updateBefore = $(e.target).parent().siblings().find("p").html();
+		const button = $("<button>").attr({
+						onclick:"updateajax(event);"	
+			}).html("수정");
+		const input = $("<input>").attr({
+			type:"text",
+			name:"updateAfter"
+		});
+		input.val(updateBefore);
+		if($(e.target).parent().siblings().find("input").length==0){
+			$(e.target).parent().siblings().append(input).append(button);
+			$(e.target).parent().siblings().find("p").hide();
+		}
+		$(e.target).off("click");
+		
+	})
+	const updateajax=(e)=>{
+		console.log("댓글 번호"+$(e.target).parent().next().find("input").val());		
+		console.log("수정내용  :"+$(e.target).parent().find("input").val());	
+			
+		$.ajax({
+				url:"<%=request.getContextPath()%>/board/commentUpdate",
+				data:{
+					"commentNo" : $(e.target).parent().next().find("input").val(),
+					"updateContent" : $(e.target).parent().find("input").val()			
+					},
+				success:data=>{
+					console.log(data);
+					if(data=="true"){
+						
+						$(e.target).parent().find("p").html($(e.target).parent().find("input").val()).show();					
+						$(e.target).parent().find("input").remove();
+						$(e.target).parent().find("button").remove();
+						
+					}
+				},
+				error:(r,m,s)=>{
+					console.log(r);
+					console.log(s);
+				}
+			}) 
+			
+			$(".updateComment").on("click",e=>{
+							alert("새로고침하고 다시하길 권합니다.");	
+							const updateBefore = $(e.target).parent().siblings().find("p").html();
+							const button = $("<button>").attr({
+											onclick:"updateajax(event);"	
+								}).html("수정");
+							const input = $("<input>").attr({
+								type:"text",
+								name:"updateAfter"
+							});
+							input.val(updateBefore);
+							if($(e.target).parent().siblings().find("input").length==0){
+								$(e.target).parent().siblings().append(input).append(button);
+								$(e.target).parent().siblings().find("p").hide();
+							}
+							$(e.target).off("click");
+							
+							
+							
+						})
+		
+	}
+	
 	const deleteBoard=()=>{
 		if(confirm("정말 삭제하실껀가요?")){
 			location.assign('<%=request.getContextPath()%>/board/delete?no=<%=b.getContentNo()%>');

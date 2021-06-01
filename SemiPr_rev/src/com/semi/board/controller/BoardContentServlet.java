@@ -84,7 +84,6 @@ public class BoardContentServlet extends HttpServlet {
 		  int commentCount = new BoardService().commentCount(no);
 		  request.setAttribute("commentList", re);
 		  request.setAttribute("commentCount", commentCount);
-		  System.out.println(commentCount);
 		  request.getRequestDispatcher("/views/board/boardContent.jsp").forward(request, response);
 	}
 
