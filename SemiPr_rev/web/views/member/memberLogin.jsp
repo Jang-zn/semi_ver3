@@ -64,17 +64,7 @@
 	</div>
 	<br>
 	<div class="row">
-		<div id="sns_page">
-			<br><div class="row">
-				<a href="">구글로그인</a>
-			</div><br>
-			<div class="row">
-				<a href="">네이버로그인</a>
-			</div><br>
-			<div class="row">
-				<a href="">카카오로그인</a>
-			</div>
-		</div>
+		
 	</div>
 
 </div>
