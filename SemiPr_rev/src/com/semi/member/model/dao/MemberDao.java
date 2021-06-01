@@ -1,13 +1,18 @@
 package com.semi.member.model.dao;
 
-import static com.semi.common.JdbcTemplate.*;
+import static com.semi.common.JdbcTemplate.close;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.semi.member.exc.model.vo.*;
-import com.semi.member.menu.model.vo.*;
-import com.semi.member.model.vo.*;
+import com.semi.member.exc.model.vo.Exercise;
+import com.semi.member.menu.model.vo.Menu;
+import com.semi.member.model.vo.MemberExcList;
+import com.semi.member.model.vo.MemberMenuList;
 
 public class MemberDao {
 
@@ -163,6 +168,7 @@ public class MemberDao {
 		}
 		
 		return m;
-	}
+	}	
+	
 
 }

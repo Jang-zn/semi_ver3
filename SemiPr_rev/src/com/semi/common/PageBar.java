@@ -2,14 +2,14 @@ package com.semi.common;
 
 import javax.servlet.http.*;
 
-public class ServletPageBar {
+public class PageBar {
 
 	private String pageBar;
 	private int cPage;
 	private int numPerpage;
 	
 
-	public ServletPageBar(HttpServletRequest request, int totalData, int pageBarSize, String location) {
+	public PageBar(HttpServletRequest request, int totalData, int pageBarSize, String location) {
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -40,10 +40,10 @@ public class ServletPageBar {
 		String pageBar = "";
 
 		if (pageNo == 1) {
-			pageBar += "<span>&nbsp[ì´ì „]&nbsp</span>";
+			pageBar += "<span>&nbsp[?´? „]&nbsp</span>";
 		} else {
 			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + (pageNo - 1) + "&numPerpage="
-					+ numPerpage + "'>[ì´ì „]</a>";
+					+ numPerpage + "'>[?´? „]</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (cPage == pageNo) {
@@ -57,15 +57,15 @@ public class ServletPageBar {
 		}
 
 		if (pageNo > totalPage) {
-			pageBar += "<span>&nbsp[ë‹¤ìŒ]&nbsp</span>";
+			pageBar += "<span>&nbsp[?‹¤?Œ]&nbsp</span>";
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "'>&nbsp[ë‹¤ìŒ]&nbsp</a>";
+			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "'>&nbsp[?‹¤?Œ]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;
 	}
 
-	public ServletPageBar(HttpServletRequest request, int totalData, int pageBarSize, String location, String query) {
+	public PageBar(HttpServletRequest request, int totalData, int pageBarSize, String location, String query) {
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -96,10 +96,10 @@ public class ServletPageBar {
 		String pageBar = "";
 
 		if (pageNo == 1) {
-			pageBar += "<span>&nbsp[ì´ì „]&nbsp</span>";
+			pageBar += "<span>&nbsp[?´? „]&nbsp</span>";
 		} else {
 			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + (pageNo - 1) + "&numPerpage="
-					+ numPerpage + "'>[ì´ì „]</a>";
+					+ numPerpage + "'>[?´? „]</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (cPage == pageNo) {
@@ -113,9 +113,9 @@ public class ServletPageBar {
 		}
 
 		if (pageNo > totalPage) {
-			pageBar += "<span>&nbsp[ë‹¤ìŒ]&nbsp</span>";
+			pageBar += "<span>&nbsp[?‹¤?Œ]&nbsp</span>";
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "'>&nbsp[ë‹¤ìŒ]&nbsp</a>";
+			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "'>&nbsp[?‹¤?Œ]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;

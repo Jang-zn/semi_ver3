@@ -12,6 +12,7 @@ import com.semi.member.model.vo.*;
 
 public class MemberService {
 	private MemberDao dao= new MemberDao();
+		
 	public List<MemberExcList> SelectMemberExcList(int cPage, int numPerpage, String dayval) {
 		Connection conn = getConnection();
 		List<MemberExcList> list = dao.SelectMemberExcList(conn,cPage,numPerpage,dayval);

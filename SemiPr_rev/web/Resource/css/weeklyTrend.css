@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+element{
+	--goal-default-color: lightgray;
+	--goal-achieve-color: green;
+	--goal-failure-color: red;
+	--goal-middle-color: yellow;
+	
+	--btn-select-color:lightgray;
+	--btn-deselect-color:gray;
+}
+
+
+.weeklyStatus {
+	width:100%;
+	height:auto;
+   	border-radius:50%;
+   	border: 1px solid black;
+   	background-color: --goal-default-color;
+   	text-align:center;  		
+}
+    	
+.btn1{
+	width:100%;
+	border-top: 1px solid black;
+	border-right:1px solid black;
+	border-left:1px solid black;
+	background-color: lightgray;
+	border-radius:10%;
+	
+}

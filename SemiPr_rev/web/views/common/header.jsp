@@ -51,9 +51,9 @@
                     <div class="col-md-3">Progress
                         <div class="sub">
                         	<div class="progress_menu"><a href="<%=request.getContextPath()%>/member/dailyLog">일일 기록</a></div>
-                            <div class="progress_menu"><a href="">주간 실천 현황</a></div>
+                            <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/weeklyTrend">주간 실천 현황</a></div>
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/monthlyTrend">월간 실천 현황</a></div>
-                            <div class="progress_menu"><a href="">My Data</a></div>
+                            <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/myData">My Data</a></div>
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/gallary/list">눈바디</a></div>
                         </div>
                     </div>
