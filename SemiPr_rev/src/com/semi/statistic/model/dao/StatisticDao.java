@@ -48,7 +48,10 @@ public class StatisticDao {
 					
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}catch(NullPointerException e){
+			e.printStackTrace();
 		}finally {
+		
 			close(rs);
 			close(pstmt);
 		}return list;
@@ -70,6 +73,8 @@ public class StatisticDao {
 			}
 					
 		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(NullPointerException e){
 			e.printStackTrace();
 		}finally {
 			close(rs);
