@@ -60,9 +60,9 @@ public class MemberMyListServlet extends HttpServlet {
 
 		PageBar pb =new PageBar(request,totalData,5,"/member/myList?val="+dayval);
 		//list가져올때 memeberid 와 요일을 같이 넘겨줌.
-		System.out.println(pb.getCpage()+" "+pb.getNumPerpage());
+		System.out.println(pb.getCPage()+" "+pb.getNumPerpage());
 		
-		List<MemberExcList> list =new MemberService().SelectMemberExcList(pb.getCpage(),pb.getNumPerpage(),dayval);	
+		List<MemberExcList> list =new MemberService().SelectMemberExcList(pb.getCPage(),pb.getNumPerpage(),dayval);	
 		//식단 목록 리시트 페이지 처리
 		/* ~~~~~~~~~~~~~~~~~~~~~~~~~
 		 * 
@@ -72,7 +72,7 @@ public class MemberMyListServlet extends HttpServlet {
 		
 		PageBar pb2 =new PageBar(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
 		//memberid,요일,시간을 넘겨줌 
-		List<MemberMenuList> list2 =new MemberService().SelectMemberMenuList(pb2.getCpage(),pb.getNumPerpage(),dayval,time);
+		List<MemberMenuList> list2 =new MemberService().SelectMemberMenuList(pb2.getCPage(),pb.getNumPerpage(),dayval,time);
 	
 		request.setAttribute("time", time);
 		request.setAttribute("today", dayval);

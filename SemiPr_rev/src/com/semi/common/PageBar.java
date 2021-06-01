@@ -2,14 +2,14 @@ package com.semi.common;
 
 import javax.servlet.http.*;
 
-public class ServletPageBar {
+public class PageBar {
 
 	private String pageBar;
 	private int cPage;
 	private int numPerpage;
 	
 
-	public ServletPageBar(HttpServletRequest request, int totalData, int pageBarSize, String location) {
+	public PageBar(HttpServletRequest request, int totalData, int pageBarSize, String location) {
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -65,7 +65,7 @@ public class ServletPageBar {
 		this.pageBar = pageBar;
 	}
 
-	public ServletPageBar(HttpServletRequest request, int totalData, int pageBarSize, String location, String query) {
+	public PageBar(HttpServletRequest request, int totalData, int pageBarSize, String location, String query) {
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
