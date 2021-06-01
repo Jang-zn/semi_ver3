@@ -2,6 +2,7 @@ package com.semi.member.model.dao;
 
 import static com.semi.common.JdbcTemplate.close;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.semi.member.exc.model.vo.Exercise;
 import com.semi.member.menu.model.vo.Menu;
@@ -18,8 +20,11 @@ import com.semi.member.model.vo.MemberMenuList;
 
 
 
-public class MemberDao {
 
+public class MemberDao {
+	
+		private Properties p = new Properties();
+	
 	public int SelectMemberExcListCount(Connection conn, String dayval) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -179,7 +184,7 @@ public class MemberDao {
 		String sql="INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,NULL)";
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt=conn.prepareStatement(p.getProperty("insertMember"));
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getEmail());
