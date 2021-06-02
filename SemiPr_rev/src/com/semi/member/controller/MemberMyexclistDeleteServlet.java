@@ -7,6 +7,7 @@ import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
 import com.semi.member.model.service.*;
+import com.semi.member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberMyexclistDeleteServlet
@@ -28,13 +29,14 @@ public class MemberMyexclistDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("어ㅏㅁ엉너멍");
 		int excno = Integer.parseInt(request.getParameter("excno"));
-		
+		System.out.println(excno);
+
 		int result =new MemberService().MemberexclistDelete(excno);
 		String msg="";
 		String loc="";
 		if(result>0) {
-			//�궘�젣�꽦怨�
 			msg="삭제성공";
 			loc="/member/myList";
 		}else {

@@ -6,8 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.semi.member.model.service.*;
+import com.semi.member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberMymenulistDeleteServlet
@@ -30,12 +32,14 @@ public class MemberMymenulistDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int menuno = Integer.parseInt(request.getParameter("menuno"));
+		HttpSession session=request.getSession();
+		Member m=(Member)session.getAttribute("logged");
+		String memberid=m.getMemberId();
+		int result =new MemberService().MembermenulistDelete(menuno,memberid);
 		
-		int result =new MemberService().MembermenulistDelete(menuno);
 		String msg="";
 		String loc="";
 		if(result>0) {
-			//�궘�젣�꽦怨�
 			msg="삭제 성공";
 			loc="/member/myList";
 		}else {

@@ -21,27 +21,27 @@ import com.semi.member.model.vo.MemberMenuList;
 
 public class MemberService {
 	private MemberDao dao= new MemberDao();
-	public List<MemberExcList> SelectMemberExcList(int cPage, int numPerpage, String dayval) {
+	public List<MemberExcList> SelectMemberExcList(int cPage, int numPerpage, String dayval, String memberid) {
 		Connection conn = getConnection();
-		List<MemberExcList> list = dao.SelectMemberExcList(conn,cPage,numPerpage,dayval);
+		List<MemberExcList> list = dao.SelectMemberExcList(conn,cPage,numPerpage,dayval,memberid);
 		close(conn);		
 		return list;
 	}
-	public int SelectMemberExcListCount(String dayval) {
+	public int SelectMemberExcListCount(String dayval, String memberid) {
 		Connection conn = getConnection();
-		int result= dao.SelectMemberExcListCount(conn,dayval);
+		int result= dao.SelectMemberExcListCount(conn,dayval,memberid);
 		close(conn);		
 		return result;
 	}
-	public List<MemberMenuList> SelectMemberMenuList(int cPage2, int numPerpage2, String dayval, String time) {
+	public List<MemberMenuList> SelectMemberMenuList(int cPage2, int numPerpage2, String dayval, String time, String memberid) {
 		Connection conn = getConnection();
-		List<MemberMenuList> list2 = dao.SelectMemberMenuList(conn,cPage2,numPerpage2,dayval,time);
+		List<MemberMenuList> list2 = dao.SelectMemberMenuList(conn,cPage2,numPerpage2,dayval,time,memberid);
 		close(conn);		
 		return list2;
 	}
-	public int SelectMemberMenuListCount(String dayval) {
+	public int SelectMemberMenuListCount(String dayval, String memberid) {
 		Connection conn = getConnection();
-		int result= dao.SelectMemberMenuListCount(conn,dayval);
+		int result= dao.SelectMemberMenuListCount(conn,dayval,memberid);
 		close(conn);		
 		return result;
 	}
@@ -59,17 +59,21 @@ public class MemberService {
 		m.setFileList(dao.selectMenuimg(conn,menuid));
 		close(conn);		
 		return m;
+	
 	}
 	public int MemberexclistDelete(int excno) {
 		Connection conn =getConnection();
+		dao.excDailyDeleteno(conn,excno);
 		int result =dao.MemberexclistDelete(conn,excno);
 		if(result>0) commit(conn);
 		else rollback(conn);		
 		return result;
 	}
-	public int MembermenulistDelete(int menuno) {
+	public int MembermenulistDelete(int menuno, String memberid) {
 		Connection conn =getConnection();
-		int result =dao.MembermenulistDelete(conn,menuno);
+		//fkdaily_e부터 먼저 삭제
+		dao.menuDailyDeleteno(conn,menuno);
+		int result =dao.MembermenulistDelete(conn,menuno,memberid);
 		if(result>0) commit(conn);
 		else rollback(conn);		
 		return result;
@@ -158,7 +162,6 @@ public class MemberService {
 
 	public List<DailyExercise> selectMemberDailyExcercise() {
 		Connection conn =getConnection();
-		System.err.println("sevicce");
 		List<DailyExercise> list =dao.selectMemberDailyExcercise(conn);
 		close(conn);
 		return list;
