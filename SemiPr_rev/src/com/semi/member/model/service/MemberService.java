@@ -48,7 +48,7 @@ public class MemberService {
 	public Exercise selectExceriseinfo(String excid) {
 		Connection conn = getConnection();
 		Exercise ex= dao.selectExceriseinfo(conn,excid);
-		ex.setImgpath(dao.selectExceriseimg(conn,excid));
+		//ex.setFileList(dao.selectExceriseimg(conn,excid));
 		close(conn);		
 		return ex;
 		

@@ -58,24 +58,26 @@ public class BoardWriteEndServlet extends HttpServlet {
 		f[3] = f4;
 		f[4] = f5;
 		
+		int result2 = 0;
 		if(cNo!=0) {
 			for(int i=0; i<5; i++) {
 					if(f[i]==null) {
 						break;
 					}
-				result = new BoardService().boardfile(cNo,f[i]);
+				 result2 = new BoardService().boardfile(cNo,f[i]);
 			}
 		}else {
-			result = 0;
+			result2 = 0;
 		}
 		String msg ="";
 		String loc ="";
-		if(result>0) {
+		if(result>0&&result2>0) {
 			msg ="등록성공!";
 			loc ="/board/boardList";
+			
 		}else {
 			msg="등록실패!";
-			loc="/board/boardWriteEnd";
+			loc="/board/write";
 		}
 		
 		request.setAttribute("msg", msg);
