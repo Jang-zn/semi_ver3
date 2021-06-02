@@ -288,8 +288,8 @@
 		<div id="board_head" class="row">
 			<!-- 글 리스트 헤드 -->
 			<div class="board_sort col-md-1">
-				<select>
-					<option>-분류-</option>
+				<select name="b_sort">
+					<option value="전체">전체</option>
 					<option value="자유">자유</option>
 					<option value="눈바디">눈바디</option>
 				</select>
@@ -398,6 +398,8 @@
 						$(e.target).parent().find("input").remove();
 						$(e.target).parent().find("button").remove();
 						
+					}else{
+						alert("댓글수정 실패입니다");						
 					}
 				},
 				error:(r,m,s)=>{
@@ -407,7 +409,7 @@
 			}) 
 			
 			$(".updateComment").on("click",e=>{
-							alert("새로고침하고 다시하길 권합니다.");	
+							
 							const updateBefore = $(e.target).parent().siblings().find("p").html();
 							const button = $("<button>").attr({
 											onclick:"updateajax(event);"	
@@ -527,5 +529,14 @@
 			return false;
 		}
 	}
+	$("[name=b_sort]").change(e=>{
+		if($(e.target).val()!='전체'){
+			location.assign('<%=request.getContextPath()%>/board/boardSort?type='+$(e.target).val());
+		}else{
+			location.assign('<%=request.getContextPath()%>/board/boardList');	
+		}
+		
+	
+})
 </script>
 <%@ include file="/views/common/footer.jsp"%>

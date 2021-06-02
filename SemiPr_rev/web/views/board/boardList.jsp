@@ -11,6 +11,7 @@
 	List<Boolean> fileyumu = (List<Boolean>)request.getAttribute("fileyumu");
 	String pageBar = (String)request.getAttribute("pageBar");
 	int boardListCount = (int)request.getAttribute("boardListCount");
+	String sortType = (String)request.getAttribute("sortType");
 %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
@@ -81,10 +82,10 @@
 		<div id="board_head" class="row">
 		<!-- 글 리스트 헤드 -->
 			<div class="board_sort col-md-1">
-				<select>
-					<option>-분류-</option>
-					<option value="자유">자유</option>
-					<option value="눈바디">눈바디</option>
+				<select name="b_sort">
+					<option value="전체" <%=sortType!=null&&sortType.equals("전체")?"selected":""%>>전체</option>
+					<option value="자유" <%=sortType!=null&&sortType.equals("자유")?"selected":""%>>자유</option>
+					<option value="눈바디" <%=sortType!=null&&sortType.equals("눈바디")?"selected":""%>>눈바디</option>
 				</select>
 			</div>
 			<div class="board_title col-md-8"
@@ -159,6 +160,16 @@
 
 
 <script>
+	$("[name=b_sort]").change(e=>{
+			if($(e.target).val()!='전체'){
+				location.assign('<%=request.getContextPath()%>/board/boardSort?type='+$(e.target).val());
+			}else{
+				location.assign('<%=request.getContextPath()%>/board/boardList');	
+			}
+			
+		
+	})
+		
 	const boardContent=(e)=>{
 		location.assign("<%=request.getContextPath()%>/board/content?no="+e);
 	}

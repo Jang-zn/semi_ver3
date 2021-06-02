@@ -513,6 +513,57 @@ public class BoardDao {
 		return result;
 	}
 
+	public List<Board> sortBoardList(Connection conn, String type,int cPage, int numPerpage) {
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		List<Board> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("sortBoardList"));
+			pstmt.setString(1, type);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Board b = new Board();
+				b.setContentNo(rs.getInt("content_no"));
+				b.setMemberId(rs.getString("member_id"));
+				b.setTitle(rs.getString("title"));
+				b.setCategory(rs.getString("category"));
+				b.setContent(rs.getString("content"));
+				b.setWriter(rs.getString("writer"));
+				b.setReadCount(rs.getInt("read_count"));
+				b.setWriteDate(rs.getDate("write_date"));
+				list.add(b);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int sortBoardListCount(Connection conn, String type) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result =0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("sortBoardListCount"));
+			pstmt.setString(1, type);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
+		
+		return result;
+	}
+
 
 
 	

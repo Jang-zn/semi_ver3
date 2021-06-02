@@ -185,6 +185,23 @@ public class BoardService {
 		return result;
 	}
 
+	public List<Board> sortBoardList(String type,int cPage, int numPerpage) {
+		Connection conn = getConnection();
+		List<Board> list = dao.sortBoardList(conn,type,cPage,numPerpage);
+		close(conn);
+		return list;
+		
+	}
+
+	public int sortBoardListCount(String type) {
+		Connection conn = getConnection();
+		int result = dao.sortBoardListCount(conn,type);
+		close(conn);
+		return result;
+		
+		
+	}
+
 
 
 

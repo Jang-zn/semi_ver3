@@ -12,16 +12,16 @@ import com.semi.board.model.vo.*;
 import com.semi.common.*;
 
 /**
- * Servlet implementation class Servlet
+ * Servlet implementation class SortBoardServlet
  */
-@WebServlet(urlPatterns = { "/board/boardList" })
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/board/boardSort")
+public class SortBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public SortBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +30,38 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boardListCount = new BoardService().boardListCount();
-		request.setAttribute("boardListCount",boardListCount);
+		String type = request.getParameter("type");
+
 		
-		ServletPageBar sp = new ServletPageBar(request, boardListCount, 5, "/board/boardList");
-		System.out.println(sp.getPageBar());
-		request.setAttribute("pageBar",sp.getPageBar());
+		int sortBoardCount = new BoardService().sortBoardListCount(type);
+		ServletPageBar pagebar = new ServletPageBar(request,sortBoardCount,5,"/board/boardSort","&type="+type); 
 		
-		List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
+		List<Board> list = new BoardService().sortBoardList(type,pagebar.getCPage(),pagebar.getNumPerpage());
+		
+		
+		List<Boolean> a = new ArrayList();
+		for(Board b : list) {
+			int result = new BoardService().fileyumu(b.getContentNo());
+		
+			a.add(result!=0?false:true);
+		};
+		
 		List<Boolean> fileyumu = new ArrayList();
 		for(Board b : list) {
 			int result = new BoardService().fileyumu(b.getContentNo());
 		
 			fileyumu.add(result!=0?false:true);
 		};
-		
+		System.out.println(pagebar.getPageBar());
 		request.setAttribute("fileyumu", fileyumu); 
+		
+		request.setAttribute("boardListCount", sortBoardCount);
 		request.setAttribute("boardList", list);
+		request.setAttribute("pageBar", pagebar.getPageBar());
+		request.setAttribute("sortType", type);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
+		
+		
 	}
 
 	/**
