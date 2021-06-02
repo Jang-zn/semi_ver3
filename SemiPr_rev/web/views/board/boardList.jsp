@@ -1,4 +1,4 @@
-<%@page import="com.semi.common.ServletPageBar"%>
+<%@page import="com.semi.common.PageBar"%>
 <%@page import="com.semi.board.model.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

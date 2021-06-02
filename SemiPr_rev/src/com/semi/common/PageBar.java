@@ -2,14 +2,14 @@ package com.semi.common;
 
 import javax.servlet.http.*;
 
-public class ServletPageBar {
+public class PageBar {
 
 	private String pageBar;
 	private int cPage;
 	private int numPerpage;
 	
 
-	public ServletPageBar(HttpServletRequest request, int totalData, int pageBarSize, String location) {
+	public PageBar(HttpServletRequest request, int totalData, int pageBarSize, String location) {
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -42,14 +42,18 @@ public class ServletPageBar {
 		if (pageNo == 1) {
 			pageBar += "<span>&nbsp[이전]&nbsp</span>";
 		} else {
+
 			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + (pageNo - 1) + "&numPerpage="
+
 					+ numPerpage + "'>[이전]</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (cPage == pageNo) {
 				pageBar += "<span>&nbsp" + pageNo + "&nbsp</span>";
 			} else {
+
 				pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "&numPerpage="
+
 						+ numPerpage +"'>&nbsp" + pageNo
 						+ "&nbsp</a>";
 			}
@@ -59,13 +63,14 @@ public class ServletPageBar {
 		if (pageNo > totalPage) {
 			pageBar += "<span>&nbsp[다음]&nbsp</span>";
 		} else {
+
 			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;
 	}
 
-	public ServletPageBar(HttpServletRequest request, int totalData, int pageBarSize, String location, String query) {
+	public PageBar(HttpServletRequest request, int totalData, int pageBarSize, String location, String query) {
 		int cPage;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -140,4 +145,6 @@ public class ServletPageBar {
 		return numPerpage;
 	}
 	
+
 }
+

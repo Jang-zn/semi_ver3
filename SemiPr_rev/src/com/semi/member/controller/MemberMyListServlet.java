@@ -42,11 +42,9 @@ public class MemberMyListServlet extends HttpServlet {
 			//아니면 마이 리스트 페이지 이동
 		///운동 목록 리스트 페이징 처리
 		
-		//요일을 클릭하면 그 값을 가져오고 그냥 처음에 들어갔을땐 현재 요일에 대한 정보를 가져옴
-		
 		String time=request.getParameter("time");
 		if(time==null) {time="아침";}
-		//아침,점심,저녁을 가져옴	
+		//기본값으로 아침,요일가져옴
 		String dayval = request.getParameter("val");
 		if(dayval==null) {
 	        Calendar calendar = Calendar.getInstance(); 
@@ -58,20 +56,20 @@ public class MemberMyListServlet extends HttpServlet {
 		int totalData=new MemberService().SelectMemberExcListCount(dayval);
 		System.out.println(totalData);
 
-		ServletPageBar pb =new ServletPageBar(request,totalData,5,"/member/myList?val="+dayval);
-		//list가져올때 memeberid 와 요일을 같이 넘겨줌.
+		PageBar pb =new PageBar(request,totalData,5,"/member/myList?val="+dayval);
+		//list id값
 		System.out.println(pb.getCPage()+" "+pb.getNumPerpage());
 		
 		List<MemberExcList> list =new MemberService().SelectMemberExcList(pb.getCPage(),pb.getNumPerpage(),dayval);	
-		//식단 목록 리시트 페이지 처리
+		//식단 리스트
 		/* ~~~~~~~~~~~~~~~~~~~~~~~~~
 		 * 
 		 * 
 		 */
 		int totalData2=new MemberService().SelectMemberMenuListCount(dayval);
-		
-		ServletPageBar pb2 =new ServletPageBar(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
-		//memberid,요일,시간을 넘겨줌 
+
+		PageBar2 pb2 =new PageBar2(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
+		//memberid, 요일 ,시간 
 		List<MemberMenuList> list2 =new MemberService().SelectMemberMenuList(pb2.getCPage(),pb.getNumPerpage(),dayval,time);
 	
 		request.setAttribute("time", time);
@@ -82,7 +80,7 @@ public class MemberMyListServlet extends HttpServlet {
 		request.setAttribute("list2", list2);
 		
 		
-		request.getRequestDispatcher("/views/member/plan/memberMyList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/plan/old_memberMyList.jsp").forward(request, response);
 		}
 //	}
 
