@@ -56,6 +56,7 @@ public class MemberService {
 		close(conn);		
 		return m;
 	}
+
 	public int insertMember(Member m) {
 		Connection conn = getConnection();
 		int result = dao.insertMember(conn, m);
@@ -74,4 +75,6 @@ public class MemberService {
 		return m;
 	}
 
+	
+	
 }

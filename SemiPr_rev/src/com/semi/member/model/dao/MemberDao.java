@@ -2,6 +2,7 @@ package com.semi.member.model.dao;
 
 import static com.semi.common.JdbcTemplate.close;
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -178,6 +179,7 @@ public class MemberDao {
 		
 		return m;
 	}
+
 
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
