@@ -33,24 +33,24 @@ public class MemberMyListServlet extends HttpServlet {
 //		HttpSession session=request.getSession();
 //		Member m=(Member)session.getAttribute("member");
 //		
-//		//로그인 처리 분기
+//		//濡쒓렇�씤 泥섎━ 遺꾧린
 //		
 //		if(m==null) {
-//			//로그인 페이지 이동 로직
+//			//濡쒓렇�씤 �럹�씠吏� �씠�룞 濡쒖쭅
 //			
 //		}else {
-			//아니면 마이 리스트 페이지 이동
-		///운동 목록 리스트 페이징 처리
+			//�븘�땲硫� 留덉씠 由ъ뒪�듃 �럹�씠吏� �씠�룞
+		///�슫�룞 紐⑸줉 由ъ뒪�듃 �럹�씠吏� 泥섎━
 		
-		//요일을 클릭하면 그 값을 가져오고 그냥 처음에 들어갔을땐 현재 요일에 대한 정보를 가져옴
+		//�슂�씪�쓣 �겢由��븯硫� 洹� 媛믪쓣 媛��졇�삤怨� 洹몃깷 泥섏쓬�뿉 �뱾�뼱媛붿쓣�븧 �쁽�옱 �슂�씪�뿉 ���븳 �젙蹂대�� 媛��졇�샂
 		
 		String time=request.getParameter("time");
-		if(time==null) {time="아침";}
-		//아침,점심,저녁을 가져옴	
+		if(time==null) {time="�븘移�";}
+		//�븘移�,�젏�떖,���뀅�쓣 媛��졇�샂	
 		String dayval = request.getParameter("val");
 		if(dayval==null) {
 	        Calendar calendar = Calendar.getInstance(); 
-	        String []days = {"일","월","화","수","목","금","토"};
+	        String []days = {"�씪","�썡","�솕","�닔","紐�","湲�","�넗"};
 	        dayval=days[calendar.get(Calendar.DAY_OF_WEEK)-1];
 		}
 		
@@ -58,20 +58,24 @@ public class MemberMyListServlet extends HttpServlet {
 		int totalData=new MemberService().SelectMemberExcListCount(dayval);
 		System.out.println(totalData);
 
-		ServletPageBar pb =new ServletPageBar(request,totalData,5,"/member/myList?val="+dayval);
-		//list가져올때 memeberid 와 요일을 같이 넘겨줌.
+
+		PageBar pb =new PageBar(request,totalData,5,"/member/myList?val="+dayval);
+		//list媛��졇�삱�븣 memeberid �� �슂�씪�쓣 媛숈씠 �꽆寃⑥쨲.
+
 		System.out.println(pb.getCPage()+" "+pb.getNumPerpage());
 		
 		List<MemberExcList> list =new MemberService().SelectMemberExcList(pb.getCPage(),pb.getNumPerpage(),dayval);	
-		//식단 목록 리시트 페이지 처리
+
 		/* ~~~~~~~~~~~~~~~~~~~~~~~~~
 		 * 
 		 * 
 		 */
 		int totalData2=new MemberService().SelectMemberMenuListCount(dayval);
 		
-		ServletPageBar pb2 =new ServletPageBar(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
-		//memberid,요일,시간을 넘겨줌 
+
+		PageBar pb2 =new PageBar(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
+		//memberid,�슂�씪,�떆媛꾩쓣 �꽆寃⑥쨲 
+
 		List<MemberMenuList> list2 =new MemberService().SelectMemberMenuList(pb2.getCPage(),pb.getNumPerpage(),dayval,time);
 	
 		request.setAttribute("time", time);

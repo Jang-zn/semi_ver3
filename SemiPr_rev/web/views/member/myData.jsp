@@ -22,15 +22,24 @@
     <div class="container">
         <!-- 카테고리 버튼 -->
         <div class="row">
-            <div class="col-md-2">버튼 1</div>
-            <div class="col-md-2">버튼 2</div>
-            <div class="col-md-2">버튼 3</div>
+            <div class="col-md-2"><a href="<%=request.getContextPath()%>/member/weeklyTrend">주간 현황</a></div>
+            <div class="col-md-2"><a href="<%=request.getContextPath()%>/member/monthlyTrend">월간 현황</a></div>
+            <div class="col-md-2"><a href="<%=request.getContextPath()%>/member/myData">My Data</a></div>
         </div>
         <br><br>
 
         <!-- 주간 달성 현황 -->
         <div class="row">
-            <div class="col-md-10"> 그래프</div>
+            <div class="col-md-10"> 
+           		<div>
+           			<select name="duration" size="1">
+           				<option value="1month">1개월</option>
+           				<option value="3month">3개월</option>
+           				<option value="6month">6개월</option>
+           			</select>
+           			<canvas id="myChart" style="width='100%', height='auto'"></canvas>           		
+           		</div>
+            </div>
             <div class="col-md-2"> 
                 <!-- 항목 -->
                 <div class="row">
@@ -49,7 +58,7 @@
                     <div class="col-md-12">골격근량</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6"><a>공유하기 버튼</a></div>
+                    <!-- <div class="col-md-6"><a>공유하기 버튼</a></div> -->
                 </div>
             </div>
         </div>
@@ -60,61 +69,37 @@
     </div>
 
 
-
-	<!-- 참고용 임시 css스타일 -->
-	<style>
-        .btn{
-            background-color: orangered;
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: bold;
-            color: white;
-        }
-        .photo01{
-            background-color: lightgrey !important;
-        } 
-        .content01{
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size: 2.3rem;
-            padding-bottom: 2rem;
-        }
-        .content02{
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size: 1.7rem;
-        }
-        .title01{
-            font-family: "Press Start 2P" ;    
-            font-size: 1.9rem; 
-            padding-bottom: 1rem;               
-        }
-
-        #header_container{
-            font-family: "Press Start 2P";
-            color: white;
-            background-color: black !important;
-            font-size: 1.3rem;
-            line-height: 50px;
-            text-align: center;
-            font-weight: 700;
-        }    
-        .container{
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left:auto;
-        }        
-        .container-fluid{
-            margin-right: auto;
-            margin-left: auto;
-            background: lightgrey;
-        }
-
-        [class|="col"] {
-        /* background: #2db34a; */
-        border: 1px solid red;
-        height: fit-content;        
-        }
-
-    </style>
+	<script>
+	/* 임시 차트 */
+	    var ctx = document.getElementById('myChart');
+	    var myChart = new Chart(ctx, {
+	         type: 'line',
+	          data: { labels: ['월', '화', '수', '목', '금', '토' ,'일'], 
+	          datasets: [{ label: '달성 여부', 
+	          data: [1,2,2,1,0,0,1], 
+	          backgroundColor: 'rgba(255, 200, 200, 0.2)', 
+	          borderColor: 'gray', 
+	          borderWidth: 1 }] },           
+	          options: { 
+	        	 
+	        	  responsive: false,	        	  
+	            lengnd:{
+	                display: false
+	            },
+	            scales: {
+	                yAxes: [{ 	
+	                    ticks: {
+	                        beginAtZero: true,
+	                        display:false
+	                    }
+	                }],
+	                xAxes: [{
+	                    stacked: true
+	                }],
+	            } 
+	            } 
+	        }); 
+    </script> 
 
 
 <%@ include file = "/../views/common/footer.jsp"%>

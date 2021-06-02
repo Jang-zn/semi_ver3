@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.btn{
+            background-color: orangered;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: bold;
+            color: white;
+        }
+        .photo01{
+            background-color: lightgrey !important;
+        } 
+        .content01{
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 2.3rem;
+            padding-bottom: 2rem;
+        }
+        .content02{
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 1.7rem;
+        }
+        .content03{
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .title01{
+            font-family: "Press Start 2P" ;    
+            font-size: 1.9rem; 
+            padding-bottom: 1rem;               
+        }

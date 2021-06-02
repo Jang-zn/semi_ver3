@@ -2,15 +2,14 @@ package com.semi.member.model.dao;
 
 import static com.semi.common.JdbcTemplate.close;
 
-
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Properties;
 
 import com.semi.member.exc.model.vo.Exercise;
@@ -18,9 +17,6 @@ import com.semi.member.menu.model.vo.Menu;
 import com.semi.member.model.vo.Member;
 import com.semi.member.model.vo.MemberExcList;
 import com.semi.member.model.vo.MemberMenuList;
-
-
-
 
 public class MemberDao {
 	
@@ -178,7 +174,8 @@ public class MemberDao {
 		}
 		
 		return m;
-	}
+	}	
+	
 
 
 	public int insertMember(Connection conn, Member m) {

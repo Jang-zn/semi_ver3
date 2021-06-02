@@ -40,10 +40,11 @@ public class PageBar {
 		String pageBar = "";
 
 		if (pageNo == 1) {
-			pageBar += "<span>&nbsp[이전]&nbsp</span>";
+
+			pageBar += "<span>&nbsp[�씠�쟾]&nbsp</span>";
 		} else {
 			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + (pageNo - 1) + "&numPerpage="
-					+ numPerpage + "'>[이전]</a>";
+					+ numPerpage + "'>[�씠�쟾]</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (cPage == pageNo) {
@@ -57,9 +58,9 @@ public class PageBar {
 		}
 
 		if (pageNo > totalPage) {
-			pageBar += "<span>&nbsp[다음]&nbsp</span>";
+			pageBar += "<span>&nbsp[�떎�쓬]&nbsp</span>";
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
+			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "'>&nbsp[�떎�쓬]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;
@@ -96,10 +97,10 @@ public class PageBar {
 		String pageBar = "";
 
 		if (pageNo == 1) {
-			pageBar += "<span>&nbsp[이전]&nbsp</span>";
+			pageBar += "<span>&nbsp[�씠�쟾]&nbsp</span>";
 		} else {
 			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + (pageNo - 1) + "&numPerpage="
-					+ numPerpage + "'>[이전]</a>";
+					+ numPerpage + "'>[�씠�쟾]</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (cPage == pageNo) {
@@ -113,9 +114,9 @@ public class PageBar {
 		}
 
 		if (pageNo > totalPage) {
-			pageBar += "<span>&nbsp[다음]&nbsp</span>";
+			pageBar += "<span>&nbsp[�떎�쓬]&nbsp</span>";
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
+			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "'>&nbsp[�떎�쓬]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;
