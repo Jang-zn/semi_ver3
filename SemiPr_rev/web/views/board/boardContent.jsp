@@ -263,6 +263,7 @@
 					<div class="reply_write_btn">
 						<input type="submit" value="댓글 등록">
 					</div>
+					<!-- 임의로 준 부분 -->
 					<input type="hidden" name="userId" value="aaa"> 
 					<input type="hidden" name="boardNo" value="<%=b.getContentNo()%>">
 					<input type="hidden" name="replyNoRef" value="0">
