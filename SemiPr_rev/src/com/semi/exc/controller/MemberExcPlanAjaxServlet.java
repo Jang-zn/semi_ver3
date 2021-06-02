@@ -1,23 +1,28 @@
-package com.semi.member.controller;
+package com.semi.exc.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.semi.exc.model.service.ExcService;
+import com.semi.member.exc.model.vo.Exercise;
+
 /**
- * Servlet implementation class MemberExcPlanServlet
+ * Servlet implementation class MemberExcPlanAjaxServlet
  */
-@WebServlet("/member/excPlan")
-public class MemberExcPlanServlet extends HttpServlet {
+@WebServlet("/ajax/excListClick.do")
+public class MemberExcPlanAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberExcPlanServlet() {
+    public MemberExcPlanAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +31,11 @@ public class MemberExcPlanServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("/views/member/plan/memberExcPlan.jsp").forward(request, response);
-		
-		
+		String excName = request.getParameter("name");
+		Exercise exc = new ExcService().getExcInfo(excName);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(exc,response.getWriter());
+
 	}
 
 	/**

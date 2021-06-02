@@ -55,10 +55,11 @@
 						<span>세트수 : <%=mel.getSets() %>sets</span>
 					</div>
 					<div class="list_button_area">
-						<button>수정</button>
+							<button onclick="window.open('<%=request.getContextPath() %>/member/myexclistupdate?no=<%=mel.getExcNo()%>&excid=<%=mel.getExcId() %>',
+						'운동편집','left=500,top=300,width=400,height=400,location=no,status=no,scrollbars=yes');">수정</button>
 						<br>
 						<br>
-						<button>삭제</button>
+						<button onclick="location.replace('<%=request.getContextPath()%>/member/myexclistdelete?excno=<%=mel.getExcNo()%>')">삭제</button>
 					</div>
 				</li>
 				<%}
@@ -94,10 +95,11 @@
 					
 					</div>
 					<div class="list_button_area">
-						<button>수정</button>
+						<button onclick="window.open('<%=request.getContextPath() %>/member/mymenulistupdate?no=<%=mml.getMenuNo()%>&menuid=<%=mml.getMenuId() %>',
+						'메뉴편집','left=500,top=300,width=400,height=400,location=no,status=no,scrollbars=yes');">수정</button>
 						<br>
 						<br>
-						<button>삭제</button>
+						<button onclick="location.replace('<%=request.getContextPath()%>/member/mymenulistdelete?menuno=<%=mml.getMenuNo()%>')">삭제</button>
 					</div>
 				</li>
 				<%}

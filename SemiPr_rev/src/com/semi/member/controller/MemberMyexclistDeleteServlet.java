@@ -6,21 +6,19 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-import com.google.gson.*;
-import com.semi.member.exc.model.vo.*;
 import com.semi.member.model.service.*;
 
 /**
- * Servlet implementation class MemberListAjaxServlet
+ * Servlet implementation class MemberMyexclistDeleteServlet
  */
-@WebServlet("/ajax/exclist")
-public class MemberListAjaxServlet extends HttpServlet {
+@WebServlet("/member/myexclistdelete")
+public class MemberMyexclistDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListAjaxServlet() {
+    public MemberMyexclistDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,12 +28,22 @@ public class MemberListAjaxServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String excid=request.getParameter("excid");
-		Exercise ex = new MemberService().selectExceriseinfo(excid);
+		int excno = Integer.parseInt(request.getParameter("excno"));
 		
-		response.setContentType("application/json;charset=utf-8");
-		new Gson().toJson(ex,response.getWriter());
-		
+		int result =new MemberService().MemberexclistDelete(excno);
+		String msg="";
+		String loc="";
+		if(result>0) {
+			//�궘�젣�꽦怨�
+			msg="삭제성공";
+			loc="/member/myList";
+		}else {
+			msg="삭제 실패";
+			loc="/member/myList";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

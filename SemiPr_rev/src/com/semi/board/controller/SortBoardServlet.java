@@ -34,7 +34,7 @@ public class SortBoardServlet extends HttpServlet {
 
 		
 		int sortBoardCount = new BoardService().sortBoardListCount(type);
-		ServletPageBar pagebar = new ServletPageBar(request,sortBoardCount,5,"/board/boardSort","&type="+type); 
+		PageBar pagebar = new PageBar(request,sortBoardCount,5,"/board/boardSort","&type="+type); 
 		
 		List<Board> list = new BoardService().sortBoardList(type,pagebar.getCPage(),pagebar.getNumPerpage());
 		

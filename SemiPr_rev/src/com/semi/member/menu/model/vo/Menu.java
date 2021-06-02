@@ -11,6 +11,7 @@ public class Menu {
 	private int na;
 	private String menuManual;
 	private String menuVideo;
+	private String imgpath;
 
 	
 	public Menu() {
@@ -19,7 +20,7 @@ public class Menu {
 
 
 	public Menu(String menuId, String menuSort, String menuName, int kcal, int ch, int prot, int fat, int na,
-			String menuManual, String menuVideo) {
+			String menuManual, String menuVideo,String imgpath) {
 		super();
 		this.menuId = menuId;
 		this.menuSort = menuSort;
@@ -31,6 +32,7 @@ public class Menu {
 		this.na = na;
 		this.menuManual = menuManual;
 		this.menuVideo = menuVideo;
+		this.imgpath=imgpath;
 	}
 
 
@@ -131,6 +133,16 @@ public class Menu {
 
 	public void setMenuVideo(String menuVideo) {
 		this.menuVideo = menuVideo;
+	}
+
+
+	public String getImgpath() {
+		return imgpath;
+	}
+
+
+	public void setImgpath(String imgpath) {
+		this.imgpath = imgpath;
 	}
 
 		

@@ -22,6 +22,7 @@ div#exc_list {
 div#exc_list_info {
 	
 	border: 1px solid black;
+	transition:all 0.2s;
 	
 
 }
@@ -62,5 +63,15 @@ div#exc_detail_info_container {
 	border:1px solid #bbb;
 	
 }
-#sort_list>div{
+img{
+	width:100%;
+	height:100%;
+	
+}
+.clickcheck{
+	transition:all 0.3s;
+}
+.clickcheck:hover{
+	cursor:pointer;
+	border:3px solid gold;
 }
