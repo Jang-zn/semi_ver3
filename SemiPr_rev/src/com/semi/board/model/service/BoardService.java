@@ -134,6 +134,74 @@ public class BoardService {
 		return list;
 	}
 
+	public int commentCount(int no) {
+		Connection conn = getConnection();
+		int result = dao.commentCount(conn,no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int commentDelete(int no) {
+		Connection conn = getConnection();
+		int result = dao.commentDelete(conn,no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int boardDelete(int boardNo) {
+		Connection conn = getConnection();
+		int result = dao.boardDelete(conn,boardNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int fileDelete(int boardNo) {
+		Connection conn = getConnection();
+		int result = dao.fileDelete(conn,boardNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public String[] filesName(int boardNo) {
+		Connection conn = getConnection();
+		String[] file = dao.filesName(conn,boardNo);
+		close(conn);
+		return file;
+	}
+
+	public int updateComment(int commentNo, String updateContent) {
+		Connection conn = getConnection();
+		int result = dao.updateComment(conn,commentNo,updateContent);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
+	public List<Board> sortBoardList(String type,int cPage, int numPerpage) {
+		Connection conn = getConnection();
+		List<Board> list = dao.sortBoardList(conn,type,cPage,numPerpage);
+		close(conn);
+		return list;
+		
+	}
+
+	public int sortBoardListCount(String type) {
+		Connection conn = getConnection();
+		int result = dao.sortBoardListCount(conn,type);
+		close(conn);
+		return result;
+		
+		
+	}
+
 
 
 

@@ -76,7 +76,6 @@ public class BoardDao {
 		ResultSet rs = null;
 		List<Board> list = new ArrayList();
 		String sql="";
-		System.out.println(searchType);
 		if(searchType.equals("titlecontent")) {
 			sql = prop.getProperty("titlecontent");
 			
@@ -292,8 +291,7 @@ public class BoardDao {
 			while(rs.next()) {
 				list[count++] = rs.getString(3);
 			}
-			for(int i=0; i<5; i++)
-			System.out.println(list[i]);
+			
 			
 			
 		}catch(SQLException e) {
@@ -409,6 +407,164 @@ public class BoardDao {
 		
 		return list;
 	}
+
+	public int commentCount(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rs = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("commentCount"));
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int commentDelete(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("commentDelete"));
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int boardDelete(Connection conn, int boardNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardDelete"));
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int fileDelete(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("fileDelete"));
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public String[] filesName(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String[] list = null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("filesName"));
+			pstmt.setInt(1, boardNo);
+			rs=pstmt.executeQuery();
+			list = new String[5];
+			int count=0;
+			while(rs.next()) {
+				list[count++] = rs.getString(1);
+			}
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int updateComment(Connection conn, int commentNo, String updateContent) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt =conn.prepareStatement(prop.getProperty("updateComment"));
+			pstmt.setString(1, updateContent);
+			pstmt.setInt(2, commentNo);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public List<Board> sortBoardList(Connection conn, String type,int cPage, int numPerpage) {
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		List<Board> list = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("sortBoardList"));
+			pstmt.setString(1, type);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Board b = new Board();
+				b.setContentNo(rs.getInt("content_no"));
+				b.setMemberId(rs.getString("member_id"));
+				b.setTitle(rs.getString("title"));
+				b.setCategory(rs.getString("category"));
+				b.setContent(rs.getString("content"));
+				b.setWriter(rs.getString("writer"));
+				b.setReadCount(rs.getInt("read_count"));
+				b.setWriteDate(rs.getDate("write_date"));
+				list.add(b);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int sortBoardListCount(Connection conn, String type) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result =0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("sortBoardListCount"));
+			pstmt.setString(1, type);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
+		
+		return result;
+	}
+
+
 
 	
 	

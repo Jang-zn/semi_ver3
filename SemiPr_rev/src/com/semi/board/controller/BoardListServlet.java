@@ -33,8 +33,10 @@ public class BoardListServlet extends HttpServlet {
 		int boardListCount = new BoardService().boardListCount();
 		request.setAttribute("boardListCount",boardListCount);
 		
-		PageBar sp = new PageBar(request, boardListCount, 5, "/board/boardList");
-		
+
+		ServletPageBar sp = new ServletPageBar(request, boardListCount, 5, "/board/boardList");
+		System.out.println(sp.getPageBar());
+
 		request.setAttribute("pageBar",sp.getPageBar());
 		
 		List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());

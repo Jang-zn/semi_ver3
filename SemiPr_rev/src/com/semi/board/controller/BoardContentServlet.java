@@ -30,10 +30,10 @@ public class BoardContentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int no = Integer.parseInt(request.getParameter("no"));
 		int boardListCount = new BoardService().boardListCount();
 		
 		
-		int no = Integer.parseInt(request.getParameter("no"));
 		
 		boolean readFlag=false;
 	      String boardReadNo="";
@@ -81,8 +81,9 @@ public class BoardContentServlet extends HttpServlet {
 		  	
 		  //댓글
 		  List<Reply> re = new BoardService().commentList(no);
+		  int commentCount = new BoardService().commentCount(no);
 		  request.setAttribute("commentList", re);
-		  
+		  request.setAttribute("commentCount", commentCount);
 		  request.getRequestDispatcher("/views/board/boardContent.jsp").forward(request, response);
 	}
 

@@ -28,25 +28,22 @@ public class InsertBoardCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String CommentContent = request.getParameter("CommentContent");
-		System.out.println(CommentContent);
 		String userId = request.getParameter("userId");
 		int replyNoRef = Integer.parseInt(request.getParameter("replyNoRef"));
 		int replyLevel = Integer.parseInt(request.getParameter("replyLevel"));
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		
 		Reply re = new Reply(0,boardNo,userId,CommentContent,null,replyLevel,replyNoRef);
 		int result = new BoardService().insertComment(re);
 		String msg="";
 		if(result>0) {
 			msg="댓글 등록 성공!";
-			
 		}else {
-			msg="댓글 등록 실패!";
+			msg="댓글 장난 경고 1회 1/5";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", "/board/content?no="+boardNo);
-		
 		request.getRequestDispatcher("/views/error/errorPage.jsp").forward(request, response);
 	}
 
