@@ -55,6 +55,87 @@ public class BoardService {
 		return b;
 	}
 
+	public int insertBoard(Board b) {
+		Connection conn = getConnection();
+		int result = dao.insertBoard(conn,b);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+
+	public int boardfile(int contentNo,String file) {
+		Connection conn = getConnection();
+		int result = dao.boardfile(contentNo,file,conn);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int boardContentNo() {
+		Connection conn = getConnection();
+		int cNo = dao.boardContentNo(conn);
+		close(conn);
+		return cNo;
+	}
+
+	public String[] selectBoardfile(int no) {
+		Connection conn = getConnection();
+		String[] list = dao.selectBoardFile(conn,no);
+		close(conn);
+		return list;
+	}
+
+	public int fileyumu(int contentNo) {
+		Connection conn = getConnection();
+		int result = dao.fileyumu(conn,contentNo);
+		close(conn);
+		return result;
+	}
+
+	public Board boardNoInf(int no) {
+		Connection conn = getConnection();
+		Board b = dao.boardContent(conn,no);
+		close(conn);
+		return b;
+	}
+
+	public int updateBoard(Board b) {
+		Connection conn = getConnection();
+		int result = dao.updateBoard(conn,b);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int deleteFile(String parameter) {
+		Connection conn = getConnection();
+		int result = dao.deleteFile(conn,parameter);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int insertComment(Reply re) {
+		Connection conn = getConnection();
+		int result = dao.insertComment(conn,re);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public List<Reply> commentList(int no) {
+		Connection conn = getConnection();
+		List<Reply> list = dao.commentList(conn,no);
+		close(conn);
+		return list;
+	}
+
+
+
 
 	
 

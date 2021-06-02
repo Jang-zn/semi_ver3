@@ -1,12 +1,12 @@
 package com.semi.board.model.dao;
 
+import static com.semi.common.JdbcTemplate.*;
+
 import java.io.*;
 import java.sql.*;
 import java.util.*;
 
 import com.semi.board.model.vo.*;
-
-import static com.semi.common.JdbcTemplate.close;
 public class BoardDao {
 	
 	
@@ -222,6 +222,195 @@ public class BoardDao {
 		return result;
 	}
 
+	public int insertBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertBoard"));
+			pstmt.setString(1, b.getMemberId());
+			pstmt.setString(2, b.getTitle());
+			pstmt.setString(3, b.getCategory());
+			pstmt.setString(4, b.getContent());
+			pstmt.setString(5, b.getWriter());
+			result = pstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int boardfile(int contentNo,String file,Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt =conn.prepareStatement(prop.getProperty("boardfile"));
+			pstmt.setInt(1, contentNo);
+			pstmt.setString(2, file);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+	public int boardContentNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cNo =0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("boardContentNo"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) cNo = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(conn);
+		}
+		
+		return cNo;
+	}
+
+	public String[] selectBoardFile(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String[] list = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectBoardFile"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			list = new String[5];
+			int count=0;
+			while(rs.next()) {
+				list[count++] = rs.getString(3);
+			}
+			for(int i=0; i<5; i++)
+			System.out.println(list[i]);
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return list;
+	}
+
+	public int fileyumu(Connection conn, int contentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rs = null;
+		try {
+			pstmt =conn.prepareStatement(prop.getProperty("fileyumu"));
+			pstmt.setInt(1, contentNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateBoard(Connection conn, Board b) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateBoard"));
+			pstmt.setString(1, b.getCategory());
+			pstmt.setString(2, b.getTitle());
+			pstmt.setString(3, b.getContent());
+			pstmt.setInt(4, b.getContentNo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteFile(Connection conn, String parameter) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("deleteFile"));
+			pstmt.setString(1, parameter);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertComment(Connection conn, Reply re) {
+		PreparedStatement pstmt =null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertComment"));
+			pstmt.setInt(1, re.getContentNo());
+			pstmt.setString(2, re.getWriter());
+			pstmt.setString(3, re.getReplyContent());
+			pstmt.setInt(4, re.getReplyLevel());
+			pstmt.setString(5, re.getReplyNoRef()==0?null:String.valueOf(re.getReplyNoRef()));
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public List<Reply> commentList(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Reply nc = null;
+		List<Reply> list = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("commentList"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				nc=new Reply();
+				nc.setReplyNo(rs.getInt("reply_no"));
+				nc.setContentNo(rs.getInt("content_no"));
+				nc.setWriter(rs.getString("writer"));
+				nc.setReplyContent(rs.getString("reply_content"));
+				nc.setReplyDate(rs.getDate("reply_date"));
+				nc.setReplyLevel(rs.getInt("reply_level"));
+				nc.setReplyNoRef(rs.getInt("reply_no_ref"));
+				list.add(nc);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	
 	
 	 
 }

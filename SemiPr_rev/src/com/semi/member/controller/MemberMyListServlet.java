@@ -58,7 +58,7 @@ public class MemberMyListServlet extends HttpServlet {
 		int totalData=new MemberService().SelectMemberExcListCount(dayval);
 		System.out.println(totalData);
 
-		PageBar pb =new PageBar(request,totalData,5,"/member/myList?val="+dayval);
+		ServletPageBar pb =new ServletPageBar(request,totalData,5,"/member/myList?val="+dayval);
 		//list가져올때 memeberid 와 요일을 같이 넘겨줌.
 		System.out.println(pb.getCPage()+" "+pb.getNumPerpage());
 		
@@ -70,7 +70,7 @@ public class MemberMyListServlet extends HttpServlet {
 		 */
 		int totalData2=new MemberService().SelectMemberMenuListCount(dayval);
 		
-		PageBar pb2 =new PageBar(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
+		ServletPageBar pb2 =new ServletPageBar(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
 		//memberid,요일,시간을 넘겨줌 
 		List<MemberMenuList> list2 =new MemberService().SelectMemberMenuList(pb2.getCPage(),pb.getNumPerpage(),dayval,time);
 	
