@@ -74,7 +74,7 @@
 					</div>
 				</div>
 
-				
+					
 				<!-- EMAIL -->
 				<div class="row">
 					<div class="col-md-12">
@@ -87,8 +87,12 @@
 							class="int" maxlength="50" placeholder="이메일입력">
 						</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
 					</div>
+					<div id="email_chk"> </div>
+					<button type="button" id="email-chk" 
+					value="이메일 인증" style="width: 100px; height: 25px" onclick="emailCheck();" >이메일 인증</button>
+				
 				</div>
-
+					</form>
 
 
 				<!-- NAME -->
@@ -269,8 +273,47 @@
 
 
 <script>
+$("#email-chk").click(function(){
+	
+	const user_email=$("#email").val();
+	const key;
+	const bool = true;
+	if(bool){
+		
+	}
+})
 
 
+
+const emailCheck=()=>{
+	location.assign("<%=request.getContextPath()%>/member/emailAuth");
+}
+
+
+
+$("#email").blur(function(email){
+	 const email2 = $("#email").val();
+	    if(email2 == ""){
+	        alert("이메일을 입력해 주십시오");
+	    }else{
+	$.ajax({
+		url :"<%=request.getContextPath()%>/member/emailDuplication",
+		type : 'post',
+		dataType:"text",
+		data:{
+			"email":$('#email').val()
+		},
+		success:data=>{
+				console.log(data);
+				
+				$("#email_chk").html(data);
+				
+				}
+			})
+	    }
+	})
+
+var pwMsg = document.querySelector('#alertTxt');
 
 function numberMaxLength(e){
     if(e.value.length > e.maxLength){
