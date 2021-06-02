@@ -44,12 +44,9 @@ public class DeleteBoardServlet extends HttpServlet {
 		String msg ="";
 		String loc ="";
 		if(result>0) {
-			msg ="삭제성공!";
+			msg ="삭제완료!";
 			if(fileresult>0) {
 				msg ="글삭제 +파일삭제성공!";
-				loc ="/board/boardList";
-			}else {
-				msg ="파일이 없거나 삭제실패!";
 				loc ="/board/boardList";
 			}
 		}else {

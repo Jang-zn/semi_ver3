@@ -32,6 +32,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 		Board b = new BoardService().boardNoInf(no);
 		String[] filelist = new BoardService().selectBoardfile(no);
+	
 		
 		request.setAttribute("board", b);
 		request.setAttribute("filelist", filelist);

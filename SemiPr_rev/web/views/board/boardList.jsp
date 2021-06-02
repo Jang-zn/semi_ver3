@@ -88,7 +88,7 @@
 					<option value="눈바디" <%=sortType!=null&&sortType.equals("눈바디")?"selected":""%>>눈바디</option>
 				</select>
 			</div>
-			<div class="board_title col-md-8"
+			<div class="board_title col-md-7"
 				style="display: inline-block; text-align: center;">제목</div>
 			<div class="board_content_info col-md-1">
 				<span>글쓴이</span>
@@ -113,7 +113,7 @@
 		 			<%Board b = (Board)list.get(i); %>
 						<div id="board_body" class="row">
 							<div class="board_sort col-md-1"><%=b.getCategory() %></div>
-							<div class="board_title col-md-8"  onclick="boardContent(<%=b.getContentNo()%>);">
+							<div class="board_title col-md-7"  onclick="boardContent(<%=b.getContentNo()%>);">
 								<div class="board_file_img col-md-1">
 										<%if(fileyumu==null) {%>
 											불러온 request가 없네요
@@ -139,6 +139,11 @@
 							<div class="board_content_info col-md-1">
 								<%=b.getReadCount() %>
 							</div>
+							<%-- <%if(loginM.getUserId("admin")||loginM.getUserId(b.getWriter()) {%> --%>
+							<div class="board_content_info col-md-1">
+								<button value = "<%=b.getContentNo() %>" onclick="deleteBoard(event)">삭제하기</button>
+							</div>
+							<%-- <%} %> --%>
 						</div>
 					<%} %>
 				<%} %>
@@ -160,6 +165,11 @@
 
 
 <script>
+	const deleteBoard=(e)=>{
+		if(confirm("정말 삭제하실껀가요?")){
+				location.assign('<%=request.getContextPath()%>/board/delete?no='+$(e.target).val());			
+			}
+	}
 	$("[name=b_sort]").change(e=>{
 			if($(e.target).val()!='전체'){
 				location.assign('<%=request.getContextPath()%>/board/boardSort?type='+$(e.target).val());
