@@ -338,33 +338,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public List<MemberExcList> SelectMemberExcDailyList(Connection conn, String dayval) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<MemberExcList> list=new ArrayList();
-		String sql="SELECT * FROM MEM_E_LIST WHERE EXC_WEEK=?";
-		try {
-			pstmt=conn.prepareStatement(sql);
-//			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(1, dayval);;
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				MemberExcList mel=new MemberExcList();
-				mel.setExcNo(rs.getInt("exc_no"));
-				mel.setSets(rs.getInt("sets"));
-				mel.setReps(rs.getInt("reps"));
-				mel.setWeight(rs.getInt("weight"));
-				mel.setExcId(rs.getString("exc_id"));
-				list.add(mel);			
-			}
-					
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return list;
-	}
+
 
 	public List<MemberMenuList> SelectMemberMenuDailyList(Connection conn, String dayval) {
 		PreparedStatement pstmt=null;
@@ -424,10 +398,7 @@ public class MemberDao {
 		return result;
 	}
 
-	public List<DailyExercise> selectMemberDailyExcercise() {
 
-		return null;
-	}
 
 	public List<DailyMenu> selectMemberDailyMenu() {
 		// TODO Auto-generated method stub
@@ -438,4 +409,120 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+///////////////////////////////////daliy log ï¿½ï¿½ï¿½ï¿½
+	public String selectSysdate(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		String sysdate="";
+		String sql="SELECT EXC_DATE FROM DAILY_E WHERE EXC_DATE = TO_CHAR(SYSDATE,'YY-MM-DD')";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) sysdate=rs.getString("exc_date");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return sysdate;
+	}
+
+	public int[] selectExcno(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		int[] excno=new int[100];
+		int index=0;
+		String sql="SELECT EXC_NO FROM MEM_E_LIST WHERE MEMBER_ID='test9' AND EXC_WEEK='ï¿½ï¿½'";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				excno[index]=rs.getInt("exc_no");
+				index++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}		
+		return excno;
+	}
+
+	public void insertExcDaliylog(Connection conn, int i) {
+		PreparedStatement pstmt=null;
+		String sql="INSERT INTO DAILY_E VALUES(SEQ_ELOG_NO.NEXTVAL,?,TO_CHAR(SYSDATE,'YY-MM-DD'),NULL,NULL)";	
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, i);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+	}
+	
+	public List<DailyExercise> selectMemberDailyExcercise(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		System.out.println("¿À³Ä?");
+		List<DailyExercise> list=new ArrayList();
+		String sql="SELECT DISTINCT(exc_date) FROM DAILY_E JOIN MEM_E_LIST USING(EXC_NO) ORDER BY EXC_DATE DESC";
+		try {
+			pstmt=conn.prepareStatement(sql);
+//			pstmt.setString(1, m.getMemberId());
+			//pstmt.setString(1, dayval);;
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				DailyExercise de=new DailyExercise();
+				de.setExcDate(rs.getDate(1));
+				System.out.println(de.getExcDate());
+				list.add(de);			
+			}					
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+
+	public List<MemberExcList> selectExceriseinfo2(Connection conn, String excday) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<MemberExcList> list=new ArrayList();
+		String sql="SELECT * FROM MEM_E_LIST JOIN E_LIST USING(EXC_ID) JOIN DAILY_E USING(EXC_NO) WHERE MEMBER_ID='test9' AND EXC_WEEK=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+//			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(1, excday);;
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				MemberExcList mel=new MemberExcList();
+				mel.setExcNo(rs.getInt("exc_no"));
+				mel.setSets(rs.getInt("sets"));
+				mel.setReps(rs.getInt("reps"));
+				mel.setWeight(rs.getInt("weight"));
+				mel.setExcId(rs.getString("exc_id"));
+				mel.setExcName(rs.getString("exc_name"));
+				list.add(mel);
+				
+			}
+					
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+
+
 }

@@ -35,7 +35,7 @@ public class BoardSearchServlet extends HttpServlet {
 		String searchType = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
 		int totalData = new BoardService().boardSearchCount(searchType,searchKeyword);
-		ServletPageBar p1 = new ServletPageBar(request, totalData, 5, "/board/boardSearch", "&searchKeyword="+searchKeyword+"&searchType="+searchType);
+		PageBar2 p1 = new PageBar2(request, totalData, 5, "/board/boardSearch", "&searchKeyword="+searchKeyword+"&searchType="+searchType);
 		List<Board> list = new BoardService().boardsearch(searchType,searchKeyword,p1.getCPage(),p1.getNumPerpage());
 		request.setAttribute("searchKeyword", searchKeyword);
 		request.setAttribute("searchType", searchType);

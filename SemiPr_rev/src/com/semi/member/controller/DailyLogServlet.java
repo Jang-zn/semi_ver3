@@ -1,11 +1,14 @@
 package com.semi.member.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.*;
+
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+import com.semi.member.daily.model.vo.*;
+import com.semi.member.model.service.*;
 
 /**
  * Servlet implementation class DailyExcServlet
@@ -26,7 +29,21 @@ public class DailyLogServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/member/daily/dailyLog.jsp").forward(request, response);
+		String sysdate =new MemberService().selectSysdate();		
+		int[] excno = new MemberService().selectExcno();
+		System.out.println(excno[1]);
+		System.out.println(Arrays.toString(excno));
+		if(sysdate==null||sysdate.equals("")) {
+			for(int i=0;i<excno.length;i++) {
+				if(excno[i]!=0) {new MemberService().insertDailylog(excno[i]);}
+			}
+			
+		}
+		System.out.println("오지?");
+		List<DailyExercise> list = new MemberService().selectMemberDailyExcercise();
+		System.out.println("오지?");
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/views/member/daily/new_dailyLog.jsp").forward(request, response);
 	}
 
 	/**

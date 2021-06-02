@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
+<%@ page import="com.semi.member.daily.model.vo.DailyExercise, java.util.List" %>
+<%
+	int num=1;
+	List<DailyExercise> list =(List<DailyExercise>)request.getAttribute("list");
+%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/dailyExc.css">
 
@@ -25,27 +30,10 @@
 
 		<div id=dailyExc_content_container class="row">
 			<div id="dailyExc_content" class="col-md-6">
-				<div class="exc_plan_title row">
+				<div class="exc_plan_title row" >
 					<span>(제목)운동 계획 날짜 +요일+ 실행여부로 색표현</span>
 				</div>
-				<div class="exc_plan_list row">
-					<span>운동이름</span><span>reps</span><span>sets</span>
-				</div>
-				<div class="exc_plan_list row">
-					<span>운동이름</span><span>reps</span><span>sets</span>
-				</div>
-				<div class="exc_plan_list row">
-					<span>운동이름</span><span>reps</span><span>sets</span>
-				</div>
-				<div class="exc_plan_list row">
-					<span>운동이름</span><span>reps</span><span>sets</span>
-				</div>
-				<div class="exc_plan_list row">
-					<span>운동이름</span><span>reps</span><span>sets</span>
-				</div>
-				<div class="exc_plan_list row">
-					<span>운동이름</span><span>reps</span><span>sets</span>
-				</div>
+				<div id="excdown"></div>
 				<div class="row">
 					<div class="col-md-5"></div>
 					<div id="complete_exc" class="btn col-md-2">실천 완료</div>
@@ -56,27 +44,11 @@
 				<div class="exc_plan_title row">
 					<span>No</span><span>기록일</span>
 				</div>
-				<div class="exc_list row">
-					<span>No</span><span>운동 계획 날짜 +요일+실행여부로 색표현(이 위치는 항상 오늘날짜)</span>
+				<%for(DailyExercise de:list){ %>
+				<div class="exc_list row excday">
+					<span><%=num %></span><span class="day"><%=de.getExcDate()%></span>실행여부로 색표현(이 위치는 항상 오늘날짜)</span>
 				</div>
-				<div class="exc_list row">
-					<span>No</span><span>운동 계획 날짜 +요일+실행여부로 색표현</span>
-				</div>
-				<div class="exc_list row">
-					<span>No</span><span>운동 계획 날짜 +요일+실행여부로 색표현</span>
-				</div>
-				<div class="exc_list row">
-					<span>No</span><span>운동 계획 날짜 +요일+실행여부로 색표현</span>
-				</div>
-				<div class="exc_list row">
-					<span>No</span><span>운동 계획 날짜 +요일+실행여부로 색표현</span>
-				</div>
-				<div class="exc_list row">
-					<span>No</span><span>운동 계획 날짜 +요일+실행여부로 색표현</span>
-				</div>
-				<div class="exc_list row">
-					<span>No</span><span>운동 계획 날짜 +요일+실행여부로 색표현</span>
-				</div>
+				<%num++;} %>
 				<div id="pageBar" class="row">
 					<div class="col-md-3"></div>
 					<div class="col-md-6"><h4>◀ &nbsp1&nbsp &nbsp2&nbsp &nbsp3&nbsp &nbsp4&nbsp
@@ -177,3 +149,27 @@
 	<div class="col-md-1"></div>
 </div>
 <%@ include file="/views/common/footer.jsp"%>
+<script>
+$(".excday").click(e=>{	
+	var week = ['일', '월', '화', '수', '목', '금', '토'];
+	var dayOfWeek = week[new Date($(e.target).children().eq(1).text()).getDay()];
+	console.log(dayOfWeek)
+	$("#excdown").html("");
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/excdailylist",
+		type:"get",
+		data:{
+			excday:dayOfWeek
+			},
+		success:data=>{
+			console.log(data);
+			
+			for(var i=0;i<data.length;i++){
+				let div=$("<div>").attr("class","exc_plan_list row");
+				let span=$("<span>")			
+				$("#excdown").append(div.append(span.html(data[i].excName+" "+data[i].reps+" "+data[i].sets)));
+				}
+			}
+		})
+	})
+</script>

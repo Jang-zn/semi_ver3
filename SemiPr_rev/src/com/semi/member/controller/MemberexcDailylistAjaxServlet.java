@@ -1,27 +1,28 @@
-package com.semi.board.controller;
+package com.semi.member.controller;
 
 import java.io.*;
+import java.text.*;
 import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-import com.semi.board.model.service.*;
-import com.semi.board.model.vo.*;
-import com.semi.common.*;
+import com.google.gson.*;
+import com.semi.member.model.service.*;
+import com.semi.member.model.vo.*;
 
 /**
- * Servlet implementation class Servlet
+ * Servlet implementation class MemberexcDailylistAjaxServlet
  */
-@WebServlet(urlPatterns = { "/board/boardList" })
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/ajax/excdailylist")
+public class MemberexcDailylistAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public MemberexcDailylistAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +31,20 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boardListCount = new BoardService().boardListCount();
-		request.setAttribute("boardListCount",boardListCount);
+		// TODO Auto-generated method stub
+		String excday=request.getParameter("excday");
+		System.out.println(excday);
+
+
+	
+		String memberid=request.getParameter("member_id");
 		
-		PageBar2 sp = new PageBar2(request, boardListCount, 5, "/board/boardList");
+		List<MemberExcList> list = new MemberService().selectExceriseinfo2(excday);
 		
-		request.setAttribute("pageBar",sp.getPageBar());
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(list,response.getWriter());
 		
-		List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
-		request.setAttribute("boardList", list);
-		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
+
 	}
 
 	/**

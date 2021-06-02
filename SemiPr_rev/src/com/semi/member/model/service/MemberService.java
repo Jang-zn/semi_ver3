@@ -92,12 +92,7 @@ public class MemberService {
 		else rollback(conn);		
 		return result;
 	}
-	public List<MemberExcList> SelectMemberExcDailyList(String dayval) {
-		Connection conn = getConnection();
-		List<MemberExcList> list= dao.SelectMemberExcDailyList(conn,dayval);
-		close(conn);		
-		return list;
-	}
+
 	public List<MemberMenuList> SelectMemberMenuDailyList(String dayval) {
 		Connection conn = getConnection();
 		List<MemberMenuList> list= dao.SelectMemberMenuDailyList(conn,dayval);
@@ -118,12 +113,6 @@ public class MemberService {
 		else rollback(conn);		
 		return result;
 	}
-	public List<DailyExercise> selectMemberDailyExcercise() {
-		Connection conn =getConnection();
-		List<DailyExercise> list =dao.selectMemberDailyExcercise();
-		close(conn);
-		return list;
-	}
 	public List<DailyMenu> selectMemberDailyMenu() {
 		Connection conn =getConnection();
 		List<DailyMenu> list =dao.selectMemberDailyMenu();
@@ -136,7 +125,41 @@ public class MemberService {
 		close(conn);
 		return mel;
 	}
+	////////////////////////////////////////////daliy log 
+	
+	
+	
+	public String selectSysdate() {
+		Connection conn =getConnection();
+		String sysdate =dao.selectSysdate(conn);
+		close(conn);
+		return sysdate;
+	}
+	public int[] selectExcno() {
+		Connection conn =getConnection();
+		int[] excno =dao.selectExcno(conn);
+		close(conn);
+		return excno;
+	}
+	public void insertDailylog(int i) {
+		Connection conn=getConnection();
+		dao.insertExcDaliylog(conn,i);
+		commit(conn);
+	}
 
 
+	public List<DailyExercise> selectMemberDailyExcercise() {
+		Connection conn =getConnection();
+		System.err.println("sevicce");
+		List<DailyExercise> list =dao.selectMemberDailyExcercise(conn);
+		close(conn);
+		return list;
+	}
+	public List<MemberExcList> selectExceriseinfo2(String excday) {
+		Connection conn = getConnection();
+		List<MemberExcList> list = dao.selectExceriseinfo2(conn,excday);
+		close(conn);		
+		return list;
+	}
 
 }
