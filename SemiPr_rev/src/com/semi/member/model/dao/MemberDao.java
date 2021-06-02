@@ -2,7 +2,9 @@ package com.semi.member.model.dao;
 
 import static com.semi.common.JdbcTemplate.close;
 
+
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,11 +15,17 @@ import java.util.Properties;
 
 import com.semi.member.exc.model.vo.Exercise;
 import com.semi.member.menu.model.vo.Menu;
+import com.semi.member.model.vo.Member;
 import com.semi.member.model.vo.MemberExcList;
 import com.semi.member.model.vo.MemberMenuList;
 
-public class MemberDao {
 
+
+
+public class MemberDao {
+	
+		private Properties p = new Properties();
+	
 	public int SelectMemberExcListCount(Connection conn, String dayval) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -172,54 +180,83 @@ public class MemberDao {
 		return m;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
-	
+	public int insertMember(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		//String sql="INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,NULL)";
+		int result=0;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			
+			
+			pstmt=conn.prepareStatement(p.getProperty("insertMember"));
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPw());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getName());
+			pstmt.setString(5, m.getNickname());
+			pstmt.setDate(6,new java.sql.Date((m.getBirth()).getTime()));
+//			pstmt.setString(6, new SimpleDateFormat("yy/MM/dd").format(m.getBirth()));
+			pstmt.setString(7, m.getPhone());
+			pstmt.setDouble(8, m.getHeight());
+			pstmt.setDouble(9, m.getWeight());
+			pstmt.setString(10,m.getGender());
+			pstmt.setString(11, m.getProfileImg());
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Member login(Connection conn, String userId, String password) {
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		Member m =null;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			pstmt=conn.prepareStatement(p.getProperty("login"));
+			pstmt.setString(1, userId);
+			pstmt.setString(2, password);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberId(rs.getString("MEMBER_ID"));
+				m.setMemberPw(rs.getString("MEMBER_PW"));
+				m.setEmail(rs.getString("EMAIL"));
+				m.setName(rs.getString("NAME"));
+				m.setNickname(rs.getString("NICKNAME"));
+				m.setBirth(rs.getDate("BIRTH"));
+				m.setPhone(rs.getString("PHONE"));
+				m.setHeight(rs.getDouble("HEIGHT"));
+				m.setWeight(rs.getDouble("WEIGHT"));
+				m.setGender(rs.getString("GENDER"));
+				m.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				m.setProfileImg(rs.getString("PROFILE_IMG"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+
 }
