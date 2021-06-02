@@ -45,10 +45,10 @@ public class MemberexcUpdateEndServlet extends HttpServlet {
 		String msg="";
 		
 		if(result>0) {
-			msg="¼öÁ¤ ¼º°ø";
+			msg="ìˆ˜ì • ì„±ê³µ";
 		
 		}else {
-			msg="¼öÁ¤ ½ÇÆÐ";
+			msg="ìˆ˜ì • ì‹¤íŒ¨";
 		
 		}
 		request.setAttribute("msg", msg);

@@ -40,10 +40,10 @@ public class PageBar {
 		String pageBar = "";
 
 		if (pageNo == 1) {
-			pageBar += "<span>&nbsp[ÀÌÀü]&nbsp</span>";
+			pageBar += "<span>&nbsp[ì´ì „]&nbsp</span>";
 		} else {
 			pageBar += "<a href='" + request.getContextPath() + location + "&cPage=" + (pageNo - 1) + "&numPerpage="
-					+ numPerpage + "'>[ÀÌÀü]</a>";
+					+ numPerpage + "'>[ì´ì „]</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (cPage == pageNo) {
@@ -57,9 +57,9 @@ public class PageBar {
 		}
 
 		if (pageNo > totalPage) {
-			pageBar += "<span>&nbsp[´ÙÀ½]&nbsp</span>";
+			pageBar += "<span>&nbsp[ë‹¤ìŒ]&nbsp</span>";
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + location + "&cPage=" + pageNo + "'>&nbsp[´ÙÀ½]&nbsp</a>";
+			pageBar += "<a href='" + request.getContextPath() + location + "&cPage=" + pageNo + "'>&nbsp[ë‹¤ìŒ]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;
@@ -96,10 +96,10 @@ public class PageBar {
 		String pageBar = "";
 
 		if (pageNo == 1) {
-			pageBar += "<span>&nbsp[ÀÌÀü]&nbsp</span>";
+			pageBar += "<span>&nbsp[ì´ì „]&nbsp</span>";
 		} else {
 			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + (pageNo - 1) + "&numPerpage="
-					+ numPerpage + "'>[ÀÌÀü]</a>";
+					+ numPerpage + "'>[ì´ì „]</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (cPage == pageNo) {
@@ -113,9 +113,9 @@ public class PageBar {
 		}
 
 		if (pageNo > totalPage) {
-			pageBar += "<span>&nbsp[´ÙÀ½]&nbsp</span>";
+			pageBar += "<span>&nbsp[ë‹¤ìŒ]&nbsp</span>";
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "'>&nbsp[´ÙÀ½]&nbsp</a>";
+			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "'>&nbsp[ë‹¤ìŒ]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;

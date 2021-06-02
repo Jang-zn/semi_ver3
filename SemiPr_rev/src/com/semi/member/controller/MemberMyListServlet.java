@@ -33,24 +33,22 @@ public class MemberMyListServlet extends HttpServlet {
 //		HttpSession session=request.getSession();
 //		Member m=(Member)session.getAttribute("member");
 //		
-//		//·Î±×ÀÎ Ã³¸® ºĞ±â
+//		//ë¡œê·¸ì¸ ì²˜ë¦¬ ë¶„ê¸°
 //		
 //		if(m==null) {
-//			//·Î±×ÀÎ ÆäÀÌÁö ÀÌµ¿ ·ÎÁ÷
+//			//ë¡œê·¸ì¸ í˜ì´ì§€ ì´ë™ ë¡œì§
 //			
 //		}else {
-			//¾Æ´Ï¸é ¸¶ÀÌ ¸®½ºÆ® ÆäÀÌÁö ÀÌµ¿
-		///¿îµ¿ ¸ñ·Ï ¸®½ºÆ® ÆäÀÌÂ¡ Ã³¸®
-		
-		//¿äÀÏÀ» Å¬¸¯ÇÏ¸é ±× °ªÀ» °¡Á®¿À°í ±×³É Ã³À½¿¡ µé¾î°¬À»¶© ÇöÀç ¿äÀÏ¿¡ ´ëÇÑ Á¤º¸¸¦ °¡Á®¿È
+			//ì•„ë‹ˆë©´ ë§ˆì´ ë¦¬ìŠ¤íŠ¸ í˜ì´ì§€ ì´ë™
+		///ìš´ë™ ëª©ë¡ ë¦¬ìŠ¤íŠ¸ í˜ì´ì§• ì²˜ë¦¬
 		
 		String time=request.getParameter("time");
-		if(time==null) {time="¾ÆÄ§";}
-		//¾ÆÄ§,Á¡½É,Àú³áÀ» °¡Á®¿È	
+		if(time==null) {time="ì•„ì¹¨";}
+		//ê¸°ë³¸ê°’ìœ¼ë¡œ ì•„ì¹¨,ìš”ì¼ê°€ì ¸ì˜´
 		String dayval = request.getParameter("val");
 		if(dayval==null) {
 	        Calendar calendar = Calendar.getInstance(); 
-	        String []days = {"ÀÏ","¿ù","È­","¼ö","¸ñ","±İ","Åä"};
+	        String []days = {"ì¼","ì›”","í™”","ìˆ˜","ëª©","ê¸ˆ","í† "};
 	        dayval=days[calendar.get(Calendar.DAY_OF_WEEK)-1];
 		}
 		
@@ -59,11 +57,11 @@ public class MemberMyListServlet extends HttpServlet {
 		System.out.println(totalData);
 
 		PageBar pb =new PageBar(request,totalData,5,"/member/myList?val="+dayval);
-		//list°¡Á®¿Ã¶§ memeberid ¿Í ¿äÀÏÀ» °°ÀÌ ³Ñ°ÜÁÜ.
+		//list idê°’
 		System.out.println(pb.getCPage()+" "+pb.getNumPerpage());
 		
 		List<MemberExcList> list =new MemberService().SelectMemberExcList(pb.getCPage(),pb.getNumPerpage(),dayval);	
-		//½Ä´Ü ¸ñ·Ï ¸®½ÃÆ® ÆäÀÌÁö Ã³¸®
+		//ì‹ë‹¨ ë¦¬ìŠ¤íŠ¸
 		/* ~~~~~~~~~~~~~~~~~~~~~~~~~
 		 * 
 		 * 
@@ -71,7 +69,7 @@ public class MemberMyListServlet extends HttpServlet {
 		int totalData2=new MemberService().SelectMemberMenuListCount(dayval);
 		
 		PageBar2 pb2 =new PageBar2(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
-		//memberid,¿äÀÏ,½Ã°£À» ³Ñ°ÜÁÜ 
+		//memberid, ìš”ì¼ ,ì‹œê°„ 
 		List<MemberMenuList> list2 =new MemberService().SelectMemberMenuList(pb2.getCPage(),pb.getNumPerpage(),dayval,time);
 	
 		request.setAttribute("time", time);
@@ -82,7 +80,7 @@ public class MemberMyListServlet extends HttpServlet {
 		request.setAttribute("list2", list2);
 		
 		
-		request.getRequestDispatcher("/views/member/plan/new_memberMyList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/plan/old_memberMyList.jsp").forward(request, response);
 		}
 //	}
 
