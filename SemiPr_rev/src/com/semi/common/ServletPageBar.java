@@ -35,8 +35,6 @@ public class ServletPageBar {
 
 		int pageEnd = pageNo + pageBarSize - 1;
 
-		System.out.println(cPage + " " + pageNo + " " + pageEnd);
-
 		String pageBar = "";
 
 		if (pageNo == 1) {
@@ -90,8 +88,6 @@ public class ServletPageBar {
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
 
 		int pageEnd = pageNo + pageBarSize - 1;
-
-		System.out.println(cPage + " " + pageNo + " " + pageEnd);
 
 		String pageBar = "";
 

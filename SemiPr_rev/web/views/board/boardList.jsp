@@ -151,8 +151,8 @@
 		<div id="board_pageBar" class="row">
 			<div class="col-md-5"></div>
 			
-			<div class="col-md-2">	<%=pageBar %> </div>
-			<div class="col-md-4"></div>
+			<div class="col-md-3"><%=pageBar %></div>
+			<div class="col-md-3"></div>
 			<div class="col-md-1 btn"
 				onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</div>
 		</div>
