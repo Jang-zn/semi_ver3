@@ -42,14 +42,18 @@ public class PageBar {
 		if (pageNo == 1) {
 			pageBar += "<span>&nbsp[이전]&nbsp</span>";
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + location + "&cPage=" + (pageNo - 1) + "&numPerpage="
+
+			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + (pageNo - 1) + "&numPerpage="
+
 					+ numPerpage + "'>[이전]</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (cPage == pageNo) {
 				pageBar += "<span>&nbsp" + pageNo + "&nbsp</span>";
 			} else {
-				pageBar += "<a href='" + request.getContextPath() + location + "&cPage=" + pageNo + "&numPerpage="
+
+				pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "&numPerpage="
+
 						+ numPerpage +"'>&nbsp" + pageNo
 						+ "&nbsp</a>";
 			}
@@ -59,7 +63,8 @@ public class PageBar {
 		if (pageNo > totalPage) {
 			pageBar += "<span>&nbsp[다음]&nbsp</span>";
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + location + "&cPage=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
+
+			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;
@@ -140,4 +145,6 @@ public class PageBar {
 		return numPerpage;
 	}
 	
+
 }
+

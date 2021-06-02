@@ -1,15 +1,21 @@
 package com.semi.member.model.service;
 
-import static com.semi.common.JdbcTemplate.*;
+import static com.semi.common.JdbcTemplate.close;
+import static com.semi.common.JdbcTemplate.commit;
+import static com.semi.common.JdbcTemplate.getConnection;
+import static com.semi.common.JdbcTemplate.rollback;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.util.List;
 
-import com.semi.member.daily.model.vo.*;
-import com.semi.member.exc.model.vo.*;
-import com.semi.member.menu.model.vo.*;
-import com.semi.member.model.dao.*;
-import com.semi.member.model.vo.*;
+import com.semi.member.exc.model.vo.Exercise;
+import com.semi.member.menu.model.vo.Menu;
+import com.semi.member.model.dao.MemberDao;
+import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.MemberExcList;
+import com.semi.member.model.vo.MemberMenuList;
+
+
 
 public class MemberService {
 	private MemberDao dao= new MemberDao();
@@ -139,4 +145,24 @@ public class MemberService {
 
 
 
+	public int insertMember(Member m) {
+		Connection conn = getConnection();
+		int result = dao.insertMember(conn, m);
+		close(conn);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
+	public Member login(String userId, String password) {
+		Connection conn = getConnection();
+		Member m = dao.login(conn, userId,password);
+		close(conn);
+		return m;
+	}
+
+	
+	
 }

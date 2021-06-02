@@ -67,7 +67,7 @@ public class MemberMyListServlet extends HttpServlet {
 		 * 
 		 */
 		int totalData2=new MemberService().SelectMemberMenuListCount(dayval);
-		
+
 		PageBar2 pb2 =new PageBar2(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
 		//memberid, 요일 ,시간 
 		List<MemberMenuList> list2 =new MemberService().SelectMemberMenuList(pb2.getCPage(),pb.getNumPerpage(),dayval,time);

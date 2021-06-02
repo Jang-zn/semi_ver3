@@ -1,17 +1,34 @@
 package com.semi.member.model.dao;
 
-import static com.semi.common.JdbcTemplate.*;
+import static com.semi.common.JdbcTemplate.close;
 
-import java.sql.*;
-import java.util.*;
 
-import com.semi.member.daily.model.vo.*;
-import com.semi.member.exc.model.vo.*;
-import com.semi.member.menu.model.vo.*;
-import com.semi.member.model.vo.*;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import com.semi.member.exc.model.vo.Exercise;
+import com.semi.member.menu.model.vo.Menu;
+import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.MemberExcList;
+import com.semi.member.model.vo.MemberMenuList;
+
+
+
 
 public class MemberDao {
-
+  
+  public MemberDao () {}
+	
+	private Properties p = new Properties();
+	
 	public int SelectMemberExcListCount(Connection conn, String dayval) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -35,6 +52,9 @@ public class MemberDao {
 		return result;
 	}
 
+  
+  
+  
 	public List<MemberExcList> SelectMemberExcList(Connection conn, int cPage, int numPerpage, String dayval) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -66,6 +86,9 @@ public class MemberDao {
 		}return list;
 	}
 
+  
+  
+  
 	public List<MemberMenuList> SelectMemberMenuList(Connection conn, int cPage2, int numPerpage2, String dayval, String time) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -96,6 +119,9 @@ public class MemberDao {
 		}return list;
 	}
 
+  
+  
+  
 	public int SelectMemberMenuListCount(Connection conn, String dayval) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -118,6 +144,9 @@ public class MemberDao {
 		return result;
 	}
 
+  
+  
+  
 	public Exercise selectExceriseinfo(Connection conn, String excid) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -141,6 +170,9 @@ public class MemberDao {
 		return ex;
 	}
 
+  
+  
+  
 	public Menu selectMenu(Connection conn, String menuid) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -164,10 +196,16 @@ public class MemberDao {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
-		
+		}finally{
+     close(rs);
+     close(pstmt);
+    }
 		return m;
 	}
+
+  
+  
+  
 
 	public int MemberexclistDelete(Connection conn, int excno) {
 		// TODO Auto-generated method stub
@@ -182,11 +220,15 @@ public class MemberDao {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally{
+     close(pstmt);
+    }
 		
 		return result;
 	}
 
+  
+  
 	public int MembermenulistDelete(Connection conn, int menuno) {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt=null;
@@ -200,11 +242,15 @@ public class MemberDao {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
-		
+		}finally{
+     close(pstmt);
+    }
 		return result;
 	}
 
+  
+  
+  //fileList로 수정하셔야될겁니다
 	public String selectExceriseimg(Connection conn, String excid) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -221,11 +267,17 @@ public class MemberDao {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally{
+     close(rs);
+     close(pstmt);
+    }
 		
 		return imgpath;
 	}
 
+  
+  
+    //fileList로 수정하셔야될겁니다
 	public String selectMenuimg(Connection conn, String menuid) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -242,11 +294,16 @@ public class MemberDao {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally{
+      close(rs);
+     close(pstmt);
+    }
 		
 		return imgpath;
 	}
 
+  
+  
 	public MemberExcList selectExercisebyno(Connection conn, int no) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -265,14 +322,15 @@ public class MemberDao {
 				mel.setExcWeek(rs.getString("exc_week"));
 			}
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-		}
-		
+		}finally{
+      close(rs);
+     close(pstmt);
+    }
 		return mel;
-
 	}
 
+  
 	public int updateExcrcise(Connection conn, MemberExcList mel) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -287,13 +345,16 @@ public class MemberDao {
 			pstmt.setInt(5, mel.getExcNo());
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-		}
+		}finally{
+     close(pstmt);
+    }
 		
 		return result;
 	}
 
+  
+  
 	public MemberMenuList selectMenubyno(Connection conn, int no) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -313,11 +374,16 @@ public class MemberDao {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally{
+      close(rs);
+     close(pstmt);
+    }
 		
 		return mml;
 	}
 
+  
+  
 	public int updateMenu(Connection conn, MemberMenuList mml) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -333,11 +399,15 @@ public class MemberDao {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		}
+		}finally{
+     close(pstmt);
+    }
 		
 		return result;
 	}
 
+  
+  
 	public List<MemberExcList> SelectMemberExcDailyList(Connection conn, String dayval) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -366,6 +436,8 @@ public class MemberDao {
 		}return list;
 	}
 
+  
+  
 	public List<MemberMenuList> SelectMemberMenuDailyList(Connection conn, String dayval) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -385,7 +457,6 @@ public class MemberDao {
 				list.add(mml);
 			
 			}
-					
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -394,6 +465,8 @@ public class MemberDao {
 		}return list;
 	}
 
+  
+  
 	public int insertExcDaliylog(Connection conn) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -404,11 +477,15 @@ public class MemberDao {
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally{
+     close(pstmt);
+    }
 		
 		return result;
 	}
 
+  
+  
 	public int insertMenuDaliylog(Connection conn) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -424,11 +501,15 @@ public class MemberDao {
 		return result;
 	}
 
+  
+  
 	public List<DailyExercise> selectMemberDailyExcercise() {
 
 		return null;
 	}
 
+  
+  
 	public List<DailyMenu> selectMemberDailyMenu() {
 		// TODO Auto-generated method stub
 		return null;
@@ -438,4 +519,5 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
