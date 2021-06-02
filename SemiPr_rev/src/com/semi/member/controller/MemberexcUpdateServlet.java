@@ -6,21 +6,21 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-import com.google.gson.*;
-import com.semi.member.menu.model.vo.*;
+import com.semi.member.exc.model.vo.*;
 import com.semi.member.model.service.*;
+import com.semi.member.model.vo.*;
 
 /**
- * Servlet implementation class MenuselectServlet
+ * Servlet implementation class MemberexcUpdateServlet
  */
-@WebServlet("/ajax/selectmenu")
-public class MenuselectServlet extends HttpServlet {
+@WebServlet("/member/myexclistupdate")
+public class MemberexcUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MenuselectServlet() {
+    public MemberexcUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +30,11 @@ public class MenuselectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String Menuid=request.getParameter("Menuid");
-		Menu m = new MemberService().selectMenu(Menuid);
+		int no=Integer.parseInt(request.getParameter("no"));		
+		MemberExcList mel = new MemberService().selectExercisebyno(no);
+		request.setAttribute("exc", mel);		
+		request.getRequestDispatcher("/views/member/plan/memberexcMylistUpdate.jsp").forward(request, response);
 		
-		response.setContentType("application/json;charset=utf-8");
-		new Gson().toJson(m,response.getWriter());
 	}
 
 	/**

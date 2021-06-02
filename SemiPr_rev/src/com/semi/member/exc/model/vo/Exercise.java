@@ -10,8 +10,8 @@ public class Exercise {
 	private String excVideo;
 	private List<String> fileList;
 	
-	
-	
+
+
 	public Exercise() {
 	
 	}
@@ -72,6 +72,7 @@ public class Exercise {
 
 	public void setFileList(List<String> fileList) {
 		this.fileList = fileList;
+
 	}
 	
 	
