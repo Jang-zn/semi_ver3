@@ -257,4 +257,32 @@ public class MemberDao {
 		return m;
 	}
 
+	public int emailDuplication(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		int result =0;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+	
+		try {
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("emailDuplication"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				
+				result=rs.getInt(1);
+				System.out.println(rs.getInt(1));
+			}
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
 }
