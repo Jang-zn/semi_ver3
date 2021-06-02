@@ -12,6 +12,7 @@
 <body>
 	<script>
 		alert('<%=msg%>');
+		window.opener.location.reload();
 		window.close();
 	</script>
 </body>

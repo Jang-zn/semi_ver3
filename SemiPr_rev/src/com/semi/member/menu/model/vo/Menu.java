@@ -1,5 +1,7 @@
 package com.semi.member.menu.model.vo;
 
+import java.util.List;
+
 public class Menu {
 	private String menuId;
 	private String menuSort;
@@ -11,16 +13,16 @@ public class Menu {
 	private int na;
 	private String menuManual;
 	private String menuVideo;
-	private String imgpath;
+	private List<String> fileList;
 
-	
+
 	public Menu() {
 	
 	}
 
 
 	public Menu(String menuId, String menuSort, String menuName, int kcal, int ch, int prot, int fat, int na,
-			String menuManual, String menuVideo,String imgpath) {
+			String menuManual, String menuVideo,List<String> fileList) {
 		super();
 		this.menuId = menuId;
 		this.menuSort = menuSort;
@@ -32,7 +34,7 @@ public class Menu {
 		this.na = na;
 		this.menuManual = menuManual;
 		this.menuVideo = menuVideo;
-		this.imgpath=imgpath;
+		this.fileList=fileList;
 	}
 
 
@@ -136,15 +138,16 @@ public class Menu {
 	}
 
 
-	public String getImgpath() {
-		return imgpath;
+
+	
+	public List<String> getFileList() {
+		return fileList;
 	}
-
-
-	public void setImgpath(String imgpath) {
-		this.imgpath = imgpath;
+	
+	
+	public void setFileList(List<String> fileList) {
+		this.fileList = fileList;
 	}
-
 		
 	
 }
