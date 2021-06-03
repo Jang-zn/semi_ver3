@@ -62,11 +62,11 @@ public class BoardUpdateEndServlet extends HttpServlet {
 				
 				
 			}
-			else if(mr.getFilesystemName("upload"+i)==null&&mr.getFilesystemName("oldfile"+i)==null) {
+			/*else if(mr.getFilesystemName("upload"+i)==null&&mr.getFilesystemName("oldfile"+i)==null) {
 				File del = new File(path+mr.getParameter("oldfileR"+i));
 				del.delete();
 				new BoardService().deleteFile(mr.getParameter("oldfileR"+i));
-			}
+			}*/
 		}
 		String msg ="";
 		String loc ="";

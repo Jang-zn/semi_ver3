@@ -1,15 +1,18 @@
 package com.semi.board.controller;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.*;
-import javax.servlet.annotation.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.semi.board.model.service.*;
-import com.semi.board.model.vo.*;
-import com.semi.common.*;
+import com.semi.board.model.service.BoardService;
+import com.semi.board.model.vo.Board;
+import com.semi.common.PageBar;
 
 /**
  * Servlet implementation class SortBoardServlet
@@ -34,7 +37,7 @@ public class SortBoardServlet extends HttpServlet {
 
 		
 		int sortBoardCount = new BoardService().sortBoardListCount(type);
-		ServletPageBar pagebar = new ServletPageBar(request,sortBoardCount,5,"/board/boardSort","&type="+type); 
+		PageBar pagebar = new PageBar(request,sortBoardCount,5,"/board/boardSort","&type="+type); 
 		
 		List<Board> list = new BoardService().sortBoardList(type,pagebar.getCPage(),pagebar.getNumPerpage());
 		
@@ -52,7 +55,6 @@ public class SortBoardServlet extends HttpServlet {
 		
 			fileyumu.add(result!=0?false:true);
 		};
-		System.out.println(pagebar.getPageBar());
 		request.setAttribute("fileyumu", fileyumu); 
 		
 		request.setAttribute("boardListCount", sortBoardCount);
