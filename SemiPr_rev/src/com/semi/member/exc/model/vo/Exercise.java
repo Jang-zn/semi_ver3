@@ -1,23 +1,29 @@
 package com.semi.member.exc.model.vo;
 
+import java.util.List;
+
 public class Exercise {
 	private String excId;
 	private String excSort;
 	private String excName;
 	private String excManual;
 	private String excVideo;
+	private List<String> fileList;
 	
+
+
 	public Exercise() {
 	
 	}
 
-	public Exercise(String excId, String excSort, String excName, String excManual, String excVideo) {
+	public Exercise(String excId, String excSort, String excName, String excManual, String excVideo, List<String> fileList) {
 		super();
 		this.excId = excId;
 		this.excSort = excSort;
 		this.excName = excName;
 		this.excManual = excManual;
 		this.excVideo = excVideo;
+		this.fileList = fileList;
 	}
 
 	public String getExcId() {
@@ -58,6 +64,15 @@ public class Exercise {
 
 	public void setExcVideo(String excVideo) {
 		this.excVideo = excVideo;
+	}
+
+	public List<String> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(List<String> fileList) {
+		this.fileList = fileList;
+
 	}
 	
 	

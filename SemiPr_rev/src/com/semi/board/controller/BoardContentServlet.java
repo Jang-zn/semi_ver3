@@ -30,11 +30,10 @@ public class BoardContentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		int no = Integer.parseInt(request.getParameter("no"));
 		int boardListCount = new BoardService().boardListCount();
 		
 		
-		int no = Integer.parseInt(request.getParameter("no"));
 		
 		boolean readFlag=false;
 	      String boardReadNo="";
@@ -61,16 +60,30 @@ public class BoardContentServlet extends HttpServlet {
 	      
 	      
 	      Board b = new BoardService().boardContent(no,readFlag);
+	      String[] list2 = new BoardService().selectBoardfile(no);
 	      request.setAttribute("boardListCount",boardListCount);
 	      request.setAttribute("board", b);
 	      
 	      PageBar sp = new PageBar(request, boardListCount, 5, "/board/boardList");
 		  request.setAttribute("pageBar",sp.getPageBar());
 		  List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
+			List<Boolean> fileyumu = new ArrayList();
+			for(Board bb : list) {
+				int result = new BoardService().fileyumu(bb.getContentNo());
+			
+				fileyumu.add(result!=0?false:true);
+			};
+			
+			request.setAttribute("fileyumu", fileyumu); 
+		  
 		  request.setAttribute("boardList", list);
-		  
-		  
-		  
+		  request.setAttribute("selectBoardFile", list2);
+		  	
+		  //댓글
+		  List<Reply> re = new BoardService().commentList(no);
+		  int commentCount = new BoardService().commentCount(no);
+		  request.setAttribute("commentList", re);
+		  request.setAttribute("commentCount", commentCount);
 		  request.getRequestDispatcher("/views/board/boardContent.jsp").forward(request, response);
 	}
 

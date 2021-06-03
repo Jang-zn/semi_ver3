@@ -7,18 +7,18 @@ public class Gallary {
 	private Date gallaryDate;
 	private String memberId;
 	private String writer;
-	private String comment;
+	private String content;
 	private String shareCheck="N";
 	
 	public Gallary() {}
 
-	public Gallary(int galNo, Date gallaryDate, String memberId, String writer, String comment, String shareCheck) {
+	public Gallary(int galNo, Date gallaryDate, String memberId, String writer, String content, String shareCheck) {
 		super();
 		this.galNo = galNo;
 		this.gallaryDate = gallaryDate;
 		this.memberId = memberId;
 		this.writer = writer;
-		this.comment = comment;
+		this.content = content;
 		this.shareCheck = shareCheck;
 	}
 
@@ -54,12 +54,12 @@ public class Gallary {
 		this.writer = writer;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getContent() {
+		return content;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String getShareCheck() {

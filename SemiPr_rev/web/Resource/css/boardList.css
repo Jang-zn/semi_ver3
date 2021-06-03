@@ -12,7 +12,9 @@
 	display: flex;
 }
 
-
+#board_head>ul>li, #board_body>ul>li {
+	margin: 0.3%;
+}
 
 #content_count {
 	padding: 0.5%;
@@ -24,22 +26,28 @@
 }
 
 
-.board_sort {
+.board_sort,.board_type {
+	width: 5%;
 
+
+.board_sort {
 	text-align: center;
 	align-self: center;
 }
 
 .board_title {
+	width: 65%;
 	display: flex;
 }
 
 .board_content_info {
+	width: 10%;
 	align-self: center;
 	text-align: center;
 }
 
 div.board_file_img {
+	width: 3%;
 }
 
 div.board_file_img>img {
@@ -49,4 +57,11 @@ div.board_file_img>img {
 
 #board_pageBar {
 	text-align: center;
+
+	margin: 1%;
+}
+#board_pageBar>a {
+	color:black;
+
+
 }

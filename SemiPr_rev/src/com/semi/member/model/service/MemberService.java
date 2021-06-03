@@ -46,6 +46,7 @@ public class MemberService {
 	public Exercise selectExceriseinfo(String excid) {
 		Connection conn = getConnection();
 		Exercise ex= dao.selectExceriseinfo(conn,excid);
+		ex.setImgpath(dao.selectExceriseimg(conn,excid));
 		close(conn);		
 		return ex;
 		
@@ -53,9 +54,97 @@ public class MemberService {
 	public Menu selectMenu(String menuid) {
 		Connection conn = getConnection();
 		Menu m= dao.selectMenu(conn,menuid);
+		m.setImgpath(dao.selectMenuimg(conn,menuid));
 		close(conn);		
 		return m;
 	}
+	public int MemberexclistDelete(int excno) {
+		Connection conn =getConnection();
+		int result =dao.MemberexclistDelete(conn,excno);
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		return result;
+	}
+	public int MembermenulistDelete(int menuno) {
+		Connection conn =getConnection();
+		int result =dao.MembermenulistDelete(conn,menuno);
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		return result;
+	}
+	public MemberExcList selectExercisebyno(int no) {
+		Connection conn = getConnection();
+		MemberExcList mel= dao.selectExercisebyno(conn,no);
+		close(conn);		
+		return mel;
+	}
+	public int updateExcrcise(MemberExcList mel) {
+		Connection conn =getConnection();
+		int result =dao.updateExcrcise(conn,mel);
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		return result;
+	}
+	public MemberMenuList selectMenubyno(int no) {
+		Connection conn = getConnection();
+		MemberMenuList mml= dao.selectMenubyno(conn,no);
+		close(conn);		
+		return mml;
+	}
+	public int updateMenu(MemberMenuList mml) {
+		Connection conn =getConnection();
+		int result =dao.updateMenu(conn,mml);
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		return result;
+	}
+	public List<MemberExcList> SelectMemberExcDailyList(String dayval) {
+		Connection conn = getConnection();
+		List<MemberExcList> list= dao.SelectMemberExcDailyList(conn,dayval);
+		close(conn);		
+		return list;
+	}
+	public List<MemberMenuList> SelectMemberMenuDailyList(String dayval) {
+		Connection conn = getConnection();
+		List<MemberMenuList> list= dao.SelectMemberMenuDailyList(conn,dayval);
+		close(conn);		
+		return list;
+	}
+	public int insertExcDaliylog() {
+		Connection conn =getConnection();
+		int result =dao.insertExcDaliylog(conn);
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		return result;
+	}
+	public int insertMenuDaliylog() {
+		Connection conn =getConnection();
+		int result =dao.insertMenuDaliylog(conn);
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		return result;
+	}
+	public List<DailyExercise> selectMemberDailyExcercise() {
+		Connection conn =getConnection();
+		List<DailyExercise> list =dao.selectMemberDailyExcercise();
+		close(conn);
+		return list;
+	}
+	public List<DailyMenu> selectMemberDailyMenu() {
+		Connection conn =getConnection();
+		List<DailyMenu> list =dao.selectMemberDailyMenu();
+		close(conn);
+		return list;
+	}
+	public MemberExcList selectmel(String admin) {
+		Connection conn =getConnection();
+		MemberExcList mel =dao.selectmel(conn,admin);
+		close(conn);
+		return mel;
+	}
+
+
+
 	public int insertMember(Member m) {
 		Connection conn = getConnection();
 		int result = dao.insertMember(conn, m);
@@ -82,4 +171,6 @@ public class MemberService {
 	}
 	
 
+	
+	
 }

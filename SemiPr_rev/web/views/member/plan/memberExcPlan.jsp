@@ -1,73 +1,142 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "/views/common/header.jsp"%>
+<%@ page import ="com.semi.member.exc.model.vo.Exercise"%>
+<%@ page import ="com.semi.member.model.vo.Member"%>
+<%@ page import ="java.util.List" %>
+<%
+List<Exercise> list =(List<Exercise>)request.getAttribute("excList");
+Member m = (Member)session.getAttribute("loginMember");
+String pageBar = (String)request.getAttribute("pageBar");
+%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberExcPlan.css">
-	<div id="sub_change">
-        <button>운동 List</button>
-        <button>나만의 운동 등록</button>
-        <button>운동 등록하기(ADMIN)</button>
+	<br>
+	<div class=row>
+		<div class="col-md-1"></div>
+		<div id="sub_change" class="col-md-10">
+		        <div class="btn col-md-2">운동 List</div>
+		        <div class="btn col-md-2">나만의 운동 등록</div>
+		        <div class="btn col-md-2">운동 등록하기(ADMIN)</div>
+    	</div>
     </div>
-    <div id="list_container">
-        <div id="exc_list">
-            <div id="sort_container">
-                <select>
-                    <option id="chest" name="chest" value="가슴">가슴</option>
-                    <option id="back" name="back" value="등">등</option>
-                    <option id="lowerbody" name="lowerbody" value="하체">하체</option>
-                </select>
-                <button>인기 운동</button>
-            </div>
-            <div id="sort_list">
-                <ul>
-                    <li class="list">111</li>
-                    <li class="list">111</li>
-                    <li class="list">111</li>
-                    <li class="list">111</li>
-                    <li class="list">111</li>
-                    <li class="list">111</li>
-                    <li class="list">111</li>
-                </ul>
-            </div>
-        </div>
-        <div id="exc_list_info">
-            <div id="exc_name">대충 운동이름</div>
-            <div id="exc_select">
-                <div id="exc_img"><img src=""></div>
-                <div id="exc_submit">
-                    <form action="" method="post">
-                        <select name="week">
-                            <option value="월">월</option>
-                            <option value="화">화</option>
-                            <option value="수">수</option>
-                            <option value="목">목</option>
-                            <option value="금">금</option>
-                            <option value="토">토</option>
-                            <option value="일">일</option>
-                        </select><br>
-                        <input type="number" name="weight" placeholder="kg"><br>
-                        <input type="number" name="reps" placeholder="횟수"><br>
-                        <input type="number" name="sets" placeholder="세트수"><br>
-                        <input type="submit" onclick="" value="등록하기">
-                    </form>
-                </div>
-            </div>
-            <div id="exc_detail_info_container">
-                <p>대충 운동정보</p>
-                <p>1</p>
-                <p>1</p>
-                <p>1</p>
-                <p>1</p>
-                <p>1</p>
-                <p>1</p>
-                <p>1</p>
-                <p>1</p>
-                <p>1</p>
-                <div id="exc_video">
-                    <a href="">대충 영상링크</a><br>
-                    아니면 영상 띄우기
-                </div>
-                <a href="">대충 추가 정보 링크</a>
-            </div>
-        </div>
+    
+    <div class=row>
+    	<div class="col-md-1"></div>
+	    <div id="list_container" class="col-md-10">
+	        <div id="exc_list" class="col-md-5">
+	            <div id="sort_container" class="row">
+	                <div class="col-md-3">
+	                	<select id="excSort">
+	                		<option>분류 선택</option>
+		                    <option value="상체">- 상체 -</option>
+		                    <option value="하체">- 하체 -</option>
+	                	</select>
+	                </div>
+	                <div class="btn col-md-2">인기 운동</div>
+	            </div>
+	            <br>
+	            
+	            <%for(Exercise e : list){ %>
+	            	<div id="sort_list" class="row clickcheck">
+	            		<div class="border col-md-2 listimgbox"><img src="<%=request.getContextPath()%>/upload/excList/<%=e.getFileList().get(0)%>"></div>
+	            		<!-- Exercise에 요약정보 row 추가해줘야됨 -->
+	            		<div id="exc_box" class="border col-md-10" style="padding-top:1%;padding-bottom:1%; ">
+	            			<div id="exc_box_name" class="col-md-12"><%=e.getExcName() %></div>
+	            			<div id="exc_box_info" class="col-md-12"><%=e.getExcManual()%></div>
+	            			<div id="exc_box_sort" class="col-md-12"><%=e.getExcSort() %></div>
+	            		</div>
+	            	</div>
+	            <%} %>
+	            <div id="sort_list" class="row">
+	            	<div id="pageBar" class="row" style="text-align:center;">
+	            		<%=pageBar%>
+	            	</div>
+	            </div>
+	            
+	        </div>
+	        <div id="exc_list_info" class="col-md-7">
+	        
+	        <!-- Ajax 적용영역 -->
+	            <div id="exc_name" class="row"><%=list.get(0).getExcName()%></div>
+	            <div id="exc_select" class="row">
+	                <div id="exc_img" class="col-md-8"><img src="<%=request.getContextPath()%>/upload/excList/<%=list.get(0).getFileList().get(0)%>"></div>
+	                <div class="col-md-1"></div>
+	                <div id="exc_submit" class="col-md-3">
+	                    <form action="<%=request.getContextPath()%>/member/excPlan/submit" method="post" onsubmit="return excSubmit();">
+	                        <select name="week">
+	                            <option value="월">월</option>
+	                            <option value="화">화</option>
+	                            <option value="수">수</option>
+	                            <option value="목">목</option>
+	                            <option value="금">금</option>
+	                            <option value="토">토</option>
+	                            <option value="일">일</option>
+	                        </select><br>
+	                        <input type="number" name="weight" placeholder="kg / 불필요시 미입력"><br>
+	                        <input type="number" name="reps" placeholder="횟수" required><br>
+	                        <input type="number" name="sets" placeholder="세트수" required><br>
+	                        <input type="submit" value="등록하기"><br>
+	                        <input id="excName" type="hidden" name="excName">
+	                    </form>
+	                </div>
+	            </div>
+	            <div id="exc_detail_info_container" class="row">
+	            	<%for(int i=1;i<list.get(0).getFileList().size();i++){ %>
+	            		<div class="col-md-12"><img style="width:40%" src="<%=request.getContextPath()%>/upload/excList/<%=list.get(0).getFileList().get(i)%>"></div>
+	            	<%} %>
+	                <div class="col-md-12"><%=list.get(0).getExcManual()%></div>
+	            </div>
+	            <div id="exc_video" class="row">
+					<a href="<%=list.get(0).getExcVideo()%>">참고 영상 : <%=list.get(0).getExcVideo()%></a><br>
+	                <p>아니면 영상 띄우기<p>
+	            </div>
+	        <!-- Ajax 적용영역 --> 
+	            
+	        </div>
+	    </div>
     </div>
+    
+    
+
+<script>
+	$(".clickcheck").click(e=>{
+		let name =$(e.target).parents(".clickcheck").find("#exc_box_name").text();
+		$.ajax({
+			url:"<%=request.getContextPath()%>/ajax/excListClick.do?name="+name,
+			dataType:"json",
+			success:data=>{
+				$("#exc_name").text(data.excName);
+				$("#exc_img>img").attr("src","<%=request.getContextPath()%>/upload/excList/"+data.fileList[0]);
+				for(let i=1;i<data.fileList.length;i++){
+					let div = $("<div>").addClass("col-md-12");
+					let img = $("<img>").attr("src","<%=request.getContextPath()%>/upload/excList/"+data.fileList[i]).attr("style","width:40%");
+					div.append(img);
+					if(i==1){
+						$("#exc_detail_info_container").html(div);
+					}else{
+						$("#exc_detail_info_container").append(div);
+					}
+				}
+				let div = $("<div>").addClass("col-md-12");
+				div.text(data.excManual);
+				$("#exc_video").html($("<a>").attr("href",data.excVideo).text("참고영상 : "+data.excVideo));
+			}
+		});
+	});
+	
+	$("#excSort").change(e=>{
+		let excSort = $(e.target).val();
+		location.assign("<%=request.getContextPath()%>/member/excPlan?numPerpage=10&excSort="+excSort);
+	});
+	
+	// 운동 중복등록시 처리 / 숫자 음수 / 0일때 처리
+	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리
+	
+	const excSubmit=()=>{
+		$("#excName").val($("#exc_name").text());
+		return true;
+	}
+	
+</script>	
+
 <%@ include file = "/views/common/footer.jsp"%>
