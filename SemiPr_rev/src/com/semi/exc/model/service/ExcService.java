@@ -51,9 +51,9 @@ public class ExcService {
 		return result;
 		
 	}
-	public List<Map> planCountExc(String memberId, String date, int length){
+	public Map[] planCountExc(String memberId, String date, int length){
 		Connection conn = getConnection();
-		List<Map> result = dao.planCountExc(conn, memberId, date, length);
+		Map[] result = dao.planCountExc(conn, memberId, date, length);
 		close(conn);		
 		return result;
 		

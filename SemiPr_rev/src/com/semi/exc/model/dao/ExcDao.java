@@ -196,17 +196,16 @@ public class ExcDao {
 	}
 	
 	
-	public List<Map> planCountExc (Connection conn, String memberId, String date, int length){
+	public Map[] planCountExc (Connection conn, String memberId, String date, int length){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Map map = null;
-		List<Map> list = new ArrayList();
+		Map[] list = new Map[length];
 		try {
 			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
 			String sql = p.getProperty("planCountExc").replace("<L>", ""+length);
-			System.out.println(sql);
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, date);
@@ -214,19 +213,18 @@ public class ExcDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 			    map = new HashMap();
-			    System.out.println(rs.getString(2));
-			    int d = Integer.parseInt(rs.getString(2).substring(7));
+			    int d = Integer.parseInt(rs.getString(2).substring(8,10));
 			    map.put("count", rs.getInt(1));
 			    map.put("date", d);
 			    map.put("check", rs.getString(3));
-			    list.add(d-1, map);
+			    list[d-1]= map;
 			}
-			if(list.size()<length) {
-				for(int i=0;i<length;i++) {
-					if(list.get(i)==null) {
-						map = new HashMap();
-						list.add(i, map);
-					}
+			for(int i=0;i<length;i++) {
+				if(list[i]!=null) {
+					
+				}else {
+					map = new HashMap();
+					list[i]= map;
 				}
 			}
 		} catch (Exception e) {
@@ -235,10 +233,8 @@ public class ExcDao {
 			close(rs);
 			close(pstmt);
 			
-			
 		}
 		return list;
-		
 	}
 
 	

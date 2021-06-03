@@ -49,7 +49,7 @@ public class MonthlyTrendPlanServlet extends HttpServlet {
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		List<Map> list = new ExcService().planCountExc(memberId, date, length);
+		Map[] list = new ExcService().planCountExc(memberId, date, length);
 		
 		new Gson().toJson(list,response.getWriter());
 		
