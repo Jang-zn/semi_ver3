@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.semi.statistic.model.service.StatisticService;
 
 /**
@@ -30,11 +32,17 @@ public class WeeklyCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String weekCheck=request.getParameter("weekCheck");
-		System.out.println(weekCheck);
 		response.setContentType("text/html;charset=utf-8");
+//		request.getRequestDispatcher("weeklyTrend.jsp").forward(request, response);
+//		
+		String weekCheck=request.getParameter("weekCheck");
 		String result=new StatisticService().weekMenuCheck(weekCheck);
-		request.getRequestDispatcher("weeklyTrend.jsp").forward(request, response);
+		
+		JSONObject jo=new JSONObject();
+		jo.put("weekCheck", result);
+		
+		response.setContentType("application/jason;charset=utf-8");
+		response.getWriter().print(jo);
 	}
 
 	/**

@@ -119,63 +119,33 @@
 				case '토': weekNum=6; break;
 				case '일': weekNum=7; break;
 			}	 
-			
 			if( weekNum < <%=su%>){ //오늘 날짜가 n요일 이전이라면 -> DB값에 따라 색상 변함
 				
 				//해당 요일 메뉴 계획 달성 여부 체크
 				//요일을 service로 보내야됨
-				
-				<%-- $.ajax({
-					url:"<%=request.getContextPath()%>/ajax/weeklyCheck",
-					type:"post",
-					data:{"weekCheck":weekCheck},
-					dataType:"text",
-					success:function(data){ //해당 요일 달성 여부를 data로 받아옴
-						console.log(data);
-						if(data.equals("Y")){ //달성했을 경우 green
-							$(this).css('background-color','green'); 
-						}else if(data.equals("N")){ //달성하지 못했을 경우 red
-							$(this).css('background-color','red');
-						}else{//체크되지 않았을 경우 yellow
-							$(this).css('background-color','yellow');
-						}
-					},
-					error : function(request,status,error){
-						console.log(request);
-						console.log(status);
-						console.log(error);
-						console.log("--------------------");
-						//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); //에러 출력용
-					}
-				})	 --%>	
-				// -> 조회된 값을 제대로 가져오지 못하고 있는 듯. 확인 필요
-				//경로 확인 필요
-				
 				$.ajax({
 					url:"<%=request.getContextPath()%>/ajax/weeklyCheck",
 					type:"post",
 					data:{"weekCheck":weekCheck},
-					dataType:"text",
-					success:function(data){ //해당 요일 달성 여부를 data로 받아옴
-						console.log(data);
-						if(data.equals("Y")){ //달성했을 경우 green
+					dataType:"json",
+					success:data=>{//해당 요일 달성 여부를 data로 받아옴
+					
+						if(data["weekCheck"]=="Y"){ //달성했을 경우 green
 							$(this).css('background-color','green'); 
-						}else if(data.equals("N")){ //달성하지 못했을 경우 red
+						}else if(data["weekCheck"]=="N"){ //달성하지 못했을 경우 red
 							$(this).css('background-color','red');
 						}else{//체크되지 않았을 경우 yellow
 							$(this).css('background-color','yellow');
 						}
-					},
-					error : function(request,status,error){
+						
+					},error : (request, status, error)=>{
 						console.log(request);
 						console.log(status);
 						console.log(error);
 						console.log("--------------------");
 						//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); //에러 출력용
 					}
-				})
-				
-				
+				});			
 				
 			}else{ //이후라면 -> default 색상
 				$(this).css('background-color','gray');
