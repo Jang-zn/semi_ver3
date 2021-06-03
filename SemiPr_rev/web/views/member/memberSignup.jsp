@@ -17,7 +17,7 @@
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
 		
-	<form action="<%=request.getContextPath()%>/member/memberSignup" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
+	<form name="insertform" action="<%=request.getContextPath()%>/member/memberSignup" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
 
 
 			<!-- content-->
@@ -33,7 +33,7 @@
 					<div class="col-md-12">
 						<span class="box int_id"> <input
 						type="text" id="userId_" name="userId" class="int" maxlength="12" placeholder="아이디"
-						style="width: 100%; height: 100%"></span>
+						style="width: 100%; height: 100%" required></span>
 						<input type="hidden"
 						name="idDuplication" value="idUncheck">
 						 <span class="error_next_box"></span>
@@ -52,7 +52,7 @@
 					</div>
 					<div class="col-md-12">
 						<span class="box int_pass"> <input type="password" id="pswd1" name="password" placeholder="비밀번호"
-					class="int" maxlength="16"> <span
+					class="int" maxlength="16" required> <span
 							id="alertTxt">사용불가</span>
 
 						</span> <span class="error_next_box"></span>
@@ -68,18 +68,18 @@
 					</div>
 					<div class="col-md-12">
 						<span class="box int_pass_check"> <input type="password" 
-							id="pswd2" class="int" maxlength="16">
+							id="pswd2" class="int" maxlength="16" required>
 
 						</span> <span class="error_next_box"></span>
 					</div>
 				</div>
 
-				
+					
 				<!-- EMAIL -->
 				<div class="row">
 					<div class="col-md-12">
 						<h3 class="join_title">
-							<label for="email">본인확인 이메일</label>
+							<label for="email">이메일</label>
 						</h3>
 					</div>
 					<div class="col-md-12">
@@ -87,8 +87,12 @@
 							class="int" maxlength="50" placeholder="이메일입력">
 						</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
 					</div>
+					<div id="email_chk"> </div>
+					<button type="button" id="email-chk" 
+					value="이메일 인증" style="width: 100px; height: 25px" onclick="emailCheck(insertform.email.value);" >이메일 인증</button>
+					
 				</div>
-
+					</form>
 
 
 				<!-- NAME -->
@@ -100,7 +104,7 @@
 					</div>
 					<div class="col-md-12">
 						<span class="box int_name"> <input type="text" id="name" name="name"
-							class="int" maxlength="12">
+							class="int" maxlength="12" required>
 						</span> <span class="error_next_box"></span>
 					</div>
 				</div>
@@ -113,7 +117,7 @@
 						</h3>
 						<span class="box int_Nickname"> <input type="text"
 							id="nickName_" name="nickName" placeholder="닉네임" class="int"
-							maxlength="12">
+							maxlength="12" required>
 						</span> <span class="error_next_box"></span>
 					</div>
 					<button type="button" id="Nick-chk" onclick="fn_duplicateNick();"
@@ -136,13 +140,13 @@
 						<!-- BIRTH_YY -->
 						<div id="bir_yy" class="col-md-4">
 							<span class="box"> <input type="text" id="yy" class="int" name="yy"
-								maxlength="4" placeholder="년(4자)">
+								maxlength="4" placeholder="년(4자)" required>
 							</span>
 						</div>
 
 						<!-- BIRTH_MM -->
 						<div id="bir_mm" class="col-md-4">
-							<span class="box"> <select id="mm" class="sel" name="mm">
+							<span class="box"> <select id="mm" class="sel" name="mm" required>
 									<option>월</option>
 									<option value="01">1</option>
 									<option value="02">2</option>
@@ -163,7 +167,7 @@
 						<!-- BIRTH_DD -->
 						<div id="bir_dd" class="col-md-4">
 							<span class="box"> <input type="text" id="dd" class="int" name="dd"
-								maxlength="2" placeholder="일">
+								maxlength="2" placeholder="일" required>
 							</span>
 						</div>
 
@@ -179,7 +183,7 @@
 						</h3>
 					</div>
 					<div class="col-md-12">
-						<span class="box gender_code"> <select id="gender" name="gender"
+						<span class="box gender_code"> <select id="gender" name="gender" required
 							class="sel">
 								<option>성별</option>
 								<option value="M">남자</option>
@@ -199,7 +203,7 @@
 					</div>
 					<div class="col-md-12">
 						<span class="box int_mobile"> <input type="tel" id="mobile" name="phone"
-							class="int" maxlength="11" placeholder="(-)하이픈 없이 입력">
+							class="int" maxlength="11" placeholder="(-)하이픈 없이 입력" required>
 						</span> <span class="error_next_box"></span>
 					</div>
 				</div>
@@ -212,7 +216,7 @@
 					</div>
 					<div class="col-md-11">
 						<span> <input type="text" id="height" placeholder="키 입력" name="height"
-							maxlength="3"></span>
+							maxlength="3" required></span>
 					</div>
 					<div class="col-md-1">
 						<span class="sta_height">cm</span>
@@ -227,7 +231,7 @@
 						<h3>체중</h3>
 					</div>
 					<div class="col-md-11">
-						<span> <input type="text" id="weight" placeholder="체중 입력" name="weight"
+						<span> <input type="text" id="weight" placeholder="체중 입력" name="weight" required
 							maxlength="3"></span>
 					</div>
 					<div class="col-md-1">
@@ -271,6 +275,50 @@
 <script>
 
 
+
+ function emailCheck(email){
+	console.log(email);
+	let url="emailCheck.jsp?email="+email;
+	open(url,"emailwindow","statusbar=no, scrollbar=no, menubar=no, width=400, height=200");
+	
+	<%-- location.assign("<%=request.getContextPath()%>/member/emailAuth?email="+email); --%>
+		
+	
+}
+
+
+$("#email").blur(function(email){
+	 const email2 = $("#email").val();
+	    if(email2 == ""){
+	        alert("이메일을 입력해 주십시오");
+	        return;
+	    }else{
+	$.ajax({
+		url :"<%=request.getContextPath()%>/member/emailDuplication",
+		type : 'post',
+		dataType:"text",
+		data:{
+			"email":$('#email').val()
+		},
+		success:data=>{
+				console.log(data);
+				
+				if(data=='fail'){
+					$("#email_chk").css('color','red')
+					$("#email_chk").html("사용할 수 없는 이메일입니다.")
+					
+					
+				}else{
+					$("#email_chk").css('color','blue')
+					$("#email_chk").html("사용할 수 있는 이메일입니다.")
+				}
+				
+				}
+			})
+	    }
+	})
+
+var pwMsg = document.querySelector('#alertTxt');
 
 function numberMaxLength(e){
     if(e.value.length > e.maxLength){

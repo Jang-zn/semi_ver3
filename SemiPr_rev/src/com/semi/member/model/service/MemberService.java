@@ -153,12 +153,13 @@ public class MemberService {
 	public int insertMember(Member m) {
 		Connection conn = getConnection();
 		int result = dao.insertMember(conn, m);
-		close(conn);
+		
 		if(result>0) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
+		close(conn);
 		return result;
 	}
 	public Member login(String userId, String password) {
@@ -167,6 +168,13 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	public int emailDuplication(String email) {
+		Connection conn = getConnection();
+		int result = dao.emailDuplication(conn,email);
+		close(conn);
+		return result;
+	}
+	
 
 	
 	

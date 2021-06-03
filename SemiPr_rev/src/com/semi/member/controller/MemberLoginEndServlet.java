@@ -54,7 +54,7 @@ public class MemberLoginEndServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 		}else {
 			String msg="아이디 비밀번호가 일치하지 않습니다.";
-			String loc="/";
+			String loc="/views/member/memberLogin.jsp";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			

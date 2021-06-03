@@ -520,7 +520,36 @@ public class MemberDao {
 		return null;
 	}
 
-	public int insertMember(Connection conn, Member m) {
+
+	public int emailDuplication(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		int result =0;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+	
+		try {
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("emailDuplication"));
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				
+				result=rs.getInt(1);
+				System.out.println(rs.getInt(1));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+  		return result;
+	}  
+  
+  
+  
+    
+    	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
 		//String sql="INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,NULL)";
 		int result=0;
@@ -590,14 +619,15 @@ public class MemberDao {
 				m.setProfileImg(rs.getString("PROFILE_IMG"));
 			}
 		}catch(SQLException e) {
-			e.printStackTrace();
+    			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
-		
-		return m;
-	}
+ 		return m;
+	}   
+    
+    
 
 
 	public Member login(Connection conn, String userId, String password) {
@@ -640,6 +670,4 @@ public class MemberDao {
 		
 		return m;
 	}
-	
-	
 }
