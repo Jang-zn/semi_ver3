@@ -1,15 +1,18 @@
 package com.semi.board.controller;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.*;
-import javax.servlet.annotation.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.semi.board.model.service.*;
-import com.semi.board.model.vo.*;
-import com.semi.common.*;
+import com.semi.board.model.service.BoardService;
+import com.semi.board.model.vo.Board;
+import com.semi.common.PageBar;
 
 /**
  * Servlet implementation class SortBoardServlet

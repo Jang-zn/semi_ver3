@@ -7,6 +7,7 @@ import static com.semi.common.JdbcTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.semi.exc.model.dao.ExcDao;
 import com.semi.member.exc.model.vo.Exercise;
@@ -50,7 +51,13 @@ public class ExcService {
 		return result;
 		
 	}
-	
+	public Map[] planCountExc(String memberId, String date, int length){
+		Connection conn = getConnection();
+		Map[] result = dao.planCountExc(conn, memberId, date, length);
+		close(conn);		
+		return result;
+		
+	}
 	
 	
 }
