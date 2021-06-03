@@ -33,6 +33,7 @@
 				<div class="col-md-11">
 					<input type="text" id="write_title" name="title"
 						placeholder="제목을 입력하세요" required style="width: 100%;" value="<%=b.getTitle()%>">
+					<!-- 임의로 준부분  -->
 					<input type="hidden" name="writer" value="aaa">
 					<input type="hidden" name="memberId" value="aaa">	
 				</div>
@@ -119,10 +120,12 @@
 			imgaddclone.find(".spanstr").remove();
 			$(e.target).parent("div").next().after(imgaddclone);
 				const for1= $(e.target).parent("div").nextUntil("#write_btn_area");
+				console.log(for1);
 				for1.each((i,v)=>{
 					const zz =$(v).find("input").attr("name");
 					if(zz!='upload'+i){
 						$(v).find("input[type=file]").attr("name","upload"+i);
+						$(v).find("input[type=hidden]").attr("name","oldfileR"+i);
 					}
 				})
 			
@@ -136,13 +139,34 @@
 		const bbb=(e)=>{
 			const filecount = $(".filecount").length;
 			if(filecount==1){
+				console.log($(e.target).parent().siblings().find("span").html());
+				$.ajax({
+					url:"<%=request.getContextPath()%>/board/fileD",
+					data:{"deletefile" : $(e.target).parent().siblings().find("span").html()},
+					success:data=>{
+						if(data=="true")
+						alert("파일삭제완료!");
+					}
+				})
+				
 				$(".spanstr").remove();
 				$("input[type=file]").val("");
 				$(e.target).off("click");
 			}else{
 				alert($(e.target).parent().siblings().find("input").attr("name")+"삭제");
+					console.log($(e.target).parent().siblings().find("span").length);
+				if($(e.target).parent().siblings().find("span").length==1){
+					console.log($(e.target).parent().siblings().find("span").html());
+					$.ajax({
+						url:"<%=request.getContextPath()%>/board/fileD",
+						data:{"deletefile" : $(e.target).parent().siblings().find("span").html()},
+						success:data=>{
+							if(data=="true")
+							alert("파일삭제완료!");
+						}
+					})
+				}
 				$(e.target).parent().parent().remove();
-				
 			}
 			
 		}
@@ -150,9 +174,10 @@
     		if($(e.target).val()==""){
     			$(e.target).parent().next().find("span").show();
     		}else{
-    			$(e.target).parent().next(".spanstr").hide();
+    			$(e.target).parent().next(".spanstr").remove();
     		}
     	})
+    	
 		
 
 		

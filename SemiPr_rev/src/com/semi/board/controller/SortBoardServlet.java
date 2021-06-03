@@ -55,7 +55,6 @@ public class SortBoardServlet extends HttpServlet {
 		
 			fileyumu.add(result!=0?false:true);
 		};
-		System.out.println(pagebar.getPageBar());
 		request.setAttribute("fileyumu", fileyumu); 
 		
 		request.setAttribute("boardListCount", sortBoardCount);

@@ -35,7 +35,6 @@ public class PageBar {
 
 		int pageEnd = pageNo + pageBarSize - 1;
 
-		System.out.println(cPage + " " + pageNo + " " + pageEnd);
 
 		String pageBar = "";
 
@@ -96,7 +95,6 @@ public class PageBar {
 
 		int pageEnd = pageNo + pageBarSize - 1;
 
-		System.out.println(cPage + " " + pageNo + " " + pageEnd);
 
 		String pageBar = "";
 

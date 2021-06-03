@@ -30,6 +30,7 @@
 				<div class="col-md-11">
 					<input type="text" id="write_title" name="title"
 						placeholder="제목을 입력하세요" required style="width: 100%;">
+						<!-- 여기에 아이디값,닉네임값 받을것. -->
 					<input type="hidden" name="writer" value="aaa">
 					<input type="hidden" name="memberId" value="aaa">	
 				</div>

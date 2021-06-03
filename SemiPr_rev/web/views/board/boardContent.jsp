@@ -175,7 +175,7 @@
 								<div class="reply_btn col-md-1"><button value ="<%=re.getReplyNo()%>" class="lev1">댓글</button></div>
 								<input type="hidden" value="<%=re.getReplyNo()%>">
 								<!-- 관리자 or 작성자만 수정 삭제 가능하게 -->
-							<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(b.getMemberId())){ %> --%>
+							<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(re.getWriter())){ %> --%>
 								<div class="reply_btn col-md-1 deleteComment" >삭제</div>
 								<div class="reply_btn col-md-1 updateComment">수정</div>
 							<%-- <%} %> --%>
@@ -209,7 +209,7 @@
 							<div class="reply_btn col-md-1"><button  class="lev2" value="<%=re.getReplyNo()%>">댓글</button></div>
 							<input type="hidden" value="<%=re.getReplyNo()%>">
 							<!-- 관리자 or 작성자만 수정 삭제 가능하게 -->
-							<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(b.getMemberId())){ %> --%>
+							<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(re.getWriter())){ %> --%>
 								<div class="reply_btn col-md-1 deleteComment" >삭제</div>
 								<div class="reply_btn col-md-1 updateComment" >수정</div>
 							<%-- <%} %> --%>
@@ -244,7 +244,7 @@
 							<div class="col-md-9"></div>
 							<input type="hidden" value="<%=re.getReplyNo()%>">
 							<!-- 관리자 or 작성자만 수정 삭제 가능하게 -->
-							<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(b.getMemberId())){ %> --%>
+							<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(re.getWriter())){ %> --%>
 								<div class="reply_btn col-md-1 deleteComment" >삭제</div>
 								<div class="reply_btn col-md-1 updateComment">수정</div>
 							<%-- <%} %> --%>
@@ -263,6 +263,7 @@
 					<div class="reply_write_btn">
 						<input type="submit" value="댓글 등록">
 					</div>
+					<!-- 임의로 준 부분 -->
 					<input type="hidden" name="userId" value="aaa"> 
 					<input type="hidden" name="boardNo" value="<%=b.getContentNo()%>">
 					<input type="hidden" name="replyNoRef" value="0">
