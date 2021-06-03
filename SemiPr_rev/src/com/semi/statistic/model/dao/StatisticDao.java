@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -88,19 +89,101 @@ public class StatisticDao {
 		}return list;
 	}
 	
+	public String weekExcCheck(Connection conn, String weekCheck) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String result="";
+		
+		Calendar today=Calendar.getInstance();
+		int su=today.get(Calendar.DAY_OF_WEEK)-1;
+		int weekNum=0;
+		switch(weekCheck){
+			case "월": weekNum=1; break;
+			case "화": weekNum=2; break;
+			case "수": weekNum=3; break;
+			case "목": weekNum=4; break;
+			case "금": weekNum=5; break;
+			case "토": weekNum=6; break;
+			case "일": weekNum=7; break;
+		}
+		
+		try {
+			
+			if(weekNum==su) { //오늘날짜 조회시
+				pstmt=conn.prepareStatement(prop.getProperty("todayExcCheck"));
+				pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음		
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					if(rs.getString("max(exc_plan_check)")==null) {
+						result="0";
+					}else {
+						result=rs.getString("max(exc_plan_check)");							
+					}
+				}
+				
+			}else {
+				pstmt=conn.prepareStatement(prop.getProperty("weekExcCheck"));
+				pstmt.setString(1, weekCheck);
+				pstmt.setString(2, "test1");	//아이디 대신 test1 넣었음		
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					result=rs.getString("exc_plan_check");
+				}
+			}
+			System.out.println(weekCheck+" : "+result);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(NullPointerException e){
+			e.printStackTrace();
+			result="";
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+		
+	}
+		
 	public String weekMenuCheck(Connection conn, String weekCheck) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String result="";
+		
+		Calendar today=Calendar.getInstance();
+		int su=today.get(Calendar.DAY_OF_WEEK)-1;
+		int weekNum=0;
+		switch(weekCheck){
+			case "월": weekNum=1; break;
+			case "화": weekNum=2; break;
+			case "수": weekNum=3; break;
+			case "목": weekNum=4; break;
+			case "금": weekNum=5; break;
+			case "토": weekNum=6; break;
+			case "일": weekNum=7; break;
+		}
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("weekMenuCheck"));
-			pstmt.setString(1, weekCheck);
-			pstmt.setString(2, "test1");	//아이디 대신 test1 넣었음		
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				result=rs.getString("menu_plan_check");
-			}
-					
+			
+			if(weekNum==su) { //오늘날짜 조회시
+				pstmt=conn.prepareStatement(prop.getProperty("todayMenuCheck"));
+				pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음		
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					if(rs.getString("max(menu_plan_check)")==null) {
+						result="0";
+					}else {
+						result=rs.getString("max(menu_plan_check)");							
+					}
+				}
+				
+			}else {
+				pstmt=conn.prepareStatement(prop.getProperty("weekMenuCheck"));
+				pstmt.setString(1, weekCheck);
+				pstmt.setString(2, "test1");	//아이디 대신 test1 넣었음		
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					result=rs.getString("menu_plan_check");
+				}
+			}	
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}catch(NullPointerException e){

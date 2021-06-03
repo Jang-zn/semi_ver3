@@ -1,7 +1,6 @@
 package com.semi.statistic.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +12,16 @@ import org.json.simple.JSONObject;
 import com.semi.statistic.model.service.StatisticService;
 
 /**
- * Servlet implementation class WeeklyCheckServlet
+ * Servlet implementation class WeeklyExcCheckServlet
  */
-@WebServlet("/ajax/weeklyMenuCheck")
-public class WeeklyCheckServlet extends HttpServlet {
+@WebServlet("/ajax/weeklyExcCheck")
+public class WeeklyExcCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WeeklyCheckServlet() {
+    public WeeklyExcCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +35,7 @@ public class WeeklyCheckServlet extends HttpServlet {
 		response.setContentType("application/jason;charset=utf-8");
 					
 		String weekCheck=request.getParameter("weekCheck");
-		String result=new StatisticService().weekMenuCheck(weekCheck);
+		String result=new StatisticService().weekExcCheck(weekCheck);
 		
 		JSONObject jo=new JSONObject();
 		
@@ -44,7 +43,7 @@ public class WeeklyCheckServlet extends HttpServlet {
 		
 		response.getWriter().print(jo);
 		
-	
+
 	}
 
 	/**

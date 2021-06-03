@@ -70,7 +70,7 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-2">운동</div>
-                    <div class="weeklyLog">
+                    <div id="weeklyExcStatus">
                         <div class="col-md-1"><div class="weeklyExcStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">화</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">수</div></div>
@@ -93,11 +93,6 @@
                         <div class="col-md-1"><div class="weeklyMenuStatus">금</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">일</div></div>
-                        
-                        <!-- #weeklyStatus
-                        	1. 오늘 포함 이후 날짜 -> 연회색
-                        	2. 오늘 이전 날짜 -> 달성 현황에 따라 색상 변경                    
-                         -->
                     </div>                    
 
                     <div class="col-md-3"><div>연속 <%=menuAchieve %>일 달성</div> </div>                    
@@ -106,55 +101,98 @@
             </div>         
         </div>
         <br><br><br>
-	<script>
-		$("div.weeklyMenuStatus").each(function(){
-			var weekNum=0;
-			const weekCheck=$(this).html(); //어느 요일?
-			 switch(weekCheck){
-				case '월': weekNum=1; break;
-				case '화': weekNum=2; break;
-				case '수': weekNum=3; break;
-				case '목': weekNum=4; break;
-				case '금': weekNum=5; break;
-				case '토': weekNum=6; break;
-				case '일': weekNum=7; break;
-			}	 
-			if( weekNum < <%=su%>){ //오늘 날짜가 n요일 이전이라면 -> DB값에 따라 색상 변함
-				
-				//해당 요일 메뉴 계획 달성 여부 체크
-				//요일을 service로 보내야됨
-				$.ajax({
-					url:"<%=request.getContextPath()%>/ajax/weeklyCheck",
-					type:"post",
-					data:{"weekCheck":weekCheck},
-					dataType:"json",
-					success:data=>{//해당 요일 달성 여부를 data로 받아옴
-					
-						if(data["weekCheck"]=="Y"){ //달성했을 경우 green
-							$(this).css('background-color','green'); 
-						}else if(data["weekCheck"]=="N"){ //달성하지 못했을 경우 red
-							$(this).css('background-color','red');
-						}else{//체크되지 않았을 경우 yellow
-							$(this).css('background-color','yellow');
-						}
-						
-					},error : (request, status, error)=>{
-						console.log(request);
-						console.log(status);
-						console.log(error);
-						console.log("--------------------");
-						//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); //에러 출력용
-					}
-				});			
-				
-			}else{ //이후라면 -> default 색상
-				$(this).css('background-color','gray');
-			}
+
+	<script>	
+	$("div.weeklyExcStatus").each(function(){
+		var weekNum=0;
+		const weekCheck=$(this).html(); //어느 요일?
+		 switch(weekCheck){
+			case '월': weekNum=1; break;
+			case '화': weekNum=2; break;
+			case '수': weekNum=3; break;
+			case '목': weekNum=4; break;
+			case '금': weekNum=5; break;
+			case '토': weekNum=6; break;
+			case '일': weekNum=7; break;
+		}	
+		if( weekNum < <%=su%>){ //오늘 포함 이전일 DB값에 따라 색상 변함
 			
-		});
+			//해당 요일 메뉴 계획 달성 여부 체크
+			//요일을 service로 보내야됨
+			$.ajax({
+				url:"<%=request.getContextPath()%>/ajax/weeklyExcCheck",
+				type:"post",
+				data:{"weekCheck":weekCheck},
+				dataType:"json",
+				success:data=>{//해당 요일 달성 여부를 data로 받아옴
+					switch(data["weekCheck"]){
+					case 'Y': $(this).css('background-color','green'); break;//달성했을 경우 green					
+					case 'N': $(this).css('background-color','red'); break; //달성하지 못했을 경우 red
+					default : $(this).css('background-color','yellow'); break;
+					}
+					
+				},error : (request, status, error)=>{
+					console.log(request);
+					console.log(status);
+					console.log(error);
+					console.log("--------------------");
+					//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); //에러 출력용
+				}
+			});			
+			
+		}else{ //이후라면 -> default 색상
+			$(this).css('background-color','gray');
+		}
+		
+	});	
+	
+	$("div.weeklyMenuStatus").each(function(){
+		var weekNum=0;
+		const weekCheck=$(this).html(); //어느 요일?
+		 switch(weekCheck){
+			case '월': weekNum=1; break;
+			case '화': weekNum=2; break;
+			case '수': weekNum=3; break;
+			case '목': weekNum=4; break;
+			case '금': weekNum=5; break;
+			case '토': weekNum=6; break;
+			case '일': weekNum=7; break;
+		}	
+		if( weekNum < <%=su%>){ //오늘 포함 이전일 DB값에 따라 색상 변함
+			
+			//해당 요일 메뉴 계획 달성 여부 체크
+			//요일을 service로 보내야됨
+			$.ajax({
+				url:"<%=request.getContextPath()%>/ajax/weeklyMenuCheck",
+				type:"post",
+				data:{"weekCheck":weekCheck},
+				dataType:"json",
+				success:data=>{//해당 요일 달성 여부를 data로 받아옴
+					switch(data["weekCheck"]){
+					case 'Y': $(this).css('background-color','green'); break;//달성했을 경우 green					
+					case 'N': $(this).css('background-color','red'); break; //달성하지 못했을 경우 red
+					default : $(this).css('background-color','yellow'); break;
+					}
+					
+				},error : (request, status, error)=>{
+					console.log(request);
+					console.log(status);
+					console.log(error);
+					console.log("--------------------");
+					//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); //에러 출력용
+				}
+			});			
+			
+		}else{ //이후라면 -> default 색상
+			$(this).css('background-color','gray');
+		}
+		
+	});	
 	
 	</script>
-        <!-- 일일 계획 --> <!-- ▲DB 확인 필요▲ -->
+	
+	
+        <!-- 일일 계획 -->
         <div class="row">
             <div class="col-md-6">
                 <!-- 운동 -->
@@ -172,7 +210,7 @@
                     	<div class="col-md-3">운동 이름</div>
                     	<div class="col-md-3">reps</div>
                     	<div class="col-md-3">sets</div>
-                    	<div class="col-md-3"></div>
+                    	<div class="col-md-3">weight</div>
                     </div>
 	                    	<!-- 운동 이름은 운동 id로 가져와야 됨 -->
 	                    	
@@ -183,7 +221,7 @@
                     	<div class="col-md-3"><%=m.getExcId() %></div>
                     	<div class="col-md-3"><%=m.getReps() %> reps</div>
                     	<div class="col-md-3"><%=m.getSets()%> sets</div>
-                    	<div class="col-md-3"></div>
+                    	<div class="col-md-3"><%=m.getWeight() %> weight</div>
                     </div>
                     <%
                     	count++;

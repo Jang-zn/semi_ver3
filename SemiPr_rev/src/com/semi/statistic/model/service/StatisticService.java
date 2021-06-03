@@ -25,6 +25,14 @@ public class StatisticService {
 		close(conn);		
 		return list02;
 	}
+	
+	public String weekExcCheck(String weekCheck) {
+		Connection conn = getConnection();
+		String result = dao.weekExcCheck(conn, weekCheck);
+		close(conn);	
+		return result;
+	}
+	
 	public String weekMenuCheck(String weekCheck) {
 		Connection conn = getConnection();
 		String result = dao.weekMenuCheck(conn, weekCheck);
