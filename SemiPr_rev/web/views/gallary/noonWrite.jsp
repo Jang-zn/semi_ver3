@@ -59,7 +59,7 @@
 					<div class="col-md-3 btn">
 						<div class="col-md-1"></div>
 						<div class="col-md-4"><img src="<%=request.getContextPath()%>/Resource/img/btn-check.png"></div>
-						<div class="col-md-5">등록</div>
+						<div class="col-md-5"><button type="submit" id="submit"><img src="<%=request.getContextPath()%>/Resource/img/btn-check.png"><span>등록</span></button></div>
 					</div>
 				</div>
 			</div>
