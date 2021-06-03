@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.semi.member.exc.model.vo.Exercise;
@@ -192,5 +194,52 @@ public class ExcDao {
 		
 		return result;
 	}
+	
+	
+	public List<Map> planCountExc (Connection conn, String memberId, String date, int length){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Map map = null;
+		List<Map> list = new ArrayList();
+		try {
+			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			String sql = p.getProperty("planCountExc").replace("<L>", ""+length);
+			System.out.println(sql);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, date);
+			pstmt.setString(3, date);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+			    map = new HashMap();
+			    System.out.println(rs.getString(2));
+			    int d = Integer.parseInt(rs.getString(2).substring(7));
+			    map.put("count", rs.getInt(1));
+			    map.put("date", d);
+			    map.put("check", rs.getString(3));
+			    list.add(d-1, map);
+			}
+			if(list.size()<length) {
+				for(int i=0;i<length;i++) {
+					if(list.get(i)==null) {
+						map = new HashMap();
+						list.add(i, map);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+			
+		}
+		return list;
+		
+	}
+
 	
 }

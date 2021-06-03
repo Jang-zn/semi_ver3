@@ -1,13 +1,19 @@
 let date = new Date();
+let dates = null;
+let viewYear = null;
+let viewMonth = null; 
+
+
+
 
 // Date 객체 생성
 const renderCalendar = () => {
 
-	const viewYear = date.getFullYear();
-	const viewMonth = date.getMonth();
+	viewYear = date.getFullYear();
+	viewMonth = date.getMonth();
 
 	// year-month 채우기
-	$(".year-month").text(viewYear + "년 " + (viewMonth + 1) + "월");
+	$(".year-month").text(viewYear + "년 " + (viewMonth + 1) + "월" + " 실천 현황");
 
 	// 지난 달 마지막 Date, 이번 달 마지막 Date
 	const prevLast = new Date(viewYear, viewMonth, 0);
@@ -37,22 +43,23 @@ const renderCalendar = () => {
 	}
 
 	// Dates 합치기
-	const dates = prevDates.concat(thisDates, nextDates);
+	dates = prevDates.concat(thisDates, nextDates);
 
 	// Dates 정리
 	const firstDateIndex = dates.indexOf(1);
 	const lastDateIndex = dates.lastIndexOf(TLDate);
 	dates.forEach((date, i) => {
 		const condition = i >= firstDateIndex && i < lastDateIndex + 1
-			? 'this'
+			? 'thism'
 			: 'other';
 
 
 		dates[i] = `<div class="date"><span class="${condition}">${date}</span></div>`;
-		dates[i] = "<div class='date col-md-1'><span class='" + condition + "'>" + date + "</span><div class='col-md-12 eCheck" + condition + "'></div>"
-			+ "<div class='col-md-12 mCheckm" + condition + "'></div>"
-			+ "<div class='col-md-12 mCheckl" + condition + "'></div>"
-			+ "<div class='col-md-12 mCheckd" + condition + "'></div></div>";
+		dates[i] = "<div class='date col-md-1'><span class='" + condition + "'>" + date + "</span>"
+		    +"<div class='col-md-12 eCheck " + condition + "'></div>"
+			+ "<div class='col-md-12 mCheckm " + condition + "'></div>"
+			+ "<div class='col-md-12 mCheckl " + condition + "'></div>"
+			+ "<div class='col-md-12 mCheckd " + condition + "'></div></div>";
 	})
 
 
@@ -70,7 +77,7 @@ const renderCalendar = () => {
 		}
 	}
 
-
+	callPlan();
 }
 
 renderCalendar();

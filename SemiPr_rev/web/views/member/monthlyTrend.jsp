@@ -125,7 +125,6 @@
 
 		<div class="row cheight">
 
-			<div class="col-md-12">이번달 실천 현황</div>
 			<div class="col-md-12">
 			
 			<!-- Calendar Area -->
@@ -163,9 +162,37 @@
 </div>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/calendar.css">
-<script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>
-<script>
 
+<script>
+const callPlan=()=>{
+	let list = $("span.thism");
+	let yymm01=null;
+	if(viewMonth<10){
+		yymm01=viewYear+"/0"+(viewMonth+1)+"/01"
+	}else{
+		yymm01=viewYear+"/"+(viewMonth+1)+"/01"
+	}
+	console.log(list.length);
+	console.log(yymm01);
+	$.ajax({
+		url:"<%=request.getContextPath()%>/member/monthlyTrend/plancall?length="+list.length+"&yymm01="+yymm01,
+		dataType:"json",
+		success:data=>{
+			console.log(data.length);
+			for(let i=0;i<list.length;i++){
+				if(data[i]!=null && data[i].date==$($("span.thism")[i]).text() && data[i].count>0){
+					$($(".eCheck.thism")[i]).text("운동계획");
+					if(data[i].check=="Y"){
+						$($(".eCheck.thism")[i]).attr("style","background-color:green");
+					}else{
+						$($(".eCheck.thism")[i]).attr("style","background-color:red");
+					}
+				}
+			}
+		}		
+	});
+}
 
 </script>
+<script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>
 <%@ include file="/../views/common/footer.jsp"%>
