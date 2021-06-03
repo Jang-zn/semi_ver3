@@ -1,7 +1,6 @@
 package com.semi.gallary.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,24 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import com.semi.common.ServletPageBar;
 import com.semi.gallary.model.service.GallaryService;
 import com.semi.gallary.model.vo.Gallary;
 
-
-
 /**
- * Servlet implementation class GallaryListServlet
+ * Servlet implementation class GallaryUpdateServlet
  */
-@WebServlet("/gallary/list")
-public class GallaryListServlet extends HttpServlet {
+@WebServlet("/gallary/updateGallary")
+public class GallaryUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GallaryListServlet() {
+    public GallaryUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,24 +30,23 @@ public class GallaryListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int totalData = new GallaryService().selectGallaryCount();
-		String location ="/gallary/list";
-		
-		ServletPageBar pb = new ServletPageBar(request,totalData,5,location);
-		
-		request.setAttribute("pageBar",pb.getPageBar());
-		
-		List<Gallary> list=new GallaryService().selectGallaryList(pb.getCPage(),pb.getNumPerpage());
-		
-		request.setAttribute("list", list);
+		// TODO Auto-generated method stub
+		int galNo=Integer.parseInt(request.getParameter("no"));
 		
 		
+		Gallary g =new GallaryService().selectGallary(galNo);
 		
+		request.setAttribute("gallary",g);
 		
-		request.getRequestDispatcher("/views/gallary/noonList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/gallary/noonUpdate.jsp")
+		.forward(request, response);
+	
+		
 	}
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
