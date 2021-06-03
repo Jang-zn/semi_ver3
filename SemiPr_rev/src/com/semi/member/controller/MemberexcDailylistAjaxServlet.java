@@ -33,13 +33,22 @@ public class MemberexcDailylistAjaxServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String excday=request.getParameter("excday");
-		System.out.println(excday);
-
-
-	
-		String memberid=request.getParameter("member_id");
+		System.out.println(excday);	
+		HttpSession session=request.getSession();
+		Member m=(Member)session.getAttribute("logged");	
+		String memberid=m.getMemberId();
+		int[] excarr =new MemberService().selectExcno(excday,memberid);
+		List<MemberExcList> list=new ArrayList(); 
+		for(int i=0;i<excarr.length;i++) {
+			System.out.println(excarr[i]);
+			if(excarr[i]!=0) {
+				MemberExcList mel=new MemberService().selectMemberExcListbyno(excarr[i]); 
+				list.add(mel);
+			}
+		}		
 		
-		List<MemberExcList> list = new MemberService().selectExceriseinfo2(excday);
+		
+
 		
 		response.setContentType("application/json;charset=utf-8");
 		new Gson().toJson(list,response.getWriter());

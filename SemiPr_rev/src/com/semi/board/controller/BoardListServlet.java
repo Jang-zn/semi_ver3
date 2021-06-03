@@ -33,11 +33,23 @@ public class BoardListServlet extends HttpServlet {
 		int boardListCount = new BoardService().boardListCount();
 		request.setAttribute("boardListCount",boardListCount);
 		
-		PageBar2 sp = new PageBar2(request, boardListCount, 5, "/board/boardList");
+
+		PageBar2 sp2 = new PageBar2(request, boardListCount, 5, "/board/boardList");
 		
+		PageBar sp = new PageBar(request, boardListCount, 5, "/board/boardList");
+		System.out.println(sp.getPageBar());
+
 		request.setAttribute("pageBar",sp.getPageBar());
 		
 		List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
+		List<Boolean> fileyumu = new ArrayList();
+		for(Board b : list) {
+			int result = new BoardService().fileyumu(b.getContentNo());
+		
+			fileyumu.add(result!=0?false:true);
+		};
+		
+		request.setAttribute("fileyumu", fileyumu); 
 		request.setAttribute("boardList", list);
 		request.getRequestDispatcher("/views/board/boardList.jsp").forward(request, response);
 	}
