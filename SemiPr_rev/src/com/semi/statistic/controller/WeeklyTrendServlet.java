@@ -37,8 +37,13 @@ public class WeeklyTrendServlet extends HttpServlet {
 		request.setAttribute("list01", list01);
 		List<MemberMenuList> list02=new StatisticService().TodayMemberMenuList();
 		request.setAttribute("list02", list02);
-		request.getRequestDispatcher("/views/member/weeklyTrend.jsp").forward(request, response);
 		
+		int excAchieve=new StatisticService().ExcAchieveCount();
+		request.setAttribute("excAchieve", excAchieve);
+		int menuAchieve=new StatisticService().MenuAchieveCount();
+		request.setAttribute("menuAchieve", menuAchieve);
+		
+		request.getRequestDispatcher("/views/member/weeklyTrend.jsp").forward(request, response);
 		
 		
 	}

@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "/../views/common/header.jsp"%>
 <%@ page import="java.util.Calendar, java.util.List,
- com.semi.member.model.vo.MemberExcList, com.semi.member.model.vo.MemberMenuList" %>
+ com.semi.member.model.vo.MemberExcList, com.semi.member.model.vo.MemberMenuList,
+ com.semi.statistic.model.vo.AchieveCheck"
+ %>
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/weeklyTrend.css">
 <%
 	// 오늘 날짜 생성
@@ -28,7 +30,12 @@
 	List<MemberExcList> excList=(List<MemberExcList>)request.getAttribute("list01");
 	List<MemberMenuList> menuList=(List<MemberMenuList>)request.getAttribute("list02");
 	
-	//주간 현황 가져오기
+	
+	//연속 달성일 받아오기
+	int excAchieve=(int)request.getAttribute("excAchieve");
+	int menuAchieve=(int)request.getAttribute("menuAchieve");
+	//월간 통계 가져오기
+	
 	
 	
 %>
@@ -72,7 +79,7 @@
                         <div class="col-md-1"><div class="weeklyExcStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">일</div></div>
                     </div>
-                    <div class="col-md-3">연속 n일 달성</div>
+                    <div class="col-md-3">연속 <%=excAchieve %>일 달성</div>
                 </div>
             </div>  
             <div class="col-md-12">
@@ -93,9 +100,7 @@
                          -->
                     </div>                    
 
-                    <div class="col-md-3">
-                    	<div>연속 n일 달성</div>  <!-- 회원 DB에 따라 연속 달성일 표시 -->
-                    </div>                    
+                    <div class="col-md-3"><div>연속 <%=menuAchieve %>일 달성</div> </div>                    
                     
                 </div>
             </div>         
@@ -120,6 +125,32 @@
 				//해당 요일 메뉴 계획 달성 여부 체크
 				//요일을 service로 보내야됨
 				
+				<%-- $.ajax({
+					url:"<%=request.getContextPath()%>/ajax/weeklyCheck",
+					type:"post",
+					data:{"weekCheck":weekCheck},
+					dataType:"text",
+					success:function(data){ //해당 요일 달성 여부를 data로 받아옴
+						console.log(data);
+						if(data.equals("Y")){ //달성했을 경우 green
+							$(this).css('background-color','green'); 
+						}else if(data.equals("N")){ //달성하지 못했을 경우 red
+							$(this).css('background-color','red');
+						}else{//체크되지 않았을 경우 yellow
+							$(this).css('background-color','yellow');
+						}
+					},
+					error : function(request,status,error){
+						console.log(request);
+						console.log(status);
+						console.log(error);
+						console.log("--------------------");
+						//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); //에러 출력용
+					}
+				})	 --%>	
+				// -> 조회된 값을 제대로 가져오지 못하고 있는 듯. 확인 필요
+				//경로 확인 필요
+				
 				$.ajax({
 					url:"<%=request.getContextPath()%>/ajax/weeklyCheck",
 					type:"post",
@@ -142,9 +173,8 @@
 						console.log("--------------------");
 						//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); //에러 출력용
 					}
-				})		
-				// -> 조회된 값을 제대로 가져오지 못하고 있는 듯. 확인 필요
-				//경로 확인 필요
+				})
+				
 				
 				
 			}else{ //이후라면 -> default 색상
@@ -154,7 +184,7 @@
 		});
 	
 	</script>
-        <!-- 일일 계획 -->
+        <!-- 일일 계획 --> <!-- ▲DB 확인 필요▲ -->
         <div class="row">
             <div class="col-md-6">
                 <!-- 운동 -->
@@ -168,22 +198,38 @@
                     <%if(excList.isEmpty()){  %>
                     	<div> 오늘 예정된 운동이 없습니다.</div>
                     <%}else{%>
-                    <span>운동이름</span><span>reps</span><span>sets</span>
+                    <div class="row">
+                    	<div class="col-md-3">운동 이름</div>
+                    	<div class="col-md-3">reps</div>
+                    	<div class="col-md-3">sets</div>
+                    	<div class="col-md-3"></div>
+                    </div>
 	                    	<!-- 운동 이름은 운동 id로 가져와야 됨 -->
-                    <%for( MemberExcList m : excList){%>
-                    <span><%=m.getExcId() %></span><span><%=m.getReps() %> reps</span><span><%=m.getSets()%> sets</span>
-                    <%}
+	                    	
+                    <%
+                    int count=0;
+                    for( MemberExcList m : excList){%>
+                    <div class="row">
+                    	<div class="col-md-3"><%=m.getExcId() %></div>
+                    	<div class="col-md-3"><%=m.getReps() %> reps</div>
+                    	<div class="col-md-3"><%=m.getSets()%> sets</div>
+                    	<div class="col-md-3"></div>
+                    </div>
+                    <%
+                    	count++;
+                    	if (count>10) break;                    	
+                    }
                     }%>
                         
 
 
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                         예상 소요 시간
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
                     <div class="col-md-4"></div>
                     <div class="col-md-4"><button onclick="">달성 확인 버튼</button></div>
@@ -193,7 +239,7 @@
                 <!-- 식단 -->
                 <div class="row">
                     <div class="col-md-4">
-                    	<div><%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 </div>
+                    	<div><%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 식단 계획</div>
                     </div>
                 </div>
                 <div class="row">
@@ -201,26 +247,38 @@
                     	<%if(excList.isEmpty()){  %>
 	                    	<div> 오늘 예정된 식단이 없습니다.</div>
 	                    <%}else{%>
-	                    <span>식단이름</span><span>양</span><span>아침/점심/저녁</span>
-		                    	<!-- 식단 이름은 식단 id로 가져와야 됨 -->
-	                    <%for( MemberMenuList m : menuList){%>
-	                    <span><%=m.getMenuId() %></span><span><%=m.getAmount() %> 양</span><span><%=m.getMenuDaytime() %> </span>
-	                    <%}
-	                    }%>
+	                    <div class="row">
+	                    	<div class="col-md-3">식단 이름</div>
+	                    	<div class="col-md-3">양</div>
+	                    	<div class="col-md-3">아침/점심/저녁</div>
+	              		  </div>
+	                    	<!-- 식단 이름은 운동 id로 가져와야 됨 -->
+	                    	
+	                    <%
+	                    int count=0;
+	                    for( MemberMenuList m : menuList){%>
+	                    <div class="row">
+	                    	<div class="col-md-3"><%=m.getMenuId() %></div>
+	                    	<div class="col-md-3"><%=m.getAmount() %> 양</div>
+	                    	<div class="col-md-3"><%=m.getMenuDaytime() %></div>
+	                    </div>
+	                   <%
+	                    	count++;
+	                    	if (count>10) break;                    	
+	                    	}
+	                    }%>  
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
-                     전체 kcal
+                        전체 kcal
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
                     <div class="col-md-4"></div>
                     <div class="col-md-4"><button onclick="">달성 확인 버튼</button></div>
                 </div>
             </div>
-            <br><br><br><br><br><br>
-             <br><br><br><br><br><br>
 
 
             <!-- 주간 통계 -->

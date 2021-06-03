@@ -32,4 +32,18 @@ public class StatisticService {
 		System.out.println(weekCheck+" : "+result);
 		return result;
 	}
+	
+	public int ExcAchieveCount() {
+		Connection conn = getConnection();
+		int count=dao.excAchieveCount(conn);
+		close(conn);
+		return count;
+	}
+	
+	public int MenuAchieveCount() {
+		Connection conn = getConnection();
+		int count=dao.menuAchieveCount(conn);
+		close(conn);
+		return count;
+	}
 }
