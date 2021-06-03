@@ -3,9 +3,7 @@
 <%@ include file="/../views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/monthlyTrend.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/calendar.css">
-<script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>
+
 
 
 <div id="container_progress_trend" class="row">
@@ -137,9 +135,9 @@
 					<div class="header">
 						<div class="year-month"></div>
 						<div class="nav">
-							<button class="nav-btn go-prev">&lt;</button>
-							<button class="nav-btn go-today">Today</button>
-							<button class="nav-btn go-next">&gt;</button>
+							<button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
+						    <button class="nav-btn go-today" onclick="goToday()">Today</button>
+    						<button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
 						</div>
 					</div>
 					<div class="main">
@@ -163,6 +161,11 @@
 	</div>
 	<div class="col-md-1"></div>
 </div>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/Resource/css/calendar.css">
+<script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>
 <script>
+
+
 </script>
 <%@ include file="/../views/common/footer.jsp"%>
