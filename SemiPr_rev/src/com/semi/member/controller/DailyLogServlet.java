@@ -72,18 +72,23 @@ public class DailyLogServlet extends HttpServlet {
 	        String []days = {"일","월","화","수","목","금","토"};
 	        dayval=days[calendar.get(Calendar.DAY_OF_WEEK)-1];
 		}
-		
+		int cPage2;
+		try {
+			cPage2 = Integer.parseInt(request.getParameter("cPage2"));
+		} catch (NumberFormatException e) {
+			cPage2 = 1;
+		}
 		List<MemberExcList> list= new MemberService().selectDailyExclist(dayval,memberid);
 		int totaldata= new MemberService().selectDailyexclistCount(memberid);
 		System.out.println(totaldata);
-		PageBar pb =new PageBar(request, totaldata, 5,"/member/dailyLog");
+		PageBar pb =new PageBar(request, totaldata, 5,"/member/dailyLog","cPage="+cPage2);
 		List<DailyExercise> list2 = new MemberService().selectMemberDailyExcercise(memberid,pb.getCPage(),pb.getNumPerpage()+7);
 		
 		
 		List<MemberMenuList> list3 =new MemberService().selectDailymenulist(dayval,memberid);
 		
 		int totaldata2= new MemberService().selectDailymenulistCount(memberid);
-		PageBar2 pb2 =new PageBar2(request, totaldata, 5,"/member/dailyLog");
+		PageBar2 pb2 =new PageBar2(request, totaldata, 5,"/member/dailyLog","cPage2="+pb.getCPage());
 		List<DailyMenu> list4 =new MemberService().selectMemberDailyMenu(memberid,pb2.getCPage(),pb2.getNumPerpage()+7);
 		request.setAttribute("list", list);
 		request.setAttribute("list2", list2);
