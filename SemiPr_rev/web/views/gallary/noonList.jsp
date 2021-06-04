@@ -5,7 +5,7 @@
 <% 	List<Gallary> list = (List<Gallary>)request.getAttribute("list");
 	String pageBar=(String)request.getAttribute("pageBar");
 	
-	
+	String searchKeyword=request.getParameter("searchKeyword");
 	
 %>		
 	
@@ -29,7 +29,7 @@
 			<div id="n_content_img" class="col-md-12">
 				<img class="content_img" src="">
 			</div>
-			<div id="n_date" class="col-md-12">
+			<div id="n_date" class="col-md-12 noonDate">
 				<p>21.5.26 / xxx님의 기록</p>
 			</div>
 			<div id="n_comment" class="col-md-12">
@@ -49,32 +49,34 @@
 				<div class="col-md-2 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진등록</div>
 				
 				<div class="col-md-10">
-					<form action="" method="GET">
+						<form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="get">
 						<div class="col-md-10">
-							<input type="text" style="width:100%;">
+						<%-- <form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="post"> --%>
+							<input type="text" name="searchKeyword" size="25" placeholder="검색할 내용을 입력하세요 "/>
 						</div>
-						<div class="col-md-2 btn">검색</div>
-						</form>
+						<input type="submit" value="검색"/>
+					</form>
 				</div>
 			</div>
  			<%if(list.isEmpty()){ %>
- 					<div></div>
-	<%}else{
-		for(Gallary g : list) { %>
+ 					<div>등록된 이미지가 없습니다.</div>
+	
 		
 			<div id="n_img_list" class="col-md-12">
-					
-				
-					<div class="row">
+							
+					<div class="row"> 
+					<%}else{
+		for(Gallary g : list) { %>
 						<div class="img_obj col-md-6">
 							<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>"/>
 							<img width="100%" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
-																			
+							<%=g.getGallaryDate() %>																			
 						</div>
-					</div>
+						<% }
+			}%>	
+					</div> 
 			</div>
-			<% }
-			}%>			
+					
 							
 <!-- 						<div class="img_obj col-md-6"></div>
 						
@@ -115,7 +117,7 @@
 	//onclick = cilck
 		$.ajax({
 			url:"<%=request.getContextPath()%>/gallary/getGallaryList",
-			/* type:"post", */
+			type:"post",
 			data:{"gal_no" : gal_no},
 			dataType:"json",
 			success:getNoon,
@@ -125,11 +127,17 @@
 		});				
 	});
 		function getNoon(data){ 	
-			var imgname=data["imgName"];		
-			console.log("imgname:"+imgname);						
+			var imgname=data["imgName"];
+			console.log("imgname:"+imgname);
+ 			var galdate=data["galDate"];
+			console.log(galdate); 
+			
 			 	$(".content_img").attr("src", "<%=request.getContextPath()%>/upload/gallary/"+imgname);			 	
 				$("#comment_area").html(data["content"]);
 				$(".deleteNo").attr("value" ,data["galNo"]);
+				$("#n_date").html(galdate);
+				
+				
 		}
 	
 	
@@ -156,7 +164,7 @@
 			}
 		}
 	
-		
+
 	
 
 </script>

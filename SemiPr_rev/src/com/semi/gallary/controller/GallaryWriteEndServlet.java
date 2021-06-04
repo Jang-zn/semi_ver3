@@ -43,6 +43,7 @@ public class GallaryWriteEndServlet extends HttpServlet {
 		
 		Gallary g = new Gallary();
 		g.setContent(mr.getParameter("content"));
+		
 		String file = mr.getFilesystemName("imgUp");
 		
 		int result = new GallaryService().insertGallary(g);

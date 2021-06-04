@@ -1,20 +1,21 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%
-	Date nowTime = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
-%>
-
-
+<%@page import="com.semi.gallary.model.vo.Gallary"%>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/noonWrite.css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/views/board/editor/js/service/HuskyEZCreator.js"
 	charset="utf-8"></script>
+
+<%
+	Gallary g =(Gallary)request.getAttribute("gallary");
+	
+	
+%>	
+	
+	
+	
 <div class="row">
 	<div class="col-md-1"></div>
 	<div id="n_title" class="col-md-10">
@@ -22,20 +23,17 @@
 	</div>
 	<div class="col-md-1"></div>
 </div>
-<form action="<%=request.getContextPath() %>/gallary/writeEnd" method="post" enctype="multipart/form-data" id="frm">
+<form action="<%=request.getContextPath() %>/gallary/updateGallaryEnd"  method="post" enctype="multipart/form-data" id="frm">
 	<div class="row">
 		<div class="col-md-1"></div>
 
 		<div id="n_content_area" class="col-md-10">
 
 
-
-
-
 			<div id="n_content" class="col-md-6">
 				<div class="col-md-1"></div>s
 				<div id="n_date" class="col-md-5">
-					<input type="text" name="title" value="<%= sf.format(nowTime)%> / xxx님의 기록" readonly
+					<input type="text" name="title" value="21.5.26 "/ xxx님의 기록" readonly
 						style="font-size: 20px; font-weight: bold;">
 				</div>
 				<div class="col-md-2"></div>
@@ -45,7 +43,7 @@
 				</div>
 				<div class="row">
 					<div id="n_content_img" class="col-md-12">
-						<img id="img_preview" src="#">
+						<img id="img_preview" src="<%=request.getContextPath() %>/upload/gallary/<%=g.getImgName()%>">
 					</div>
 				</div>
 			</div>
@@ -55,14 +53,20 @@
 				<br><br>
 				
 				<div id="comment_area" class="row">
-					<textarea name="content" id="ir1" rows="19" cols="100" required> 내용을 입력하세요 </textarea>
+					<input type="hidden" name="galno" value="<%=g.getGalNo() %>" />
+					<textarea name="content" id="ir1" rows="19" cols="100" required><%=g.getContent()%></textarea>
 				</div>
 				
 
 
 				<div id="upload_area" class="row">
 					<div class="col-md-1 btn">+</div>
-					<div class="col-md-10"><input type="file" name="imgUp" id="imgInput"/></div>
+					<div class="col-md-10">					
+						<input type="file" name="imgUp" id="imgInput"/>
+						<span id="fname"><%=g.getImgName() %></span>
+						<input type="hidden" name="oldFile" value="<%=g.getImgName()%>">
+						
+						</div>
 				</div>
 
 				<br>
@@ -82,45 +86,46 @@
 	</div>
 </form>
 
-
 <script type="text/javascript">
-		
-		var oEditors = [];
-		nhn.husky.EZCreator.createInIFrame({
- 		oAppRef: oEditors,
- 		elPlaceHolder: "ir1",
- 		sSkinURI: "<%=request.getContextPath()%>/views/board/editor/SmartEditor2Skin.html",
+
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "ir1",
+		sSkinURI: "<%=request.getContextPath()%>/views/board/editor/SmartEditor2Skin.html",
 		fCreator : "createSEditor2"
-			});
-		
-		$("#submit").click(function(){ 
-			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); 
-			$("#frm").submit(); 
-			})
-			
-		
-			//업로드이미지 미리보기 
-		function readURL(input) {
-			 if (input.files && input.files[0]) {
-			  var reader = new FileReader();
-			  
-			  reader.onload = function (e) {
-			   $('#img_preview').attr('src', e.target.result);  
-			  }
-			  
-			  reader.readAsDataURL(input.files[0]);
-			  }
-			}			 
-			// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행.
-			$("#imgInput").change(function(){
-			   readURL(this);
-			});		
-			
-		
-		
+		});
+ 	$("#submit").click(function(){ 
+		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); 
+		$("#frm").submit(); 
+		})
+
+	//업로드이미지 미리보기 
+function readURL(input) {
+	 if (input.files && input.files[0]) {
+	  var reader = new FileReader();
+	  
+	  reader.onload = function (e) {
+	   $('#img_preview').attr('src', e.target.result);  
+	  }
+	  
+	  reader.readAsDataURL(input.files[0]);
+	  }
+	}			 
+	// 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행.
+	$("#imgInput").change(function(){
+	   readURL(this);
+	});	
+	$("input[type=file]").change(e=>{
+		if($(e.target).val()==""){
+			$("#fname").show();
+		}else{
+			$("#fname").hide();
+		}
+	});
+
+
+
 </script>
-
-
-
 
 <%@ include file="/views/common/footer.jsp"%>

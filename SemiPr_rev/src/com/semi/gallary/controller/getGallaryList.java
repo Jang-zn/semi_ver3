@@ -1,6 +1,9 @@
 package com.semi.gallary.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,11 +38,23 @@ public class getGallaryList extends HttpServlet {
 		Gallary g=new GallaryService().getNoonList(galNo);
 		System.out.println("galNO :" +galNo);
 		System.out.println("img,content " + g.getContent()+""+g.getImgName()+""+g.getGalNo());
+		System.out.println("date :" +g.getGallaryDate());
+		
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+		Date date = new Date();        
+		
+		
+		String galdate=dateFormat.format(g.getGallaryDate());
+		System.out.println("galdate :" +g.getGallaryDate());
 
 		JSONObject jo=new JSONObject();
 		jo.put("imgName", g.getImgName());
 		jo.put("content", g.getContent());
 		jo.put("galNo", g.getGalNo());
+
+		jo.put("galDate", galdate);
+		
 		System.out.println("jo:"+jo);
 		
 		

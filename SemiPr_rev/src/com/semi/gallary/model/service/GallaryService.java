@@ -1,6 +1,7 @@
 package com.semi.gallary.model.service;
 
 
+
 import static com.semi.common.JdbcTemplate.close;
 import static com.semi.common.JdbcTemplate.commit;
 import static com.semi.common.JdbcTemplate.getConnection;
@@ -9,6 +10,7 @@ import static com.semi.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+
 
 import com.semi.gallary.model.dao.GallaryDao;
 import com.semi.gallary.model.vo.Gallary;
@@ -98,5 +100,20 @@ public class GallaryService {
 	return result;
 
 }
+	
+	public List<Gallary> selectSearchGallary(int cPage, int numPerpage,String keyword){
+		Connection conn=getConnection();
+		List<Gallary> list=dao.selectSearchGallary(conn,cPage,numPerpage,keyword);
+		close(conn);
+		return list;
+		
+	}
+	
+	public int selectSearchGallaryCount(String keyword) {
+		Connection conn=getConnection();
+		int result=dao.selectSearchGallaryCount(conn,keyword);
+		close(conn);
+		return result;
+	}
 	
 }

@@ -80,5 +80,4 @@ public class Gallary {
 		this.imgName = ImgName;
 	}
 
-	
 }
