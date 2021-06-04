@@ -54,9 +54,9 @@
 		<div class="col-md-1"></div>
 		<div id="list_title_container" class="col-md-10">
 			<div id="myexc" class="list_title_area col-md-6"
-				style="font-size: 3rem">X 요일 운동계획</div>
+				style="font-size: 3rem"><%=today %>요일 운동계획</div>
 			<div id="mymenu" class="list_title_area col-md-6">
-				<div class="col-md-10" style="font-size: 3rem">X 요일 식단계획</div>
+				<div class="col-md-10" style="font-size: 3rem"><%=today %> 요일 식단계획</div>
 				<div class="col-md-2" style="font-size: 2rem">
 					<select>
 						<option value="아침" <%=time!=null&&time.equals("아침")?"selected":"" %>>아침</option>
@@ -166,7 +166,7 @@
 		location.assign("<%=request.getContextPath()%>/member/myList?val="+dayval+"&time="+daytime);	
 	})
 	
-		$(".excinfocho").click(e=>{	
+	$(".excinfocho").click(e=>{	
 		$("#myExc_info_box").html("");
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/exclist",
@@ -186,7 +186,7 @@
 			})
 		})
 		
-		$(".menuinfocho").click(e=>{	
+	$(".menuinfocho").click(e=>{	
 		$("#myMenu_info_box").html("");
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/selectmenu",
@@ -206,7 +206,7 @@
 			})
 		})
 		
-		$(function(){
+	$(function(){
 		$("input[name=excid]").each((i,v)=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/exclist",
@@ -216,7 +216,7 @@
 				},
 				success:data=>{
 				console.log(data);
-				$(".excimg").eq(i).attr("src",data.imgpath);
+				$(".excimg").eq(i).attr("src",data.fileList[0]);
 				$(".excname").eq(i).html(data.excName);
 							
 					}
@@ -226,18 +226,16 @@
 	
 	$(function(){
 		$("input[name=menuid]").each((i,v)=>{
-			console.log($("input[name=menuid]").eq(i).val())
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/selectmenu",
 			type:"get",
-			data:{
-				
+			data:{		
 				Menuid:$("input[name=menuid]").eq(i).val()
 				},
 				success:data=>{
 					console.log(data)
 					let amount =$(".menuamount").eq(i).text();
-					$(".menuimg").eq(i).attr("src",data.imgpath);
+					$(".menuimg").eq(i).attr("src",data.fileList[0]);
 					$(".menukcal").eq(i).html("kcal:"+Math.ceil((data.kcal)/amount));		
 					$(".menuget").eq(i).html("ch:"+Math.ceil(data.ch/amount))
 					}

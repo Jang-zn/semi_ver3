@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.semi.board.model.service.BoardService;
 import com.semi.board.model.vo.Board;
 import com.semi.common.PageBar;
+import com.semi.common.PageBar2;
 
 /**
  * Servlet implementation class Servlet
@@ -37,7 +38,12 @@ public class BoardListServlet extends HttpServlet {
 		request.setAttribute("boardListCount",boardListCount);
 		
 
+
+		PageBar2 sp2 = new PageBar2(request, boardListCount, 5, "/board/boardList");
+		
 		PageBar sp = new PageBar(request, boardListCount, 5, "/board/boardList");
+		System.out.println(sp.getPageBar());
+
 
 		request.setAttribute("pageBar",sp.getPageBar());
 		

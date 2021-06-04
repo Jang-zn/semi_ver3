@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<%@page import="com.semi.common.PageBar2"%>
+=======
 <%@page import="com.semi.common.PageBar"%>
+>>>>>>> 054fcb51bce8638ea2ade6ac8ddf6ecdedb48781
 <%@page import="com.semi.board.model.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import com.semi.common.ServletPageBar;
+import com.semi.common.PageBar;
 import com.semi.gallary.model.service.GallaryService;
 import com.semi.gallary.model.vo.Gallary;
 
@@ -38,7 +37,7 @@ public class GallaryListServlet extends HttpServlet {
 		int totalData = new GallaryService().selectGallaryCount();
 		String location ="/gallary/list";
 		
-		ServletPageBar pb = new ServletPageBar(request,totalData,5,location);
+		PageBar pb = new PageBar(request,totalData,5,location);
 		
 		request.setAttribute("pageBar",pb.getPageBar());
 		
