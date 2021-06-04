@@ -17,7 +17,7 @@
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
 		
-	<form name="insertform" action="<%=request.getContextPath()%>/member/memberSignup" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
+	<form name="insertform" action="<%=request.getContextPath()%>/member/memberSignup" method="post" onsubmit="return fn_invalidate" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
 
 
 			<!-- content-->
@@ -274,25 +274,31 @@
 	<input type="hidden" name="nickName">
 </form>
 
-<%-- $(document).ready(function() {
-                
-  var test = "${memberVO.me_phone}";
-  var testDate = test.replace
-  
-  $("#me_phone").text(testDate);
- 
-}); --%>
+
 <script>
 
 //아이디 정규표현식
-
+ 	$("#userId_").blur(function(){
+		var userId=$("#userId_").val();
+		console.log(userId);
+		var idPattern = /[a-zA-Z0-9_-]{5,13}/; //아이디 13자리까지 가능
+		if(!idPattern.test(userId)){
+			alert("5~13자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+			
+		}else if(userId.trim()==0){
+			alert("아이디를 입력하세요!");
+		
+		}
+		
+	}); 
 // 비밀번호 정규표현식
 	$("#pswd1").blur(function(){
     	var pw1 = $("#pswd1").val();
+    
     	console.log(pw1);
 		var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
-		if(pw1.trim() == ""){
-			alert("필수정보입니다.");
+		if(pw1.trim().length==0){
+			alert("공백없이 패스워드를 입력하세요.");
 			return;
 		}else if(!pwPattern.test(pw1)){
 			alert("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
