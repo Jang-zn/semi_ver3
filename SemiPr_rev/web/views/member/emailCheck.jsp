@@ -22,7 +22,7 @@ System.out.println(authNum);
 </head>
 <body>
 
-<form method="post" action="" name="emailcheck">
+<form method="post" action="" name="emailcheck" onsubmit="return submitCheck();">
 	<table>
 		<tr>
 			<th colspan="2">인증번호를 입력하세요.</th>
@@ -32,7 +32,7 @@ System.out.println(authNum);
 				<input type="text" name="emailconfirm">
 			</td>
 			<td>
-				<input type="button" value="확인" 
+				<input type="button" value="확인"  id="submit-btn"
                  onclick="confirmemail(emailcheck.emailconfirm.value,
                                                                '<%=authNum%>')">
 			</td>
@@ -47,17 +47,26 @@ function confirmemail(emailconfirm, authNum ){
 	if(emailconfirm != authNum ){
 		alert("인증 실패하였습니다.");
 		emailconfirm.value="";
+		isCertification==false;
 		self.close();
     // 인증코드가 일치하는 경우
 	}else if(emailconfirm==authNum ){
 		alert("인증에 성공하셨습니다.");
 		emailconfirm.value="";
+		isCertification==true;
 		self.close();
 		opener.document.insertform.emailconfirm.value.value=1;
 	}
 }
 
-
+$("#submit-btn").click(function submitCheck(){
+	if(isCertification==false){
+		alert("메일 인증이 완료되지 않았습니다,");
+		return false;
+	}else{
+		true;
+	}
+})
 
 </script>
 
