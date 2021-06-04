@@ -243,10 +243,13 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h3>프로필 사진</h3>
-						<input type="file" id="image" accept="image/*" name="userProfile"
-					onchange="setThumbnail(event);"/>
+						<input type="file" id="image" accept="image/*" name="userProfile"/>
+					<!-- onchange="setThumbnail(event);" -->
+
 					</div>
 					<div id="image_container"></div>
+					<!-- <button class="btn-delete">삭제</button> -->
+					<div id="btn-container"></div>
 				</div>
 			
 
@@ -275,7 +278,7 @@
 <script>
 
 
-
+	//이메일 인증 창
  function emailCheck(email){
 	console.log(email);
 	let url="emailCheck.jsp?email="+email;
@@ -286,7 +289,7 @@
 	
 }
 
-
+//이메일 중복검사 ajax
 $("#email").blur(function(email){
 	 const email2 = $("#email").val();
 	    if(email2 == ""){
@@ -320,13 +323,14 @@ $("#email").blur(function(email){
 
 var pwMsg = document.querySelector('#alertTxt');
 
+//number 최대길이 설정
 function numberMaxLength(e){
     if(e.value.length > e.maxLength){
         e.value = e.value.slice(0, e.maxLength);
     }
 }
 
-
+//닉네임 중복검사 -> ajax로 교체할 예정
 const fn_duplicateNick=()=>{
 	const status="width=350px,height=250px, left=500px, top=500px";
 	const title="duplicateNick";
@@ -341,7 +345,7 @@ const fn_duplicateNick=()=>{
 }
 
 
-
+// 아이디 중복검사 -> ajax로 교체할 예정
 const fn_duplicateId=()=>{
 	const status="width=300px,height=250px,left=500px,top=500px";
 	const title="duplicateId";
@@ -355,13 +359,62 @@ const fn_duplicateId=()=>{
 	
 
 }
+//프로필 사진 업데이트
+function readInputFile(input){
+	if(input.files){
+		let reader = new FileReader();
+		f=event.target.files[0]
+		console.log(event.target.files[0].size);
+		if(f.size>1024*1024*2){
+			alert("2mb까지의 사지만 업데이트 할 수 있습니다.");
+			return;
+		}
+			
+		reader.onload = function(e){
+			$("#image_container").html("<img src="+e.target.result+">");
+		}
+		reader.readAsDataURL(input.files[0]);
+		
+		
+	}
+}
 
 
-function setThumbnail(event) { 
+//프로필 사진 미리보기 및 삭제버튼
+$("#image").on('change',function(){
+	readInputFile(this);
+	
+	var btnDel =$("<button class='btnDel' type='button'>삭제</button>");
+
+	btnDel.click(e=>{
+		$("#image_container").empty(); 
+		$(".btnDel").remove();
+	});
+	if($('.btnDel').length == 0){//버튼 한 개만 생성하게 만들기 
+	$("#btn-container").append(btnDel);
+		
+	}
+});  //요소 생성시 중간에 값이 들어가므로 생성시에 이벤트를 걸어줘야 한다.
+
+//등록 이미지 삭제 ( input file reset )
+
+
+
+
+
+
+/* function setThumbnail(event) { 
 	var reader = new FileReader(); reader.onload = function(event) {
-		var img = document.createElement("img"); 
+		/* var img = document.createElement("img");  
+		var btn = document.createElement("button");
+		var btnText = document.createElement("삭제");
+		btn.appendChild(btnText);
 		img.setAttribute("src", event.target.result); 
-		document.querySelector("div#image_container").appendChild(img); 
+		/* document.querySelector("div#image_container").appendChild(img); 
+		$("#image").click(function(){
+			$("#image_container").append("<image> </image>");
+		})
+		document.querySelector("div#image_container").appendChild(btn);
 		};
 		
 		var f = event.target.files[0];
@@ -380,7 +433,7 @@ function setThumbnail(event) {
 		reader.readAsDataURL(event.target.files[0]); 
 	
 		}
-
+ */
 
 
 
