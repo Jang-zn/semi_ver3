@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import="com.semi.member.controller.EmailAuthenticationServlet,com.semi.member.controller.EmailAuthentication" %>
+    <%@page import=com.semi.member.controller.EmailAuthentication" %>
    <%--  <% 
     String AuthenticationKey = (String)request.getSession().getAttribute("AuthenticationKey");
     System.out.println(AuthenticationKey);
