@@ -66,7 +66,12 @@
 							<div class="col-md-2">5</div>
 							<div class="col-md-2">6</div>
 						</div>
-						<div class="row"></div>
+						<div class="row">
+						
+							<canvas id="chart8" class="col-md-12" style="height:100%"></canvas>
+						
+						
+						</div>
 					</div>
 					<div id="rank" class="col-md-6">
 						<div class="row">
@@ -77,7 +82,9 @@
 							<div class="col-md-2">5</div>
 							<div class="col-md-2">6</div>
 						</div>
-						<div class="row"></div>
+						<div class="row">
+							
+						</div>
 					</div>
 				</div>
 
@@ -99,7 +106,9 @@
 							<div class="col-md-2">5</div>
 							<div class="col-md-2">6</div>
 						</div>
-						<div class="row"></div>
+						<div class="row">
+							<canvas id="menuDonut" class="col-md-12"></canvas>
+						</div>
 					</div>
 					<div id="rank" class="col-md-6">
 						<div class="row">
@@ -172,26 +181,65 @@ const callPlan=()=>{
 	}else{
 		yymm01=viewYear+"/"+(viewMonth+1)+"/01"
 	}
-	console.log(list.length);
-	console.log(yymm01);
 	$.ajax({
 		url:"<%=request.getContextPath()%>/member/monthlyTrend/plancall?length="+list.length+"&yymm01="+yymm01,
 		dataType:"json",
 		success:data=>{
-			console.log(data.length);
 			for(let i=0;i<list.length;i++){
-				if(data[i]!=null && data[i].date==$($("span.thism")[i]).text() && data[i].count>0){
+				if(data[0][i]!=null && data[0][i].date==$($("span.thism")[i]).text() && data[0][i].count>0){
 					$($(".eCheck.thism")[i]).text("운동계획");
-					if(data[i].check=="Y"){
-						$($(".eCheck.thism")[i]).attr("style","background-color:green");
+					if(data[0][i].check=="Y"){
+						$($(".eCheck.thism")[i]).attr("style","background-color:green; color:white;");
 					}else{
-						$($(".eCheck.thism")[i]).attr("style","background-color:red");
+						$($(".eCheck.thism")[i]).attr("style","background-color:red; color:white;");
+					}
+				}
+				if(data[1][i]!=null && data[1][i].date==$($("span.thism")[i]).text() && data[1][i].count>0){
+					$($(".mCheck.thism")[i]).text("식단계획");
+					if(data[1][i].check=="Y"){
+						$($(".mCheck.thism")[i]).attr("style","background-color:green; color:white;");
+					}else{
+						$($(".mCheck.thism")[i]).attr("style","background-color:red; color:white;");
 					}
 				}
 			}
 		}		
 	});
 }
+var num = Math.random();
+var data = {
+    labels: ["실천","미실천","남은 일자"],
+    datasets: [{
+        data: [num/2, 1 - num, num/2],
+        backgroundColor: ["#FF6384","#DDD", "#AAA"],
+        hoverBackgroundColor: ["#FF6384", "#AAA", "#FFF"]
+    }]
+};
+window.onload = function () {
+    var ctx8 = $('#chart8').get(0).getContext("2d");
+    window.theChart8 = new Chart(ctx8, {
+        type: 'doughnut',
+        data: data,
+        options: {
+
+            elements: {
+                center: {
+                    text: Math.round(num * 100),
+                    sidePadding: 15
+                }
+            },
+            layout:{padding:0},
+            maintainAspectRatio: false,
+            cutoutPercentage: 100,
+            rotation: 270,
+            circumference: 300
+        }
+    });
+}
+
+
+
+
 
 </script>
 <script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>

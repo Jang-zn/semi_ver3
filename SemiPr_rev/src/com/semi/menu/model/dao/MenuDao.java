@@ -215,7 +215,7 @@ public class MenuDao {
 			String path = MenuDao.class.getResource("/sql/monthly_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			String sql = p.getProperty("planCountExc").replace("<L>", ""+length);
+			String sql = p.getProperty("planCountMenu").replace("<L>", ""+length);
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, date);

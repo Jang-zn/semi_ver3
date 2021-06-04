@@ -51,14 +51,13 @@
 .dates {
   display: flex;
   flex-flow: row wrap;
-  height: 500px;
   border-top: 1px solid #333333;
   border-right: 1px solid #333333;
 }
 
 .date {
-
-  padding: 15px;
+  height:100px;
+  padding-bottom:15px;
   text-align: right;
   border-bottom: 1px solid #333333;
   border-left: 1px solid #333333;

@@ -57,9 +57,8 @@ const renderCalendar = () => {
 		dates[i] = `<div class="date"><span class="${condition}">${date}</span></div>`;
 		dates[i] = "<div class='date col-md-1'><span class='" + condition + "'>" + date + "</span>"
 		    +"<div class='col-md-12 eCheck " + condition + "'></div>"
-			+ "<div class='col-md-12 mCheckm " + condition + "'></div>"
-			+ "<div class='col-md-12 mCheckl " + condition + "'></div>"
-			+ "<div class='col-md-12 mCheckd " + condition + "'></div></div>";
+			+ "<div class='col-md-12 mCheck " + condition + "'></div>"
+			+ "</div>";
 	})
 
 

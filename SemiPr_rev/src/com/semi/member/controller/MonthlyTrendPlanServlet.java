@@ -52,6 +52,7 @@ public class MonthlyTrendPlanServlet extends HttpServlet {
 		Map[] liste = new ExcService().planCountExc(memberId, date, length);
 		Map[] listm = new MenuService().planCountMenu(memberId, date, length);
 		
+		
 		Map[][] list = new Map[2][];
 		list[0] = liste;
 		list[1] = listm;
