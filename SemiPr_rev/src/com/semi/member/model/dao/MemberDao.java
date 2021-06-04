@@ -249,7 +249,6 @@ public class MemberDao {
 		try {
 			pstmt=conn.prepareStatement(p.getProperty("MemberexclistDelete"));
 			pstmt.setInt(1, excno);
-		//	pstmt.setString(2, memberid);
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1209,6 +1208,62 @@ public class MemberDao {
 			close(pstmt);
 		}		
 		return list;
+	}
+
+
+
+
+	public int YNmenuCheckAll(Connection conn, String menudate, String memberid) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String path=MemberDao.class.getResource("/sql/daily_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));		
+		}catch(IOException e) {
+			e.printStackTrace();
+		}		
+		try {
+			pstmt=conn.prepareStatement(p.getProperty("YNmenuCheckAll"));
+			pstmt.setString(1, menudate);
+			pstmt.setString(2, memberid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}		
+		return result;
+	}
+
+
+
+
+	public int YNmenuChseck(Connection conn, String menudate, String memberid) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String path=MemberDao.class.getResource("/sql/daily_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));		
+		}catch(IOException e) {
+			e.printStackTrace();
+		}		
+		try {
+			pstmt=conn.prepareStatement(p.getProperty("YmenuCheck"));
+			pstmt.setString(1, menudate);
+			pstmt.setString(2, memberid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}		
+		return result;
 	}
 
 

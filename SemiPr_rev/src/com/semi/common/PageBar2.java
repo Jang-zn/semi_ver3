@@ -76,46 +76,46 @@ public class PageBar2 {
 		
 		
 		
-		int numPerpage;
+		int numPerpage2;
 		try {
-			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
+			numPerpage2 = Integer.parseInt(request.getParameter("numPerpage2"));
 		} catch (NumberFormatException e) {
-			numPerpage = 5;
+			numPerpage2 = 5;
 		}
-		this.numPerpage2 = numPerpage;
+		this.numPerpage2 = numPerpage2;
 		
 		
-		int totalPage = (int) Math.ceil((double) totalData / numPerpage);
+		int totalPage = (int) Math.ceil((double) totalData / numPerpage2);
 
-		int pageNo = ((cPage2 - 1) / pageBarSize) * pageBarSize + 1;
+		int pageNo2 = ((cPage2 - 1) / pageBarSize) * pageBarSize + 1;
 
-		int pageEnd = pageNo + pageBarSize - 1;
+		int pageEnd = pageNo2 + pageBarSize - 1;
 
-		System.out.println(cPage2 + " " + pageNo + " " + pageEnd);
+		System.out.println(cPage2 + " " + pageNo2 + " " + pageEnd);
 
 		String pageBar2 = "";
 
-		if (pageNo == 1) {
+		if (pageNo2 == 1) {
 			pageBar2 += "<span>&nbsp[이전]&nbsp</span>";
 		} else {
-			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + (pageNo - 1) + "&numPerpage="
-					+ numPerpage + "'>[이전]</a>";
+			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage2=" + (pageNo2 - 1) + "&numPerpage2="
+					+ numPerpage2 + "'>[이전]</a>";
 		}
-		while (!(pageNo > pageEnd || pageNo > totalPage)) {
-			if (cPage2 == pageNo) {
-				pageBar2 += "<span>&nbsp" + pageNo + "&nbsp</span>";
+		while (!(pageNo2 > pageEnd || pageNo2 > totalPage)) {
+			if (cPage2 == pageNo2) {
+				pageBar2 += "<span>&nbsp" + pageNo2 + "&nbsp</span>";
 			} else {
-				pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "&numPerpage="
-						+ numPerpage + "'>&nbsp" + pageNo
+				pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage2=" + pageNo2 + "&numPerpage2="
+						+ numPerpage2 + "'>&nbsp" + pageNo2
 						+ "&nbsp</a>";
 			}
-			pageNo++;
+			pageNo2++;
 		}
 
-		if (pageNo > totalPage) {
+		if (pageNo2 > totalPage) {
 			pageBar2 += "<span>&nbsp[다음]&nbsp</span>";
 		} else {
-			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
+			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage2=" + pageNo2 + "'>&nbsp[다음]&nbsp</a>";
 		}
 		
 		this.pageBar2 = pageBar2;

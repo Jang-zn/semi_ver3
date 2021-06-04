@@ -270,5 +270,13 @@ public class MemberService {
 		close(conn);	
 		return list;
 	}
+	public int[] YNmenuCheckAll(String menudate, String memberid) {
+		int[] check = new int[2];
+		Connection conn = getConnection();
+		check [0] = dao.YNmenuCheckAll(conn,menudate,memberid);
+		check [1] = dao.YNmenuChseck(conn,menudate,memberid);
+		close(conn);	
+		return check;
+	}
 	
 }

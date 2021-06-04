@@ -222,6 +222,23 @@ $(".excday").click(e=>{
 	})
 });
 	
+	$(function(){
+		$("input[name=menudate]").each((i,v)=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/ajax/dailymenulogcheck",
+			type:"get",
+			data:{
+				menudate:$("input[name=menudate]").eq(i).val()
+				},
+			success:data=>{
+				if(data[0]==data[1]){
+					$(".menuday2").eq(i).css("background-color","green");
+				}
+			}
+		})
+	})
+});
+	
 	$.ajax({
 		url:"<%=request.getContextPath()%>/ajax/dailyrecord",
 			type:"get",
@@ -232,5 +249,8 @@ $(".excday").click(e=>{
 				$("#menurecord").text(data[1].replace("]",""));
 				
 			}		
-	})
+	});
+	
+	
+	
 </script>
