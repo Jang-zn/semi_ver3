@@ -13,10 +13,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
-import com.semi.member.daily.model.vo.DailyMenu;
 import com.semi.member.model.vo.MemberExcList;
 import com.semi.member.model.vo.MemberMenuList;
-import com.semi.statistic.model.vo.AchieveCheck;
+import com.semi.statistic.model.service.StatisticService;
+import com.semi.statistic.model.vo.ExcInfo;
+import com.semi.statistic.model.vo.MenuInfo;
 
 
 
@@ -47,7 +48,9 @@ public class StatisticDao {
 				m.setSets(rs.getInt("sets"));
 				m.setReps(rs.getInt("reps"));
 				m.setWeight(rs.getInt("weight"));
-				m.setExcId(rs.getString("exc_id"));
+				//excId를 excName으로 대치시킴
+				String excName=new StatisticService().excInfo(rs.getString("exc_id")).getExcName();
+				m.setExcId(excName);
 				list.add(m);				
 			}
 					
@@ -76,6 +79,9 @@ public class StatisticDao {
 				m.setAmount(rs.getInt("amount"));
 				m.setMenuId(rs.getString("menu_id"));
 				m.setMenuDaytime(rs.getString("menu_daytime"));
+				//menuId를 menuName으로 대치시킴
+				String menuName=new StatisticService().menuInfo(rs.getString("menu_id")).getMenuName(); 
+				m.setMenuId(menuName);
 				list.add(m);				
 			}
 					
@@ -87,6 +93,54 @@ public class StatisticDao {
 			close(rs);
 			close(pstmt);
 		}return list;
+	}
+	
+	//excId로 정보 조회해오기
+	public ExcInfo excInfo(Connection conn, String excId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		ExcInfo eInfo=new ExcInfo();	
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("excInfo"));
+			pstmt.setString(1, excId); 
+			rs=pstmt.executeQuery();
+			while(rs.next()) {		
+				eInfo.setExcName(rs.getString("exc_name"));
+			}
+					
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return eInfo;
+	}
+	
+	//menuId로 정보 조회해오기
+	public MenuInfo menuInfo(Connection conn, String menuId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		MenuInfo mInfo=new MenuInfo();	
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("menuInfo"));
+			pstmt.setString(1, menuId); 
+			rs=pstmt.executeQuery();
+			while(rs.next()) {		
+				mInfo.setMenuName(rs.getString("menu_name"));
+			}
+					
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return mInfo;
 	}
 	
 	public String weekExcCheck(Connection conn, String weekCheck) {
@@ -130,7 +184,6 @@ public class StatisticDao {
 					result=rs.getString("exc_plan_check");
 				}
 			}
-			System.out.println(weekCheck+" : "+result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}catch(NullPointerException e){

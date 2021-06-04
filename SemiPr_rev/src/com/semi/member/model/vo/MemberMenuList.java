@@ -80,7 +80,7 @@ public class MemberMenuList {
 	public void setMenuDaytime(String menuDaytime) {
 		this.menuDaytime = menuDaytime;
 	}
-	
+		
 	
 	
 	

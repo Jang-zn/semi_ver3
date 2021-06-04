@@ -3,7 +3,7 @@
 <%@ include file = "/../views/common/header.jsp"%>
 <%@ page import="java.util.Calendar, java.util.List,
  com.semi.member.model.vo.MemberExcList, com.semi.member.model.vo.MemberMenuList,
- com.semi.statistic.model.vo.AchieveCheck"
+ com.semi.statistic.model.vo.ExcInfo, com.semi.statistic.model.vo.MenuInfo"
  %>
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/weeklyTrend.css">
 <%
@@ -34,9 +34,6 @@
 	//연속 달성일 받아오기
 	int excAchieve=(int)request.getAttribute("excAchieve");
 	int menuAchieve=(int)request.getAttribute("menuAchieve");
-	//월간 통계 가져오기
-	
-	
 	
 %>
 	
@@ -102,6 +99,7 @@
         </div>
         <br><br><br>
 
+	<!-- 주간 달성 현황 색상 -->
 	<script>	
 	$("div.weeklyExcStatus").each(function(){
 		var weekNum=0;
@@ -218,6 +216,8 @@
                     int count=0;
                     for( MemberExcList m : excList){%>
                     <div class="row">
+                    
+	                    		<!-- 첫번째 이름으로 다 받아오고 있음.. 수정해야 됨 -->
                     	<div class="col-md-3"><%=m.getExcId() %></div>
                     	<div class="col-md-3"><%=m.getReps() %> reps</div>
                     	<div class="col-md-3"><%=m.getSets()%> sets</div>
@@ -243,6 +243,12 @@
                     <div class="col-md-4"><button onclick="">달성 확인 버튼</button></div>
                 </div>
             </div>
+            
+                
+            
+            
+            
+            
             <div class="col-md-6">
                 <!-- 식단 -->
                 <div class="row">
@@ -266,6 +272,7 @@
 	                    int count=0;
 	                    for( MemberMenuList m : menuList){%>
 	                    <div class="row">
+	                    		<!-- 첫번째 이름으로 다 받아오고 있음.. 수정해야 됨 -->
 	                    	<div class="col-md-3"><%=m.getMenuId() %></div>
 	                    	<div class="col-md-3"><%=m.getAmount() %> 양</div>
 	                    	<div class="col-md-3"><%=m.getMenuDaytime() %></div>
@@ -326,7 +333,6 @@
         </div>
 
     </div>
-     </div>
     <br>
     <br>
     <br>
@@ -334,16 +340,22 @@
     <br>
     <br>
 	<script>
+	
 	/* 임시 식단 pie차트 */
+	
+         /* DB에서 데이터 받아와 주간 평균 내서 값 넣기 */
+		var ch=10;
+		var prot=20;
+		var fat=100-ch-prot;
+	
 	 	var ctx = document.getElementById('menuChart');
     	var menuChart = new Chart(ctx, {
          type: 'pie',
           data: { 
             labels: ['탄수화물','단백질','지방'], 
             datasets: [{ 
-            data: [30,20,50],
-            /* DB에서 데이터 받아와 주간 평균 내서 값 넣기 */
-            backgroundColor: ['rgba(255, 200, 200, 0.2)','rgba(255, 255, 255, 0.2)','rgba(100, 200, 200, 0.2)'], 
+            data: [ch,prot,fat],
+            backgroundColor: ['rgba(255, 200, 200, 0.2)','rgba(255, 230, 255, 0.2)','rgba(100, 200, 200, 0.2)'], 
             borderColor: 'black', 
             borderWidth: 1 }] },           
             options: { 
@@ -358,12 +370,14 @@
                         display:false
                     },
                     gridLines: {
+                    	 drawOnChartArea: false,
                     	display:false
                     }                	
                 }],
                 xAxes: [{
                     stacked: true,
                     gridLines: {
+                   	 drawOnChartArea: false,
                     	display:false
                     }
                 	
