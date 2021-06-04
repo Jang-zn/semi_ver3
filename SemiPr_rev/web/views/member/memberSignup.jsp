@@ -203,7 +203,7 @@
 					</div>
 					<div class="col-md-12">
 						<span class="box int_mobile"> <input type="tel" id="mobile" name="phone"
-							class="int" maxlength="11" placeholder="(-)하이픈 없이 입력" required>
+							class="int"  placeholder="(-)하이픈 없이 입력" required>
 						</span> <span class="error_next_box"></span>
 					</div>
 				</div>
@@ -274,8 +274,64 @@
 	<input type="hidden" name="nickName">
 </form>
 
-
+<%-- $(document).ready(function() {
+                
+  var test = "${memberVO.me_phone}";
+  var testDate = test.replace
+  
+  $("#me_phone").text(testDate);
+ 
+}); --%>
 <script>
+	$("#mobile").blur(function(){
+		var mobile = $("#mobile").val();
+		console.log(mobile);
+		 var isPhoneNum = /([01]{2,})-([0-9]{3,4})-([0-9]{4})/;
+		 var isPhoneNum2 = /^\d{2,3}-\d{3,4}-\d{4}$/;
+		 if(!isPhoneNum.test(mobile)&&!isPhoneNum2.test(mobile)) {
+		        alert("잘못된 형식의 번호입니다.");
+		        return;
+		 }
+	});
+	
+//전화번호 자동으로 하이픈 생성하기
+$("#mobile").on('keyup',function(event){
+	var value = $(this).val(),
+		addValue = [];
+	value = value.replace(/-/gi,'');
+
+	if(value.length>=3){
+		if(value.substring(0,2) == '02') {  //02로 시작하면
+			addValue.push(value.substring(0,2));
+		console.log(value);
+			if(value.length>=3){
+				var endKey = (value.length >= 10 ? 6 : 5); 
+				addValue.push(value.substring(2, endKey));
+				if(value.length>=6){
+					if(value.length>=10){
+						value = value.substring(0,10);
+					}
+					addValue.push(value.substring(endKey, value.length));
+				}
+			}
+		}else{
+			addValue.push(value.substring(0,3)); //010, 070 3글자로시작한다면
+			if(value.length>=4){
+				var endKey = (value.length>=11? 7 : 6);
+				addValue.push(value.substring(3,endKey));
+				if(value.length>=7){
+					if(value.length>=11){
+						value=value.substring(0,11);
+					}
+					addValue.push(value.substring(endKey,value.length));
+				}
+			}
+		}
+		$(this).val(addValue.join('-'));
+  }	
+});
+
+
 
 
 	//이메일 인증 창
@@ -457,7 +513,7 @@ var gender = document.querySelector('#gender');
 
 var email = document.querySelector('#email');
 
-var mobile = document.querySelector('#mobile');
+//var mobile = document.querySelector('#mobile');
 
 var error = document.querySelectorAll('.error_next_box');
 
@@ -487,7 +543,7 @@ gender.addEventListener("change", function() {
     }
 })
 email.addEventListener("change", isEmailCorrect);
-mobile.addEventListener("change", checkPhoneNum);
+//mobile.addEventListener("change", checkPhoneNum);
 
 
 /*콜백 함수*/
@@ -629,7 +685,7 @@ function isEmailCorrect() {
 
 }
 
-function checkPhoneNum() {
+/* function checkPhoneNum() {
     var isPhoneNum = /([01]{2,})([01679]{1,})([0-9]{3,4})([0-9]{4})/;
 
     if(mobile.value === "") {
@@ -643,7 +699,7 @@ function checkPhoneNum() {
     }
 
     
-}
+} */
 
 function checkPw() {
     var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
