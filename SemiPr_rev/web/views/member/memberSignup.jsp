@@ -283,6 +283,25 @@
  
 }); --%>
 <script>
+
+//아이디 정규표현식
+
+// 비밀번호 정규표현식
+	$("#pswd1").blur(function(){
+    	var pw1 = $("#pswd1").val();
+    	console.log(pw1);
+		var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
+		if(pw1.trim() == ""){
+			alert("필수정보입니다.");
+			return;
+		}else if(!pwPattern.test(pw1)){
+			alert("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+			return;
+		}
+	});
+    
+
+
 	$("#mobile").blur(function(){
 		var mobile = $("#mobile").val();
 		console.log(mobile);
@@ -331,11 +350,26 @@ $("#mobile").on('keyup',function(event){
   }	
 });
 
+//이메일이 입력되지 않고 이메일 인증버튼을 눌렀을 때 block
+
+$("#email-chk").click(function(){
+	var emailChk=$("#email-chk").val();
+	if(emailChk == ""){
+		alert("이메일을 입력 후 눌러주세요.");
+		$("#email-chk").attr("disabled");
+		return;
+	}
+});
 
 
 
 	//이메일 인증 창
  function emailCheck(email){
+	 if(email == ""){
+		 alert("이메일을 입력 후 눌러주세요.");
+		 $("#email-chk").attr("disabled");
+		 return;
+	 } 
 	console.log(email);
 	let url="emailCheck.jsp?email="+email;
 	open(url,"emailwindow","statusbar=no, scrollbar=no, menubar=no, width=400, height=200");
@@ -529,8 +563,8 @@ if(nickname.trim()==null){
 }
 
 id.addEventListener("change", checkId);
-pw1.addEventListener("change", checkPw);
-pw2.addEventListener("change", comparePw);
+/* pw1.addEventListener("change", checkPw);
+pw2.addEventListener("change", comparePw); */
 
 yy.addEventListener("change", isBirthCompleted);
 mm.addEventListener("change", isBirthCompleted);
@@ -564,7 +598,7 @@ function checkId() {
     }
 }
 
-function checkPw() {
+/* function checkPw() {
     var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
     if(pw1.value === "") {
         error[1].innerHTML = "필수 정보입니다.";
@@ -573,9 +607,10 @@ function checkPw() {
         
         error[1].style.display = "block";
     } else if(!pwPattern.test(pw1.value)) {
-        error[1].innerHTML = "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.";
+        alert("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
         pwMsg.innerHTML = "사용불가";
         pwMsgArea.style.paddingRight = "93px";
+        pwMsgArea.style.paddingTop = "250px";
         error[1].style.display = "block";
         pwMsg.style.color = "red";
         pwMsg.style.display = "block";
@@ -588,7 +623,7 @@ function checkPw() {
         pwMsg.style.display = "block";
         pwImg1.src = "m_icon_safe.png";
     }
-}
+} */
 
 function comparePw() {
     if(pw2.value === pw1.value) {
@@ -701,7 +736,7 @@ function isEmailCorrect() {
     
 } */
 
-function checkPw() {
+/* function checkPw() {
     var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
     if(pw1.value === "") {
         error[1].innerHTML = "필수 정보입니다.";
@@ -725,7 +760,7 @@ function checkPw() {
         pwMsg.style.display = "block";
        
     }
-}
+} */
     </script>
 
 <%@ include file="/../views/common/footer.jsp"%>
