@@ -48,9 +48,9 @@ public class StatisticDao {
 				m.setSets(rs.getInt("sets"));
 				m.setReps(rs.getInt("reps"));
 				m.setWeight(rs.getInt("weight"));
-				//excId를 excName으로 대치시킴
+				//excId_c를 excName으로 대치시킴
 				String excName=new StatisticService().excInfo(rs.getString("exc_id")).getExcName();
-				m.setExcId(excName);
+				m.setExcId_c(excName);
 				list.add(m);				
 			}
 					
@@ -79,9 +79,9 @@ public class StatisticDao {
 				m.setAmount(rs.getInt("amount"));
 				m.setMenuId(rs.getString("menu_id"));
 				m.setMenuDaytime(rs.getString("menu_daytime"));
-				//menuId를 menuName으로 대치시킴
+				//menuId_c를 menuName으로 대치시킴
 				String menuName=new StatisticService().menuInfo(rs.getString("menu_id")).getMenuName(); 
-				m.setMenuId(menuName);
+				m.setMenuId_c(menuName);
 				list.add(m);				
 			}
 					

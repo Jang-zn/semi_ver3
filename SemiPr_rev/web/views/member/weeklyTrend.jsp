@@ -218,7 +218,7 @@
                     <div class="row">
                     
 	                    		<!-- 첫번째 이름으로 다 받아오고 있음.. 수정해야 됨 -->
-                    	<div class="col-md-3"><%=m.getExcId() %></div>
+                    	<div class="col-md-3"><%=m.getExcId_c() %></div>
                     	<div class="col-md-3"><%=m.getReps() %> reps</div>
                     	<div class="col-md-3"><%=m.getSets()%> sets</div>
                     	<div class="col-md-3"><%=m.getWeight() %> weight</div>
@@ -273,7 +273,7 @@
 	                    for( MemberMenuList m : menuList){%>
 	                    <div class="row">
 	                    		<!-- 첫번째 이름으로 다 받아오고 있음.. 수정해야 됨 -->
-	                    	<div class="col-md-3"><%=m.getMenuId() %></div>
+	                    	<div class="col-md-3"><%=m.getMenuId_c() %></div>
 	                    	<div class="col-md-3"><%=m.getAmount() %> 양</div>
 	                    	<div class="col-md-3"><%=m.getMenuDaytime() %></div>
 	                    </div>
@@ -380,7 +380,6 @@
                    	 drawOnChartArea: false,
                     	display:false
                     }
-                	
                 }],
             } 
             } 
