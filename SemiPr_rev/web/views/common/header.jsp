@@ -10,7 +10,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/header.css">
+        <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/header.css"> --%>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/02header.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/font.css">
         <script src="<%=request.getContextPath()%>/Resource/js/jquery-3.6.0.min.js"></script>
         <script src="<%=request.getContextPath()%>/Resource/js/chart.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -34,7 +36,11 @@
 
     <body>
         <div id="header_container" class="row">
+<!-- 로고 3 -->
             <div id="logo_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
+<!-- 공백 -->
+			<div class="col-md-2"></div>
+<!-- 주메뉴(6) -->           	
             <div id="menu_container" class="col-md-6">
                 <div id="menu_line">
                     <div class="col-md-3">
@@ -64,15 +70,17 @@
                     </div>
                 </div>
             </div>
+<!-- 로그인 3->1  -->            
             <% if(loginMember!=null){ %>
-            	<div id="profile_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="border-radius:100%;"></div>
+            	<div id="profile_area" class="col-md-1"><img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="border-radius:100%;"></div>
             <%}else{ %>
-            	<div id="login_area" class="col-md-3">
-            		<span onclick="login();">&#9786;로그인</span>
+            	<div id="login_area" class="col-md-1">
+            		<span onclick="login();">login</span>
             	</div>
-            <%} %>
-            
+            <%} %>            
         </div>
+        
+        
 		<div id="aside_content" class="row">
       	  <div id="content_container" class="col-md-10">
                 <!-- 이 위까지 header -->

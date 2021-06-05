@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+	*{	
+		font-family: 'PFStardust';
+	}
+	p{
+		font-size:2rem;	
+		font-weight: bolder;	
+	}
+	p span{
+		color: orange;
+	}
+
+	#board_container li {
+		list-style: none;
+	}
+
+	#board_head>ul, #board_body>ul {
+		display: flex;
+	}
+
+	#board_head>ul>li, #board_body>ul>li {
+		margin: 0.3%;
+	}
+
+	#content_count {
+		padding: 0.5%;
+		display: flex;
+		font-family: 'PFStardust';
+		font-size:1.7rem;	
+		font-weight: bold;	
+	}
+
+	#board_search, #board_head, #board_sort{
+		font-family: 'PFStardust';
+		font-size:1.7rem;	
+		font-weight: bold;
+		}
+		
+	#board_body, #board_head {
+		font-size: 1.8rem;
+		
+	}
+	.selectSort{		
+		background:lightgray;
+	}
+	.board_sort>select{
+		background-color:transparent;
+	}
+	
+	#board_head ul li{
+		border-radius:0.2em;
+  		border:1.5px solid black;
+	}
+	 .board_type {
+		width: 7%;
+		border-radius:0.2em;
+  		border:1.5px solid black;
+	}
+
+	.board_sort {
+		text-align: center;
+		align-self: center;
+		font-family: 'PFStardust';
+		font-size:1.7rem;	
+		font-weight: bold;
+		width:5rem;	
+	}
+
+	.board_title {
+		width: 65%;
+		display: flex;
+	}
+
+	.board_content_info {
+		width: 10%;
+		align-self: center;
+		text-align: center;
+	}
+
+	div.board_file_img {
+		width: 3%;
+	}
+
+	div.board_file_img>img {
+		width: 100%;
+		height: 100%;
+	}
+
+	#board_pageBar {
+		text-align: center;
+		margin: 1%;
+		font-size:1.2rem;
+	}
+	#board_pageBar>a {
+		color:black;
+	}
+	
+	#board_pageBar>button{
+		font-size:1.7rem;
+		font-weight:bold;
+		color:white;
+		background-color:#009688;
+		padding:0.3rem;
+		border-radius:0.2em;
+  		border:1.5px solid black;
+  		/* 오른쪽으로 정렬 필요 */
+	}
