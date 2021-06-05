@@ -5,7 +5,8 @@
  com.semi.member.model.vo.MemberExcList, com.semi.member.model.vo.MemberMenuList,
  com.semi.statistic.model.vo.ExcInfo, com.semi.statistic.model.vo.MenuInfo"
  %>
-<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/weeklyTrend.css">
+<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/02weeklyTrend.css">
+<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/font.css">
 <%
 	// 오늘 날짜 생성
 	Calendar today=Calendar.getInstance();
@@ -53,20 +54,20 @@
     <div class="container">
         <!-- 카테고리 버튼 -->
         <div class="row">
-            <div class="col-md-2"><a href="<%=request.getContextPath()%>/member/weeklyTrend" class="btn1">주간 현황</a></div>
-            <div class="col-md-2"><a href="<%=request.getContextPath()%>/member/monthlyTrend" class="btn1">월간 현황</a></div>
-            <div class="col-md-2"><a href="<%=request.getContextPath()%>/member/myData" class="btn1">My Data</a></div>
+            <div class="col-md-2 title01"><a href="<%=request.getContextPath()%>/member/weeklyTrend" class="btn1">주간 현황</a></div>
+            <div class="col-md-2 title01"><a href="<%=request.getContextPath()%>/member/monthlyTrend" class="btn1">월간 현황</a></div>
+            <div class="col-md-2 title01"><a href="<%=request.getContextPath()%>/member/myData" class="btn1">My Data</a></div>
         </div>
         <br><br>
 
         <!-- 주간 달성 현황 -->
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 title01">
                 <%=today.get(Calendar.MONTH)+1 %>월 <%=ju %>번째 주 달성 현황
             </div>
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-2">운동</div>
+                    <div class="col-md-2 title01">운동</div>
                     <div id="weeklyExcStatus">
                         <div class="col-md-1"><div class="weeklyExcStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">화</div></div>
@@ -76,12 +77,12 @@
                         <div class="col-md-1"><div class="weeklyExcStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">일</div></div>
                     </div>
-                    <div class="col-md-3">연속 <%=excAchieve %>일 달성</div>
+                    <div class="col-md-3 title01">연속 <%=excAchieve %>일 달성</div>
                 </div>
             </div>  
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-2">식단</div>
+                    <div class="col-md-2 title01">식단</div>
                     <div id="weeklyMenuStatus">
                         <div class="col-md-1"><div class="weeklyMenuStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">화</div></div>
@@ -92,7 +93,7 @@
                         <div class="col-md-1"><div class="weeklyMenuStatus">일</div></div>
                     </div>                    
 
-                    <div class="col-md-3"><div>연속 <%=menuAchieve %>일 달성</div> </div>                    
+                    <div class="col-md-3 title01"><div>연속 <%=menuAchieve %>일 달성</div> </div>                    
                     
                 </div>
             </div>         
@@ -195,14 +196,14 @@
             <div class="col-md-6">
                 <!-- 운동 -->
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 title01">
                     	<div><%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 운동 계획</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                     <%if(excList.isEmpty()){  %>
-                    	<div> 오늘 예정된 운동이 없습니다.</div>
+                    	<div class="title01"> 오늘 예정된 운동이 없습니다.</div>
                     <%}else{%>
                     <div class="row">
                     	<div class="col-md-3">운동 이름</div>
@@ -252,14 +253,14 @@
             <div class="col-md-6">
                 <!-- 식단 -->
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 title01">
                     	<div><%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 식단 계획</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                     	<%if(excList.isEmpty()){  %>
-	                    	<div> 오늘 예정된 식단이 없습니다.</div>
+	                    	<div class="title01"> 오늘 예정된 식단이 없습니다.</div>
 	                    <%}else{%>
 	                    <div class="row">
 	                    	<div class="col-md-3">식단 이름</div>
@@ -300,7 +301,7 @@
             <div class="col-md-6">
                 <!-- 운동 -->
                 <div class="row">
-                    <div class="col-md-6">이번주 많이 한 운동 5</div>
+                    <div class="col-md-6 title01">이번주 많이 한 운동 5</div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -318,7 +319,7 @@
             <div class="col-md-6">
                 <!-- 식단 -->
                 <div class="row">
-                    <div class="col-md-6">식단 분석</div>
+                    <div class="col-md-6 title01">식단 분석</div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">

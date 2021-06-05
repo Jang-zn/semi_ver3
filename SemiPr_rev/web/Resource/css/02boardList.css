@@ -10,32 +10,18 @@
 	*{	
 		font-family: 'PFStardust';
 	}
-	p{
-		font-size:2rem;	
-		font-weight: bolder;	
-	}
-	p span{
-		color: orange;
-	}
 
 	#board_container li {
 		list-style: none;
 	}
 
-	#board_head>ul, #board_body>ul {
-		display: flex;
-	}
-
-	#board_head>ul>li, #board_body>ul>li {
-		margin: 0.3%;
-	}
-
 	#content_count {
-		padding: 0.5%;
-		display: flex;
 		font-family: 'PFStardust';
-		font-size:1.7rem;	
+		font-size:2rem;	
 		font-weight: bold;	
+		
+		border-radius:0.2em;
+  		border:1.5px solid lightgray;
 	}
 
 	#board_search, #board_head, #board_sort{
@@ -79,6 +65,11 @@
 		display: flex;
 	}
 
+	#board_head{
+		border-radius:0.2em;
+  		border:1.5px solid black;
+  		background-color:lightgray;
+	}
 	.board_content_info {
 		width: 10%;
 		align-self: center;

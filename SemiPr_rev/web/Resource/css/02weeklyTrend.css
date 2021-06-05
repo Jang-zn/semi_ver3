@@ -1,0 +1,38 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.weeklyMenuStatus { 
+	/* default */
+	width:100%;
+	height:auto;
+   	border-radius:50%;
+   	border: 1px solid black;
+   	text-align:center;  		
+}
+    	
+.title01{	
+	font-family: 'PFStardust';
+	font-size:2rem;
+	font-weight:bold;
+}
+
+#weeklyExcStatus{
+	align-items:center;
+}
+.weeklyExcStatus, .weeklyMenuStatus{
+	font-family: 'PFStardust';
+	font-size:2.5rem;
+	font-weight:bold;
+	color:white;
+	text-align:center;
+	
+	width:6rem;
+	height:6rem;
+   	border-radius:50%;
+   	text-align:center;
+}

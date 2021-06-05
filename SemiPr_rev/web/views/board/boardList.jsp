@@ -28,19 +28,18 @@
 	
 	<div id="board_container" class="col-md-12">
 		<!-- 글 수 + 검색창 -->
-		<div class="row">
-			<div id="content_count" class="col-md-12">
-				<div class="col-md-1">전체 글 수</div>
+			<div id="content_count" class="row">
+				<div class="col-md-1">전체 글 </div>
 				<div style="color: orange;" class="col-md-1"><%=boardListCount %></div>
 				<div class="col-md-5"></div>
 
 				<div id="board_search" class="col-md-5">
-				
-						<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-9">
 									<div id="search-Title" >
 										<form action="<%=request.getContextPath()%>/board/boardSearch" method="GET">
-											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword"
-											value=<%=searchType!=null&&searchType.equals("title")?searchKeyword:"" %>> 
+											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword" 
+											value=<%=searchType!=null&&searchType.equals("title")?searchKeyword:"" %> > 
 											<input type="hidden" name="searchType" value="title">
 											<input type="submit" value="검색">
 										</form>
@@ -70,7 +69,7 @@
 								</form>
 							</div>
 						</div> 
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<select id="search-Type">
 								<option value="Title" <%=searchType!=null&&searchType.equals("title")?"selected":"" %>>제목</option>
 								<option value="Content"  <%=searchType!=null&&searchType.equals("content")?"selected":"" %>>내용</option>
@@ -78,9 +77,9 @@
 								<option value="Writer"  <%=searchType!=null&&searchType.equals("Writer")?"selected":"" %>>작성자</option>
 							</select> 
 						</div>
+					</div>
 				</div>
 			</div>
-		</div>
 						
 
 
