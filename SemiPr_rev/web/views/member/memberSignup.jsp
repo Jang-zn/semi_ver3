@@ -32,14 +32,14 @@
 					</div>
 					<div class="col-md-12">
 						<span class="box int_id"> <input
-						type="text" id="userId_" name="userId" class="int" maxlength="12" placeholder="아이디"
+						type="text" id="userId_" name="userId" class="int" maxlength="12" placeholder="아이디" 
 						style="width: 100%; height: 100%" required></span>
 						<input type="hidden"
 						name="idDuplication" value="idUncheck">
 						 <span class="error_next_box"></span>
 					</div>
-					<button type="button" id="id-chk" onclick="fn_duplicateId();"
-					value="아이디 중복확인" style="width: 120px; HEIGHT: 25px">아이디중복확인</button>
+					<div id="idCheck"></div>
+					
 				<span class="error_next_box"></span>
 				</div>
 
@@ -120,8 +120,7 @@
 							maxlength="12" required>
 						</span> <span class="error_next_box"></span>
 					</div>
-					<button type="button" id="Nick-chk" onclick="fn_duplicateNick();"
-						value="닉네임 중복확인" style="width: 120px; HEIGHT: 25px">닉네임중복확인</button>
+					<div id="nickCheck"></div>
 					<span class="error_next_box"></span>
 				</div>
 				
@@ -278,6 +277,7 @@
 <script>
 
 //아이디 정규표현식
+
  	$("#userId_").blur(function(){
 		var userId=$("#userId_").val();
 		console.log(userId);
@@ -291,6 +291,38 @@
 		}
 		
 	}); 
+	
+//아이디 중복 	
+	$("#userId_").blur(function(userId){
+		const userId2 = $("#userId_").val();
+		if(userId2 == ""){
+			alert("아이디를 입력하세요.");
+			return;
+		}else{
+			$.ajax({
+				url:"<%=request.getContextPath()%>/member/idDuplication",
+				type : "post",
+				dataType:"text",
+				data:{
+					"userId":$("#userId_").val()
+				},
+				success:data=>{
+					console.log(data);
+					if(data=="fail"){
+						$("#idCheck").css('color','red')
+						$("#idCheck").html("사용할 수 없는 아이디입니다.")
+					}else{
+						$("#idCheck").css('color','green')
+						$("#idCheck").html("아주 멋지네요!")
+					}
+				}
+			})
+		}
+	})
+	
+	
+	
+	
 // 비밀번호 정규표현식
 	$("#pswd1").blur(function(){
     	var pw1 = $("#pswd1").val();
@@ -362,7 +394,7 @@ $("#email-chk").click(function(){
 	var emailChk=$("#email-chk").val();
 	if(emailChk == ""){
 		alert("이메일을 입력 후 눌러주세요.");
-		$("#email-chk").attr("disabled");
+	
 		return;
 	}
 });
@@ -381,10 +413,8 @@ $("#email-chk").click(function(){
 	open(url,"emailwindow","statusbar=no, scrollbar=no, menubar=no, width=400, height=200");
 	
 	<%-- location.assign("<%=request.getContextPath()%>/member/emailAuth?email="+email); --%>
-		
 	
 }
-
 //이메일 중복검사 ajax
 $("#email").blur(function(email){
 	 const email2 = $("#email").val();
@@ -406,7 +436,6 @@ $("#email").blur(function(email){
 					$("#email_chk").css('color','red')
 					$("#email_chk").html("사용할 수 없는 이메일입니다.")
 					
-					
 				}else{
 					$("#email_chk").css('color','blue')
 					$("#email_chk").html("사용할 수 있는 이메일입니다.")
@@ -417,7 +446,6 @@ $("#email").blur(function(email){
 	    }
 	})
 
-var pwMsg = document.querySelector('#alertTxt');
 
 //number 최대길이 설정
 function numberMaxLength(e){
@@ -427,34 +455,37 @@ function numberMaxLength(e){
 }
 
 //닉네임 중복검사 -> ajax로 교체할 예정
-const fn_duplicateNick=()=>{
-	const status="width=350px,height=250px, left=500px, top=500px";
-	const title="duplicateNick";
-	const url="<%=request.getContextPath()%>/views/member/checkDuplicateNick.jsp";
-	
-	open("",title,status);
-	console.log(duplicateFrm.nickName);
-	duplicateFrm.nickName.value=$("#nickName_").val();
-	duplicateFrm.target=title;
-	duplicateFrm.action=url;
-	duplicateFrm.submit();
-}
+
+$("#nickName_").blur(function(){
+	var isNickname = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,15}/; //인스타그램아이디 정규표현식
+	var nickName =$('#nickName_').val();
+	console.log(nickName);
+	if(!isNickname.test(nickName)&&!nickName.trim()){
+		 alert("잘못된 형식의 닉네임입니다.");
+	        return;
+		}else {
+			$.ajax ({
+				url:"<%=request.getContextPath()%>/member/nickNameDuplication",
+				type : "post",
+				dataType:"text",
+				data:{
+					"nickName":$("#nickName_").val().trim()
+				},
+				success:data=>{
+					console.log(data);
+					if(data=="fail"){
+						$("#nickCheck").css('color','red')
+						$("#nickCheck").html("이미 사용중인 닉네임입니다.")
+					}else{
+						$("#nickCheck").css('color','green')
+						$("#nickCheck").html("아주 멋지네요!")
+					}
+				}
+				})
+		}
+});
 
 
-// 아이디 중복검사 -> ajax로 교체할 예정
-const fn_duplicateId=()=>{
-	const status="width=300px,height=250px,left=500px,top=500px";
-	const title="duplicateId";
-	const url="<%=request.getContextPath()%>/views/member/checkDuplicateId.jsp";
-	
-	open("",title,status);
-	duplicateFrm.userId.value=$("#userId_").val();
-	duplicateFrm.target=title;
-	duplicateFrm.action=url;
-	duplicateFrm.submit();
-	
-
-}
 //프로필 사진 업데이트
 function readInputFile(input){
 	if(input.files){
@@ -548,6 +579,7 @@ var userName = document.querySelector('#name_');
 var yy = document.querySelector('#yy');
 var mm = document.querySelector('#mm');
 var dd = document.querySelector('#dd');
+var pwMsg = document.querySelector('#alertTxt');
 
 var gender = document.querySelector('#gender');
 
@@ -568,8 +600,8 @@ if(nickname.trim()==null){
 	}
 }
 
-id.addEventListener("change", checkId);
-/* pw1.addEventListener("change", checkPw);
+/*id.addEventListener("change", checkId);
+pw1.addEventListener("change", checkPw);
 pw2.addEventListener("change", comparePw); */
 
 yy.addEventListener("change", isBirthCompleted);
@@ -589,7 +621,7 @@ email.addEventListener("change", isEmailCorrect);
 /*콜백 함수*/
 
 
-function checkId() {
+/* function checkId() {
     var idPattern = /[a-zA-Z0-9_-]{5,20}/;
     if(id.value === "") {
         error[0].innerHTML = "필수 정보입니다.";
@@ -602,7 +634,7 @@ function checkId() {
         error[0].style.color = "#08A600";
         error[0].style.display = "block";
     }
-}
+} */
 
 /* function checkPw() {
     var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;

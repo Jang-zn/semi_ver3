@@ -625,6 +625,58 @@ public class MemberDao {
 			close(pstmt);
 		}
  		return m;
+	}
+
+
+
+
+	public int userIdDuplication(Connection conn, String userId) {
+		PreparedStatement pstmt =null;
+		int result=0;
+		ResultSet rs =null;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("userIdDuplication"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				
+				result=rs.getInt(1);
+				System.out.println(rs.getInt(1));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+	public int nickNameDuplication(Connection conn, String nickName) {
+		PreparedStatement pstmt =null;
+		int result=0;
+		ResultSet rs =null;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("nickNameDuplication"));
+			pstmt.setString(1, nickName);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}   
     
     
