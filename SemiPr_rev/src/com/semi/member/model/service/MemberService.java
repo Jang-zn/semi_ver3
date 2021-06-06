@@ -8,6 +8,9 @@ import static com.semi.common.JdbcTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+
+import com.semi.exc.model.dao.ExcDao;
+
 import com.semi.member.daily.model.vo.DailyExercise;
 import com.semi.member.daily.model.vo.DailyMenu;
 import com.semi.member.exc.model.vo.Exercise;
@@ -47,8 +50,8 @@ public class MemberService {
 	}
 	public Exercise selectExceriseinfo(String excid) {
 		Connection conn = getConnection();
-		Exercise ex= dao.selectExceriseinfo(conn,excid);
-		//ex.setFileList(dao.selectExceriseimg(conn,excid));
+		Exercise ex= new ExcDao().getExcInfo(conn,excid);
+
 		close(conn);		
 		return ex;
 		
