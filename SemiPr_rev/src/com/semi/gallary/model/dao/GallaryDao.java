@@ -40,8 +40,8 @@ public class GallaryDao {
 		int result = 0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertGallary"));
-			pstmt.setString(1,"TEST04");
-			pstmt.setString(2,"TEST04");
+			pstmt.setString(1,"test4");
+			pstmt.setString(2,"남자4");
 			pstmt.setString(3,g.getContent());
 			
 			result = pstmt.executeUpdate();

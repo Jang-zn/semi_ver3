@@ -6,6 +6,8 @@
 	String pageBar=(String)request.getAttribute("pageBar");
 	
 	String searchKeyword=request.getParameter("searchKeyword");
+
+
 	
 %>		
 	
@@ -38,19 +40,19 @@
 				</div>
 			</div>
 			<input class="deleteNo" type="hidden" value="">
-			<input type="button" class ="btn btn-default" value="수정하기" onclick="gal_update();">
-            <input type="button" class ="btn btn-default" value="삭제하기" onclick="gal_delete();">
+			<input type="button" class ="btn btn-light" value="수정하기" onclick="gal_update();">
+            <input type="button" class ="btn btn-light"value="삭제하기" onclick="gal_delete();">
 		</div>
 		
 
 
 		<div id="n_list" class="col-md-4">
 			<div class="row">
-				<div class="col-md-2 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진등록</div>
+				<div class="col-md-3 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진등록</div>
 				
-				<div class="col-md-10">
+				<div class="col-md-9">
 						<form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="get">
-						<div class="col-md-10">
+						<div class="">
 						<%-- <form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="post"> --%>
 							<input type="text" name="searchKeyword" size="25" placeholder="검색할 내용을 입력하세요 "/>
 						</div>
@@ -60,13 +62,11 @@
 			</div>
  			<%if(list.isEmpty()){ %>
  					<div>등록된 이미지가 없습니다.</div>
-	
-		
 			<div id="n_img_list" class="col-md-12">
 							
 					<div class="row"> 
 					<%}else{
-		for(Gallary g : list) { %>
+						for(Gallary g : list) { %>
 						<div class="img_obj col-md-6">
 							<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>"/>
 							<img width="100%" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
@@ -75,13 +75,10 @@
 						<% }
 			}%>	
 					</div> 
+			
 			</div>
-					
 							
 <!-- 						<div class="img_obj col-md-6"></div>
-						
-							
-					
 				<div class="img_obj col-md-6"></div>
 						<div class="img_obj col-md-6"></div>
 					</div>
@@ -91,11 +88,10 @@
 					</div>
 			
  -->
-			
-
 			<div id="n_pageBar" class="row">
-				<div class="col-md-12"><%=pageBar %></div>
-			</div>
+				<div class="col-md-8"></div>
+				<div class="col-md-4"><%=pageBar %></div>
+			</div> 
 		</div>
 	</div>
 	<div class="col-md-1"></div>
