@@ -31,17 +31,25 @@
 					<img
 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_qscX8L2bnZfZhslTsvDavnGhH16jUEsTRw&usqp=CAU">
 				</div>
-				<div id="Practice_trend" class="col-md-8">trend</div>
+				
+				
+				<!-- Trend Area -->
+				<div id="Practice_trend" class="col-md-8">
+					<div class="row">
+						<div class="col-md-12" style="height:230px">
+							<canvas id="lineChart"></canvas>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Trend Area -->
+				
 				<div id="select_sort" class="col-md-2">
 					<select id="dataType_select">
-						<option name="dataType" value="">운동량</option>
-						<option name="dataType" value="">일일 섭취 칼로리</option>
-						<option name="dataType" value="">몸무게</option>
-						<option name="dataType" value="">체지방률</option>
-						<option name="dataType" value="">근골격량</option>
-						<option name="dataType" value="">인바디점수</option>
-						<option name="dataType" value="">운동 실천률</option>
-						<option name="dataType" value="">식단 실천률</option>
+						<option name="dataType" value="">운동 실천현황</option>
+						<option name="dataType" value="">식단 실천현황</option>
+						<option name="dataType" value="">누적 운동량(reps)</option>
+						<option name="dataType" value="">섭취 칼로리(kcal)</option>
 					</select><br> <label><input type="radio" name="term" value="1m">
 						1개월 </label><br> <label><input type="radio" name="term"
 						value="3m"> 3개월 </label><br> <label><input
@@ -66,7 +74,12 @@
 							<div class="col-md-2">5</div>
 							<div class="col-md-2">6</div>
 						</div>
-						<div class="row"></div>
+						<div class="row cContainer">
+						
+							<canvas id="chart8" class="col-md-12" ></canvas>
+						
+						
+						</div>
 					</div>
 					<div id="rank" class="col-md-6">
 						<div class="row">
@@ -77,7 +90,9 @@
 							<div class="col-md-2">5</div>
 							<div class="col-md-2">6</div>
 						</div>
-						<div class="row"></div>
+						<div class="row">
+							
+						</div>
 					</div>
 				</div>
 
@@ -99,7 +114,12 @@
 							<div class="col-md-2">5</div>
 							<div class="col-md-2">6</div>
 						</div>
-						<div class="row"></div>
+						<div class="row cContainer">
+						
+							<canvas id="chart9" class="col-md-12" ></canvas>
+						
+						
+						</div>
 					</div>
 					<div id="rank" class="col-md-6">
 						<div class="row">
@@ -172,26 +192,174 @@ const callPlan=()=>{
 	}else{
 		yymm01=viewYear+"/"+(viewMonth+1)+"/01"
 	}
-	console.log(list.length);
-	console.log(yymm01);
 	$.ajax({
 		url:"<%=request.getContextPath()%>/member/monthlyTrend/plancall?length="+list.length+"&yymm01="+yymm01,
 		dataType:"json",
 		success:data=>{
-			console.log(data.length);
+			let ey=0;
+			let en=0;
+			let my=0;
+			let=mn=0;
 			for(let i=0;i<list.length;i++){
-				if(data[i]!=null && data[i].date==$($("span.thism")[i]).text() && data[i].count>0){
+				if(data[0][i]!=null && data[0][i].date==$($("span.thism")[i]).text() && data[0][i].count>0){
 					$($(".eCheck.thism")[i]).text("운동계획");
-					if(data[i].check=="Y"){
-						$($(".eCheck.thism")[i]).attr("style","background-color:green");
+					if(data[0][i].check=="Y"){
+						$($(".eCheck.thism")[i]).attr("style","background-color:green; color:white;");
+						ey++;
 					}else{
-						$($(".eCheck.thism")[i]).attr("style","background-color:red");
+						$($(".eCheck.thism")[i]).attr("style","background-color:red; color:white;");
+						en++
+					}
+				}
+				if(data[1][i]!=null && data[1][i].date==$($("span.thism")[i]).text() && data[1][i].count>0){
+					$($(".mCheck.thism")[i]).text("식단계획");
+					if(data[1][i].check=="Y"){
+						$($(".mCheck.thism")[i]).attr("style","background-color:green; color:white;");
+						my++;
+					}else{
+						$($(".mCheck.thism")[i]).attr("style","background-color:red; color:white;");
+						mn++;
 					}
 				}
 			}
+			excPie(ey,en, list.length);
+			menuPie(my,mn, list.length);
 		}		
 	});
 }
+
+
+const excPie=(y, n, l)=>{
+	var data = {
+		    //ajax 처리
+	    labels: ["실천","미실천","남은 일자"],
+	
+	    datasets: [{
+	        data: [y/l, n/l, 1-(y/l+n/l)],
+	        backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
+	    }]
+	};
+	let ctx = $('#chart8').get(0).getContext("2d");
+	let theChart = new Chart(ctx, {
+	    type: 'doughnut',
+	    data: data,
+	    options: {
+	        layout:{padding:0},
+	        maintainAspectRatio: false,
+	        cutoutPercentage:10,
+	        rotation: 270,
+	        circumference: 180
+	    }
+	});
+	chart.update();
+};
+
+const menuPie=(y, n, l)=>{
+	let data = {
+			  //ajax 처리
+		    labels: ["실천","미실천","남은 일자"],
+		    datasets: [{
+		        data: [y/l, n/l, 1-(y/l+n/l)],
+		        backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
+		    }]
+		};
+	    let ctx = $('#chart9').get(0).getContext("2d");
+	    let theChart = new Chart(ctx, {
+	        type: 'doughnut',
+	        data: data,
+	        layout:{padding:0},
+	        maintainAspectRatio: false,
+	        cutoutPercentage:10,
+	        rotation: 270,
+	        circumference: 180
+	    }
+	});
+};
+
+
+const reloadChart=()=>{
+	
+	//데이터셋 수 만큼 반복
+	var dataset = config.data.datasets;
+	for(var i=0; i<dataset.length; i++){
+		console.log(dataset);
+		//데이터 갯수 만큼 반복
+		var data = dataset[i].data;
+		for(var j=0 ; j < data.length ; j++){
+			data[j] = Math.floor(Math.random() * 50);
+		}
+	}
+	
+	myChart.update();	//차트 업데이트
+}
+
+
+
+
+
+
+//line chart
+const line = $("#lineChart");
+const lineChart = new Chart(line, {
+    type: 'bar',
+    options:{
+        legend:{
+         	display:false
+    	},
+    	maintainAspectRatio : false,
+	},
+    data: {
+        labels: [
+            '1일', '2일', '3일', '4일', '5일', '6일', '7일', '8일', '9일', '10일',
+            '11일', '12일','13일', '14일','15일', '16일','17일', '18일','19일', '20일',
+            '21일', '22일','23일', '24일','25일', '26일','27일', '28일','29일', '30일',
+        ],
+        datasets: [
+            {
+                label: '운동',
+                data: [1, 1, 1, 1, 1, 0, 1, 1, 1, 0,
+                        1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
+                        1, 1, 1, 0, 1, 1, 1, 0, 1, 1,
+                ],
+                borderColor : 'blue',
+                backgroundColor:'rgba(0,0,255,0.3)',
+                borderWidth:3,
+                
+            },
+            {
+                label: "",
+                type:'line',
+                data: [1, 1, 1, 1, 0, 0, 1, 0, 1, 0,
+                        1, 0, 0, 1, 0, 1, 0, 1, 0, 1,
+                        1, 1, 1, 0, 1, 0, 1, 0, 1, 1,
+                ],
+                borderColor : 'rgba(0,0,255,0.3)',
+                borderWidth:3,
+                
+            },
+            {
+                type:'line',
+                label: '실천완료',
+                data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                ],
+                borderColor : 'lightgreen',
+                borderWidth:2,
+                borderDash:[10,10],
+                pointRadius:0,
+                options: {
+                       legend: {
+                            display: false
+                        }
+                }
+            }
+        ]},
+});
+
+
+
+
 
 </script>
 <script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>

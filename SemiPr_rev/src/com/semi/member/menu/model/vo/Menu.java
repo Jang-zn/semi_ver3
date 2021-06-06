@@ -13,6 +13,8 @@ public class Menu {
 	private int na;
 	private String menuManual;
 	private String menuVideo;
+
+	private String imgpath;
 	private List<String> fileList;
 
 
@@ -22,7 +24,7 @@ public class Menu {
 
 
 	public Menu(String menuId, String menuSort, String menuName, int kcal, int ch, int prot, int fat, int na,
-			String menuManual, String menuVideo,List<String> fileList) {
+			String menuManual, String menuVideo, String imgpath, List<String> fileList) {
 		super();
 		this.menuId = menuId;
 		this.menuSort = menuSort;
@@ -34,8 +36,12 @@ public class Menu {
 		this.na = na;
 		this.menuManual = menuManual;
 		this.menuVideo = menuVideo;
-		this.fileList=fileList;
+		this.imgpath = imgpath;
+		this.fileList = fileList;
 	}
+
+
+
 
 
 	public String getMenuId() {
@@ -148,6 +154,8 @@ public class Menu {
 	public void setFileList(List<String> fileList) {
 		this.fileList = fileList;
 	}
-		
+
+
+
 	
 }

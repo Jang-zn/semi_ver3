@@ -767,6 +767,7 @@ public class MemberDao {
 
 
 
+
 	public Member login(Connection conn, String userId, String password) {
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;

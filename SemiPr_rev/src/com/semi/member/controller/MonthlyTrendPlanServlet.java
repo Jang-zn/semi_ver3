@@ -1,7 +1,6 @@
 package com.semi.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.semi.exc.model.service.ExcService;
 import com.semi.member.model.vo.Member;
+import com.semi.menu.model.service.MenuService;
 
 /**
  * Servlet implementation class MonthlyTrendPlanServlet
@@ -49,7 +49,14 @@ public class MonthlyTrendPlanServlet extends HttpServlet {
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		Map[] list = new ExcService().planCountExc(memberId, date, length);
+		Map[] liste = new ExcService().planCountExc(memberId, date, length);
+		Map[] listm = new MenuService().planCountMenu(memberId, date, length);
+		
+		
+		Map[][] list = new Map[2][];
+		list[0] = liste;
+		list[1] = listm;
+		
 		
 		new Gson().toJson(list,response.getWriter());
 		

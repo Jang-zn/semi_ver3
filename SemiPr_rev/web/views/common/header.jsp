@@ -45,7 +45,7 @@
                         <div class="sub">
                         	<div class="plan_menu"><a href="<%=request.getContextPath()%>/member/myList">My List</a></div>
                             <div class="plan_menu"><a href="<%=request.getContextPath()%>/member/excPlan?numPerpage=10">운동 계획 관리</a></div>
-                            <div class="plan_menu"><a href="">식단 계획 관리</a></div>
+                            <div class="plan_menu"><a href="<%=request.getContextPath()%>/member/menuPlan?numPerpage=10">식단 계획 관리</a></div>
                         </div>
                     </div>
                     <div class="col-md-3">Progress
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-md-3">Community
                         <div class="sub">
-                            <div class="community_menu"><a href="<%=request.getContextPath()%>/board/boardList">자유게시판</a></div>
+                            <div class="community_menu"><a href="<%=request.getContextPath()%>/board/boardList?numPerpage=15">자유게시판</a></div>
                         </div>
                     </div>
                 </div>
