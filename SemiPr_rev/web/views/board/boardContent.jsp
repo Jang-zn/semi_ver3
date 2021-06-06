@@ -15,6 +15,7 @@
 	String pageBar = (String)request.getAttribute("pageBar");
 	List<Reply> relist = (List<Reply>)request.getAttribute("commentList");
 	int commentCount = (Integer)request.getAttribute("commentCount");
+	
 %>
 	
 <%@ include file="/views/common/header.jsp"%>
