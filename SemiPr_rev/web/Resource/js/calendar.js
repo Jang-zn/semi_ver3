@@ -14,6 +14,9 @@ const renderCalendar = () => {
 
 	// year-month 채우기
 	$(".year-month").text(viewYear + "년 " + (viewMonth + 1) + "월" + " 실천 현황");
+	$("#excMonth").text((viewMonth + 1) + "월" + " 운동 실천률");
+	$("#menuMonth").text((viewMonth + 1) + "월" + " 식단 실천률");
+	
 
 	// 지난 달 마지막 Date, 이번 달 마지막 Date
 	const prevLast = new Date(viewYear, viewMonth, 0);
