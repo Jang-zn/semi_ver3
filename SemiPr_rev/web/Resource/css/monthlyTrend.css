@@ -15,7 +15,7 @@
 	margin-top:1%
 }
 
-#container_progress_trend *{
+#container_progress_trend div{
 	border : 1px solid #aaa;
 	
 }
@@ -73,9 +73,9 @@
 	margin-bottom: 15px;
 }
 
-#calendar {
-	margin-top: 50px;
-	height: 600px;
+.cheight {
+	padding:1%;
+	
 }
 
 #statistics_container {
@@ -90,3 +90,4 @@
 	height: 300px;
 	margin: 20px;
 }
+

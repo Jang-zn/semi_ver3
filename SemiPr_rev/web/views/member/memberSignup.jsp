@@ -3,206 +3,330 @@
 <%@ include file="/../views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/memberSignup.css">
-<div id="logo">
-	<h2>ForMuscle</h2>
+
+<div id="logo" class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<h2>ForMuscle</h2>
+	</div>
+	<div class="col-md-4"></div>
 </div>
 
-<form action="<%=request.getContextPath()%>/memberSignup" method="post">
-	<!-- wrapper -->
-	<div id="wrapper">
 
-		<!-- content-->
-		<div id="content">
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		
+	<form name="insertform" action="<%=request.getContextPath()%>/member/memberSignup" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
 
-			<!-- ID -->
-			<div>
-				<h3 class="join_title">
-					<label for="userId">아이디</label>
-				</h3>
-				<div id="wrap-idchk">
-					<span class="box int_id" style="width: 100%;"> <input
+
+			<!-- content-->
+			<div id="content" class="row">
+
+				<!-- ID -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="join_title">
+							<label for="id">아이디</label>
+						</h3>
+					</div>
+					<div class="col-md-12">
+						<span class="box int_id"> <input
 						type="text" id="userId_" name="userId" class="int" maxlength="12" placeholder="아이디"
-						style="width: 100%; HEIGHT: 100%"></span> <input type="hidden"
+						style="width: 100%; height: 100%" required></span>
+						<input type="hidden"
 						name="idDuplication" value="idUncheck">
-				</div>
-				<button type="button" id="id-chk" onclick="fn_duplicateId();"
-					value="아이디 중복확인" style="width: 110px; HEIGHT: 25px">아이디중복확인</button>
+						 <span class="error_next_box"></span>
+					</div>
+					<button type="button" id="id-chk" onclick="fn_duplicateId();"
+					value="아이디 중복확인" style="width: 120px; HEIGHT: 25px">아이디중복확인</button>
 				<span class="error_next_box"></span>
-			</div>
+				</div>
 
-			<!-- PW1 -->
-			<div>
-				<h3 class="join_title">
-					<label for="pswd1">비밀번호</label>
-				</h3>
-				<span class="box int_pass"> <input type="password" id="pswd1" name="password" placeholder="비밀번호"
-					class="int" maxlength="16"> <span id="alertTxt">사용불가</span>
+				<!-- PW1 -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="join_title">
+							<label for="pswd1">비밀번호</label>
+						</h3>
+					</div>
+					<div class="col-md-12">
+						<span class="box int_pass"> <input type="password" id="pswd1" name="password" placeholder="비밀번호"
+					class="int" maxlength="16" required> <span
+							id="alertTxt">사용불가</span>
 
-				</span> <span class="error_next_box"></span>
-			</div>
+						</span> <span class="error_next_box"></span>
+					</div>
+				</div>
 
-			<!-- PW2 -->
-			<div>
-				<h3 class="join_title">
-					<label for="pswd2">비밀번호 재확인</label>
-				</h3>
-				<span class="box int_pass_check"> <input type="password"
-					id="pswd2" class="int" maxlength="16">
+				<!-- PW2 -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="join_title">
+							<label for="pswd2">비밀번호 재확인</label>
+						</h3>
+					</div>
+					<div class="col-md-12">
+						<span class="box int_pass_check"> <input type="password" 
+							id="pswd2" class="int" maxlength="16" required>
 
-				</span> <span class="error_next_box"></span>
-			</div>
+						</span> <span class="error_next_box"></span>
+					</div>
+				</div>
+
+					
 				<!-- EMAIL -->
-			<div>
-				<h3 class="join_title">
-					<label for="email">본인확인 이메일<span class="optional"></span></label>
-				</h3>
-				<span class="box int_email"> <input type="text" id="email" name="email"
-					class="int" maxlength="100" placeholder="이메일입력">
-				</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
-			</div>
-			<!-- NAME -->
-			<div>
-				<h3 class="join_title">
-					<label for="name">이름</label>
-				</h3>
-				<span class="box int_name"> <input type="text" id="name_" name="name" placeholder="이름"
-					class="int" maxlength="20">
-				</span> <span class="error_next_box"></span>
-			</div>
-	
-				<!--NickName -->
-			<div>
-				<h3 class="join_title">
-					<label for="Nickname">닉네임</label>
-				</h3>
-				<span class="box int_Nickname"> <input type="text" id="nickName_" name="nickName" placeholder="닉네임"
-					class="int" maxlength="12">
-				</span> <span class="error_next_box"></span>
-			</div>
-				<button type="button" id="Nick-chk" onclick="fn_duplicateNick();"
-					value="닉네임 중복확인" style="width: 110px; HEIGHT: 25px">닉네임중복확인</button>
-				<span class="error_next_box"></span>
-	
-			<!-- BIRTH -->
-			<div>
-				<h3 class="join_title">
-					<label for="yy">생년월일</label>
-				</h3>
-
-				<div id="bir_wrap">
-					<!-- BIRTH_YY -->
-					<div id="bir_yy">
-						<span class="box"> <input type="text" id="yy" name="yy" class="int"
-							maxlength="4" placeholder="년(4자)">
-						</span>
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="join_title">
+							<label for="email">이메일</label>
+						</h3>
 					</div>
-
-					<!-- BIRTH_MM -->
-					<div id="bir_mm">
-						<span class="box"> <select id="mm" class="sel" name="mm">
-								<option>월</option>
-								<option value="01">1</option>
-								<option value="02">2</option>
-								<option value="03">3</option>
-								<option value="04">4</option>
-								<option value="05">5</option>
-								<option value="06">6</option>
-								<option value="07">7</option>
-								<option value="08">8</option>
-								<option value="09">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-						</select>
-						</span>
+					<div class="col-md-12">
+						<span class="box int_email"> <input type="text" id="email" name="email"
+							class="int" maxlength="50" placeholder="이메일입력">
+						</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
 					</div>
-
-					<!-- BIRTH_DD -->
-					<div id="bir_dd">
-						<span class="box"> <input type="text" id="dd" class="int" name="dd"
-							maxlength="2" placeholder="일">
-						</span>
-					</div>
-
+					<div id="email_chk"> </div>
+					<button type="button" id="email-chk" 
+					value="이메일 인증" style="width: 100px; height: 25px" onclick="emailCheck(insertform.email.value);" >이메일 인증</button>
+					
 				</div>
-				<span class="error_next_box"></span>
-			</div>
+					</form>
 
-			<!-- GENDER -->
-			<div>
-				<h3 class="join_title">
-					<label for="gender">성별</label>
-				</h3>
-				<span class="box gender_code"> <select id="gender" name="gender"
-					class="sel">
-						<option>성별</option>
-						<option value="M">남자</option>
-						<option value="F">여자</option>
-				</select>
-				</span> <span class="error_next_box">필수 정보입니다.</span>
-			</div>
+
+				<!-- NAME -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="join_title">
+							<label for="name">이름</label>
+						</h3>
+					</div>
+					<div class="col-md-12">
+						<span class="box int_name"> <input type="text" id="name" name="name"
+							class="int" maxlength="12" required>
+						</span> <span class="error_next_box"></span>
+					</div>
+				</div>
+			
+				<!--NickName -->
+				<div>
+					<div class="col-md-12">
+						<h3 class="join_title">
+							<label for="name">닉네임</label>
+						</h3>
+						<span class="box int_Nickname"> <input type="text"
+							id="nickName_" name="nickName" placeholder="닉네임" class="int"
+							maxlength="12" required>
+						</span> <span class="error_next_box"></span>
+					</div>
+					<button type="button" id="Nick-chk" onclick="fn_duplicateNick();"
+						value="닉네임 중복확인" style="width: 120px; HEIGHT: 25px">닉네임중복확인</button>
+					<span class="error_next_box"></span>
+				</div>
+				
+				
+			
+			
+				<!-- BIRTH -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="join_title">
+							<label for="yy">생년월일</label>
+						</h3>
+					</div>
+
+					<div id="bir_wrap" class="col-md-12">
+						<!-- BIRTH_YY -->
+						<div id="bir_yy" class="col-md-4">
+							<span class="box"> <input type="text" id="yy" class="int" name="yy"
+								maxlength="4" placeholder="년(4자)" required>
+							</span>
+						</div>
+
+						<!-- BIRTH_MM -->
+						<div id="bir_mm" class="col-md-4">
+							<span class="box"> <select id="mm" class="sel" name="mm" required>
+									<option>월</option>
+									<option value="01">1</option>
+									<option value="02">2</option>
+									<option value="03">3</option>
+									<option value="04">4</option>
+									<option value="05">5</option>
+									<option value="06">6</option>
+									<option value="07">7</option>
+									<option value="08">8</option>
+									<option value="09">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+							</select>
+							</span>
+						</div>
+
+						<!-- BIRTH_DD -->
+						<div id="bir_dd" class="col-md-4">
+							<span class="box"> <input type="text" id="dd" class="int" name="dd"
+								maxlength="2" placeholder="일" required>
+							</span>
+						</div>
+
+					</div>
+					<span class="error_next_box"></span>
+				</div>
+
+				<!-- GENDER -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="join_title ">
+							<label for="gender">성별</label>
+						</h3>
+					</div>
+					<div class="col-md-12">
+						<span class="box gender_code"> <select id="gender" name="gender" required
+							class="sel">
+								<option>성별</option>
+								<option value="M">남자</option>
+								<option value="F">여자</option>
+						</select>
+						</span> <span class="error_next_box">필수 정보입니다.</span>
+					</div>
+				</div>
 
 		
-
-			<!-- MOBILE -->
-			<div>
-				<h3 class="join_title">
-					<label for="phoneNo">휴대전화</label>
-				</h3>
-				<span class="box int_mobile"> <input type="tel" id="mobile" name="phone"
-					class="int" maxlength="11" placeholder="(-)하이픈 없이 입력">
-				</span> <span class="error_next_box"></span>
-			</div>
-
-				<!-- height -->
-			<div>
-				<h3>키</h3>
-
-				<span> <input type="number" id="height" placeholder="키 입력" name="height"
-					maxlength="3"></span> <span class="sta_height">cm</span>
+				<!-- MOBILE -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="join_title">
+							<label for="phoneNo">휴대전화</label>
+						</h3>
+					</div>
+					<div class="col-md-12">
+						<span class="box int_mobile"> <input type="tel" id="mobile" name="phone"
+							class="int" maxlength="11" placeholder="(-)하이픈 없이 입력" required>
+						</span> <span class="error_next_box"></span>
+					</div>
+				</div>
 
 
-			<!-- weight-->
+					<!-- height -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3>키</h3>
+					</div>
+					<div class="col-md-11">
+						<span> <input type="text" id="height" placeholder="키 입력" name="height"
+							maxlength="3" required></span>
+					</div>
+					<div class="col-md-1">
+						<span class="sta_height">cm</span>
+					</div>
+				</div>
 
-				<h3>체중</h3>
-
-				<span> <input type="number" id="weight" placeholder="체중 입력" name="weight"
-					maxlength="3"></span> <span class="sta_weight">Kg</span>
-
-			</div>
-
-			<div id="profile2-wrap">
-				<h3>프로필 사진</h3>
-				<input type="file" id="image" accept="image/*"
-					onchange="setThumbnail(event);" multiple />
-				<div id="image_container"></div>
 
 
-			</div>
-			<!-- JOIN BTN-->
-			<div class="btn_area">
-				<button type="submit" id="btnJoin">
-					<span>가입하기</span>
-				</button>
+				<!-- weight-->
+				<div class="row">
+					<div class="col-md-12">
+						<h3>체중</h3>
+					</div>
+					<div class="col-md-11">
+						<span> <input type="text" id="weight" placeholder="체중 입력" name="weight" required
+							maxlength="3"></span>
+					</div>
+					<div class="col-md-1">
+						<span class="sta_weight">Kg</span>
+					</div>
+				</div>
+			
+				<!-- 프로필 사진 -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3>프로필 사진</h3>
+						<input type="file" id="image" accept="image/*" name="userProfile"
+					onchange="setThumbnail(event);"/>
+					</div>
+					<div id="image_container"></div>
+				</div>
+			
+
+				<!-- JOIN BTN-->
+				<div class="btn_area row">
+					<div class="col-md-12">
+						<button type="submit" id="btnJoin">
+							<span>가입하기</span>
+						</button>
+					</div>
+				</div>
 			</div>
 			<!-- content-->
-		</div>
 
-		<!-- wrapper -->
+
+		</form>
 	</div>
-</form>
+	<div class="col-md-4"></div>
+</div>
 <form name="duplicateFrm" action="" method="post">
 	<input type="hidden" name="userId">
 	<input type="hidden" name="nickName">
 </form>
 
 
-
-
-
-
-
 <script>
+
+
+
+ function emailCheck(email){
+	console.log(email);
+	let url="emailCheck.jsp?email="+email;
+	open(url,"emailwindow","statusbar=no, scrollbar=no, menubar=no, width=400, height=200");
+	
+	<%-- location.assign("<%=request.getContextPath()%>/member/emailAuth?email="+email); --%>
+		
+	
+}
+
+
+$("#email").blur(function(email){
+	 const email2 = $("#email").val();
+	    if(email2 == ""){
+	        alert("이메일을 입력해 주십시오");
+	        return;
+	    }else{
+	$.ajax({
+		url :"<%=request.getContextPath()%>/member/emailDuplication",
+		type : 'post',
+		dataType:"text",
+		data:{
+			"email":$('#email').val()
+		},
+		success:data=>{
+				console.log(data);
+				
+				if(data=='fail'){
+					$("#email_chk").css('color','red')
+					$("#email_chk").html("사용할 수 없는 이메일입니다.")
+					
+					
+				}else{
+					$("#email_chk").css('color','blue')
+					$("#email_chk").html("사용할 수 있는 이메일입니다.")
+				}
+				
+				}
+			})
+	    }
+	})
+
+var pwMsg = document.querySelector('#alertTxt');
+
+function numberMaxLength(e){
+    if(e.value.length > e.maxLength){
+        e.value = e.value.slice(0, e.maxLength);
+    }
+}
+
+
 const fn_duplicateNick=()=>{
 	const status="width=350px,height=250px, left=500px, top=500px";
 	const title="duplicateNick";
@@ -240,7 +364,21 @@ function setThumbnail(event) {
 		document.querySelector("div#image_container").appendChild(img); 
 		};
 		
+		var f = event.target.files[0];
+		if(!f.type.match("image*")){
+			alert("이미지만 첨부할 수 있습니다.");
+			$("#image").val();
+			return;
+		}
+		
+		if(f.size>1024*1024*2){
+			alert("2mb까지의 사지만 업데이트 할 수 있습니다.");
+			return;
+		}
+		
+		
 		reader.readAsDataURL(event.target.files[0]); 
+	
 		}
 
 
@@ -270,10 +408,21 @@ var mobile = document.querySelector('#mobile');
 
 var error = document.querySelectorAll('.error_next_box');
 
-userId_.addEventListener("change", checkId);
+
+
+const fn_invalidate=()=>{
+	
+if(nickname.trim()==null){
+	const nickname = $("#nickName_").val();
+	alert("닉네임을 입력해주세요.");
+	return false;
+	}
+}
+
+id.addEventListener("change", checkId);
 pw1.addEventListener("change", checkPw);
 pw2.addEventListener("change", comparePw);
-userName.addEventListener("change", checkName);
+
 yy.addEventListener("change", isBirthCompleted);
 mm.addEventListener("change", isBirthCompleted);
 dd.addEventListener("change", isBirthCompleted);
@@ -300,7 +449,7 @@ function checkId() {
         error[0].innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
         error[0].style.display = "block";
     } else {
-        error[0].innerHTML = "멋진 아이디네요!";
+        error[0].innerHTML = "아주 멋지네요!";
         error[0].style.color = "#08A600";
         error[0].style.display = "block";
     }
