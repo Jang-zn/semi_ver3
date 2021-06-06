@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import=com.semi.member.controller.EmailAuthentication" %>
+    <%@page import="com.semi.member.controller.EmailAuthentication" %>
    <%--  <% 
     String AuthenticationKey = (String)request.getSession().getAttribute("AuthenticationKey");
     System.out.println(AuthenticationKey);
@@ -47,13 +47,11 @@ function confirmemail(emailconfirm, authNum ){
 	if(emailconfirm != authNum ){
 		alert("인증 실패하였습니다.");
 		emailconfirm.value="";
-		isCertification==false;
 		self.close();
     // 인증코드가 일치하는 경우
 	}else if(emailconfirm==authNum ){
 		alert("인증에 성공하셨습니다.");
 		emailconfirm.value="";
-		isCertification==true;
 		self.close();
 		opener.document.insertform.emailconfirm.value.value=1;
 	}
