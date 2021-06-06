@@ -2,8 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<% List<Gallary> list=(List<Gallary>)request.getAttribute("list");
-	String pageBar=(String)request.getAttribute("pageBar");	
+<% 	List<Gallary> list = (List<Gallary>)request.getAttribute("list");
+	String pageBar=(String)request.getAttribute("pageBar");
+	
+	
+	
 %>		
 	
 <%@ include file="/views/common/header.jsp"%>
@@ -21,10 +24,10 @@
 	<div class="col-md-1"></div>
 
 	<div id="n_content_area" class="col-md-10">
-
+		<span class="gal_no"></span>
 		<div id="n_content" class="col-md-8">
 			<div id="n_content_img" class="col-md-12">
-				<img src="">
+				<img class="content_img" src="">
 			</div>
 			<div id="n_date" class="col-md-12">
 				<p>21.5.26 / xxx님의 기록</p>
@@ -34,7 +37,11 @@
 					<textarea rows="10" cols="100"></textarea>
 				</div>
 			</div>
+			<input class="deleteNo" type="hidden" value="">
+			<input type="button" class ="btn btn-default" value="수정하기" onclick="gal_update();">
+            <input type="button" class ="btn btn-default" value="삭제하기" onclick="gal_delete();">
 		</div>
+		
 
 
 		<div id="n_list" class="col-md-4">
@@ -50,23 +57,39 @@
 						</form>
 				</div>
 			</div>
-
-
+ 			<%if(list.isEmpty()){ %>
+ 					<div></div>
+	<%}else{
+		for(Gallary g : list) { %>
+		
 			<div id="n_img_list" class="col-md-12">
+					
 				
 					<div class="row">
-						<div class="img_obj col-md-6"></div>
-						<div class="img_obj col-md-6"></div>
-					</div>
-					<div class="row">
-						<div class="img_obj col-md-6"></div>
-						<div class="img_obj col-md-6"></div>
-					</div>
-					<div class="row">
-						<div class="img_obj col-md-6"></div>
-						<div class="img_obj col-md-6"></div>
+						<div class="img_obj col-md-6">
+							<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>"/>
+							<img width="100%" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
+																			
+						</div>
 					</div>
 			</div>
+			<% }
+			}%>			
+							
+<!-- 						<div class="img_obj col-md-6"></div>
+						
+							
+					
+				<div class="img_obj col-md-6"></div>
+						<div class="img_obj col-md-6"></div>
+					</div>
+					<div class="row">
+						<div class="img_obj col-md-6"></div>
+						<div class="img_obj col-md-6"></div>
+					</div>
+			
+ -->
+			
 
 			<div id="n_pageBar" class="row">
 				<div class="col-md-12"><%=pageBar %></div>
@@ -76,6 +99,67 @@
 	<div class="col-md-1"></div>
 </div>
 
+<script>
+	$(".img_obj").click(e=>{
+		console.log($(e.target));
+/* 		console.log("gal_no: "+$(".gal_no").val());
+		var gal_no =$(".gal_no").val(); */
+		/* var gal_no =$(e.target).children(".gal_no").val(); */
+		var gal_no =$(e.target).prev().val();
+		console.log("gal_no: "+ gal_no);
+	
+		
+/* 	function noonList(){}
+		console.log("gal_no: "+$(".gal_no").val());
+		var gal_no =$(".gal_no").val(); */
+	//onclick = cilck
+		$.ajax({
+			url:"<%=request.getContextPath()%>/gallary/getGallaryList",
+			/* type:"post", */
+			data:{"gal_no" : gal_no},
+			dataType:"json",
+			success:getNoon,
+			error:function(){alert("error");
+			}
+		//$(e.target).parent.children($	
+		});				
+	});
+		function getNoon(data){ 	
+			var imgname=data["imgName"];		
+			console.log("imgname:"+imgname);						
+			 	$(".content_img").attr("src", "<%=request.getContextPath()%>/upload/gallary/"+imgname);			 	
+				$("#comment_area").html(data["content"]);
+				$(".deleteNo").attr("value" ,data["galNo"]);
+		}
+	
+	
+		const gal_delete=()=>{
+			var no =$(".deleteNo").val();
+			var src = $('.content_img').attr("src");
+			console.log("no: "+no);
+			console.log("src "+src);
+			if(confirm("삭제하시겠습니까?")){
+								
+				location.replace("<%=request.getContextPath()%>/gallary/deleteGallary?no="+no+"&filepath="+src);
+				
+			}
+		} 
+		
+		const gal_update=()=>{
+			var no =$(".deleteNo").val();
+			var src = $('.content_img').attr("src");
+			console.log("no: "+no);
+			console.log("src "+src);
+			
+			if(confirm("수정하시겠습니까?")){
+			location.assign("<%=request.getContextPath()%>/gallary/updateGallary?no="+no);
+			}
+		}
+	
+		
+	
+
+</script>
 
 
 <%@ include file="/views/common/footer.jsp"%>

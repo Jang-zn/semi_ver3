@@ -1,15 +1,18 @@
 package com.semi.gallary.controller;
 
-import java.io.*;
+import java.io.IOException;
 
-import javax.servlet.*;
-import javax.servlet.annotation.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.*;
-import com.oreilly.servlet.multipart.*;
-import com.semi.gallary.model.service.*;
-import com.semi.gallary.model.vo.*;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.oreilly.servlet.multipart.FileRenamePolicy;
+import com.semi.gallary.model.service.GallaryService;
+import com.semi.gallary.model.vo.Gallary;
 
 /**
  * Servlet implementation class GallaryWriteEndServlet
@@ -45,18 +48,21 @@ public class GallaryWriteEndServlet extends HttpServlet {
 		int result = new GallaryService().insertGallary(g);
 		int result2 = new GallaryService().insertGFile(file);
 		
+		
+		
 		String msg ="";
 		String loc="";
-		if(result>0&&result>0) {
+		if(result>0&&result2>0) {
 			msg="등록 성공";
 			loc="/gallary/list";
 		}else {
 			msg="등록 실패";
-			loc="";
+			loc="/gallary/write";
 		}
 		request.setAttribute("msg",msg);
 		request.setAttribute("loc",loc);
-		request.getRequestDispatcher("/view/common/msg.jsp").forward(request,response);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request,response);
 		
 		
 		

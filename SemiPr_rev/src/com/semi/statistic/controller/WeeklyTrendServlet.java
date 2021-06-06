@@ -1,27 +1,29 @@
-package com.semi.member.controller;
+package com.semi.statistic.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.semi.member.model.service.*;
-import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.MemberExcList;
+import com.semi.member.model.vo.MemberMenuList;
+import com.semi.statistic.model.service.StatisticService;
 
 /**
- * Servlet implementation class MemberMymenulistDeleteServlet
+ * Servlet implementation class WeeklyTrendServlet
  */
-@WebServlet("/member/mymenulistdelete")
-public class MemberMymenulistDeleteServlet extends HttpServlet {
+@WebServlet("/member/weeklyTrend")
+public class WeeklyTrendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberMymenulistDeleteServlet() {
+    public WeeklyTrendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +33,21 @@ public class MemberMymenulistDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int menuno = Integer.parseInt(request.getParameter("menuno"));
-		HttpSession session=request.getSession();
-		Member m=(Member)session.getAttribute("logged");
-		String memberid=m.getMemberId();
-		int result =new MemberService().MembermenulistDelete(menuno,memberid);
+		List<MemberExcList> list01=new StatisticService().TodayMemberExcList();	
 		
-		String msg="";
-		String loc="";
-		if(result>0) {
-			msg="삭제 성공";
-			loc="/member/myList";
-		}else {
-			msg="삭제 실패";
-			loc="/member/myList";
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		request.setAttribute("list01", list01);
+		List<MemberMenuList> list02=new StatisticService().TodayMemberMenuList();
+		request.setAttribute("list02", list02);	
+		
+		int excAchieve=new StatisticService().ExcAchieveCount();
+		request.setAttribute("excAchieve", excAchieve);
+		int menuAchieve=new StatisticService().MenuAchieveCount();
+		request.setAttribute("menuAchieve", menuAchieve);
+		
+		request.getRequestDispatcher("/views/member/weeklyTrend.jsp").forward(request, response);
+		
+		
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

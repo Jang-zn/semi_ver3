@@ -1,6 +1,7 @@
 package com.semi.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,20 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.semi.member.model.service.*;
+import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberMymenulistDeleteServlet
+ * Servlet implementation class InsertExcDailylogServlet
  */
-@WebServlet("/member/mymenulistdelete")
-public class MemberMymenulistDeleteServlet extends HttpServlet {
+@WebServlet("/daily/insertexcdaily")
+public class InsertExcDailylogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberMymenulistDeleteServlet() {
+    public InsertExcDailylogServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +32,29 @@ public class MemberMymenulistDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int menuno = Integer.parseInt(request.getParameter("menuno"));
 		HttpSession session=request.getSession();
 		Member m=(Member)session.getAttribute("logged");
 		String memberid=m.getMemberId();
-		int result =new MemberService().MembermenulistDelete(menuno,memberid);
-		
+		String exc=request.getParameter("excArr");
+		String[] excarr=exc.split(",");		
+		String sysdate=new MemberService().selectSysdate(memberid);
+		System.out.println(sysdate+"여기체크");
 		String msg="";
 		String loc="";
-		if(result>0) {
-			msg="삭제 성공";
-			loc="/member/myList";
+		if(sysdate==null||sysdate.equals("")) {
+		for(int i=1;i<excarr.length;i++) {
+			new MemberService().insertExcDaliylog(excarr[i]);
+		}
+			msg="일지를 등록했습니다.";
+			loc="/member/dailyLog";
 		}else {
-			msg="삭제 실패";
-			loc="/member/myList";
+			msg="이미 일지를 등록하셨습니다.";
+			loc="/member/dailyLog";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

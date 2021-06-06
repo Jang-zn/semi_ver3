@@ -1,6 +1,9 @@
 package com.semi.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,20 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.semi.member.model.service.*;
+import com.google.gson.Gson;
+import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.MemberExcList;
+import com.semi.member.model.vo.MemberMenuList;
 
 /**
- * Servlet implementation class MemberMymenulistDeleteServlet
+ * Servlet implementation class MembermenuDailylistAjaxServlet
  */
-@WebServlet("/member/mymenulistdelete")
-public class MemberMymenulistDeleteServlet extends HttpServlet {
+@WebServlet("/ajax/menudailylist")
+public class MembermenuDailylistAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberMymenulistDeleteServlet() {
+    public MembermenuDailylistAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +37,23 @@ public class MemberMymenulistDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int menuno = Integer.parseInt(request.getParameter("menuno"));
+		String menuday=request.getParameter("menuday");
 		HttpSession session=request.getSession();
-		Member m=(Member)session.getAttribute("logged");
+		Member m=(Member)session.getAttribute("logged");	
 		String memberid=m.getMemberId();
-		int result =new MemberService().MembermenulistDelete(menuno,memberid);
-		
-		String msg="";
-		String loc="";
-		if(result>0) {
-			msg="삭제 성공";
-			loc="/member/myList";
-		}else {
-			msg="삭제 실패";
-			loc="/member/myList";
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		int[] menuarr =new MemberService().selectmenuno(menuday,memberid);
+		List<MemberMenuList> list=new ArrayList(); 
+		for(int i=0;i<menuarr.length;i++) {
+			System.out.println(menuarr[i]);
+			if(menuarr[i]!=0) {
+				MemberMenuList mml=new MemberService().selectMemberMenuListbyno(menuarr[i]); 
+				System.out.println(mml);
+				list.add(mml);
+			}
+		}		
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(list,response.getWriter());
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

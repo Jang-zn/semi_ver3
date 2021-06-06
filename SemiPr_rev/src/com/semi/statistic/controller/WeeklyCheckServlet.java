@@ -1,7 +1,6 @@
-package com.semi.gallary.controller;
+package com.semi.statistic.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.common.PageBar;
-import com.semi.gallary.model.service.GallaryService;
-import com.semi.gallary.model.vo.Gallary;
+import org.json.simple.JSONObject;
 
-
+import com.semi.statistic.model.service.StatisticService;
 
 /**
- * Servlet implementation class GallaryListServlet
+ * Servlet implementation class WeeklyCheckServlet
  */
-@WebServlet("/gallary/list")
-public class GallaryListServlet extends HttpServlet {
+@WebServlet("/ajax/weeklyMenuCheck")
+public class WeeklyCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GallaryListServlet() {
+    public WeeklyCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +31,25 @@ public class GallaryListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int totalData = new GallaryService().selectGallaryCount();
-		String location ="/gallary/list";
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("application/jason;charset=utf-8");
+					
+		String weekCheck=request.getParameter("weekCheck");
+		String result=new StatisticService().weekMenuCheck(weekCheck);
 		
-		PageBar pb = new PageBar(request,totalData,5,location);
+		JSONObject jo=new JSONObject();
 		
-		request.setAttribute("pageBar",pb.getPageBar());
+		jo.put("weekCheck", result);
 		
-		List<Gallary> list=new GallaryService().selectGallaryList(pb.getCPage(),pb.getNumPerpage());
+		response.getWriter().print(jo);
 		
-		request.setAttribute("list", list);
-		
-		
-		
-		
-		request.getRequestDispatcher("/views/gallary/noonList.jsp").forward(request, response);
+	
 	}
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
