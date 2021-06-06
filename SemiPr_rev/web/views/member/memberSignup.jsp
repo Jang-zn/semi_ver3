@@ -54,8 +54,8 @@
 						<span class="box int_pass"> <input type="password" id="pswd1" name="password" placeholder="비밀번호"
 					class="int" maxlength="16" required> <span
 							id="alertTxt">사용불가</span>
-
-						</span> <span class="error_next_box"></span>
+						</span> 
+						<div id="pw-chk"></div>
 					</div>
 				</div>
 
@@ -284,10 +284,10 @@
 		var idPattern = /[a-zA-Z0-9_-]{5,13}/; //아이디 13자리까지 가능
 		if(!idPattern.test(userId)){
 			alert("5~13자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
-			
+			userId="";
 		}else if(userId.trim()==0){
 			alert("아이디를 입력하세요!");
-		
+			userId="";
 		}
 		
 	}); 
@@ -323,15 +323,18 @@
 	
 	
 	
-// 비밀번호 정규표현식
+// 비밀번호 정규표현식 
 	$("#pswd1").blur(function(){
     	var pw1 = $("#pswd1").val();
-    
+ 
     	console.log(pw1);
 		var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
 		if(pw1.trim().length==0){
-			alert("공백없이 패스워드를 입력하세요.");
-			return;
+			
+			$("#pw-chk").css('color','red');
+			$("#pw-chk").html("공백없이 패스워드를 입력하세요");
+			
+			
 		}else if(!pwPattern.test(pw1)){
 			alert("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
 			return;
@@ -455,13 +458,15 @@ function numberMaxLength(e){
 }
 
 //닉네임 중복검사 -> ajax로 교체할 예정
-
+//onchange
 $("#nickName_").blur(function(){
 	var isNickname = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,15}/; //인스타그램아이디 정규표현식
 	var nickName =$('#nickName_').val();
+	
 	console.log(nickName);
 	if(!isNickname.test(nickName)&&!nickName.trim()){
 		 alert("잘못된 형식의 닉네임입니다.");
+		 nickName="";
 	        return;
 		}else {
 			$.ajax ({
@@ -469,7 +474,8 @@ $("#nickName_").blur(function(){
 				type : "post",
 				dataType:"text",
 				data:{
-					"nickName":$("#nickName_").val().trim()
+					"nickName":$.trim($("#nickName_").val()) //trim 처리하기
+					
 				},
 				success:data=>{
 					console.log(data);
