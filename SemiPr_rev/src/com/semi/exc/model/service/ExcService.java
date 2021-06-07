@@ -79,4 +79,11 @@ public class ExcService {
 		
 	}
 	
+	public Map[] reasonE(String memberId, String date, int length){
+		Connection conn = getConnection();
+		Map[] result = dao.reasonE(conn, memberId, date, length);
+		close(conn);		
+		return result;
+		
+	}
 }

@@ -240,6 +240,48 @@ public class ExcDao {
 		return list;
 	}
 	
+	public Map[] reasonE (Connection conn, String memberId, String date, int length){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Map map = null;
+		Map[] list = new Map[length];
+		try {
+			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			String sql = p.getProperty("reasonE").replace("<L>", ""+length);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, date);
+			pstmt.setString(3, date);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+			    map = new HashMap();
+			    int d = Integer.parseInt(rs.getString(2).substring(8,10));
+			    map.put("count", rs.getInt(1));
+			    map.put("date", d);
+			    map.put("check", rs.getString(3));
+			    map.put("reason", rs.getString(4));
+			    list[d-1]= map;
+			}
+			for(int i=0;i<length;i++) {
+				if(list[i]!=null) {
+					
+				}else {
+					map = new HashMap();
+					list[i]= map;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return list;
+	}
+	
 	public Map[] planCountExcforChart (Connection conn, String memberId, String date, int length){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

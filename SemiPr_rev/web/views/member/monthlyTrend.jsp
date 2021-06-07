@@ -73,7 +73,10 @@
 						</div>
 					</div>
 					<div id="" class="col-md-6 rank">
-						<div class="row"></div>
+						<div class="row">
+							<div class="col-md-8 cContainer"><canvas id="chart10" ></canvas></div>
+							<div class="col-md-4"></div>		
+						</div>
 					</div>
 				</div>
 
@@ -88,11 +91,14 @@
 				<div id="data_container" class="row">
 					<div id="" class="col-md-6 pieChart">
 						<div class="row cContainer">
-							<canvas id="chart9" class="col-md-12"></canvas>
+							<canvas id="chart9" ></canvas>
 						</div>
 					</div>
 					<div id="" class="col-md-6 rank">
-						<div class="row"></div>
+						<div class="row">
+							<div class="col-md-8 cContainer"><canvas id="chart11" ></canvas></div>
+							<div class="col-md-4"></div>
+						</div>
 					</div>
 				</div>
 
@@ -145,7 +151,107 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/calendar.css">
 
+
+
+
+
+
+
+
+
+
 <script>
+//Piechart(10, 11) 작성 : 미실천 분류
+const pieE = $("#chart10");
+const pieChartE = new Chart(pieE, {
+	type:'pie',
+	data:{
+		labels:["게으름","다른 일정","피치못할사정","기타"],
+		datasets: [{
+		    data: [0,0,0,0],
+		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)"],
+		}]
+	},
+	options: {
+    	layout:{padding:0},
+    	maintainAspectRatio: false,
+    	plugins: {
+			legend: {
+				position:'right'
+			},
+			title: {
+        		display: true,
+        		text: '미실천 사유'
+			}
+    	},
+	}
+})
+
+const pieM = $("#chart11");
+const pieChartM = new Chart(pieM, {
+	type:'pie',
+	data:{
+		labels:["게으름","회식","야식","기타"],
+		datasets: [{
+		    data: [0,0,0,0],
+		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)"],
+		}]
+	},
+	options: {
+    	layout:{padding:0},
+    	maintainAspectRatio: false,
+    	plugins: {
+			legend: {
+				position:'right'
+			},
+			title: {
+        		display: true,
+        		text: '미실천 사유'
+			}
+    	},
+	}	
+})
+
+
+const pieCall=()=>{
+let list = $("span.thism");
+let yymm01=null;
+if(viewMonth<10){
+	yymm01=viewYear+"/0"+(viewMonth+1)+"/01"
+}else{
+	yymm01=viewYear+"/"+(viewMonth+1)+"/01"
+}
+$.ajax({
+	url:"<%=request.getContextPath()%>/member/monthlyTrend/piecall?length="+list.length+"&yymm01="+yymm01,
+	dataType:"json",
+	success:data=>{
+		console.log(data);
+		let dataE = [0,0,0,0];
+		let dataM = [0,0,0,0];
+		data[0].forEach(function(ep){
+			if(ep!=null&&ep.check=='N'){
+				dataE[ep.reason]+=1
+				console.log(ep);
+			}
+		});
+		data[1].forEach(function(mp){
+			if(mp!=null&&mp.check=='N'){
+				dataM[mp.reason]+=1
+			}
+		});
+		
+		pieChartE.data.datasets[0].data=dataE;
+		pieChartE.update();
+		
+		pieChartM.data.datasets[0].data=dataM;
+		pieChartM.update();
+
+	}
+});
+}
+
+
+
 
 const callPlan=()=>{
 	let list = $("span.thism");
@@ -192,6 +298,7 @@ const callPlan=()=>{
 				reloadChart(eChart, ey, en, list.length);
 				reloadChart(mChart, my, mn, list.length);
 			}
+			pieCall();
 		}		
 	});
 }
@@ -266,8 +373,8 @@ const reloadChart=(chart, y, n, l)=>{
 
 
 
-
-
+	
+	
 
 
 //Linechart 작성 / 업데이트

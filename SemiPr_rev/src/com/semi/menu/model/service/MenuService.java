@@ -78,4 +78,11 @@ public class MenuService {
 		
 	}
 	
+	public Map[] reasonM(String memberId, String date, int length){
+		Connection conn = getConnection();
+		Map[] result = dao.reasonM(conn, memberId, date, length);
+		close(conn);		
+		return result;
+		
+	}
 }
