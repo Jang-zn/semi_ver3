@@ -52,7 +52,7 @@ public class GallaryDeleteServlet extends HttpServlet {
 			
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc","/gallary/list");
+		request.setAttribute("loc","/gallary/list?numPerpage=6"); 
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request,response);
 		
 		
