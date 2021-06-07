@@ -15,7 +15,7 @@ import java.util.Properties;
 
 import com.semi.member.daily.model.vo.DailyExercise;
 import com.semi.member.daily.model.vo.DailyMenu;
-
+import com.semi.member.daily.model.vo.DailyMenuList;
 import com.semi.member.daily.model.vo.DailyRecordCheck;
 
 import com.semi.member.exc.model.vo.Exercise;
@@ -523,10 +523,10 @@ public class MemberDao {
   
   
 
-	public List<MemberMenuList> selectDailymenulist(Connection conn, String dayval,String memberid) {
+	public List<DailyMenuList> selectDailymenulist(Connection conn, String dayval,String memberid, String daytime) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<MemberMenuList> list=new ArrayList();
+		List<DailyMenuList> list=new ArrayList();
 		String path=MemberDao.class.getResource("/sql/daily_sql.properties").getPath();
 		try {
 			p.load(new FileReader(path));		
@@ -537,15 +537,21 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(p.getProperty("selectDailymenulist"));
 			pstmt.setString(1, memberid);
 			pstmt.setString(2, dayval);;
+//			pstmt.setString(3, daytime);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				MemberMenuList mml=new MemberMenuList();
-				mml.setMenuNo(rs.getInt("menu_no"));
-				mml.setAmount(rs.getInt("amount"));
-				mml.setMenuId(rs.getString("menu_id"));
-				mml.setMenuDaytime(rs.getString("menu_daytime"));
-				mml.setMenuName(rs.getString("menu_name"));
-				list.add(mml);
+				DailyMenuList dml=new DailyMenuList();
+				dml.setMenuNo(rs.getInt("menu_no"));
+				dml.setAmount(rs.getInt("amount"));
+				dml.setMenuId(rs.getString("menu_id"));
+				dml.setMenuDaytime(rs.getString("menu_daytime"));
+				dml.setMenuName(rs.getString("menu_name"));
+				dml.setCh(rs.getInt("ch"));
+				dml.setFat(rs.getInt("fat"));
+				dml.setKcal(rs.getInt("kcal"));
+				dml.setNa(rs.getInt("na"));
+				dml.setProt(rs.getInt("prot"));
+				list.add(dml);
 			
 			}
 		}catch(SQLException e) {
@@ -575,6 +581,8 @@ public class MemberDao {
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		
 		return result;
@@ -867,6 +875,7 @@ public class MemberDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				DailyExercise de=new DailyExercise();
+				de.seteLogNo(rs.getInt("rnum"));
 				de.setExcDate(rs.getDate("exc_date"));
 				System.out.println(de.getExcDate());
 				list.add(de);			
@@ -931,7 +940,8 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(p.getProperty("selectmenuSysdate"));
 			pstmt.setString(1, memberid);
 			rs=pstmt.executeQuery();
-			if(rs.next()) sysdate=rs.getString("menu_date");
+			if(rs.next()) sysdate=rs.getString(1);
+			System.out.println(sysdate);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -963,6 +973,7 @@ public class MemberDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				DailyMenu dm=new DailyMenu();
+				dm.setmLogNo(rs.getInt("rnum"));
 				dm.setMenuDate(rs.getDate("menu_date"));
 				list.add(dm);			
 			}					
@@ -977,10 +988,10 @@ public class MemberDao {
 
 
 
-	public int[] selectmenuno(Connection conn, String menuday, String memberid) {
+	public int[] selectmenuno(Connection conn, String menuday, String memberid, String daytime) {
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
-		int[] menuno=new int[100];
+		int[] menuno=new int[300];
 		int index=0;
 		String sql="SELECT DISTINCT(MENU_NO) FROM MEM_M_LIST JOIN DAILY_M USING(MENU_NO) WHERE MEMBER_ID=? AND MENU_WEEK=?";
 		
@@ -988,6 +999,7 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberid);
 			pstmt.setString(2, menuday);
+			//pstmt.setString(3, daytime);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				menuno[index]=rs.getInt("menu_no");
@@ -1005,10 +1017,10 @@ public class MemberDao {
 
 
 
-	public MemberMenuList selectMemberMenuListbyno(Connection conn, int i) {
+	public DailyMenuList selectMemberMenuListbyno(Connection conn, int i) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		MemberMenuList mml=null;
+		DailyMenuList dml=null;
 		String path=MemberDao.class.getResource("/sql/daily_sql.properties").getPath();
 		try {
 			p.load(new FileReader(path));		
@@ -1020,12 +1032,18 @@ public class MemberDao {
 			pstmt.setInt(1, i);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				mml=new MemberMenuList();
-				mml.setMenuNo(rs.getInt("menu_no"));
-				mml.setAmount(rs.getInt("amount"));
-				mml.setMenuId(rs.getString("menu_id"));
-				mml.setMenuDaytime(rs.getString("menu_daytime"));
-				mml.setMenuName(rs.getString("menu_name"));	
+				dml=new DailyMenuList();
+				dml.setMenuNo(rs.getInt("menu_no"));
+				dml.setAmount(rs.getInt("amount"));
+				dml.setMenuId(rs.getString("menu_id"));
+				dml.setMenuDaytime(rs.getString("menu_daytime"));
+				dml.setMenuName(rs.getString("menu_name"));
+				dml.setCh(rs.getInt("ch"));
+				dml.setFat(rs.getInt("fat"));
+				dml.setKcal(rs.getInt("kcal"));
+				dml.setNa(rs.getInt("na"));
+				dml.setProt(rs.getInt("prot"));
+
 			}
 					
 		}catch(SQLException e) {
@@ -1033,7 +1051,7 @@ public class MemberDao {
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return mml;
+		}return dml;
 	}
 
 
@@ -1265,7 +1283,6 @@ public class MemberDao {
 		}		
 		return result;
 	}
-
 
 }
 

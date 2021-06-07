@@ -6,6 +6,7 @@ import static com.semi.common.JdbcTemplate.getConnection;
 import static com.semi.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import com.semi.exc.model.dao.ExcDao;
 
 import com.semi.member.daily.model.vo.DailyExercise;
 import com.semi.member.daily.model.vo.DailyMenu;
-
+import com.semi.member.daily.model.vo.DailyMenuList;
 import com.semi.member.daily.model.vo.DailyExercise;
 import com.semi.member.daily.model.vo.DailyMenu;
 import com.semi.member.daily.model.vo.DailyRecordCheck;
@@ -115,24 +116,30 @@ public class MemberService {
 		return result;
 	}
 
-	public List<MemberMenuList> selectDailymenulist(String dayval,String memberid) {
+	public List<DailyMenuList> selectDailymenulist(String dayval,String memberid, String daytime) {
 		Connection conn = getConnection();
-		List<MemberMenuList> list= dao.selectDailymenulist(conn,dayval,memberid);
+		List<DailyMenuList> list= dao.selectDailymenulist(conn,dayval,memberid,daytime);
 		close(conn);		
 		return list;
 	}
-	public int insertExcDaliylog(String excarr) {
+	public int insertExcDaliylog(String[] excarr) {
 		Connection conn =getConnection();
-		int result =dao.insertExcDaliylog(conn,excarr);
+		int result=0;
+		for(int i=1;i<excarr.length;i++) {
+		result =dao.insertExcDaliylog(conn,excarr[i]);
 		if(result>0) commit(conn);
 		else rollback(conn);		
+		}
 		return result;
 	}
-	public int insertMenuDaliylog(String menuarr) {
+	public int insertMenuDaliylog(String[] menuarr) {
 		Connection conn =getConnection();
-		int result =dao.insertMenuDaliylog(conn,menuarr);
+		int result=0;
+		for(int i=1;i<menuarr.length;i++) {
+		result =dao.insertMenuDaliylog(conn,menuarr[i]);
 		if(result>0) commit(conn);
 		else rollback(conn);		
+		}
 		return result;
 	}
 
@@ -205,16 +212,22 @@ public class MemberService {
 		close(conn);		
 		return list;
 	}
-	public MemberExcList  selectMemberExcListbyno(int i) {
+	public List<MemberExcList> selectMemberExcListbyno(int[] excarr) {
 		Connection conn = getConnection();
-		MemberExcList mel = dao.selectMemberExcListbyno(conn,i);
+		List<MemberExcList> list=new ArrayList();
+		for(int i=0;i<excarr.length;i++) {
+			if(excarr[i]!=0) {
+				MemberExcList mel = dao.selectMemberExcListbyno(conn,excarr[i]);
+				list.add(mel);
+			}
+		}
 		close(conn);	
-		return mel;
+		return list;
 		
 	}
 	public String selectmenuSysdate(String memberid) {
 		Connection conn =getConnection();
-		String sysdate =dao.selectSysdate(conn,memberid);
+		String sysdate =dao.selectmenuSysdate(conn,memberid);
 		close(conn);
 		return sysdate;
 	}
@@ -224,17 +237,24 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
-	public int[] selectmenuno(String menuday, String memberid) {
+	public int[] selectmenuno(String menuday, String memberid, String daytime) {
 		Connection conn =getConnection();
-		int[] menuno =dao.selectmenuno(conn,menuday,memberid);
+		int[] menuno =dao.selectmenuno(conn,menuday,memberid,daytime);
 		close(conn);
 		return menuno;
 	}
-	public MemberMenuList selectMemberMenuListbyno(int i) {
+	public List<DailyMenuList> selectMemberMenuListbyno(int[] menuarr) {
 		Connection conn = getConnection();
-		MemberMenuList mml = dao.selectMemberMenuListbyno(conn,i);
-		close(conn);	
-		return mml;
+		List<DailyMenuList> list = new ArrayList();
+		for(int i=0;i<menuarr.length;i++) {
+		if(menuarr[i]!=0) {
+			DailyMenuList dml = dao.selectMemberMenuListbyno(conn,menuarr[i]);
+		
+		list.add(dml);
+			}
+		}
+		close(conn);
+		return list;
 	}
 	public int selectDailyexclistCount(String memberid) {
 		Connection conn = getConnection();
@@ -278,5 +298,6 @@ public class MemberService {
 		close(conn);	
 		return check;
 	}
+
 	
 }

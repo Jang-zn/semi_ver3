@@ -88,7 +88,7 @@ public class MemberMyListServlet extends HttpServlet {
 		request.setAttribute("list2", list2);
 		
 		
-		request.getRequestDispatcher("/views/member/plan/old_memberMyList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/plan/new_memberMyList.jsp").forward(request, response);
 		}
 	}
 
