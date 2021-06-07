@@ -42,7 +42,7 @@ public class BoardContentServlet extends HttpServlet {
 	         for(Cookie c : cookies) {
 	            String name=c.getName();
 	            String value=c.getValue();
-	            if(name.equals("noticeReadNo")) { 
+	            if(name.equals("boardReadNo")) { 
 	               if(value.contains("|"+no+"|")) {
 	                  readFlag=true;
 	                  break;
