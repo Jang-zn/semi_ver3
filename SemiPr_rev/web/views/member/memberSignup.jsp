@@ -32,7 +32,7 @@
 					</div>
 					<div class="col-md-12">
 						<span class="box int_id"> <input
-						type="text" id="userId_" name="userId" class="int" maxlength="12" placeholder="아이디" 
+						type="text" id="userId_" name="userId" class="int" maxlength="13" placeholder="아이디" 
 						style="width: 100%; height: 100%" required></span>
 						<input type="hidden"
 						name="idDuplication" value="idUncheck">
@@ -52,8 +52,7 @@
 					</div>
 					<div class="col-md-12">
 						<span class="box int_pass"> <input type="password" id="pswd1" name="password" placeholder="비밀번호"
-					class="int" maxlength="16" required> <span
-							id="alertTxt">사용불가</span>
+					class="int" maxlength="16" required> 
 						</span> 
 						<div id="pw-chk"></div>
 					</div>
@@ -69,8 +68,8 @@
 					<div class="col-md-12">
 						<span class="box int_pass_check"> <input type="password" 
 							id="pswd2" class="int" maxlength="16" required>
-
-						</span> <span class="error_next_box"></span>
+						</span> 
+						<div id="pw-chk2"></div>
 					</div>
 				</div>
 
@@ -285,20 +284,13 @@
 		if(!idPattern.test(userId)){
 			alert("5~13자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
 			userId="";
-		}else if(userId.trim()==0){
-			alert("아이디를 입력하세요!");
-			userId="";
 		}
 		
 	}); 
 	
 //아이디 중복 	
 	$("#userId_").blur(function(userId){
-		const userId2 = $("#userId_").val();
-		if(userId2 == ""){
-			alert("아이디를 입력하세요.");
-			return;
-		}else{
+	
 			$.ajax({
 				url:"<%=request.getContextPath()%>/member/idDuplication",
 				type : "post",
@@ -317,7 +309,6 @@
 					}
 				}
 			})
-		}
 	})
 	
 	
@@ -326,7 +317,7 @@
 // 비밀번호 정규표현식 
 	$("#pswd1").blur(function(){
     	var pw1 = $("#pswd1").val();
- 
+ 		
     	console.log(pw1);
 		var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
 		if(pw1.trim().length==0){
@@ -338,8 +329,20 @@
 		}else if(!pwPattern.test(pw1)){
 			alert("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
 			return;
+		}else {
+			$("#pw-chk").css('color','green');
+			$("#pw-chk").html("아름다운 비밀번호입니다.");
 		}
 	});
+	
+	$("#pswd2").blur(function(){
+		var pw1 = $("#pswd1").val();
+		var pw2 = $("#pswd2").val();
+		if(pw1 != pw2){
+			$("#pw-chk2").css('color','red');
+			$("#pw-chk2").html("비밀번호가 맞지않습니다. 다시 확인해주세요.");
+		}
+	})
     
 
 
@@ -460,25 +463,31 @@ function numberMaxLength(e){
 //닉네임 중복검사 -> ajax로 교체할 예정
 //onchange
 $("#nickName_").blur(function(){
-	var isNickname = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,15}/; //인스타그램아이디 정규표현식
+	var isNickname = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,15}/; //인스타그램아이디 정규표현식 가운데 공백 제거추가필요
 	var nickName =$('#nickName_').val();
+	var nickName2 = nickName.replace(/(\s*)/g, "");
+	console.log(nickName2); 
+	console.log(nickName); 
+	var nick = nickName.trim();
 	
-	console.log(nickName);
-	if(!isNickname.test(nickName)&&!nickName.trim()){
-		 alert("잘못된 형식의 닉네임입니다.");
-		 nickName="";
-	        return;
+	if(nickName != nickName2){
+		alert("공백없이 입력해주세요");
+	}
+	if(!isNickname.test(nickName2)){ 
+		alert("잘못된 형식의 닉네임입니다.");
+	     
 		}else {
 			$.ajax ({
 				url:"<%=request.getContextPath()%>/member/nickNameDuplication",
 				type : "post",
 				dataType:"text",
 				data:{
-					"nickName":$.trim($("#nickName_").val()) //trim 처리하기
+					
+					"nickName":nickName2 //trim 처리하기
 					
 				},
 				success:data=>{
-					console.log(data);
+					
 					if(data=="fail"){
 						$("#nickCheck").css('color','red')
 						$("#nickCheck").html("이미 사용중인 닉네임입니다.")

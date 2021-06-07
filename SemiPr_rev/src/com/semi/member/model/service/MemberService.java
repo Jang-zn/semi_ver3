@@ -186,6 +186,13 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	public Member findId(String name, String email) {
+		Connection conn = getConnection();
+		Member m = dao.findId(conn, name, email);
+		close(conn);
+		return m;
+		
+	}
 	
 
 	

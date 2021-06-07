@@ -677,6 +677,41 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+
+
+
+	public Member findId(Connection conn, String name, String email) {
+		PreparedStatement pstmt =null;
+		Member m =null;
+		ResultSet rs = null;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("findId"));
+			pstmt.setString(1,name);
+			pstmt.setString(2,email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m= new Member();
+				m.setMemberId(rs.getString("MEMBER_ID"));
+				m.setMemberPw(rs.getString("MEMBER_PW"));
+				m.setEmail(rs.getString("EMAIL"));
+				m.setName(rs.getString("NAME"));
+				m.setNickname(rs.getString("NICKNAME"));
+				m.setBirth(rs.getDate("BIRTH"));
+				m.setPhone(rs.getString("PHONE"));
+				m.setHeight(rs.getDouble("HEIGHT"));
+				m.setWeight(rs.getDouble("WEIGHT"));
+				m.setGender(rs.getString("GENDER"));
+				m.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				m.setProfileImg(rs.getString("PROFILE_IMG"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return m;
 	}   
     
     
