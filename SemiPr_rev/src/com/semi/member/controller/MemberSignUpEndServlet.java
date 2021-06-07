@@ -17,6 +17,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 import com.semi.common.AESEncrypt;
+import com.semi.common.filter.EncryptWrapper;
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 
@@ -25,13 +26,13 @@ import com.semi.member.model.vo.Member;
  * Servlet implementation class MemberEnrollServlet
  */
 @WebServlet("/member/memberSignup")
-public class MemberSignUpServlet extends HttpServlet {
+public class MemberSignUpEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSignUpServlet() {
+    public MemberSignUpEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -72,7 +73,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		}
 		
 		m.setMemberId(mr.getParameter("userId"));
-		m.setMemberPw(mr.getParameter("password"));
+		m.setMemberPw(EncryptWrapper.getSHA512(mr.getParameter("password")));
 		//m.setEmail(mr.getParameter("email"));
 		String email = mr.getParameter("email");
 		try {
