@@ -21,7 +21,6 @@ public class InsertDBMListClolling {
 	
 	 public static void main(String[] args) {   
 		    for(int i=250; i<400; i++) {
-			   //newsCrawling("https://100.daum.net/encyclopedia/view/191XXXXXXX"+Integer.toString(i));
 		 		newsCrawling("https://www.nongsaro.go.kr/portal/ps/psz/psza/contentSub.ps?menuId=PS00152&pageIndex=1&pageSize=10&pageUnit=12&cntntsNo=89"+Integer.toString(i)+"&dietSeCode=254002");
 		      }
 		   }
@@ -35,10 +34,8 @@ public class InsertDBMListClolling {
 			         e.printStackTrace();
 			      }
 			      
-			      //<ul class="list_news">태그 내부의 모든 내용이 담긴다.
 			      Elements element=doc.select("div.tit_bg");
 			      
-			      //element가 갖고잇는 내용중 <div class="cont_thumb">인 내용을 모두 가져옴
 			      Iterator<Element> title=element.select("div.sub_tit+div strong").iterator();
 			      Iterator<Element> content=element.select("div.sub_tit+div p.w-350").iterator();
 			      Iterator<Element> content2=element.select("div.sub_tit+div p.w-300").iterator();

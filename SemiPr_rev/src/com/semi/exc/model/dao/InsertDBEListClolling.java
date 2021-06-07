@@ -37,10 +37,8 @@ public class InsertDBEListClolling {
 		         e.printStackTrace();
 		      }
 		      
-		      //<ul class="list_news">태그 내부의 모든 내용이 담긴다.
 		      Elements element=doc.select("div#daumContent");
 		      
-		      //element가 갖고잇는 내용중 <div class="cont_thumb">인 내용을 모두 가져옴
 		      Iterator<Element> title=element.select("h3.tit_desc").iterator();
 		      Iterator<Element> content=element.select("p.desc_section").iterator();
 		      Iterator<Element> a=element.select("iframe").iterator();
