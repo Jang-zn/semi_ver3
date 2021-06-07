@@ -46,16 +46,18 @@
 
 				<div id="select_sort" class="col-md-2">
 					<select id="dataType_select">
-						<option name="dataType" value="">운동 실천현황</option>
-						<option name="dataType" value="">식단 실천현황</option>
-						<option name="dataType" value="">누적 운동량(reps)</option>
-						<option name="dataType" value="">섭취 칼로리(kcal)</option>
-					</select><br> <label><input type="radio" name="term" value="1m">
-						1개월 </label><br> <label><input type="radio" name="term"
-						value="3m"> 3개월 </label><br> <label><input
-						type="radio" name="term" value="6m"> 6개월 </label><br> <label><input
-						type="radio" name="term" value="12m"> 1년 </label><br>
-					<button id="read_trend" name="read_trend">조회하기</button>
+						<option name="dataType" value="monthlyExc">운동 실천현황</option>
+						<option name="dataType" value="monthlyMenu">식단 실천현황</option>
+						<option name="dataType" value="stackReps">누적 운동량(reps)</option>
+						<option name="dataType" value="stackKcals">섭취 칼로리(kcal)</option>
+					</select><br> 
+					<select id="dataPeriod">
+						<option name="term" value="1m">1개월 </option>
+						<option name="term" value="3m"> 3개월 </option> 
+						<option name="term" value="6m"> 6개월 </option> 
+						<option name="term" value="12m"> 1년 </option>
+					</select>
+					<button id="read_trend" name="read_trend" onclick="chartCall();">조회하기</button>
 				</div>
 			</div>
 
@@ -65,31 +67,12 @@
 			<div id="statistics_container" class="col-md-12">
 				<div id="excMonth" class="row">X월 운동 실천율</div>
 				<div id="data_container" class="row">
-					<div id="pieChart" class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">1</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-2">3</div>
-							<div class="col-md-2">4</div>
-							<div class="col-md-2">5</div>
-							<div class="col-md-2">6</div>
-						</div>
+					<div id="" class="col-md-6 pieChart">
 						<div class="row cContainer">
-
 							<canvas id="chart8" class="col-md-12"></canvas>
-
-
 						</div>
 					</div>
-					<div id="rank" class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">1</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-2">3</div>
-							<div class="col-md-2">4</div>
-							<div class="col-md-2">5</div>
-							<div class="col-md-2">6</div>
-						</div>
+					<div id="" class="col-md-6 rank">
 						<div class="row"></div>
 					</div>
 				</div>
@@ -103,31 +86,12 @@
 			<div id="statistics_container" class="col-md-12">
 				<div id="menuMonth" class="row">X월 식단 실천율</div>
 				<div id="data_container" class="row">
-					<div id="pieChart" class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">1</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-2">3</div>
-							<div class="col-md-2">4</div>
-							<div class="col-md-2">5</div>
-							<div class="col-md-2">6</div>
-						</div>
+					<div id="" class="col-md-6 pieChart">
 						<div class="row cContainer">
-
 							<canvas id="chart9" class="col-md-12"></canvas>
-
-
 						</div>
 					</div>
-					<div id="rank" class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">1</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-2">3</div>
-							<div class="col-md-2">4</div>
-							<div class="col-md-2">5</div>
-							<div class="col-md-2">6</div>
-						</div>
+					<div id="" class="col-md-6 rank">
 						<div class="row"></div>
 					</div>
 				</div>
@@ -205,7 +169,7 @@ const callPlan=()=>{
 						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
 						ey++;
 					}else{
-						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;");
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("eReason");
 						en++
 					}
 				}
@@ -215,7 +179,7 @@ const callPlan=()=>{
 						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
 						my++;
 					}else{
-						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;");
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("mReason");
 						mn++;
 					}
 				}
@@ -290,7 +254,6 @@ const menuPie=(y, n, l)=>{
 const reloadChart=(chart, y, n, l)=>{
 	Data = {data: [y/l, n/l, 1-(y/l+n/l)]};
 	
-	console.log("y : "+y+" n : "+n+" l : "+l)
 	
 	chart.data.datasets.forEach((dataset) => {
         dataset.data.pop();
@@ -305,18 +268,36 @@ const reloadChart=(chart, y, n, l)=>{
 
 
 
-let lineLabel;
-let lineDataSet;
+
+
+
+
+
+//Linechart 작성 / 업데이트
+
+let lineLabels;
+let lineDataSets;
+let lineConfig;
+
 
 //line chart
 const line = $("#lineChart");
 const lineChart = new Chart(line, {
     type: 'bar',
     options:{
-        legend:{
-         	display:false
-    	},
+    	plugins: {
+            legend: {
+                display: false,
+            }
+        },
     	maintainAspectRatio : false,
+    	scales:{
+    		y: {
+                suggestedMax: 1.3,
+                display:false
+            },
+            
+    	}
 	},
     data: {
         labels: [
@@ -337,17 +318,6 @@ const lineChart = new Chart(line, {
                 
             },
             {
-                label: "",
-                type:'line',
-                data: [1, 1, 1, 1, 0, 0, 1, 0, 1, 0,
-                        1, 0, 0, 1, 0, 1, 0, 1, 0, 1,
-                        1, 1, 1, 0, 1, 0, 1, 0, 1, 1,
-                ],
-                borderColor : 'rgba(0,0,255,0.3)',
-                borderWidth:3,
-                
-            },
-            {
                 type:'line',
                 label: '실천완료',
                 data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -355,13 +325,39 @@ const lineChart = new Chart(line, {
                         1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                 ],
                 borderColor : 'lightgreen',
-                borderWidth:2,
+                borderWidth:5,
                 borderDash:[10,10],
                 pointRadius:0,
             }
         ]},
 });
 
+
+const reloadLineChart=(chart,dataset)=>{
+	Data = {data: [y/l, n/l, 1-(y/l+n/l)]};
+	
+	
+	chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+        dataset.data.pop();
+        dataset.data.pop();
+        dataset.data.push(Data.data[0]);
+        dataset.data.push(Data.data[1]);
+        dataset.data.push(Data.data[2]);
+    });
+	chart.update();	//차트 업데이트
+}
+
+
+const chartCall=()=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/member/monthlyChart",
+		dataType:"json",
+		success:{
+			
+		}
+	});
+};
 
 
 

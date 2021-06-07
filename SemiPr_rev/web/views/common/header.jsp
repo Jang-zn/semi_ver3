@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import = "com.semi.member.model.vo.*" %>
 <%
-	Member loginMember = (Member)session.getAttribute("login");
+	Member loginMember = (Member)session.getAttribute("logged");
 %>
     <!DOCTYPE html>
     <html lang="en">
@@ -65,7 +65,19 @@
                 </div>
             </div>
             <% if(loginMember!=null){ %>
-            	<div id="profile_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="border-radius:100%;"></div>
+            	<div id="profile_area" class="col-md-3">
+            		<div class="row">
+            			<div class="col-md-12">
+            				<img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="border-radius:100%;">
+            			</div>
+            		</div>
+            		<div class="row">
+            			<div class="col-md-12" style="text-align:center">
+            				<span style="text-align:center"><%=loginMember.getNickname()%></span>
+            				<button onclick="location.assign('<%=request.getContextPath()%>/member/logout')">로그아웃</button>
+            			</div>
+            		</div>
+            	</div>
             <%}else{ %>
             	<div id="login_area" class="col-md-3">
             		<span onclick="login();">&#9786;로그인</span>

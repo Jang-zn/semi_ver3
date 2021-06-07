@@ -86,10 +86,13 @@
 	display: flex;
 }
 
-#pieChart, #rank {
+.pieChart, .rank {
 	height: 300px;
 	margin: 20px;
 }
 .cContainer{
-	height:90%;
+	height:100%;
+}
+.eReason, .mReason:hover{
+	cursor:pointer
 }
