@@ -54,9 +54,9 @@
     <div class="container">
         <!-- 카테고리 버튼 -->
         <div class="row">
-            <div class="col-md-2 title01"><a href="<%=request.getContextPath()%>/member/weeklyTrend" class="btn1">주간 현황</a></div>
-            <div class="col-md-2 title01"><a href="<%=request.getContextPath()%>/member/monthlyTrend" class="btn1">월간 현황</a></div>
-            <div class="col-md-2 title01"><a href="<%=request.getContextPath()%>/member/myData" class="btn1">My Data</a></div>
+            <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/weeklyTrend" class="btn1">주간 현황</a></div>
+            <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/monthlyTrend" class="btn1">월간 현황</a></div>
+            <%-- <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/myData" class="btn1">My Data</a></div> --%>
         </div>
         <br><br>
 
@@ -67,7 +67,7 @@
             </div>
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-2 title01">운동</div>
+                    <div class="col-md-2 title02">운동</div>
                     <div id="weeklyExcStatus">
                         <div class="col-md-1"><div class="weeklyExcStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">화</div></div>
@@ -82,7 +82,7 @@
             </div>  
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-2 title01">식단</div>
+                    <div class="col-md-2 title02">식단</div>
                     <div id="weeklyMenuStatus">
                         <div class="col-md-1"><div class="weeklyMenuStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">화</div></div>
@@ -93,7 +93,7 @@
                         <div class="col-md-1"><div class="weeklyMenuStatus">일</div></div>
                     </div>                    
 
-                    <div class="col-md-3 title01"><div>연속 <%=menuAchieve %>일 달성</div> </div>                    
+                    <div class="col-md-3 title01">연속 <%=menuAchieve %>일 달성 </div>                    
                     
                 </div>
             </div>         
@@ -205,7 +205,7 @@
                     <%if(excList.isEmpty()){  %>
                     	<div class="title01"> 오늘 예정된 운동이 없습니다.</div>
                     <%}else{%>
-                    <div class="row">
+                    <div class="row list01">
                     	<div class="col-md-3">운동 이름</div>
                     	<div class="col-md-3">reps</div>
                     	<div class="col-md-3">sets</div>
@@ -216,7 +216,7 @@
                     <%
                     int count=0;
                     for( MemberExcList m : excList){%>
-                    <div class="row">
+                    <div class="row list02">
                     
 	                    		<!-- 첫번째 이름으로 다 받아오고 있음.. 수정해야 됨 -->
                     	<div class="col-md-3"><%=m.getExcId_c() %></div>
@@ -241,7 +241,7 @@
                 </div> -->
                 <div class="row">
                     <div class="col-md-4"></div>
-                    <div class="col-md-4"><button onclick="">달성 확인 버튼</button></div>
+                    <div class="col-md-4"><button onclick="" class="btn01">달성 확인</button></div>
                 </div>
             </div>
             
@@ -262,21 +262,21 @@
                     	<%if(excList.isEmpty()){  %>
 	                    	<div class="title01"> 오늘 예정된 식단이 없습니다.</div>
 	                    <%}else{%>
-	                    <div class="row">
+	                    <div class="row list01">
 	                    	<div class="col-md-3">식단 이름</div>
 	                    	<div class="col-md-3">양</div>
-	                    	<div class="col-md-3">아침/점심/저녁</div>
+	                    	<div class="col-md-4" >아침/점심/저녁</div>
 	              		  </div>
 	                    	<!-- 식단 이름은 운동 id로 가져와야 됨 -->
 	                    	
 	                    <%
 	                    int count=0;
 	                    for( MemberMenuList m : menuList){%>
-	                    <div class="row">
+	                    <div class="row list02">
 	                    		<!-- 첫번째 이름으로 다 받아오고 있음.. 수정해야 됨 -->
 	                    	<div class="col-md-3"><%=m.getMenuId_c() %></div>
 	                    	<div class="col-md-3"><%=m.getAmount() %> 양</div>
-	                    	<div class="col-md-3"><%=m.getMenuDaytime() %></div>
+	                    	<div class="col-md-4"><%=m.getMenuDaytime() %></div>
 	                    </div>
 	                   <%
 	                    	count++;
@@ -292,7 +292,7 @@
                 </div> -->
                 <div class="row">
                     <div class="col-md-4"></div>
-                    <div class="col-md-4"><button onclick="">달성 확인 버튼</button></div>
+                    <div class="col-md-4"><button onclick="" class="btn01">달성 확인</button></div>
                 </div>
             </div>
 

@@ -6,13 +6,24 @@
     font-style: normal;
 }
 
-.weeklyMenuStatus { 
-	/* default */
+/* .weeklyMenuStatus { 
+	default
 	width:100%;
 	height:auto;
    	border-radius:50%;
    	border: 1px solid black;
    	text-align:center;  		
+} */
+
+.title00{	
+	font-family: 'PFStardust';
+	font-size:2.5rem;
+	font-weight:bold;	
+}
+
+.title00>a{
+	color:cadetblue;
+	text-shadow: -0.7px 0 black, 0 0.7px black, 0.7px 0 black, 0 -0.7px black;
 }
     	
 .title01{	
@@ -20,19 +31,60 @@
 	font-size:2rem;
 	font-weight:bold;
 }
-
-#weeklyExcStatus{
-	align-items:center;
-}
-.weeklyExcStatus, .weeklyMenuStatus{
+.title02{	
 	font-family: 'PFStardust';
 	font-size:2.5rem;
 	font-weight:bold;
+}
+
+.weeklyExcStatus, .weeklyMenuStatus{	
+	font-family: 'PFStardust';
+	font-size:3.5rem;
+	font-weight:bold;
 	color:white;
 	text-align:center;
+	text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
 	
 	width:6rem;
 	height:6rem;
    	border-radius:50%;
-   	text-align:center;
+   	border: 1.5px solid black;	
+   	
+   	margin:auto;
+ 
+}
+
+#weeklyExcStatus, #weeklyMenuStatus { 
+		align-items:center;		
+}
+
+.btn01{
+	border-radius:0.2em;
+  	border:1.5px solid black;
+  	background-color:cadetblue;
+  	font-family: 'PFStardust';
+  	font-weight:bold;
+  	font-size:2rem;
+  	text-align: center;
+  	padding:0.5rem 1rem 0.5rem 1rem;
+  	margin-top:1rem;
+}
+
+.list01{
+	border-radius:0.2em;
+  	border:1.5px solid black;
+  	background-color:lightgray;
+  	
+  	font-size:1.8rem;
+  	font-weight:bold;
+  	
+  	margin-top:0.5rem;
+  	margin-bottom:0.5rem;
+  	margin-right:0.1rem;
+}
+
+.list02{
+	font-size: 1.6rem;	
+	
+  	margin-right:0.1rem;
 }

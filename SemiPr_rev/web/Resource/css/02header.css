@@ -10,7 +10,7 @@
 	*{
 		margin:0;
 		padding:0;
-		/* border: 0.1px solid red; */  
+		border: 0.1px solid red;
 		
 		
 	}
@@ -40,8 +40,6 @@
 	
       
  	#content_container {
-		padding-right: 15px;
-		padding-left: 15px;
 		margin-left:100px;
 		margin-right:100px;
 		
@@ -52,11 +50,11 @@
 		background-color: black; 		
 		margin-right: auto;
 		margin-left: auto;	
-		height:5rem;		
+		/* height:5rem; */		
 	}
 
 	#menu_container, #profile_area, #login_area{
-		margin-top:1.5rem;	
+		 margin-top:1.5rem;	 
 	}
 	
 	#aside_container {

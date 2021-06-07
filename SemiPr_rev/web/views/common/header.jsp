@@ -58,8 +58,8 @@
                         <div class="sub">
                         	<div class="progress_menu"><a href="<%=request.getContextPath()%>/member/dailyLog">일일 기록</a></div>
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/weeklyTrend">주간 실천 현황</a></div>
-                           <%--  <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/monthlyTrend">월간 실천 현황</a></div> --%>
-                            <div class="progress_menu"><a href="">My Data</a></div>
+                            <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/monthlyTrend">월간 실천 현황</a></div>
+                            <!-- <div class="progress_menu"><a href="">My Data</a></div> -->
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/gallary/list">눈바디</a></div>
                         </div>
                     </div>
@@ -80,7 +80,6 @@
             <%} %>            
         </div>
         
-        
 		<div id="aside_content" class="row">
-      	  <div id="content_container" class="col-md-10">
+      	 <div id="content_container" class="col-md-11">
                 <!-- 이 위까지 header -->
