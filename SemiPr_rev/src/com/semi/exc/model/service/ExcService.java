@@ -71,6 +71,12 @@ public class ExcService {
 		
 	}
 	
-	
+	public Map[] planStackExcTotal(String memberId, String date, int length){
+		Connection conn = getConnection();
+		Map[] result = dao.planStackExcTotal(conn, memberId, date, length);
+		close(conn);		
+		return result;
+		
+	}
 	
 }

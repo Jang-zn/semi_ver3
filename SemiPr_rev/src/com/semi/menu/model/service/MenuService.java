@@ -70,4 +70,12 @@ public class MenuService {
 	}
 	
 	
+	public Map[] planStackMenuTotal(String memberId, String date, int length){
+		Connection conn = getConnection();
+		Map[] result = dao.planStackMenuTotal(conn, memberId, date, length);
+		close(conn);		
+		return result;
+		
+	}
+	
 }

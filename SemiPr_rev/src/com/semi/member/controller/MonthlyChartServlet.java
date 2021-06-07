@@ -52,10 +52,12 @@ public class MonthlyChartServlet extends HttpServlet {
 			new Gson().toJson(mlist, response.getWriter());
 			break;
 		case "stackReps":  
-			
+			Map[] eslist = new ExcService().planStackExcTotal(memberId, date, length);
+			new Gson().toJson(eslist, response.getWriter());
 			break;
 		case "stackKcals":
-			
+			Map[] mslist = new MenuService().planStackMenuTotal(memberId, date, length);
+			new Gson().toJson(mslist, response.getWriter());
 			break;
 		}
 		

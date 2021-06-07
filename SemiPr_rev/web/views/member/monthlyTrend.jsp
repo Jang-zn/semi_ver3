@@ -48,8 +48,8 @@
 					<select id="dataType_select">
 						<option name="dataType" value="monthlyExc">운동 실천현황</option>
 						<option name="dataType" value="monthlyMenu">식단 실천현황</option>
-						<option name="dataType" value="stackReps">누적 운동량(reps)</option>
-						<option name="dataType" value="stackKcals">섭취 칼로리(kcal)</option>
+						<option name="dataType" value="stackReps">누적 운동량</option>
+						<option name="dataType" value="stackKcals">누적 섭취량</option>
 					</select><br> 
 					<select id="dataPeriod">
 						<option name="term" value="1m">1개월 </option>
@@ -146,6 +146,7 @@
 	href="<%=request.getContextPath()%>/Resource/css/calendar.css">
 
 <script>
+
 const callPlan=()=>{
 	let list = $("span.thism");
 	let yymm01=null;
@@ -271,10 +272,6 @@ const reloadChart=(chart, y, n, l)=>{
 
 //Linechart 작성 / 업데이트
 
-let lineLabels;
-let lineDataSets;
-let lineConfig;
-
 
 //line chart
 const line = $("#lineChart");
@@ -371,21 +368,33 @@ const chartCall=()=>{
 						maintainAspectRatio : false,
 						scales:{
 						   	y: {
-						   	suggestedMax: 1.3,
+						   	suggestedMax: 1.2,
 						   	display:false
 						    },
 						},
 					}
-
-					lineChart.data={
-						datasets:[{
-							label: '운동',
-					        borderColor : 'blue',
-					        backgroundColor:'rgba(0,0,255,0.3)',
-					        borderWidth:2,
-					        fill:true
-						}]
-					}
+					,
+			        length>31?
+			        	lineChart.data={
+							datasets:[{
+								label: '운동',
+						        borderColor : 'blue',
+						        backgroundColor:'rgba(0,0,255,0.3)',
+						        borderWidth:2,
+						        fill:true,
+						        pointRadius:2
+							}]
+						}
+			        :	lineChart.data={
+							datasets:[{
+								label: '운동',
+							       borderColor : 'blue',
+							       backgroundColor:'rgba(0,0,255,0.3)',
+							       borderWidth:2,
+							       fill:true,
+							}]
+						}
+					
 					lineChart.data.labels=labels;
 					lineChart.data.datasets[0].data=planYN;
 					lineChart.update();
@@ -429,20 +438,32 @@ const chartCall=()=>{
 						maintainAspectRatio : false,
 						scales:{
 						   	y: {
-						   	suggestedMax: 1.3,
+						   	suggestedMax: 1.2,
 						   	display:false
 						    },
 						},
 					}
-					lineChart.data={
-						datasets:[{
-							label: '식단',
-				            borderColor : 'green',
-				            backgroundColor:'rgba(0,255,0,0.3)',
-				            borderWidth:2,
-				            fill:true
-						}]
-					}
+					length>31?
+						lineChart.data={
+							datasets:[{
+								label: '식단',
+						          borderColor : 'green',
+						          backgroundColor:'rgba(0,255,0,0.3)',
+						          borderWidth:2,
+						          fill:true,
+						          pointRadius:2
+							}]
+						}
+			        :lineChart.data={
+							datasets:[{
+								label: '식단',
+						           borderColor : 'green',
+						           backgroundColor:'rgba(0,255,0,0.3)',
+						           borderWidth:2,
+						           fill:true,
+							}]
+						}
+
 					lineChart.data.labels=labels;
 					lineChart.data.datasets[0].data=planYN;
 					lineChart.update();
@@ -452,12 +473,11 @@ const chartCall=()=>{
 			
 			
 		case "stackReps":
-			console.log(lineChart);
-			console.log(lineChart.$context);
 			$.ajax({
-				url:"<%=request.getContextPath()%>/member/monthlyChart?length="+length+"&sysdate="+sysdate+"&key=monthlyMenu",
+				url:"<%=request.getContextPath()%>/member/monthlyChart?length="+length+"&sysdate="+sysdate+"&key=stackReps",
 				dataType:"json",
 				success:data=>{
+					
 					//labels
 					let labels=[];
 					let countIndex=0;
@@ -474,7 +494,21 @@ const chartCall=()=>{
 							planYN[countIndex++]=el.check=='Y'?1:0;
 						}
 					});
-					lineChart.$context.type='line';
+					
+					
+					let stackExcW=[];
+					let stack=0;
+					for(let i=0;i<planYN.length;i++){
+						if(planYN[i]!=0&&planYN[i]!=null){
+							stack+=data[i].repsetwei;
+							stackExcW[i]=stack;
+						}else{
+							stackExcW[i]=stack;
+						}
+						
+					}
+					
+					
 					lineChart.options={
 						plugins: {
 							legend: {
@@ -482,28 +516,35 @@ const chartCall=()=>{
 							},
 							title: {
 			            		display: true,
-			            		text: '운동 횟수 누계'
+			            		text: '누적 운동량'
 			    			}
 						},    
 						maintainAspectRatio : false,
-						scales:{
-						   	y: {
-						   	suggestedMax: 1.3,
-						   	display:false
-						    },
-						},
 					}
-					lineChart.data={
-						datasets:[{
-							label: '운동횟수',
-				            borderColor : 'blue',
-				            backgroundColor:'rgba(0,0,255,0.3)',
-				            borderWidth:2,
-				            fill:true
-						}]
-					}
+					length>31?
+							lineChart.data={
+							datasets:[{
+								label: '운동무게(rep*set*weight)',
+					            borderColor : 'blue',
+					            backgroundColor:'rgba(0,0,255,0.3)',
+					            borderWidth:2,
+					            pointBorderWidth:1,
+							    pointRadius:2
+								}]
+							}
+				        :	lineChart.data={
+								datasets:[{
+									label: '운동무게(rep*set*weight)',
+						            borderColor : 'blue',
+						            backgroundColor:'rgba(0,0,255,0.3)',
+						            borderWidth:2,
+						            pointBorderWidth:1,
+						            
+								}]
+							}
+					
 					lineChart.data.labels=labels;
-					lineChart.data.datasets[0].data=planYN;
+					lineChart.data.datasets[0].data=stackExcW;
 					lineChart.update();
 				}
 			});
@@ -511,17 +552,162 @@ const chartCall=()=>{
 			
 			
 		case "stackKcals":  
-			
-			
+			$.ajax({
+				url:"<%=request.getContextPath()%>/member/monthlyChart?length="+length+"&sysdate="+sysdate+"&key=stackKcals",
+				dataType:"json",
+				success:data=>{
+					console.log(data);
+					//labels
+					let labels=[];
+					let countIndex=0;
+					data.forEach(function(el){
+						labels[countIndex++]=el.date;
+					});
+					//YN check
+					let planYN=[];
+					countIndex=0;
+					data.forEach(function(el){
+						if(el.check==null){
+							planYN[countIndex++]=null;
+						}else{
+							planYN[countIndex++]=el.check=='Y'?1:0;
+						}
+					});
+					let stackKcal=[];
+					let stack=0;
+					for(let i=0;i<planYN.length;i++){
+						if(planYN[i]!=0&&planYN[i]!=null){
+							stack+=data[i].kcal;
+							stackKcal[i]=stack;
+						}else{
+							stackKcal[i]=stack;
+						}
+						
+					}
+					let stackCH=[];
+					stack=0;
+					for(let i=0;i<planYN.length;i++){
+						if(planYN[i]!=0&&planYN[i]!=null){
+							stack+=data[i].ch;
+							stackCH[i]=stack;
+						}else{
+							stackCH[i]=stack;
+						}
+						
+					}
+					let stackProt=[];
+					stack=0;
+					for(let i=0;i<planYN.length;i++){
+						if(planYN[i]!=0&&planYN[i]!=null){
+							stack+=data[i].prot;
+							stackProt[i]=stack;
+						}else{
+							stackProt[i]=stack;
+						}
+						
+					}
+					let stackFat=[];
+					stack=0;
+					for(let i=0;i<planYN.length;i++){
+						if(planYN[i]!=0&&planYN[i]!=null){
+							stack+=data[i].fat;
+							stackFat[i]=stack;
+						}else{
+							stackFat[i]=stack;
+						}
+						
+					}
+
+					lineChart.options={
+						plugins: {
+							title: {
+			            		display: true,
+			            		text: '누적 섭취량'
+			    			}
+						},    
+						maintainAspectRatio : false,
+					}
+					length>31?
+							lineChart.data={
+							datasets:[{
+								label: 'Kcal',
+					            borderColor : 'rgba(0,255,0,1)',
+					            backgroundColor:'rgba(0,255,0,0.3)',
+					            borderWidth:2,
+					            pointBorderWidth:1,
+					            pointRadius:1
+					            
+							},{
+								label: '탄수화물',
+					            borderColor : 'rgba(102,102,153,1)',
+					            backgroundColor:'rgba(102,102,153,0.3)',
+					            borderWidth:2,
+					            pointBorderWidth:1,
+					            pointRadius:1
+					            
+							},{
+								label: '단백질',
+					            borderColor : 'rgba(255,51,51,1)',
+					            backgroundColor:'rgba(255,51,51,0.3)',
+					            borderWidth:2,
+					            pointBorderWidth:1,
+					            pointRadius:1
+					            
+							},{
+								label: '지방',
+					            borderColor : 'rgba(204,153,51,1)',
+					            backgroundColor:'rgba(204,153,51,0.3)',
+					            borderWidth:2,
+					            pointBorderWidth:1,
+					            pointRadius:1
+							}]
+						}
+				        :lineChart.data={
+								datasets:[{
+									label: 'Kcal',
+						            borderColor : 'rgba(0,255,0,1)',
+						            backgroundColor:'rgba(0,255,0,0.3)',
+						            borderWidth:2,
+						            pointBorderWidth:1,
+								},{
+									label: '탄수화물',
+						            borderColor : 'rgba(102,102,153,1)',
+						            backgroundColor:'rgba(102,102,153,0.3)',
+						            borderWidth:2,
+						            pointBorderWidth:1,
+								},{
+									label: '단백질',
+						            borderColor : 'rgba(255,51,51,1)',
+						            backgroundColor:'rgba(255,51,51,0.3)',
+						            borderWidth:2,
+						            pointBorderWidth:1,
+								},{
+									label: '지방',
+						            borderColor : 'rgba(204,153,51,1)',
+						            backgroundColor:'rgba(204,153,51,0.3)',
+						            borderWidth:2,
+						            pointBorderWidth:1,
+								}]
+							}
+
+					lineChart.data.labels=labels;
+					console.log(lineChart.data.datasets);
+					console.log(stackKcal);
+					console.log(stackCH);
+					console.log(stackProt);
+					
+					lineChart.data.datasets[0].data=stackKcal;
+					lineChart.data.datasets[1].data=stackCH;
+					lineChart.data.datasets[2].data=stackProt;
+					lineChart.data.datasets[3].data=stackFat;
+					lineChart.update();
+				}
+			});
 			break;
 	}
 };
 
-
-
-
 window.onload=chartCall();
-
 
 </script>
 <script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>
