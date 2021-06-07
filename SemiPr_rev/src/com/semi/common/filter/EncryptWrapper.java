@@ -14,7 +14,8 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		super(request);
 	
 	}
-	private String getSHA512(String val) {
+	
+	public static String getSHA512(String val) {
 		String encValue;
 		MessageDigest md = null;
 		try {
@@ -37,6 +38,7 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		}else {
 			value=super.getParameter("password");
 		}
+		System.out.println(value);
 		return value;
 	}
 }
