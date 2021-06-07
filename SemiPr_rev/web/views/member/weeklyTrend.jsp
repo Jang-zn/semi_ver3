@@ -36,6 +36,10 @@
 	int excAchieve=(int)request.getAttribute("excAchieve");
 	int menuAchieve=(int)request.getAttribute("menuAchieve");
 	
+	//통계 결과 받아오기
+	
+	MenuInfo menuStatistic=(MenuInfo)request.getAttribute("menuStatistic");
+	
 %>
 	
 
@@ -345,10 +349,11 @@
 	/* 임시 식단 pie차트 */
 	
          /* DB에서 데이터 받아와 주간 평균 내서 값 넣기 */
-		var ch=10;
-		var prot=20;
-		var fat=100-ch-prot;
+		var ch=<%=menuStatistic.getCh()%>;
+		var prot=<%=menuStatistic.getProt()%>;
+		var fat=<%=menuStatistic.getFat()%>;
 	
+		console.log(ch+" : "+prot+" : "+fat);
 	 	var ctx = document.getElementById('menuChart');
     	var menuChart = new Chart(ctx, {
          type: 'pie',

@@ -44,13 +44,11 @@ public class StatisticDao {
 			pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				MemberExcList m=new MemberExcList();				
+				MemberExcList m=new MemberExcList();			
+				m.setExcId_c(rs.getString("exc_name"));			
 				m.setSets(rs.getInt("sets"));
 				m.setReps(rs.getInt("reps"));
 				m.setWeight(rs.getInt("weight"));
-				//excId_c를 excName으로 대치시킴
-				String excName=new StatisticService().excInfo(rs.getString("exc_id")).getExcName();
-				m.setExcId_c(excName);
 				list.add(m);				
 			}
 					
@@ -70,18 +68,21 @@ public class StatisticDao {
 		ResultSet rs=null;
 		List<MemberMenuList> list=new ArrayList();
 		try {
-			//결과 보기 위해서 SYSDATE를 SYSDATE-1로 두었음. SQL문 수정할 것
+			//결과 보기 위해서 SYSDATE를 SYSDATE-n로 두었음. SQL문 수정할 것
 			pstmt=conn.prepareStatement(prop.getProperty("todayMenuList"));
 			pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				MemberMenuList m=new MemberMenuList();				
+				MemberMenuList m=new MemberMenuList();		
+				m.setMenuId_c(rs.getString("menu_name"));
 				m.setAmount(rs.getInt("amount"));
 				m.setMenuId(rs.getString("menu_id"));
 				m.setMenuDaytime(rs.getString("menu_daytime"));
-				//menuId_c를 menuName으로 대치시킴
-				String menuName=new StatisticService().menuInfo(rs.getString("menu_id")).getMenuName(); 
-				m.setMenuId_c(menuName);
+				
+//				//menuId_c를 menuName으로 대치시킴 String menuName=new
+//				 StatisticService().menuInfo(rs.getString("menu_id")).getMenuName();
+//				 m.setMenuId_c(menuName);
+//				 
 				list.add(m);				
 			}
 					
@@ -95,53 +96,53 @@ public class StatisticDao {
 		}return list;
 	}
 	
-	//excId로 정보 조회해오기
-	public ExcInfo excInfo(Connection conn, String excId){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-
-		ExcInfo eInfo=new ExcInfo();	
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("excInfo"));
-			pstmt.setString(1, excId); 
-			rs=pstmt.executeQuery();
-			while(rs.next()) {		
-				eInfo.setExcName(rs.getString("exc_name"));
-			}
-					
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}catch(NullPointerException e){
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return eInfo;
-	}
-	
-	//menuId로 정보 조회해오기
-	public MenuInfo menuInfo(Connection conn, String menuId){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-
-		MenuInfo mInfo=new MenuInfo();	
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("menuInfo"));
-			pstmt.setString(1, menuId); 
-			rs=pstmt.executeQuery();
-			while(rs.next()) {		
-				mInfo.setMenuName(rs.getString("menu_name"));
-			}
-					
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}catch(NullPointerException e){
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return mInfo;
-	}
+//	//excId로 정보 조회해오기
+//	public ExcInfo excInfo(Connection conn, String excId){
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//
+//		ExcInfo eInfo=new ExcInfo();	
+//		try {
+//			pstmt=conn.prepareStatement(prop.getProperty("excInfo"));
+//			pstmt.setString(1, excId); 
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) {		
+//				eInfo.setExcName(rs.getString("exc_name"));
+//			}
+//					
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}catch(NullPointerException e){
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return eInfo;
+//	}
+//	
+//	//menuId로 정보 조회해오기
+//	public MenuInfo menuInfo(Connection conn, String menuId){
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//
+//		MenuInfo mInfo=new MenuInfo();	
+//		try {
+//			pstmt=conn.prepareStatement(prop.getProperty("menuInfo"));
+//			pstmt.setString(1, menuId); 
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) {		
+//				mInfo.setMenuName(rs.getString("menu_name"));
+//			}
+//					
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}catch(NullPointerException e){
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return mInfo;
+//	}
 	
 	public String weekExcCheck(Connection conn, String weekCheck) {
 		PreparedStatement pstmt=null;
@@ -309,4 +310,37 @@ public class StatisticDao {
 	}
 	
 	
+	//주간 식단 %
+	public MenuInfo menuStatistic(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		MenuInfo menuStatistic=new MenuInfo(); //return할 형태
+		int ch=0;
+		int prot=0;
+		int fat=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("weeklyMenu")); //1주일간 영양 합계를 받아올거임
+			pstmt.setString(1, "test1");	//아이디 대신 test1 넣었음			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {	
+				ch=rs.getInt("sum(ch)");
+				prot=rs.getInt("sum(prot)");
+				fat=rs.getInt("sum(fat)");
+				
+				menuStatistic.setCh(ch);
+				menuStatistic.setProt(prot);
+				menuStatistic.setFat(fat);				
+			}	
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(NullPointerException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return menuStatistic;
+	}
 }
