@@ -37,7 +37,7 @@
 	int menuAchieve=(int)request.getAttribute("menuAchieve");
 	
 	//통계 결과 받아오기
-	
+	List<ExcInfo> excStatistic=(List<ExcInfo>)request.getAttribute("excStatistic");
 	MenuInfo menuStatistic=(MenuInfo)request.getAttribute("menuStatistic");
 	
 %>
@@ -221,8 +221,6 @@
                     int count=0;
                     for( MemberExcList m : excList){%>
                     <div class="row list02">
-                    
-	                    		<!-- 첫번째 이름으로 다 받아오고 있음.. 수정해야 됨 -->
                     	<div class="col-md-3"><%=m.getExcId_c() %></div>
                     	<div class="col-md-3"><%=m.getReps() %> reps</div>
                     	<div class="col-md-3"><%=m.getSets()%> sets</div>
@@ -277,7 +275,6 @@
 	                    int count=0;
 	                    for( MemberMenuList m : menuList){%>
 	                    <div class="row list02">
-	                    		<!-- 첫번째 이름으로 다 받아오고 있음.. 수정해야 됨 -->
 	                    	<div class="col-md-3"><%=m.getMenuId_c() %></div>
 	                    	<div class="col-md-3"><%=m.getAmount() %> 양</div>
 	                    	<div class="col-md-4"><%=m.getMenuDaytime() %></div>
@@ -311,11 +308,10 @@
                     <div class="col-md-12">
                         <div class="row">
                         	<!-- DB에서 데이터 받아와 순위 계산해서 값 넣기 -->
-                            <div class="col-md-12">1 </div>
-                            <div class="col-md-12">2 </div>
-                            <div class="col-md-12">3 </div>
-                            <div class="col-md-12">4 </div>
-                            <div class="col-md-12">5 </div>
+                        	<%for(int i=0; i<5; i++){ %>
+                        		<div class="col-md-2"><%=i+1 %>. </div>
+                        		<div class="col-md-10"><%=excStatistic.get(i).getExcName() %></div>
+                        	<%} %>
                         </div>
                     </div>
                 </div>                    

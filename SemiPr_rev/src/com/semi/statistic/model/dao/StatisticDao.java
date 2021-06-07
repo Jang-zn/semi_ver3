@@ -309,6 +309,30 @@ public class StatisticDao {
 		
 	}
 	
+	//주간 운동 통계
+	public List<ExcInfo> excStatistic(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ExcInfo> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("weeklyExc"));
+			pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ExcInfo e=new ExcInfo();		
+				e.setExcName(rs.getString("exc_name"));//				 
+				list.add(e);				
+			}
+					
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 	
 	//주간 식단 %
 	public MenuInfo menuStatistic(Connection conn) {

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.semi.member.model.vo.MemberExcList;
 import com.semi.member.model.vo.MemberMenuList;
 import com.semi.statistic.model.service.StatisticService;
+import com.semi.statistic.model.vo.ExcInfo;
 import com.semi.statistic.model.vo.MenuInfo;
 
 /**
@@ -43,6 +44,10 @@ public class WeeklyTrendServlet extends HttpServlet {
 		request.setAttribute("excAchieve", excAchieve);
 		int menuAchieve=new StatisticService().MenuAchieveCount();
 		request.setAttribute("menuAchieve", menuAchieve);
+		
+		List<ExcInfo> excStatistic=new StatisticService().ExcStatistic();
+		request.setAttribute("excStatistic", excStatistic);
+		System.out.println(excStatistic.get(0).getExcName());
 		
 		MenuInfo menuStatistic=new StatisticService().MenuStatistic();
 		request.setAttribute("menuStatistic", menuStatistic);
