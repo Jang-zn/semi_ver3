@@ -16,6 +16,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
+import com.semi.common.AESEncrypt;
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 
@@ -72,12 +73,26 @@ public class MemberSignUpServlet extends HttpServlet {
 		
 		m.setMemberId(mr.getParameter("userId"));
 		m.setMemberPw(mr.getParameter("password"));
-		m.setEmail(mr.getParameter("email"));
+		//m.setEmail(mr.getParameter("email"));
+		String email = mr.getParameter("email");
+		try {
+			email=AESEncrypt.encrypt(email);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		m.setEmail(email);
 		m.setName(mr.getParameter("name"));
 		m.setNickname(mr.getParameter("nickName"));
 		m.setBirth(memberAge);
 		m.setGender(mr.getParameter("gender"));
-		m.setPhone(mr.getParameter("phone"));
+		//m.setPhone(mr.getParameter("phone"));
+		String phone = mr.getParameter("phone");
+		try {
+			phone=AESEncrypt.encrypt(phone);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		m.setPhone(phone);
 		m.setHeight(Double.parseDouble(mr.getParameter("height")));
 		m.setWeight(Double.parseDouble(mr.getParameter("weight")));
 		m.setProfileImg(mr.getFilesystemName("userProfile"));
