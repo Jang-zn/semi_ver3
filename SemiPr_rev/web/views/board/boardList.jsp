@@ -142,11 +142,14 @@
 							<div class="board_content_info col-md-1">
 								<%=b.getReadCount() %>
 							</div>
-							<%-- <%if(loginM.getUserId("admin")||loginM.getUserId(b.getWriter()) {%> --%>
 							<div class="board_content_info col-md-1">
+							<%if(loginMember!=null) {%>
+								<%if(loginMember.getMemberId().equals("admin")||loginMember.getMemberId().equals(b.getMemberId())){ %>
 								<button value = "<%=b.getContentNo() %>" onclick="deleteBoard(event)">삭제하기</button>
+								 <%} %> 
+							 <%} %>
+							
 							</div>
-							<%-- <%} %> --%>
 						</div>
 					<%} %>
 				<%} %>

@@ -134,10 +134,12 @@
 		<div id="content_btn_area" class="row">
 			<div class="col-md-5"></div>
 			<!-- 관리자 or 작성자만 수정 삭제 가능하게 -->
-			<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(b.getMemberId())){ %> --%>
-				<div class="btn col-md-1" onclick="location.assign('<%=request.getContextPath()%>/board/update?no=<%=b.getContentNo()%>');">수정하기</div>
-				<div class="btn col-md-1" onclick="deleteBoard();">삭제하기</div>
-			<%-- <%} %> --%>
+			<%if(loginMember!=null) {%>
+				<%if(loginMember.getMemberId().equals("admin")||loginMember.getMemberId().equals(b.getMemberId())){ %>
+					<div class="btn col-md-1" onclick="location.assign('<%=request.getContextPath()%>/board/update?no=<%=b.getContentNo()%>');">수정하기</div>
+					<div class="btn col-md-1" onclick="deleteBoard();">삭제하기</div>
+				 <%} %> 
+			 <%} %>
 			<div class="col-md-5"></div>
 		</div>
 
@@ -173,13 +175,16 @@
 							</div>
 							<div class="reply_btn_area row">
 								<div class="col-md-9"></div>
-								<div class="reply_btn col-md-1"><button value ="<%=re.getReplyNo()%>" class="lev1">댓글</button></div>
+								<div class="reply_btn col-md-1"><button onclick="loginCheckReply();" value ="<%=re.getReplyNo()%>" class="lev1">댓글</button></div>
 								<input type="hidden" value="<%=re.getReplyNo()%>">
 								<!-- 관리자 or 작성자만 수정 삭제 가능하게 -->
-							<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(re.getWriter())){ %> --%>
-								<div class="reply_btn col-md-1 deleteComment" >삭제</div>
-								<div class="reply_btn col-md-1 updateComment">수정</div>
-							<%-- <%} %> --%>
+							<%if(loginMember!=null){ %>
+								<%if(loginMember.getMemberId().equals("admin")||loginMember.getNickname().equals(re.getWriter())||loginMember.getMemberId().equals(b.getMemberId())){ %> 
+									<div class="reply_btn col-md-1 deleteComment" >삭제</div>
+								<%}if(loginMember.getNickname().equals(re.getWriter())){ %> 
+									<div class="reply_btn col-md-1 updateComment">수정</div>
+								<%} %>
+							<%} %>
 							</div>
 						</div>
 					</div>
@@ -207,13 +212,15 @@
 						</div>
 						<div class="reply_btn_area row">
 							<div class="col-md-9"></div>
-							<div class="reply_btn col-md-1"><button  class="lev2" value="<%=re.getReplyNo()%>">댓글</button></div>
+							<div class="reply_btn col-md-1"><button   onclick="loginCheckReply();" class="lev2" value="<%=re.getReplyNo()%>">댓글</button></div>
 							<input type="hidden" value="<%=re.getReplyNo()%>">
-							<!-- 관리자 or 작성자만 수정 삭제 가능하게 -->
-							<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(re.getWriter())){ %> --%>
-								<div class="reply_btn col-md-1 deleteComment" >삭제</div>
-								<div class="reply_btn col-md-1 updateComment" >수정</div>
-							<%-- <%} %> --%>
+							<%if(loginMember!=null){ %>
+								<%if(loginMember.getMemberId().equals("admin")||loginMember.getNickname().equals(re.getWriter())||loginMember.getMemberId().equals(b.getMemberId())){ %> 
+									<div class="reply_btn col-md-1 deleteComment" >삭제</div>
+								<%}if(loginMember.getNickname().equals(re.getWriter())){ %> 
+									<div class="reply_btn col-md-1 updateComment">수정</div>
+								<%} %>
+							<%} %>
 						</div>
 					</div>
 				</div>
@@ -244,11 +251,13 @@
 						<div class="reply_btn_area row">
 							<div class="col-md-9"></div>
 							<input type="hidden" value="<%=re.getReplyNo()%>">
-							<!-- 관리자 or 작성자만 수정 삭제 가능하게 -->
-							<%-- <%if(loginM.getUserId().equals("admin")||loginM.getUserId().equals(re.getWriter())){ %> --%>
-								<div class="reply_btn col-md-1 deleteComment" >삭제</div>
-								<div class="reply_btn col-md-1 updateComment">수정</div>
-							<%-- <%} %> --%>
+							<%if(loginMember!=null){ %>
+								<%if(loginMember.getMemberId().equals("admin")||loginMember.getNickname().equals(re.getWriter())||loginMember.getMemberId().equals(b.getMemberId())){ %> 
+									<div class="reply_btn col-md-1 deleteComment" >삭제</div>
+								<%}if(loginMember.getNickname().equals(re.getWriter())){ %> 
+									<div class="reply_btn col-md-1 updateComment">수정</div>
+								<%} %>
+							<%} %>
 						</div>
 					</div>
 				</div>
@@ -265,7 +274,9 @@
 						<input type="submit" value="댓글 등록">
 					</div>
 					<!-- 임의로 준 부분 -->
-					<input type="hidden" name="userId" value="aaa"> 
+					<%if(loginMember!=null){ %>
+						<input type="hidden" name="userId" value="<%=loginMember.getNickname() %>"> 
+					<%}%>
 					<input type="hidden" name="boardNo" value="<%=b.getContentNo()%>">
 					<input type="hidden" name="replyNoRef" value="0">
 					<input type="hidden" name="replyLevel" value="1">
@@ -364,6 +375,12 @@
 	<div class="col-md-1"></div>
 </div>
 <script>
+	const loginCheckReply=()=>{
+		if(<%=loginMember==null%>){
+			alert("로그인후 이용해 주세요.");
+			location.assign("<%=request.getContextPath()%>/member/login");
+		}
+	}
 	$(".updateComment").off("click");
 	$(".updateComment").click(e=>{
 		const updateBefore = $(e.target).parent().siblings().find("p").html();
@@ -506,14 +523,20 @@
 	$(function(){
     	 $("#search-Type").change();
      });
-	
+	$("textarea[name=CommentContent]").click(e=>{
+		if(<%=loginMember==null%>){
+				alert("로그인후 이용해 주세요.");
+				location.assign("<%=request.getContextPath()%>/member/login");
+			}
+	})
 	const checkContent=()=>{
 		const content = $("[name=CommentContent]").val();
 		if(content.trim().length==0){
 			alert("내용을 입력하세요!");
-		
+			
 			return false;
 		}
+		
 	}
 	const checkContent1=()=>{
 		const content = $("[id=CommentContentLev1]").val();

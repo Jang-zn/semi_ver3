@@ -17,7 +17,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
 		<form action="<%=request.getContextPath()%>/board/boardWriteEnd" method="post" enctype="multipart/form-data"
-		onsubmit="submitContents();">
+		onsubmit="return submitContents();">
 			
 			<div id="write_title_area" class="flex margin1 row">
 				<div class="col-md-1">
@@ -31,8 +31,13 @@
 					<input type="text" id="write_title" name="title"
 						placeholder="제목을 입력하세요" required style="width: 100%;">
 						<!-- 여기에 아이디값,닉네임값 받을것. -->
-					<input type="hidden" name="writer" value="aaa">
-					<input type="hidden" name="memberId" value="aaa">	
+					<%if(loginMember!=null){ %>
+						<input type="hidden" name="writer" value="<%=loginMember.getNickname()%>">
+						<input type="hidden" name="memberId" value="<%=loginMember.getMemberId()%>">	
+					<%}else{ %>
+						<input type="hidden" name="writer" value="">
+						<input type="hidden" name="memberId" value="">
+					<%} %>
 				</div>
 			</div>
 
@@ -114,7 +119,12 @@
 			const ir1 = oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 			
 			$("[name=content]").html(ir1);
+			if($("[name=writer]").val().length==0){
+				alert("로그인 후 이용해 주세요.");
+				location.assign("<%=request.getContextPath()%>/member/login");
+				return false;
+			}
 			
-		}
+		}	
 </script>
 <%@ include file="/views/common/footer.jsp"%>
