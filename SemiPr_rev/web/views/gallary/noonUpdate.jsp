@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.semi.gallary.model.vo.Gallary"%>
@@ -9,7 +11,10 @@
 	charset="utf-8"></script>
 
 <%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	Gallary g =(Gallary)request.getAttribute("gallary");
+	Member m=(Member)session.getAttribute("logged");
 	
 	
 %>	
@@ -33,14 +38,16 @@
 			<div id="n_content" class="col-md-6">
 				<div class="col-md-1"></div>s
 				<div id="n_date" class="col-md-5">
-					<input type="text" name="title" value="21.5.26 "/ xxx님의 기록" readonly
+					<input type="text" name="title" value="<%=g.getGallaryDate()%> " readonly
 						style="font-size: 20px; font-weight: bold;">
+					<input type="text" name ="writer" value="<%=m.getNickname() %>님의 기록 " readonly />
+					<input type="hidden" name="memberId" value="<%=m.getMemberId() %>" />	
 				</div>
 				<div class="col-md-2"></div>
-				<div id="n_date" class="col-md-4">
+<!-- 				<div id="n_date" class="col-md-4">
 					<label>자유게시판공유하기 : <input type="checkbox" name="share">
 					</label>
-				</div>
+				</div> -->
 				<div class="row">
 					<div id="n_content_img" class="col-md-12">
 						<img id="img_preview" src="<%=request.getContextPath() %>/upload/gallary/<%=g.getImgName()%>">

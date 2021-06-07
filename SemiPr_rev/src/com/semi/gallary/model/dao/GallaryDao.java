@@ -40,10 +40,9 @@ public class GallaryDao {
 		int result = 0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertGallary"));
-			pstmt.setString(1,"test4");
-			pstmt.setString(2,"남자4");
-			pstmt.setString(3,g.getContent());
-			
+			pstmt.setString(1,g.getMemberId());
+			pstmt.setString(2,g.getWriter());
+			pstmt.setString(3,g.getContent());			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e ) {
 			e.printStackTrace();
@@ -98,7 +97,7 @@ public class GallaryDao {
 			while(rs.next()) {
 				Gallary g=new Gallary();
 				g.setGalNo(rs.getInt("gal_no"));
-				g.setGallaryDate(rs.getDate("gallary_date"));
+				g.setGallaryDate(rs.getTimestamp("gallary_date")); 
 				g.setMemberId(rs.getString("member_id"));
 				g.setWriter(rs.getString("writer"));
 				g.setContent(rs.getString("content"));

@@ -1,13 +1,18 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List,com.semi.gallary.model.vo.Gallary"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import="com.semi.member.model.vo.Member" %>
 <% 	List<Gallary> list = (List<Gallary>)request.getAttribute("list");
 	String pageBar=(String)request.getAttribute("pageBar");
 	
 	String searchKeyword=request.getParameter("searchKeyword");
+	Member m=(Member)session.getAttribute("logged");
 
-
+	
+	SimpleDateFormat sf = new SimpleDateFormat ( "yyyy MM/dd (HH:mm)");
+	Date time = new Date();
 	
 %>		
 	
@@ -31,8 +36,9 @@
 			<div id="n_content_img" class="col-md-12">
 				<img class="content_img" src="">
 			</div>
+			<div><p align="center"> <%=m.getNickname() %>님의 기록</p></div>
 			<div id="n_date" class="col-md-12 noonDate">
-				<p>21.5.26 / xxx님의 기록</p>
+				
 			</div>
 			<div id="n_comment" class="col-md-12">
 				<div id="comment_area" class="col-md-12">
@@ -54,7 +60,7 @@
 						<form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="get">
 						<div class="">
 						<%-- <form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="post"> --%>
-							<input type="text" name="searchKeyword" size="25" placeholder="검색할 내용을 입력하세요 "/>
+							<input type="text" name="searchKeyword" size="25" placeholder="검색할 월/일을 입력해주세요 "/>
 						</div>
 						<input type="submit" value="검색"/>
 					</form>
@@ -66,14 +72,16 @@
 							
 					<div class="row"> 
 					<%}else{
-						for(Gallary g : list) { %>
+						for(Gallary g : list) {
+							if (m.getMemberId().equals(g.getMemberId())){%>
 						<div class="img_obj col-md-6">
 							<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>"/>
 							<img width="100%" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
-							<%=g.getGallaryDate() %>																			
+							<%= sf.format(g.getGallaryDate())%>	 																		
 						</div>
 						<% }
-			}%>	
+						}
+					}%>	
 					</div> 
 			
 			</div>

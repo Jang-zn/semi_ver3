@@ -90,7 +90,7 @@ public class GallaryService {
 		close(conn);
 		return result;
 
-}
+	}
 	public int updateImg(Gallary g) {
 	Connection conn= getConnection();
 	int result = dao.updateImg(conn,g);
@@ -99,7 +99,7 @@ public class GallaryService {
 	close(conn);
 	return result;
 
-}
+	}
 	
 	public List<Gallary> selectSearchGallary(int cPage, int numPerpage,String keyword){
 		Connection conn=getConnection();

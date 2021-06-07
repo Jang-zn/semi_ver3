@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import = "com.semi.member.model.vo.*" %>
 <%
-	Member loginMember = (Member)session.getAttribute("login");
+	Member loginMember = (Member)session.getAttribute("logged");
 %>
     <!DOCTYPE html>
     <html lang="en">
@@ -45,7 +45,7 @@
                         <div class="sub">
                         	<div class="plan_menu"><a href="<%=request.getContextPath()%>/member/myList">My List</a></div>
                             <div class="plan_menu"><a href="<%=request.getContextPath()%>/member/excPlan?numPerpage=10">운동 계획 관리</a></div>
-                            <div class="plan_menu"><a href="">식단 계획 관리</a></div>
+                            <div class="plan_menu"><a href="<%=request.getContextPath()%>/member/menuPlan?numPerpage=10">식단 계획 관리</a></div>
                         </div>
                     </div>
                     <div class="col-md-3">Progress
@@ -59,13 +59,25 @@
                     </div>
                     <div class="col-md-3">Community
                         <div class="sub">
-                            <div class="community_menu"><a href="<%=request.getContextPath()%>/board/boardList">자유게시판</a></div>
+                            <div class="community_menu"><a href="<%=request.getContextPath()%>/board/boardList?numPerpage=15">자유게시판</a></div>
                         </div>
                     </div>
                 </div>
             </div>
             <% if(loginMember!=null){ %>
-            	<div id="profile_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="border-radius:100%;"></div>
+            	<div id="profile_area" class="col-md-3">
+            		<div class="row">
+            			<div class="col-md-12">
+            				<img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="border-radius:100%;">
+            			</div>
+            		</div>
+            		<div class="row">
+            			<div class="col-md-12" style="text-align:center">
+            				<span style="text-align:center"><%=loginMember.getNickname()%></span>
+            				<button onclick="location.assign('<%=request.getContextPath()%>/member/logout')">로그아웃</button>
+            			</div>
+            		</div>
+            	</div>
             <%}else{ %>
             	<div id="login_area" class="col-md-3">
             		<span onclick="login();">&#9786;로그인</span>
