@@ -159,7 +159,7 @@
 			
 			<div class="col-md-3"><%=pageBar %></div>
 			<div class="col-md-3"></div>
-			<div class="col-md-1 btn"
+			<div id ="loginCheckId"class="col-md-1 btn"
 				onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</div>
 		</div>
 
@@ -171,6 +171,12 @@
 
 
 <script>
+	$("#loginCheckId").click(e=>{
+			if(<%=loginMember==null%>){
+				alert("로그인 후 이용해주세요.");				
+				location.assign("<%=request.getContextPath()%>/member/login");
+				}	
+		})
 	const deleteBoard=(e)=>{
 		if(confirm("정말 삭제하실껀가요?")){
 				location.assign('<%=request.getContextPath()%>/board/delete?no='+$(e.target).val());			
