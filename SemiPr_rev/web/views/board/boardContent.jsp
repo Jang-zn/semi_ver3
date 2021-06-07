@@ -556,9 +556,9 @@
 	}
 	$("[name=b_sort]").change(e=>{
 		if($(e.target).val()!='전체'){
-			location.assign('<%=request.getContextPath()%>/board/boardSort?type='+$(e.target).val());
+			location.assign('<%=request.getContextPath()%>/board/boardSort?numPerpage=15&type='+$(e.target).val());
 		}else{
-			location.assign('<%=request.getContextPath()%>/board/boardList');	
+			location.assign('<%=request.getContextPath()%>/board/boardList?numPerpage=15');	
 		}
 		
 	
