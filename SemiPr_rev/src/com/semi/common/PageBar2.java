@@ -76,16 +76,16 @@ public class PageBar2 {
 		
 		
 		
-		int numPerpage;
+		int numPerpage2;
 		try {
-			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
+			numPerpage2 = Integer.parseInt(request.getParameter("numPerpage2"));
 		} catch (NumberFormatException e) {
-			numPerpage = 5;
+			numPerpage2 = 5;
 		}
-		this.numPerpage2 = numPerpage;
+		this.numPerpage2 = numPerpage2;
 		
 		
-		int totalPage = (int) Math.ceil((double) totalData / numPerpage);
+		int totalPage = (int) Math.ceil((double) totalData / numPerpage2);
 
 		int pageNo = ((cPage2 - 1) / pageBarSize) * pageBarSize + 1;
 
@@ -98,15 +98,15 @@ public class PageBar2 {
 		if (pageNo == 1) {
 			pageBar2 += "<span>&nbsp[이전]&nbsp</span>";
 		} else {
-			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + (pageNo - 1) + "&numPerpage="
-					+ numPerpage + "'>[이전]</a>";
+			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage2=" + (pageNo - 1) + "&numPerpage2="
+					+ numPerpage2 + "'>[이전]</a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (cPage2 == pageNo) {
 				pageBar2 += "<span>&nbsp" + pageNo + "&nbsp</span>";
 			} else {
-				pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "&numPerpage="
-						+ numPerpage + "'>&nbsp" + pageNo
+				pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage2=" + pageNo + "&numPerpage2="
+						+ numPerpage2 + "'>&nbsp" + pageNo
 						+ "&nbsp</a>";
 			}
 			pageNo++;
@@ -115,7 +115,7 @@ public class PageBar2 {
 		if (pageNo > totalPage) {
 			pageBar2 += "<span>&nbsp[다음]&nbsp</span>";
 		} else {
-			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
+			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage2=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
 		}
 		
 		this.pageBar2 = pageBar2;

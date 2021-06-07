@@ -61,7 +61,7 @@
 					</div>
 					<div class="col-md-6" style="padding-left:0; text-align:left;"><button type="submit" style="font-size:9px">등록하기</button></div>
 				</div>
-				<div class="btn col-md-2 btnb"  onclick='location.assign("<%=request.getContextPath()%>/board/boardList")'>돌아가기</div>
+				<div class="btn col-md-2 btnb"  onclick='location.assign("<%=request.getContextPath()%>/board/boardList?numPerpage=15")'>돌아가기</div>
 				<div class="col-md-4"></div>
 			</div>
 		</form>

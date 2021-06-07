@@ -65,7 +65,7 @@ public class BoardContentServlet extends HttpServlet {
 	      request.setAttribute("board", b);
 	      
 
-	      PageBar2 sp2 = new PageBar2(request, boardListCount, 5, "/board/boardList");
+	     // PageBar2 sp2 = new PageBar2(request, boardListCount, 5, "/board/boardList");
 
 	      PageBar sp = new PageBar(request, boardListCount, 5, "/board/boardList");
 

@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-<%@page import="com.semi.common.PageBar2"%>
-=======
-<%@page import="com.semi.common.PageBar"%>
->>>>>>> 054fcb51bce8638ea2ade6ac8ddf6ecdedb48781
 <%@page import="com.semi.board.model.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -40,6 +35,7 @@
 											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword"
 											value=<%=searchType!=null&&searchType.equals("title")?searchKeyword:"" %>> 
 											<input type="hidden" name="searchType" value="title">
+												<input type="hidden" value="15" name="numPerpage2">
 											<input type="submit" value="검색">
 										</form>
 									</div>
@@ -48,6 +44,7 @@
 									<input type="text" placeholder="제목+내용을 입력하세요" name="searchKeyword"
 									value=<%=searchType!=null&&searchType.equals("titlecontent")?searchKeyword:"" %>> 
 									<input type="hidden" name="searchType" value="titlecontent">
+										<input type="hidden" value="15" name="numPerpage2">
 									<input type="submit" value="검색">
 								</form>
 							</div>
@@ -56,6 +53,7 @@
 								<input type="text" placeholder="내용을 입력하세요" name="searchKeyword"
 								value=<%=searchType!=null&&searchType.equals("content")?searchKeyword:"" %>> 
 								<input type="hidden" name="searchType" value="content">
+									<input type="hidden" value="15" name="numPerpage2">
 								<input type="submit" value="검색">
 							</form>
 							</div>
@@ -64,6 +62,7 @@
 									<input type="text" placeholder="작성자를 입력하세요" name="searchKeyword"
 									value=<%=searchType!=null&&searchType.equals("writer")?searchKeyword:"" %>>  
 									<input type="hidden" name="searchType" value="writer">
+										<input type="hidden" value="15" name="numPerpage2">
 									<input type="submit" value="검색">
 								</form>
 							</div>
@@ -185,7 +184,7 @@
 	})
 		
 	const boardContent=(e)=>{
-		location.assign("<%=request.getContextPath()%>/board/content?no="+e);
+		location.assign("<%=request.getContextPath()%>/board/content?numPerpage=15&no="+e);
 	}
 	$("#search-Type").change(e=>{
 		const Title = $("#search-Title");
