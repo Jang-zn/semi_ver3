@@ -26,18 +26,21 @@ public class ExcService {
 		close(conn);		
 		return list;
 	}
+	
 	public int getExcListCount(String sort) {
 		Connection conn = getConnection();
 		int result = dao.getExcListCount(conn, sort);
 		close(conn);		
 		return result;
 	}
+	
 	public Exercise getExcInfo(String excName) {
 		Connection conn = getConnection();
 		Exercise result = dao.getExcInfo(conn, excName);
 		close(conn);		
 		return result;
 	}
+	
 	public int insertMemberExc(MemberExercise me) {
 		Connection conn = getConnection();
 		int result = dao.insertMemberExc(conn, me);
@@ -51,6 +54,7 @@ public class ExcService {
 		return result;
 		
 	}
+	
 	public Map[] planCountExc(String memberId, String date, int length){
 		Connection conn = getConnection();
 		Map[] result = dao.planCountExc(conn, memberId, date, length);
@@ -58,6 +62,15 @@ public class ExcService {
 		return result;
 		
 	}
+	
+	public Map[] planCountExcforChart(String memberId, String date, int length){
+		Connection conn = getConnection();
+		Map[] result = dao.planCountExcforChart(conn, memberId, date, length);
+		close(conn);		
+		return result;
+		
+	}
+	
 	
 	
 }

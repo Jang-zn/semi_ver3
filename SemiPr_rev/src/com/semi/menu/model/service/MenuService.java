@@ -61,5 +61,13 @@ public class MenuService {
 		
 	}
 	
+	public Map[] planCountMenuforChart(String memberId, String date, int length){
+		Connection conn = getConnection();
+		Map[] result = dao.planCountMenuforChart(conn, memberId, date, length);
+		close(conn);		
+		return result;
+		
+	}
+	
 	
 }

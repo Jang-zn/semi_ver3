@@ -249,12 +249,8 @@ const menuPie=(y, n, l)=>{
 };
 
 
-
-
 const reloadChart=(chart, y, n, l)=>{
 	Data = {data: [y/l, n/l, 1-(y/l+n/l)]};
-	
-	
 	chart.data.datasets.forEach((dataset) => {
         dataset.data.pop();
         dataset.data.pop();
@@ -283,7 +279,7 @@ let lineConfig;
 //line chart
 const line = $("#lineChart");
 const lineChart = new Chart(line, {
-    type: 'bar',
+    type: 'line',
     options:{
     	plugins: {
             legend: {
@@ -300,66 +296,231 @@ const lineChart = new Chart(line, {
     	}
 	},
     data: {
-        labels: [
-            '1일', '2일', '3일', '4일', '5일', '6일', '7일', '8일', '9일', '10일',
-            '11일', '12일','13일', '14일','15일', '16일','17일', '18일','19일', '20일',
-            '21일', '22일','23일', '24일','25일', '26일','27일', '28일','29일', '30일',
+        labels: [       
         ],
         datasets: [
             {
-                label: '운동',
-                data: [1, 1, 1, 1, 1, 0, 1, 1, 1, 0,
-                        1, 1, 0, 1, 0, 1, 0, 1, 0, 1,
-                        1, 1, 1, 0, 1, 1, 1, 0, 1, 1,
-                ],
-                borderColor : 'blue',
-                backgroundColor:'rgba(0,0,255,0.3)',
-                borderWidth:3,
-                
             },
-            {
-                type:'line',
-                label: '실천완료',
-                data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                ],
-                borderColor : 'lightgreen',
-                borderWidth:5,
-                borderDash:[10,10],
-                pointRadius:0,
-            }
         ]},
 });
 
 
-const reloadLineChart=(chart,dataset)=>{
-	Data = {data: [y/l, n/l, 1-(y/l+n/l)]};
-	
-	
-	chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-        dataset.data.pop();
-        dataset.data.pop();
-        dataset.data.push(Data.data[0]);
-        dataset.data.push(Data.data[1]);
-        dataset.data.push(Data.data[2]);
-    });
-	chart.update();	//차트 업데이트
-}
+
 
 
 const chartCall=()=>{
-	$.ajax({
-		url:"<%=request.getContextPath()%>/member/monthlyChart",
-		dataType:"json",
-		success:{
+	let today = new Date();
+	let sysdate=null;
+	let mm = today.getMonth()+1;
+	let yy = today.getFullYear();
+	let dd = today.getDate();
+	if(mm<10){
+		sysdate=yy+"/0"+mm+"/";
+	}else{
+		sysdate=yy+"/"+mm+"/";
+	}
+	if(dd<10){
+		sysdate+="0"+dd;
+	}else{
+		sysdate+=dd;
+	}
+	let length;
+	switch($("#dataPeriod").val()){
+		case "1m": length=31; break;
+		case "3m": length=93; break;
+		case "6m": length=186; break;
+		case "12m": length=365; break;
+	}
+	
+	switch($("#dataType_select").val()){
+		case "monthlyExc":  
+			$.ajax({
+				url:"<%=request.getContextPath()%>/member/monthlyChart?length="+length+"&sysdate="+sysdate+"&key=monthlyExc",
+				dataType:"json",
+				success:data=>{
+					//labels
+					let labels=[];
+					let countIndex=0;
+					data.forEach(function(el){
+						labels[countIndex++]=el.date;
+					});
+					
+					//YN check
+					let planYN=[];
+					countIndex=0;
+					data.forEach(function(el){
+						if(el.check==null){
+							planYN[countIndex++]=null;
+						}else{
+							planYN[countIndex++]=el.check=='Y'?1:0;
+						}
+					});
+					
+					
+					lineChart.options={
+						responsive: true,
+						plugins: {
+							legend: {
+								display: false,
+							},
+							title: {
+			            		display: true,
+			            		text: '운동 실천현황'
+			    			}
+						},    
+						maintainAspectRatio : false,
+						scales:{
+						   	y: {
+						   	suggestedMax: 1.3,
+						   	display:false
+						    },
+						},
+					}
+
+					lineChart.data={
+						datasets:[{
+							label: '운동',
+					        borderColor : 'blue',
+					        backgroundColor:'rgba(0,0,255,0.3)',
+					        borderWidth:2,
+					        fill:true
+						}]
+					}
+					lineChart.data.labels=labels;
+					lineChart.data.datasets[0].data=planYN;
+					lineChart.update();
+					
+				}
+			});
+			break;
 			
-		}
-	});
+			
+		case "monthlyMenu":  
+			$.ajax({
+				url:"<%=request.getContextPath()%>/member/monthlyChart?length="+length+"&sysdate="+sysdate+"&key=monthlyMenu",
+				dataType:"json",
+				success:data=>{
+					//labels
+					let labels=[];
+					let countIndex=0;
+					data.forEach(function(el){
+						labels[countIndex++]=el.date;
+					});
+					//YN check
+					let planYN=[];
+					countIndex=0;
+					data.forEach(function(el){
+						if(el.check==null){
+							planYN[countIndex++]=null;
+						}else{
+							planYN[countIndex++]=el.check=='Y'?1:0;
+						}
+					});
+					lineChart.options={
+						plugins: {
+							legend: {
+								display: false,
+							},
+							title: {
+			            		display: true,
+			            		text: '식단 실천현황'
+			    			}
+						},    
+						maintainAspectRatio : false,
+						scales:{
+						   	y: {
+						   	suggestedMax: 1.3,
+						   	display:false
+						    },
+						},
+					}
+					lineChart.data={
+						datasets:[{
+							label: '식단',
+				            borderColor : 'green',
+				            backgroundColor:'rgba(0,255,0,0.3)',
+				            borderWidth:2,
+				            fill:true
+						}]
+					}
+					lineChart.data.labels=labels;
+					lineChart.data.datasets[0].data=planYN;
+					lineChart.update();
+				}
+			});
+			break;
+			
+			
+		case "stackReps":
+			console.log(lineChart);
+			console.log(lineChart.$context);
+			$.ajax({
+				url:"<%=request.getContextPath()%>/member/monthlyChart?length="+length+"&sysdate="+sysdate+"&key=monthlyMenu",
+				dataType:"json",
+				success:data=>{
+					//labels
+					let labels=[];
+					let countIndex=0;
+					data.forEach(function(el){
+						labels[countIndex++]=el.date;
+					});
+					//YN check
+					let planYN=[];
+					countIndex=0;
+					data.forEach(function(el){
+						if(el.check==null){
+							planYN[countIndex++]=null;
+						}else{
+							planYN[countIndex++]=el.check=='Y'?1:0;
+						}
+					});
+					lineChart.$context.type='line';
+					lineChart.options={
+						plugins: {
+							legend: {
+								display: false,
+							},
+							title: {
+			            		display: true,
+			            		text: '운동 횟수 누계'
+			    			}
+						},    
+						maintainAspectRatio : false,
+						scales:{
+						   	y: {
+						   	suggestedMax: 1.3,
+						   	display:false
+						    },
+						},
+					}
+					lineChart.data={
+						datasets:[{
+							label: '운동횟수',
+				            borderColor : 'blue',
+				            backgroundColor:'rgba(0,0,255,0.3)',
+				            borderWidth:2,
+				            fill:true
+						}]
+					}
+					lineChart.data.labels=labels;
+					lineChart.data.datasets[0].data=planYN;
+					lineChart.update();
+				}
+			});
+			break;
+			
+			
+		case "stackKcals":  
+			
+			
+			break;
+	}
 };
 
 
+
+
+window.onload=chartCall();
 
 
 </script>
