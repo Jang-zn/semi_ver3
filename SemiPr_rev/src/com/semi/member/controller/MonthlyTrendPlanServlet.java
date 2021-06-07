@@ -36,14 +36,18 @@ public class MonthlyTrendPlanServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String date = request.getParameter("yymm01");
 		int length = Integer.parseInt(request.getParameter("length"));
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		Member m = (Member)session.getAttribute("logged");
 		String memberId = "";
 		
 		
 		////////////////////////////////////// Login id 처리해줘야됨 //////////////////////////////////////////
-		if(m==null) {
-			memberId = "test1";
+		String msg="";
+		if(session==null||m==null) {
+			msg = "로그인이 필요한 서비스입니다.";
+			request.setAttribute("msg",msg);
+			request.setAttribute("loc",request.getContextPath());
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			memberId = m.getMemberId();
 		}

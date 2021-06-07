@@ -31,31 +31,33 @@
 					<img
 						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_qscX8L2bnZfZhslTsvDavnGhH16jUEsTRw&usqp=CAU">
 				</div>
-				
-				
+
+
 				<!-- Trend Area -->
 				<div id="Practice_trend" class="col-md-8">
 					<div class="row">
-						<div class="col-md-12" style="height:230px">
+						<div class="col-md-12" style="height: 230px">
 							<canvas id="lineChart"></canvas>
 						</div>
 					</div>
 				</div>
-				
+
 				<!-- Trend Area -->
-				
+
 				<div id="select_sort" class="col-md-2">
 					<select id="dataType_select">
-						<option name="dataType" value="">운동 실천현황</option>
-						<option name="dataType" value="">식단 실천현황</option>
-						<option name="dataType" value="">누적 운동량(reps)</option>
-						<option name="dataType" value="">섭취 칼로리(kcal)</option>
-					</select><br> <label><input type="radio" name="term" value="1m">
-						1개월 </label><br> <label><input type="radio" name="term"
-						value="3m"> 3개월 </label><br> <label><input
-						type="radio" name="term" value="6m"> 6개월 </label><br> <label><input
-						type="radio" name="term" value="12m"> 1년 </label><br>
-					<button id="read_trend" name="read_trend">조회하기</button>
+						<option name="dataType" value="monthlyExc">운동 실천현황</option>
+						<option name="dataType" value="monthlyMenu">식단 실천현황</option>
+						<option name="dataType" value="stackReps">누적 운동량(reps)</option>
+						<option name="dataType" value="stackKcals">섭취 칼로리(kcal)</option>
+					</select><br> 
+					<select id="dataPeriod">
+						<option name="term" value="1m">1개월 </option>
+						<option name="term" value="3m"> 3개월 </option> 
+						<option name="term" value="6m"> 6개월 </option> 
+						<option name="term" value="12m"> 1년 </option>
+					</select>
+					<button id="read_trend" name="read_trend" onclick="chartCall();">조회하기</button>
 				</div>
 			</div>
 
@@ -63,100 +65,60 @@
 
 		<div class="row">
 			<div id="statistics_container" class="col-md-12">
-				<div class="row">X월 운동 실천율</div>
+				<div id="excMonth" class="row">X월 운동 실천율</div>
 				<div id="data_container" class="row">
-					<div id="pieChart" class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">1</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-2">3</div>
-							<div class="col-md-2">4</div>
-							<div class="col-md-2">5</div>
-							<div class="col-md-2">6</div>
-						</div>
+					<div id="" class="col-md-6 pieChart">
 						<div class="row cContainer">
-						
-							<canvas id="chart8" class="col-md-12" ></canvas>
-						
-						
+							<canvas id="chart8" class="col-md-12"></canvas>
 						</div>
 					</div>
-					<div id="rank" class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">1</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-2">3</div>
-							<div class="col-md-2">4</div>
-							<div class="col-md-2">5</div>
-							<div class="col-md-2">6</div>
-						</div>
-						<div class="row">
-							
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-		
-		
-		
-		<div class="row">
-			<div id="statistics_container" class="col-md-12">
-				<div class="row">X월 식단 실천율</div>
-				<div id="data_container" class="row">
-					<div id="pieChart" class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">1</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-2">3</div>
-							<div class="col-md-2">4</div>
-							<div class="col-md-2">5</div>
-							<div class="col-md-2">6</div>
-						</div>
-						<div class="row cContainer">
-						
-							<canvas id="chart9" class="col-md-12" ></canvas>
-						
-						
-						</div>
-					</div>
-					<div id="rank" class="col-md-6">
-						<div class="row">
-							<div class="col-md-2">1</div>
-							<div class="col-md-2">2</div>
-							<div class="col-md-2">3</div>
-							<div class="col-md-2">4</div>
-							<div class="col-md-2">5</div>
-							<div class="col-md-2">6</div>
-						</div>
+					<div id="" class="col-md-6 rank">
 						<div class="row"></div>
 					</div>
 				</div>
 
 			</div>
 		</div>
-		
-		
-		
-		
+
+
+
+		<div class="row">
+			<div id="statistics_container" class="col-md-12">
+				<div id="menuMonth" class="row">X월 식단 실천율</div>
+				<div id="data_container" class="row">
+					<div id="" class="col-md-6 pieChart">
+						<div class="row cContainer">
+							<canvas id="chart9" class="col-md-12"></canvas>
+						</div>
+					</div>
+					<div id="" class="col-md-6 rank">
+						<div class="row"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
 
 
 
 		<div class="row cheight">
 
 			<div class="col-md-12">
-			
-			<!-- Calendar Area -->
-			
-			
+
+				<!-- Calendar Area -->
+
+
 				<div class="calendar">
 					<div class="header">
 						<div class="year-month"></div>
 						<div class="nav">
 							<button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
-						    <button class="nav-btn go-today" onclick="goToday()">Today</button>
-    						<button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+							<button class="nav-btn go-today" onclick="goToday()">Today</button>
+							<button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
 						</div>
 					</div>
 					<div class="main">
@@ -172,9 +134,9 @@
 						<div class="dates col-md-12 row7"></div>
 					</div>
 				</div>
-				
-				
-			<!-- Calendar Area -->
+
+
+				<!-- Calendar Area -->
 			</div>
 		</div>
 	</div>
@@ -204,33 +166,41 @@ const callPlan=()=>{
 				if(data[0][i]!=null && data[0][i].date==$($("span.thism")[i]).text() && data[0][i].count>0){
 					$($(".eCheck.thism")[i]).text("운동계획");
 					if(data[0][i].check=="Y"){
-						$($(".eCheck.thism")[i]).attr("style","background-color:green; color:white;");
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
 						ey++;
 					}else{
-						$($(".eCheck.thism")[i]).attr("style","background-color:red; color:white;");
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("eReason");
 						en++
 					}
 				}
 				if(data[1][i]!=null && data[1][i].date==$($("span.thism")[i]).text() && data[1][i].count>0){
 					$($(".mCheck.thism")[i]).text("식단계획");
 					if(data[1][i].check=="Y"){
-						$($(".mCheck.thism")[i]).attr("style","background-color:green; color:white;");
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
 						my++;
 					}else{
-						$($(".mCheck.thism")[i]).attr("style","background-color:red; color:white;");
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("mReason");
 						mn++;
 					}
 				}
 			}
-			excPie(ey,en, list.length);
-			menuPie(my,mn, list.length);
+			try{
+				excPie(ey,en, list.length);
+				menuPie(my,mn, list.length);
+			}catch{
+				reloadChart(eChart, ey, en, list.length);
+				reloadChart(mChart, my, mn, list.length);
+			}
 		}		
 	});
 }
 
 
+
+
 const excPie=(y, n, l)=>{
-	var data = {
+	let ctx = $('#chart8').get(0).getContext("2d");
+	eData = {
 		    //ajax 처리
 	    labels: ["실천","미실천","남은 일자"],
 	
@@ -239,58 +209,61 @@ const excPie=(y, n, l)=>{
 	        backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
 	    }]
 	};
-	let ctx = $('#chart8').get(0).getContext("2d");
-	let theChart = new Chart(ctx, {
-	    type: 'doughnut',
-	    data: data,
-	    options: {
-	        layout:{padding:0},
-	        maintainAspectRatio: false,
-	        cutoutPercentage:10,
-	        rotation: 270,
-	        circumference: 180
-	    }
-	});
-	chart.update();
+	
+	eConfig ={
+			type: 'doughnut',
+			data:eData,
+			options: {
+		        layout:{padding:0},
+		        maintainAspectRatio: false,
+		        cutoutPercentage:10,
+		        rotation: 270,
+		        circumference: 180
+		    }
+	}
+	 eChart = new Chart(ctx,eConfig);
 };
 
 const menuPie=(y, n, l)=>{
-	let data = {
+	mData = {
 			  //ajax 처리
-		    labels: ["실천","미실천","남은 일자"],
-		    datasets: [{
-		        data: [y/l, n/l, 1-(y/l+n/l)],
-		        backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
-		    }]
-		};
-	    let ctx = $('#chart9').get(0).getContext("2d");
-	    let theChart = new Chart(ctx, {
-	        type: 'doughnut',
-	        data: data,
-	        layout:{padding:0},
-	        maintainAspectRatio: false,
-	        cutoutPercentage:10,
-	        rotation: 270,
-	        circumference: 180
-	    }
-	});
+		labels: ["실천","미실천","남은 일자"],
+		datasets: [{
+		    data: [y/l, n/l, 1-(y/l+n/l)],
+		    backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
+		}]
+	};
+	mConfig ={
+			type: 'doughnut',
+			data:mData,
+			options: {
+		        layout:{padding:0},
+		        maintainAspectRatio: false,
+		        cutoutPercentage:10,
+		        rotation: 270,
+		        circumference: 180
+		    }
+	}
+	let ctx = $('#chart9').get(0).getContext("2d");
+	mChart = new Chart(ctx, mConfig);
 };
 
 
-const reloadChart=()=>{
+
+
+const reloadChart=(chart, y, n, l)=>{
+	Data = {data: [y/l, n/l, 1-(y/l+n/l)]};
 	
-	//데이터셋 수 만큼 반복
-	var dataset = config.data.datasets;
-	for(var i=0; i<dataset.length; i++){
-		console.log(dataset);
-		//데이터 갯수 만큼 반복
-		var data = dataset[i].data;
-		for(var j=0 ; j < data.length ; j++){
-			data[j] = Math.floor(Math.random() * 50);
-		}
-	}
 	
-	myChart.update();	//차트 업데이트
+	chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+        dataset.data.pop();
+        dataset.data.pop();
+        dataset.data.push(Data.data[0]);
+        dataset.data.push(Data.data[1]);
+        dataset.data.push(Data.data[2]);
+    });
+	chart.update();	//차트 업데이트
 }
 
 
@@ -298,15 +271,33 @@ const reloadChart=()=>{
 
 
 
+
+
+//Linechart 작성 / 업데이트
+
+let lineLabels;
+let lineDataSets;
+let lineConfig;
+
+
 //line chart
 const line = $("#lineChart");
 const lineChart = new Chart(line, {
     type: 'bar',
     options:{
-        legend:{
-         	display:false
-    	},
+    	plugins: {
+            legend: {
+                display: false,
+            }
+        },
     	maintainAspectRatio : false,
+    	scales:{
+    		y: {
+                suggestedMax: 1.3,
+                display:false
+            },
+            
+    	}
 	},
     data: {
         labels: [
@@ -327,17 +318,6 @@ const lineChart = new Chart(line, {
                 
             },
             {
-                label: "",
-                type:'line',
-                data: [1, 1, 1, 1, 0, 0, 1, 0, 1, 0,
-                        1, 0, 0, 1, 0, 1, 0, 1, 0, 1,
-                        1, 1, 1, 0, 1, 0, 1, 0, 1, 1,
-                ],
-                borderColor : 'rgba(0,0,255,0.3)',
-                borderWidth:3,
-                
-            },
-            {
                 type:'line',
                 label: '실천완료',
                 data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -345,18 +325,39 @@ const lineChart = new Chart(line, {
                         1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                 ],
                 borderColor : 'lightgreen',
-                borderWidth:2,
+                borderWidth:5,
                 borderDash:[10,10],
                 pointRadius:0,
-                options: {
-                       legend: {
-                            display: false
-                        }
-                }
             }
         ]},
 });
 
+
+const reloadLineChart=(chart,dataset)=>{
+	Data = {data: [y/l, n/l, 1-(y/l+n/l)]};
+	
+	
+	chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+        dataset.data.pop();
+        dataset.data.pop();
+        dataset.data.push(Data.data[0]);
+        dataset.data.push(Data.data[1]);
+        dataset.data.push(Data.data[2]);
+    });
+	chart.update();	//차트 업데이트
+}
+
+
+const chartCall=()=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/member/monthlyChart",
+		dataType:"json",
+		success:{
+			
+		}
+	});
+};
 
 
 
