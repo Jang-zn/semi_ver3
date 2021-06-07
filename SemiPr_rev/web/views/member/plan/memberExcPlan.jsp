@@ -83,12 +83,13 @@ String pageBar = (String)request.getAttribute("pageBar");
 	            </div>
 	            <div id="exc_detail_info_container" class="row">
 	            	<%for(int i=1;i<list.get(0).getFileList().size();i++){ %>
-	            		<div class="col-md-12"><img style="width:40%" src="<%=request.getContextPath()%>/upload/excList/<%=list.get(0).getFileList().get(i)%>"></div>
+	            		<div class="col-md-12"><img style="width:40%" src="<%=list.get(0).getFileList().get(i)%>"></div>
 	            	<%} %>
 	                <div class="col-md-12"><%=list.get(0).getExcManual()%></div>
 	            </div>
 	            <div id="exc_video" class="row">
 					<%-- <a href="<%=list.get(0).getExcVideo()%>">참고 영상 : <%=list.get(0).getExcVideo()%></a><br> --%>
+					<%if(list.get(0).getExcVideo()!=null) %>
 					<iframe src="<%=list.get(0).getExcVideo()%>"></iframe>
 	              
 	            </div>
@@ -124,7 +125,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 				}
 				let div = $("<div>").addClass("col-md-12");
 				div.text(data.excManual);
-				$("#exc_video").html($("<a>").attr("href",data.excVideo).text("참고영상 : "+data.excVideo));
+				//$("#exc_video").html($("<a>").attr("href",data.excVideo).text("참고영상 : "+data.excVideo));
 				$("#exc_video").html($("<iframe>").attr("src",data.excVideo));
 			}
 		});

@@ -23,7 +23,7 @@ public class InsertDBEListClolling {
 
 		   
 	   public static void main(String[] args) {   
-	    for(int i=150; i<180; i++) {
+	    for(int i=100; i<200; i++) {
 		   newsCrawling("https://100.daum.net/encyclopedia/view/191XXXXXXX"+Integer.toString(i));
 	      }
 	   }
@@ -72,10 +72,10 @@ public class InsertDBEListClolling {
 	   		}
 	   		if(result>0) {
 	   			commit(conn);
-	   			//System.out.println("elist 삽입 성공!");
+	   			System.out.println("elist 삽입 성공!");
 	   		}else {
 	   			rollback(conn);
-	   			//System.out.println("elsit 삽입 실패!");
+	   			System.out.println("elsit 삽입 실패!");
 	   		}
 	   		try {
 	   			String sql2="INSERT INTO E_FILE VALUES(SEQ_IMG_E.NEXTVAL,concat('E',SEQ_EXC_ID.CURRVAL),?)";
@@ -89,10 +89,10 @@ public class InsertDBEListClolling {
 	   		}
 	   		if(result2>0) {
 	   			commit(conn);
-	   			//System.out.println("efile 삽입 성공");
+	   			System.out.println("efile 삽입 성공");
 	   		}else {
 	   			rollback(conn);
-	   			//System.out.println("efile 삽입 실패!");
+	   			System.out.println("efile 삽입 실패!");
 	   		}
 	   	}
 	   	
