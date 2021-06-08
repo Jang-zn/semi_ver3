@@ -5,67 +5,51 @@
 }
 
 #list_container_myList {
-	margin: 1%;
-	margin-top: 0;
-	display: flex;
+	
 }
 
 #list_title_container {
-	margin: 1%;
-	margin-top: 0;
-	margin-bottom: 0;
-	display: flex;
+	
 }
 
 #select_weekday {
-	margin: 1%;
+	
 }
 
 #mylist_info_container {
-	display: flex;
-	margin:1%;
+	
 }
 
 .list_title_area {
 	
-	margin-left: 1%;
-	margin-right: 1%;
 }
 
 div#select_weekday {
-	display: flex;
-	
-	height: 120px;
+	height: 100px;
 }
 
 .day_myList {
 	border-radius: 100%;
-	margin-top: 1%;
-	margin-bottom: 1%;
 	text-align: center;
 }
 
 div#my_list_exc {
 	
-	margin: 1%;
 }
 
 div#my_list_menu {
 	
-	margin: 1%;
 }
 
 li.weekDay_list {
-	padding: 0;
-	list-style: none;
-	display: flex;
-	margin: 1%;
+	
+	
+	
 }
 
 li.weekDay_list>.list_img_area {
 	
-	height: 80px;
-	margin: 1%;
+	height: 100%;
 }
 
 li.weekDay_list>.list_img_area>img {
@@ -80,15 +64,15 @@ div.list_name_area {
 
 div.list_name_area span {
 	display: inline-block;
-	margin: 1%;
+	
 }
 
 div.list_button_area {
-	padding:0;
+	
 }
 
 #mymenu {
-	display: flex;
+	
 }
 
 #mymenu>h3 {
@@ -103,12 +87,11 @@ div.list_button_area {
 	
 }
 #myExc_info, #myMenu_info{
-	margin-left:1%;
-	margin-right:1%;
+	
 	
 }
 
 
 .mylist_box {
-	height: 300px;
+	
 }
