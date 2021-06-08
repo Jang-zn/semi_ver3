@@ -21,8 +21,8 @@
 	href="<%=request.getContextPath()%>/Resource/css/noonList.css">
 
 <div class="row">
-	<div class="col-md-1"></div>
-	<div id="n_title" class="col-md-10">
+
+	<div id="n_title" class="col-md-12">
 		<h2>눈바디</h2>
 	</div>
 	<div class="col-md-1"></div>
@@ -102,7 +102,7 @@
 			</div> 
 		</div>
 	</div>
-	<div class="col-md-1"></div>
+	
 </div>
 
 <script>

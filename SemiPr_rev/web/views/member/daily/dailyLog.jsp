@@ -21,8 +21,8 @@
 	href="<%=request.getContextPath()%>/Resource/css/dailyExc.css">
 
 <div class="row">
-	<div class="col-md-1"></div>
-	<div id="dailyExc_title" class="col-md-10">
+	
+	<div id="dailyExc_title" class="col-md-12">
 		<h2>운동일지</h2>
 	</div>
 	<div class="col-md-1"></div>
@@ -78,22 +78,22 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-1"></div>
+	
 </div>
 
 
 <div class="row">
-	<div class="col-md-1"></div>
-	<div id="dailyExc_title" class="col-md-10">
+	
+	<div id="dailyExc_title" class="col-md-12">
 		<h2>식단일지</h2>
 	</div>
-	<div class="col-md-1"></div>
+	
 </div>
 
 
 <div class="row">
-	<div class="col-md-1"></div>
-	<div class="col-md-10">
+	
+	<div class="col-md-12">
 
 		<div class="row">
 			<div id="personal_record_container">
@@ -152,7 +152,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-1"></div>
+	
 </div>
 <%@ include file="/views/common/footer.jsp"%>
 <style>
