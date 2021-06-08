@@ -16,16 +16,16 @@ import com.semi.member.model.vo.Member;
 import com.semi.menu.model.service.MenuService;
 
 /**
- * Servlet implementation class MonthlyChartServlet
+ * Servlet implementation class MonthlyTrendPieServlet
  */
-@WebServlet("/member/monthlyChart")
-public class MonthlyChartServlet extends HttpServlet {
+@WebServlet("/member/monthlyTrend/piecall")
+public class MonthlyTrendPieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MonthlyChartServlet() {
+    public MonthlyTrendPieServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,43 +34,33 @@ public class MonthlyChartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String key = request.getParameter("key");
-		String date = request.getParameter("sysdate");
+		String date = request.getParameter("yymm01");
 		int length = Integer.parseInt(request.getParameter("length"));
 		HttpSession session = request.getSession(false);
 		Member m = (Member)session.getAttribute("logged");
-		String memberId = m.getMemberId();
+		String memberId = "";
 		
 		
-		switch(key) {
-		case "monthlyExc":
-			Map[] elist = new ExcService().planCountExcforChart(memberId, date, length);
-			new Gson().toJson(elist, response.getWriter());
-			break;
-		case "monthlyMenu":
-			Map[] mlist = new MenuService().planCountMenuforChart(memberId, date, length);
-			new Gson().toJson(mlist, response.getWriter());
-			break;
-		case "stackReps":  
-			Map[] eslist = new ExcService().planStackExcTotal(memberId, date, length);
-			new Gson().toJson(eslist, response.getWriter());
-			break;
-		case "stackKcals":
-			Map[] mslist = new MenuService().planStackMenuTotal(memberId, date, length);
-			new Gson().toJson(mslist, response.getWriter());
-			break;
+		String msg="";
+		if(session==null||m==null) {
+			msg = "로그인이 필요한 서비스입니다.";
+			request.setAttribute("msg",msg);
+			request.setAttribute("loc",request.getContextPath());
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}else {
+			memberId = m.getMemberId();
 		}
 		
+		Map[] liste = new ExcService().reasonE(memberId, date, length);
+		Map[] listm = new MenuService().reasonM(memberId, date, length);
 		
 		
+		Map[][] list = new Map[2][];
+		list[0] = liste;
+		list[1] = listm;
 		
 		
-		
-		
-		
-		
-		
-		
+		new Gson().toJson(list,response.getWriter());
 	}
 
 	/**

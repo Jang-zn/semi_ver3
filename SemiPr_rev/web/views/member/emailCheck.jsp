@@ -32,8 +32,8 @@ System.out.println(authNum);
 				<input type="text" name="emailconfirm">
 			</td>
 			<td>
-				<input type="button" value="확인" 
-                 onclick="confirmemail(emailcheck.emailconfirm.value,
+				<input type="button" value="확인"  id="submit-btn"
+                 onclick="return confirmemail(emailcheck.emailconfirm.value,
                                                                '<%=authNum%>')">
 			</td>
 		</tr>
@@ -47,16 +47,17 @@ function confirmemail(emailconfirm, authNum ){
 	if(emailconfirm != authNum ){
 		alert("인증 실패하였습니다.");
 		emailconfirm.value="";
-		self.close();
+		return false;
     // 인증코드가 일치하는 경우
 	}else if(emailconfirm==authNum ){
 		alert("인증에 성공하셨습니다.");
 		emailconfirm.value="";
 		self.close();
-		opener.document.insertform.emailconfirm.value.value=1;
+		return true;
+		//opener.document.insertform.emailconfirm.value.value=1;
+		
 	}
 }
-
 
 
 </script>

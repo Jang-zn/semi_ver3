@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+#board_content_area {
+	padding: 1%;
+}
+
+.bord * {
+	border: 1px solid #ccc;
+}
+
+div#content_title>#title {
+	padding: 0.5%;
+	display: inline-block;
+
+}
+
+.content_info {
+	padding: 0.5%;
+	display: inline-block;
+	text-align: center;
+}
+
+#content_detail {
+	/* text-align: center; */
+	padding: 2%;
+}
+
+#content_btn_area {
+	display: flex;
+	margin-top: 1%;
+}
+
+.content_btn {
+	margin: 0 auto;
+}
+
+#reply_area {
+
+}
+
+#reply_count {
+	margin-bottom: 0.5%;
+}
+
+.reply {
+	display: flex;
+	margin-bottom: 0.7%;
+}
+
+.reply_img {
+	padding: 0.5%;
+}
+
+#reply_area img {
+	width: 50%;
+}
+
+.reply_content {
+}
+
+
+
+.reply_btn {
+}
+
+.reply_writer_info {
+	padding-top: 1.2%;
+}
+
+.reply_writer_info_nickname {
+	font-size: 10px;
+	font-weight: bold;
+}
+
+.reply_writer_info_etc {
+	font-size: 8px;
+	color: #bbb;
+}
+
+.reply_content_area {
+	padding: 0.5%;
+}
+
+
+#reply_write_area {
+	padding: 1%;
+	text-align: center;
+}
+
+.reply_write_content>textarea {
+
+}
+
+.reply_write_btn {
+
+}

@@ -14,8 +14,8 @@ const renderCalendar = () => {
 
 	// year-month 채우기
 	$(".year-month").text(viewYear + "년 " + (viewMonth + 1) + "월" + " 실천 현황");
-	$("#excMonth").text((viewMonth + 1) + "월" + " 운동 실천률");
-	$("#menuMonth").text((viewMonth + 1) + "월" + " 식단 실천률");
+	$("#excMonth").html("<h3>"+(viewMonth + 1) + "월" + " 운동 실천률</h3>");
+	$("#menuMonth").html("<h3>"+(viewMonth + 1) + "월" + " 식단 실천률</h3>");
 	
 
 	// 지난 달 마지막 Date, 이번 달 마지막 Date
@@ -71,7 +71,7 @@ const renderCalendar = () => {
 	// 오늘 날짜 그리기
 	const today = new Date();
 	if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
-		for (let date of document.querySelectorAll('.this')) {
+		for (let date of document.querySelectorAll('.thism')) {
 			if (+date.innerText === today.getDate()) {
 				date.classList.add('today');
 				break;
