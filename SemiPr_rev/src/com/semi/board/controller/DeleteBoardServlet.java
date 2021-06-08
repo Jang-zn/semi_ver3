@@ -27,7 +27,7 @@ public class DeleteBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = getServletContext().getRealPath("/Resource/upload/board/");
+		String path = getServletContext().getRealPath("/upload/board/");
 		int boardNo = Integer.parseInt(request.getParameter("no"));
 		
 		String[] files = new String[5];
