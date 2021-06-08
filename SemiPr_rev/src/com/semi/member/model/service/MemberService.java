@@ -193,6 +193,12 @@ public class MemberService {
 		return m;
 		
 	}
+	public Member findPw(String userId, String name, String email) {
+		Connection conn = getConnection();
+		Member m =dao.findPw(conn,userId,name,email);
+		close(conn);
+		return m;
+	}
 	
 
 	

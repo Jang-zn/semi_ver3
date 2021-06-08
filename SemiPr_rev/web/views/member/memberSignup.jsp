@@ -341,6 +341,9 @@
 		if(pw1 != pw2){
 			$("#pw-chk2").css('color','red');
 			$("#pw-chk2").html("비밀번호가 맞지않습니다. 다시 확인해주세요.");
+		}else{
+			$("#pw-chk2").css('color','green');
+			$("#pw-chk2").html("비밀번호가 일치합니다.");
 		}
 	})
     
@@ -411,7 +414,6 @@ $("#email-chk").click(function(){
  function emailCheck(email){
 	 if(email == ""){
 		 alert("이메일을 입력 후 눌러주세요.");
-		 $("#email-chk").attr("disabled");
 		 return;
 	 } 
 	console.log(email);
@@ -463,7 +465,7 @@ function numberMaxLength(e){
 //닉네임 중복검사 -> ajax로 교체할 예정
 //onchange
 $("#nickName_").blur(function(){
-	var isNickname = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,15}/; //인스타그램아이디 정규표현식 가운데 공백 제거추가필요
+	var isNickname = ^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,}\$; //인스타그램아이디 정규표현식 가운데 공백 제거추가필요
 	var nickName =$('#nickName_').val();
 	var nickName2 = nickName.replace(/(\s*)/g, "");
 	console.log(nickName2); 
