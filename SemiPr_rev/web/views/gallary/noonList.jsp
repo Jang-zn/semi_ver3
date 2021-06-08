@@ -33,8 +33,8 @@
 	<div id="n_content_area" class="col-md-10">
 		<span class="gal_no"></span>
 		<div id="n_content" class="col-md-8">
-			<div id="n_content_img" class="col-md-12">
-				<img class="content_img" src="">
+			<div id="n_content_img" class="col-md-12">							
+				<img class="content_img" src="<%=request.getContextPath()%>/Resource/img/noNoon.jpg">				
 			</div>
 			<div><p align="center"> <%=m.getNickname() %>님의 기록</p></div>
 			<div id="n_date" class="col-md-12 noonDate">
@@ -46,8 +46,8 @@
 				</div>
 			</div>
 			<input class="deleteNo" type="hidden" value="">
-			<input type="button" class ="btn btn-light" value="수정하기" onclick="gal_update();">
-            <input type="button" class ="btn btn-light"value="삭제하기" onclick="gal_delete();">
+			<input class ="updateBtn" >
+			<input class="deleteBtn" >
 		</div>
 		
 
@@ -140,6 +140,8 @@
 				$("#comment_area").html(data["content"]);
 				$(".deleteNo").attr("value" ,data["galNo"]);
 				$("#n_date").html(galdate);
+				$(".updateBtn").attr({type:"button",value:"수정하기", onclick:"gal_update();"});
+				$(".deleteBtn").attr({type:"button",value:"삭제하기", onclick:"gal_delete();"});
 				
 				
 		}
