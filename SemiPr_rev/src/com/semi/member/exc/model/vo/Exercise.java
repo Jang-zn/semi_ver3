@@ -74,6 +74,12 @@ public class Exercise {
 		this.fileList = fileList;
 
 	}
+
+	@Override
+	public String toString() {
+		return "Exercise [excId=" + excId + ", excSort=" + excSort + ", excName=" + excName + ", excManual=" + excManual
+				+ ", excVideo=" + excVideo + ", fileList=" + fileList + "]";
+	}
 	
 	
 	

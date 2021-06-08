@@ -1,0 +1,73 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+	font-family: 'PFStardust';	
+}
+ /* 로그인 로고 */
+	.login {
+		margin-top:5%;
+		margin-bottom:5%;
+		padding:2%;
+	}
+	.login h2 {
+		padding: 0 0 20px;
+		font-size: 60px;
+		font-weight:bolder;
+		color: black;
+		border-bottom: 0.5rem dotted black;
+		text-align: center;
+		line-height: 1;
+	}	
+
+	#userId,
+	#password  {
+		width: 300px;
+		height: 40px;
+		padding-left: 3px;
+		
+  		border-radius:0.2em;
+  		border:1.5px solid black;
+	}
+
+	#saveId {
+		text-align: center;
+	}
+
+	label, h3 {
+		font-size: 16px;
+		color: #000000;
+		margin-left:2px;
+		margin-bottom: 3px;
+		padding:0 0 0 0;
+	}
+	
+
+	.login li input::-webkit-input-placeholder {
+		font-size: 16px;
+	}
+
+	.login li input[type='checkbox']:checked + label {
+	color: red;
+	}
+
+	#sign_page {
+		width:300px;
+	}
+	
+
+	#login_btn {
+  		background-color: cadetblue;
+  		font-size: 25px;
+  		color: black;
+  		width: 300px;
+  		height: 46px;
+  		border-radius:0.2em;
+  		border:1.5px solid black;
+  		outline:0;
+	}

@@ -9,13 +9,14 @@ public class MemberExcList {
 	private int sets;
 	private double weight;
 	private String excWeek;
+	private String excName;
 	
 	public MemberExcList() {
 	
 	}
 
 	public MemberExcList(int excNo, String memberId, String excId, String excId_c, int reps, int sets, double weight,
-			String excWeek) {
+			String excWeek,String excName) {
 		super();
 		this.excNo = excNo;
 		this.memberId = memberId;
@@ -25,6 +26,7 @@ public class MemberExcList {
 		this.sets = sets;
 		this.weight = weight;
 		this.excWeek = excWeek;
+		this.excName =excName;
 	}
 
 	public int getExcNo() {
@@ -89,6 +91,14 @@ public class MemberExcList {
 
 	public void setExcWeek(String excWeek) {
 		this.excWeek = excWeek;
+	}
+
+	public String getExcName() {
+		return excName;
+	}
+
+	public void setExcName(String excName) {
+		this.excName = excName;
 	}
 
 	

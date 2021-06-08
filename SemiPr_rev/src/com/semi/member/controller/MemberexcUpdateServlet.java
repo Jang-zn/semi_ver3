@@ -30,7 +30,7 @@ public class MemberexcUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int no=Integer.parseInt(request.getParameter("no"));		
+		int no=Integer.parseInt(request.getParameter("no"));
 		MemberExcList mel = new MemberService().selectExercisebyno(no);
 		request.setAttribute("exc", mel);		
 		request.getRequestDispatcher("/views/member/plan/memberexcMylistUpdate.jsp").forward(request, response);

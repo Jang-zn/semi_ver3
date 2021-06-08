@@ -8,13 +8,14 @@ public class MemberMenuList {
 	private int amount;
 	private String menuWeek;
 	private String menuDaytime;
+	private String menuName;
 	
 	public MemberMenuList() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public MemberMenuList(int menuNo, String memberId, String menuId, String menuId_c, int amount, String menuWeek,
-			String menuDaytime) {
+			String menuDaytime,String menuName) {
 		super();
 		this.menuNo = menuNo;
 		this.memberId = memberId;
@@ -23,6 +24,7 @@ public class MemberMenuList {
 		this.amount = amount;
 		this.menuWeek = menuWeek;
 		this.menuDaytime = menuDaytime;
+		this.menuName =menuName;
 	}
 
 	public int getMenuNo() {
@@ -79,6 +81,21 @@ public class MemberMenuList {
 
 	public void setMenuDaytime(String menuDaytime) {
 		this.menuDaytime = menuDaytime;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberMenuList [menuNo=" + menuNo + ", memberId=" + memberId + ", menuId=" + menuId + ", menuId_c="
+				+ menuId_c + ", amount=" + amount + ", menuWeek=" + menuWeek + ", menuDaytime=" + menuDaytime
+				+ ", menuName=" + menuName + "]";
 	}
 	
 	
