@@ -3,6 +3,8 @@
 <%@ include file="/../views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/memberMain.css">
+	
+
 <div class="row">
 	<div class="col-md-1"></div>
 	<div id="member_rank" class="col-md-10"></div>
