@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 	<%@ page import="com.semi.member.model.vo.Member" %>
     <%
-    String num = (String)session.getAttribute("Number");
-    Member m = (Member)session.getAttribute("m");
+    String num = (String)session.getAttribute("AuthenticationKey");
+   
     %>
     
 <%@ include file = "/../views/common/header.jsp"%>
@@ -46,7 +46,7 @@
 				<li><label for="emailNm" class="label_txt">이메일 :  </label><input
 					type="text" name="forgot_email2" id="forgot_email2" required>
 					<button type="button" id="email-chk" 
-					value="이메일 전송" style="width: 110px; height: 25px" onclick="emailCheck(insertform2.forgot_email2.value, insertform2.forgot_name2.value, insertform2.forgot_id2.value);" >인증번호 전송</button>
+					value="이메일 전송" style="width: 110px; height: 25px" onclick="emailAuthint();" >인증번호 전송</button>
 				</li>
 				 <li><label for="emailNm" class="label_txt">인증번호 :  </label><input
 					type="text" name="emailAuth" id="emailAuth"></li>
@@ -84,54 +84,50 @@
 
 				})
 	
-				
+			const emailAuthint=()=>{
+			var email = $("#forgot_email2").val();
+			if (email == "") {
+			alert("이메일을 입력 후 눌러주세요.");
+			return;
+				}
+			}
 	
- 	function emailCheck(forgot_email2, forgot_name2, forgot_id2) {
-
+ 	$("#forgot_email2").blur(function(){
 		var email =$("#forgot_email2").val();
 		var name =$("#forgot_name2").val();
 		var id =$("#forgot_id2").val();
-		
-		console.log(emailAuth);
-		if (forgot_email2 == "") {
-			alert("이메일을 입력 후 눌러주세요.");
-			return;
-		}else{
-		console.log(forgot_email2);
+	
 		$.ajax({
 			type : "post",
-			url : "<%=request.getContextPath()%>/member/findPwEnd?email=" + forgot_email2+"&name="+forgot_name2+"&id="+forgot_id2,
-			data : {
-				"email":email,
-				"name" : name,
-				"id" : id
-			},
-					success : function(data){
-					console.log(data)
-				
-						if(data=="fail"){
-							alert("가입된 회원이 아닙니다. 확인 다시 시도해주세요.");
-						}else{
-							alert("인증번호 발송 완료");
-							
-						}
-					}
-			});
-	}
-}	
-	
-	
-	$("#check").click(function(){
-		
-		
+			url : "<%=request.getContextPath()%>/member/findPwEnd",
+											
+									data : {
+										"email" : email,
+										"name" : name,
+										"id" : id
+									},
+									success : function(data) {
+										if (data == "fail") {
+											alert("가입된 회원이 아닙니다. 확인 다시 시도해주세요.");
+											//확인버튼 disabled
+										}else{
+											alert("가입된 회원정보가 있습니다. 인증번호 인증을 받으세요!");
+										} 
+									}
+								});
+					});
+
+	$("#check").click(function() {
+
 		var email = $("#emailAuth").val();
-		
-		if(email = ""){
+
+		if (email = "") {
 			alert("인증번호를 입력하세요");
 			return;
 		}
-		
-		if(email != <%=num%> ){
+
+		if (email !=
+<%=num%> ){
 				alert("이메일 인증번호가 틀립니다.");
 				return;
 			}else{

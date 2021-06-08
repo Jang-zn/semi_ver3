@@ -32,34 +32,27 @@ public class MemberFindPwEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//계정 유무 확인
 		String email = request.getParameter("email");
-		EmailAuthentication emailAuth = new EmailAuthentication();
-		String authNum=emailAuth.connectEmail(email);
 		String name = request.getParameter("name");
 		String userId = request.getParameter("id");
-		HttpSession session = request.getSession();
-		session.removeAttribute("num");
+	
 		
 		
-		System.out.println(request.getContextPath());
-		System.out.println(authNum);
+
 		Member m  = new MemberService().findPw(userId,name,email);
 		String msg="";
+		
 		if(m!=null) {
 			msg="success";
-			session.setAttribute("Number", authNum);
-			session.setAttribute("m", m);
 		}else {
 			 msg="fail";
-			 
-		
-			
 			
 		}
 		
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().print(msg);
-		response.sendRedirect(request.getContextPath());
+		
 		
 	}
 
