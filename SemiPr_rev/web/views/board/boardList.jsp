@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 <%@page import="com.semi.common.PageBar2"%>
-=======
+
 <%@page import="com.semi.common.PageBar"%>
->>>>>>> 054fcb51bce8638ea2ade6ac8ddf6ecdedb48781
+
 <%@page import="com.semi.board.model.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -19,26 +18,28 @@
 %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/boardList.css">
+	href="<%=request.getContextPath()%>/Resource/css/02boardList.css">
+	<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/Resource/css/font.css">
 
 <br>
 <div class="row">
-	<div class="col-md-1"></div>
+	<!-- <div class="col-md-1"></div> -->
 	
-	<div id="board_container" class="col-md-10">
+	<div id="board_container" class="col-md-12">
 		<!-- 글 수 + 검색창 -->
-		<div class="row">
-			<div id="content_count" class="col-md-12">
-				<div style="font-weight: bolder;" class="col-md-1">글 수</div>
-				<div style="color: orange; font-weight: bolder;" class="col-md-1"><%=boardListCount %></div>
-				<div class="col-md-6"></div>
+			<div id="content_count" class="row">
+				<div class="col-md-1">전체 글 </div>
+				<div style="color: orange;" class="col-md-1"><%=boardListCount %></div>
+				<div class="col-md-5"></div>
 
-				<div id="board_search" class="col-md-4">
-						<div class="col-md-8">
+				<div id="board_search" class="col-md-5">
+					<div class="row">
+						<div class="col-md-9">
 									<div id="search-Title" >
 										<form action="<%=request.getContextPath()%>/board/boardSearch" method="GET">
-											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword"
-											value=<%=searchType!=null&&searchType.equals("title")?searchKeyword:"" %>> 
+											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword" 
+											value=<%=searchType!=null&&searchType.equals("title")?searchKeyword:"" %> > 
 											<input type="hidden" name="searchType" value="title">
 											<input type="submit" value="검색">
 										</form>
@@ -68,7 +69,7 @@
 								</form>
 							</div>
 						</div> 
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<select id="search-Type">
 								<option value="Title" <%=searchType!=null&&searchType.equals("title")?"selected":"" %>>제목</option>
 								<option value="Content"  <%=searchType!=null&&searchType.equals("content")?"selected":"" %>>내용</option>
@@ -76,9 +77,9 @@
 								<option value="Writer"  <%=searchType!=null&&searchType.equals("Writer")?"selected":"" %>>작성자</option>
 							</select> 
 						</div>
+					</div>
 				</div>
 			</div>
-		</div>
 						
 
 
@@ -163,7 +164,7 @@
 
 	</div>
 	
-	<div class="col-md-1"></div>
+	<!-- <div class="col-md-1"></div> -->
 </div>
 
 

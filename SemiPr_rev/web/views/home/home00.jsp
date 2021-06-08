@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "/../views/common/header.jsp"%>
-	<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/home00.css">
-	 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/2home00.css">
+<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/font.css">
 	<!--------------- 배너 ---------->
     
     
