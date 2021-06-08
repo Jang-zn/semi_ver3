@@ -13,130 +13,161 @@
 	String today=(String)request.getAttribute("today");
 	String time=(String)request.getAttribute("time");
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberMyList.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/Resource/css/memberMyList.css">
 <div id="memberMyList">
-	<div id="select_weekday">
-		<div class="day_myList">일</div>
-		<div class="day_myList">월</div>
-		<div class="day_myList">화</div>
-		<div class="day_myList">수</div>
-		<div class="day_myList">목</div>
-		<div class="day_myList">금</div>
-		<div class="day_myList">토</div>
-	</div>
-	<div id="list_title_container">
-		<div id="myexc" class="list_title_area">
-			<h3><%=today%> 요일 운동계획</h3>
-		</div>
-		<div id="mymenu" class="list_title_area">
-			<h3><%=today%> 요일 식단계획</h3>
-			<select>
-				<option value="아침" <%=time!=null&&time.equals("아침")?"selected":"" %>>아침</option>
-				<option value="점심" <%=time!=null&&time.equals("점심")?"selected":"" %>>점심</option>
-				<option value="저녁" <%=time!=null&&time.equals("저녁")?"selected":"" %>>저녁</option>
-			</select>
-		</div>
-	</div>
-	<div id="list_container_myList">
-		<div id="my_list_exc">
-			<ul>
-			<%if(exclist==null){ %>
-				<div>운동 기록이 없읍니다</div>
-			<%}else{
-			for(MemberExcList mel : exclist) {%>
-				<li class="weekDay_list excinfocho" id="">
-					<div class="list_img_area">
-						<img src="">
-					</div>
-					<div class="list_name_area">
-						<span><%=mel.getExcId()%></span><br> 
-						<span>무게 : <%=mel.getWeight() %> kg</span>
-						<span>횟수 : <%=mel.getReps() %> reps</span>
-						<span>세트수 : <%=mel.getSets() %>sets</span>
-					</div>
-					<div class="list_button_area">
-							<button onclick="window.open('<%=request.getContextPath() %>/member/myexclistupdate?no=<%=mel.getExcNo()%>&excid=<%=mel.getExcId() %>',
-						'운동편집','left=500,top=300,width=400,height=400,location=no,status=no,scrollbars=yes');">수정</button>
-						<br>
-						<br>
-						<button onclick="location.replace('<%=request.getContextPath()%>/member/myexclistdelete?excno=<%=mel.getExcNo()%>')">삭제</button>
-					</div>
-				</li>
-				<%}
-			}%>
-				
-				
-				
-				
-			</ul>
-			<style>
-				#pageBar_mylist>h3>a{color:black;}
-			</style>
-			<div id="pageBar_mylist">
-				<h3><%=excpagebar %></h3>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div id="select_weekday" class="col-md-10">
+			<div class="day_myList col-md-1">
+				<br> <br>월<br> <br>
 			</div>
-		</div>
-		<div id="my_list_menu">
-			<ul>
-			
-		 	<%if(menulist==null){ %>
-				<div>식단 기록이 없읍니다</div>
-			<%}else{ %>
-			<%for(MemberMenuList mml:menulist){%>
-				<li class="weekDay_list menuinfocho">
-					<div class="list_img_area">
-						<img src="">
-					</div>
-					<div class="list_name_area">
-						<span class="MenuVal"><%=mml.getMenuId() %></span>
-						<br> 
-						<span>양 :<%=mml.getAmount() %></span>
-						<span class="kacl">칼로리: xx kcal</span>
-					
-					</div>
-					<div class="list_button_area">
-						<button onclick="window.open('<%=request.getContextPath() %>/member/mymenulistupdate?no=<%=mml.getMenuNo()%>&menuid=<%=mml.getMenuId() %>',
-						'메뉴편집','left=500,top=300,width=400,height=400,location=no,status=no,scrollbars=yes');">수정</button>
-						<br>
-						<br>
-						<button onclick="location.replace('<%=request.getContextPath()%>/member/mymenulistdelete?menuno=<%=mml.getMenuNo()%>')">삭제</button>
-					</div>
-				</li>
-				<%}
-				}%>
-				
-			</ul>
-			<div id="pageBar_mylist">
-				<h3><%=menupagebar %></h3>
+			<div class="col-md-1"></div>
+			<div class="day_myList col-md-1">
+				<br> <br>화<br> <br>
 			</div>
-		</div>
-	</div>
-	<div id="mylist_info_container">
-		<div id="myExc_info" class="mylist_info">
-			<h3>대충 선택한 운동 정보</h3>
-			<div id="myExc_info_box" class="mylist_box"></div>
-		</div>
-		<div id="myMenu_info" class="mylist_info">
-			<h3>대충 선택한 메뉴 정보</h3>
-			<div id="myMenu_info_box" class="mylist_box"></div>
-		</div>
+			<div class="col-md-1"></div>
+			<div class="day_myList col-md-1">
+				<br> <br>수<br> <br>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="day_myList col-md-1">
+				<br> <br>목<br> <br>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="day_myList col-md-1">
+				<br> <br>금<br> <br>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="day_myList col-md-1">
+				<br> <br>토<br> <br>
+			</div>
+			<div class="day_myList col-md-1">
+				<br> <br>일<br> <br>
+			</div>
 
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div id="list_title_container" class="col-md-10">
+			<div id="myexc" class="list_title_area col-md-6"
+				style="font-size: 3rem"><%=today %>요일 운동계획</div>
+			<div id="mymenu" class="list_title_area col-md-6">
+				<div class="col-md-10" style="font-size: 3rem"><%=today %> 요일 식단계획</div>
+				<div class="col-md-2" style="font-size: 2rem">
+					<select>
+						<option value="아침" <%=time!=null&&time.equals("아침")?"selected":"" %>>아침</option>
+						<option value="점심" <%=time!=null&&time.equals("점심")?"selected":"" %>>점심</option>
+						<option value="저녁" <%=time!=null&&time.equals("저녁")?"selected":"" %>>저녁</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div id="list_container_myList" class="col-md-10">
+			<div id="my_list_exc" class="col-md-6">
+			
+				<%for(MemberExcList mel : exclist) {%>
+				<div class="row excinfocho">
+					<div class="list_img_area col-md-2">
+						<br> <img src="" class="excimg"> <br> <br> <br>
+					</div>
+					<div class="list_name_area col-md-9">
+						<input type="hidden" name="excid" value="<%=mel.getExcId() %>">
+						<span class="excname data">대충 저장한 운동이름1</span><br> 
+						<span class="data">무게 : <%=mel.getWeight() %> kg</span>
+						<span class="data">횟수 : <%=mel.getReps() %> reps</span>
+						<span class="data">세트수 : <%=mel.getSets() %>sets</span>
+						<br>
+					</div>
+					<div class="list_button_area col-md-1">
+						<div class="btn" onclick="window.open('<%=request.getContextPath() %>/member/myexclistupdate?no=<%=mel.getExcNo()%>&excid=<%=mel.getExcId() %>',
+						'운동편집','left=500,top=300,width=400,height=400,location=no,status=no,scrollbars=yes');">수정</div>
+						<br>
+						<div class="btn" onclick="location.replace('<%=request.getContextPath()%>/member/myexclistdelete?excno=<%=mel.getExcNo()%>')">삭제</div>
+					</div>
+				</div>
+				<%} %>
+		
+
+	
+		
+				<div id="pageBar_mylist_exc">
+					<h3><%=excpagebar %></h3>
+				</div>
+			</div>
+			<div id="my_list_menu" class="col-md-6">
+				<%for(MemberMenuList mml:menulist){%>
+				<div class="row menuinfocho">
+				
+					<div class="list_img_area col-md-2">
+						<br> <img src="" class="menuimg"> <br> <br> <br>
+					</div>
+					<div class="list_name_area col-md-9">
+						<input type="hidden" name="menuid" value=<%=mml.getMenuId() %>>
+						<span class="data">대충 저장한 메뉴이름1</span>
+						<br><span class="menuamount data"><%=mml.getAmount() %></span>
+						<span class="menukcal data">칼로리: xx kcal</span>
+						<span class="menuget data">영양소 : ~~~~</span><br>
+						<br>
+					</div>
+					<div class="list_button_area col-md-1">
+						<div class="btn" onclick="window.open('<%=request.getContextPath() %>/member/mymenulistupdate?no=<%=mml.getMenuNo()%>&menuid=<%=mml.getMenuId() %>',
+						'메뉴편집','left=500,top=300,width=400,height=400,location=no,status=no,scrollbars=yes');">수정</div>
+						<br>
+						<div class="btn" onclick="location.replace('<%=request.getContextPath()%>/member/mymenulistdelete?menuno=<%=mml.getMenuNo()%>')">삭제</div>
+					</div>
+				</div>
+				<%} %>
+				
+				
+				<div id="pageBar_mylist_menu">
+					<h3><%=menupagebar %></h3>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div id="mylist_info_container" class="col-md-10">
+			<div id="myExc_info" class="mylist_info col-md-6">
+				<h3>대충 선택한 운동 정보</h3>
+				<div id="myExc_info_box" class="mylist_box"></div>
+			</div>
+			<div id="myMenu_info" class="mylist_info col-md-6">
+				<h3>대충 선택한 메뉴 정보</h3>
+				<div id="myMenu_info_box" class="mylist_box"></div>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
 	</div>
 </div>
+<%@ include file="/views/common/footer.jsp"%>
+<style>
+.data { pointer-events: none; }
+</style>
 <script>
-		
+	
 	$(".day_myList").click(e=>{
-		var dayval=$(e.target).text();
+		var dayval=$(e.target).text().trim();
 		console.log(dayval);
 		location.assign("<%=request.getContextPath()%>/member/myList?val="+dayval);	
 	});
-	$("#mymenu>select").change(e=>{
+	
+	$("#mymenu>div>select").change(e=>{
 		var dayval="<%=today%>";
 		console.log(dayval);
 		const daytime=$(e.target).val();
 		location.assign("<%=request.getContextPath()%>/member/myList?val="+dayval+"&time="+daytime);	
 	})
-	
 	
 	$(".excinfocho").click(e=>{	
 		$("#myExc_info_box").html("");
@@ -144,7 +175,7 @@
 			url:"<%=request.getContextPath()%>/ajax/exclist",
 			type:"get",
 			data:{
-				excid:$(e.target).children().eq(0).text()
+				excid:$(e.target).children(1).eq(0).val()
 				},
 			success:data=>{
 				console.log(data);
@@ -157,15 +188,14 @@
 				}
 			})
 		})
-			
+		
 	$(".menuinfocho").click(e=>{	
-		console.log($(e.target).children().eq(0).first().text())
 		$("#myMenu_info_box").html("");
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/selectmenu",
 			type:"get",
 			data:{
-				Menuid:$(e.target).children().eq(0).first().text()
+				Menuid:$(e.target).children(1).eq(0).val()
 				},
 			success:data=>{
 				console.log(data);
@@ -179,25 +209,42 @@
 			})
 		})
 		
-		
-		
-		$(function(){
-		$(".MenuVal").each((i,v)=>{
+	$(function(){
+		$("input[name=excid]").each((i,v)=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/ajax/selectmenu",
+			url:"<%=request.getContextPath()%>/ajax/exclist",
 			type:"get",
-			data:{
-				
-				Menuid:$(".MenuVal").eq(i).text()
+			data:{			
+				excid:$("input[name=excid]").eq(i).val()
 				},
 				success:data=>{
-				console.log($(".MenuVal").eq(i).text());
 				console.log(data);
-					$(".kacl").eq(i).html(data.kcal+"kcal 영양소 탄수화물"+data.prot+"나트륨"+data.na+"팻:"+data.fat);				
+				$(".excimg").eq(i).attr("src",data.fileList[0]);
+				$(".excname").eq(i).html(data.excName);
+							
 					}
 				})
 			})
 		});
-		
-</script>
-<%@ include file="/views/common/footer.jsp"%>
+	
+	$(function(){
+		$("input[name=menuid]").each((i,v)=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/ajax/selectmenu",
+			type:"get",
+			data:{		
+				Menuid:$("input[name=menuid]").eq(i).val()
+				},
+				success:data=>{
+					console.log(data)
+					let amount =$(".menuamount").eq(i).text();
+					$(".menuimg").eq(i).attr("src",data.fileList[0]);
+					$(".menukcal").eq(i).html("kcal:"+Math.ceil((data.kcal)/amount));		
+					$(".menuget").eq(i).html("ch:"+Math.ceil(data.ch/amount))
+					}
+				})
+			})
+		});
+
+</script>	
+	

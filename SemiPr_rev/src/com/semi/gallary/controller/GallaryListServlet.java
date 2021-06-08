@@ -49,6 +49,7 @@ public class GallaryListServlet extends HttpServlet {
 		
 		
 		request.getRequestDispatcher("/views/gallary/noonList.jsp").forward(request, response);
+		
 	}
 
 

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 
+
+
 /**
  * Servlet implementation class InsertMenuDailylogServlet
  */
@@ -35,15 +37,15 @@ public class InsertMenuDailylogServlet extends HttpServlet {
 		Member m=(Member)session.getAttribute("logged");
 		String memberid=m.getMemberId();
 		String menu=request.getParameter("menuArr");
+		System.out.println(menu);
 		String[] menuarr=menu.split(",");		
 		String sysdate=new MemberService().selectmenuSysdate(memberid);
 		System.out.println(sysdate+"여기체크");
 		String msg="";
 		String loc="";
-		if(sysdate==null||sysdate.equals("")) {
-		for(int i=1;i<menuarr.length;i++) {
-			new MemberService().insertMenuDaliylog(menuarr[i]);
-		}
+		if(sysdate==null||sysdate.equals("")) { 
+			new MemberService().insertMenuDaliylog(menuarr);
+		
 			msg="일지를 등록했습니다.";
 			loc="/member/dailyLog";
 		}else {

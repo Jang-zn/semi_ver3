@@ -15,10 +15,10 @@ import com.semi.common.PageBar;
 import com.semi.common.PageBar2;
 import com.semi.member.daily.model.vo.DailyExercise;
 import com.semi.member.daily.model.vo.DailyMenu;
+import com.semi.member.daily.model.vo.DailyMenuList;
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 import com.semi.member.model.vo.MemberExcList;
-import com.semi.member.model.vo.MemberMenuList;
 
 /**
  * Servlet implementation class DailyExcServlet
@@ -72,18 +72,23 @@ public class DailyLogServlet extends HttpServlet {
 	        String []days = {"일","월","화","수","목","금","토"};
 	        dayval=days[calendar.get(Calendar.DAY_OF_WEEK)-1];
 		}
-		
+		int cPage2;
+		try {
+			cPage2 = Integer.parseInt(request.getParameter("cPage2"));
+		} catch (NumberFormatException e) {
+			cPage2 = 1;
+		}
 		List<MemberExcList> list= new MemberService().selectDailyExclist(dayval,memberid);
 		int totaldata= new MemberService().selectDailyexclistCount(memberid);
 		System.out.println(totaldata);
-		PageBar pb =new PageBar(request, totaldata, 5,"/member/dailyLog");
+		PageBar pb =new PageBar(request, totaldata, 5,"/member/dailyLog","cPage2="+cPage2);
 		List<DailyExercise> list2 = new MemberService().selectMemberDailyExcercise(memberid,pb.getCPage(),pb.getNumPerpage()+7);
 		
-		
-		List<MemberMenuList> list3 =new MemberService().selectDailymenulist(dayval,memberid);
+		String daytime="아침";
+		List<DailyMenuList> list3 =new MemberService().selectDailymenulist(dayval,memberid,daytime);
 		
 		int totaldata2= new MemberService().selectDailymenulistCount(memberid);
-		PageBar2 pb2 =new PageBar2(request, totaldata, 5,"/member/dailyLog");
+		PageBar2 pb2 =new PageBar2(request, totaldata, 5,"/member/dailyLog","cPage="+pb.getCPage());
 		List<DailyMenu> list4 =new MemberService().selectMemberDailyMenu(memberid,pb2.getCPage(),pb2.getNumPerpage()+7);
 		request.setAttribute("list", list);
 		request.setAttribute("list2", list2);
@@ -91,7 +96,8 @@ public class DailyLogServlet extends HttpServlet {
 		request.setAttribute("list4", list4);
 		request.setAttribute("pageBar", pb.getPageBar());
 		request.setAttribute("pageBar2", pb2.getPageBar());
-		request.getRequestDispatcher("/views/member/daily/new_dailyLog.jsp").forward(request, response);
+		request.setAttribute("day", dayval);
+		request.getRequestDispatcher("/views/member/daily/dailyLog.jsp").forward(request, response);
 		}
 	}
 

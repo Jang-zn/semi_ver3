@@ -1,6 +1,7 @@
 package com.semi.gallary.model.vo;
 
 import java.util.Date;
+import java.sql.Timestamp;
 
 public class Gallary {
 	private int galNo;
@@ -80,5 +81,4 @@ public class Gallary {
 		this.imgName = ImgName;
 	}
 
-	
 }

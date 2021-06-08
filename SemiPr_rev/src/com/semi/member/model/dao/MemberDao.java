@@ -15,7 +15,7 @@ import java.util.Properties;
 
 import com.semi.member.daily.model.vo.DailyExercise;
 import com.semi.member.daily.model.vo.DailyMenu;
-
+import com.semi.member.daily.model.vo.DailyMenuList;
 import com.semi.member.daily.model.vo.DailyRecordCheck;
 
 import com.semi.member.exc.model.vo.Exercise;
@@ -249,7 +249,6 @@ public class MemberDao {
 		try {
 			pstmt=conn.prepareStatement(p.getProperty("MemberexclistDelete"));
 			pstmt.setInt(1, excno);
-		//	pstmt.setString(2, memberid);
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -524,10 +523,10 @@ public class MemberDao {
   
   
 
-	public List<MemberMenuList> selectDailymenulist(Connection conn, String dayval,String memberid) {
+	public List<DailyMenuList> selectDailymenulist(Connection conn, String dayval,String memberid, String daytime) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<MemberMenuList> list=new ArrayList();
+		List<DailyMenuList> list=new ArrayList();
 		String path=MemberDao.class.getResource("/sql/daily_sql.properties").getPath();
 		try {
 			p.load(new FileReader(path));		
@@ -538,15 +537,21 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(p.getProperty("selectDailymenulist"));
 			pstmt.setString(1, memberid);
 			pstmt.setString(2, dayval);;
+//			pstmt.setString(3, daytime);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				MemberMenuList mml=new MemberMenuList();
-				mml.setMenuNo(rs.getInt("menu_no"));
-				mml.setAmount(rs.getInt("amount"));
-				mml.setMenuId(rs.getString("menu_id"));
-				mml.setMenuDaytime(rs.getString("menu_daytime"));
-				mml.setMenuName(rs.getString("menu_name"));
-				list.add(mml);
+				DailyMenuList dml=new DailyMenuList();
+				dml.setMenuNo(rs.getInt("menu_no"));
+				dml.setAmount(rs.getInt("amount"));
+				dml.setMenuId(rs.getString("menu_id"));
+				dml.setMenuDaytime(rs.getString("menu_daytime"));
+				dml.setMenuName(rs.getString("menu_name"));
+				dml.setCh(rs.getInt("ch"));
+				dml.setFat(rs.getInt("fat"));
+				dml.setKcal(rs.getInt("kcal"));
+				dml.setNa(rs.getInt("na"));
+				dml.setProt(rs.getInt("prot"));
+				list.add(dml);
 			
 			}
 		}catch(SQLException e) {
@@ -576,6 +581,8 @@ public class MemberDao {
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
 		
 		return result;
@@ -765,9 +772,6 @@ public class MemberDao {
 
 
 
-
-
-
 	public Member login(Connection conn, String userId, String password) {
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
@@ -784,6 +788,8 @@ public class MemberDao {
 			pstmt.setString(1, userId);
 			pstmt.setString(2, password);
 			rs=pstmt.executeQuery();
+			System.out.println("id "+userId);
+			System.out.println("pw "+password);
 			if(rs.next()) {
 				m=new Member();
 				m.setMemberId(rs.getString("MEMBER_ID"));
@@ -805,12 +811,98 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}
-		
-		return m;
+ 		return m;
+
 	}
 
 
 
+
+
+	public int userIdDuplication(Connection conn, String userId) {
+		PreparedStatement pstmt =null;
+		int result=0;
+		ResultSet rs =null;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("userIdDuplication"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				
+				result=rs.getInt(1);
+				System.out.println(rs.getInt(1));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+	public int nickNameDuplication(Connection conn, String nickName) {
+		PreparedStatement pstmt =null;
+		int result=0;
+		ResultSet rs =null;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("nickNameDuplication"));
+			pstmt.setString(1, nickName);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+	public Member findId(Connection conn, String name, String email) {
+		PreparedStatement pstmt =null;
+		Member m =null;
+		ResultSet rs = null;
+		String path=MemberDao.class.getResource("/sql/member_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("findId"));
+			pstmt.setString(1,name);
+			pstmt.setString(2,email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m= new Member();
+				m.setMemberId(rs.getString("MEMBER_ID"));
+				m.setMemberPw(rs.getString("MEMBER_PW"));
+				m.setEmail(rs.getString("EMAIL"));
+				m.setName(rs.getString("NAME"));
+				m.setNickname(rs.getString("NICKNAME"));
+				m.setBirth(rs.getDate("BIRTH"));
+				m.setPhone(rs.getString("PHONE"));
+				m.setHeight(rs.getDouble("HEIGHT"));
+				m.setWeight(rs.getDouble("WEIGHT"));
+				m.setGender(rs.getString("GENDER"));
+				m.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				m.setProfileImg(rs.getString("PROFILE_IMG"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return m;
+	}   
+    
 
 
 
@@ -871,6 +963,7 @@ public class MemberDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				DailyExercise de=new DailyExercise();
+				de.seteLogNo(rs.getInt("rnum"));
 				de.setExcDate(rs.getDate("exc_date"));
 				System.out.println(de.getExcDate());
 				list.add(de);			
@@ -935,7 +1028,8 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(p.getProperty("selectmenuSysdate"));
 			pstmt.setString(1, memberid);
 			rs=pstmt.executeQuery();
-			if(rs.next()) sysdate=rs.getString("menu_date");
+			if(rs.next()) sysdate=rs.getString(1);
+			System.out.println(sysdate);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -967,6 +1061,7 @@ public class MemberDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				DailyMenu dm=new DailyMenu();
+				dm.setmLogNo(rs.getInt("rnum"));
 				dm.setMenuDate(rs.getDate("menu_date"));
 				list.add(dm);			
 			}					
@@ -981,10 +1076,10 @@ public class MemberDao {
 
 
 
-	public int[] selectmenuno(Connection conn, String menuday, String memberid) {
+	public int[] selectmenuno(Connection conn, String menuday, String memberid, String daytime) {
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
-		int[] menuno=new int[100];
+		int[] menuno=new int[300];
 		int index=0;
 		String sql="SELECT DISTINCT(MENU_NO) FROM MEM_M_LIST JOIN DAILY_M USING(MENU_NO) WHERE MEMBER_ID=? AND MENU_WEEK=?";
 		
@@ -992,6 +1087,7 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberid);
 			pstmt.setString(2, menuday);
+			//pstmt.setString(3, daytime);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				menuno[index]=rs.getInt("menu_no");
@@ -1009,10 +1105,10 @@ public class MemberDao {
 
 
 
-	public MemberMenuList selectMemberMenuListbyno(Connection conn, int i) {
+	public DailyMenuList selectMemberMenuListbyno(Connection conn, int i) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		MemberMenuList mml=null;
+		DailyMenuList dml=null;
 		String path=MemberDao.class.getResource("/sql/daily_sql.properties").getPath();
 		try {
 			p.load(new FileReader(path));		
@@ -1024,12 +1120,18 @@ public class MemberDao {
 			pstmt.setInt(1, i);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				mml=new MemberMenuList();
-				mml.setMenuNo(rs.getInt("menu_no"));
-				mml.setAmount(rs.getInt("amount"));
-				mml.setMenuId(rs.getString("menu_id"));
-				mml.setMenuDaytime(rs.getString("menu_daytime"));
-				mml.setMenuName(rs.getString("menu_name"));	
+				dml=new DailyMenuList();
+				dml.setMenuNo(rs.getInt("menu_no"));
+				dml.setAmount(rs.getInt("amount"));
+				dml.setMenuId(rs.getString("menu_id"));
+				dml.setMenuDaytime(rs.getString("menu_daytime"));
+				dml.setMenuName(rs.getString("menu_name"));
+				dml.setCh(rs.getInt("ch"));
+				dml.setFat(rs.getInt("fat"));
+				dml.setKcal(rs.getInt("kcal"));
+				dml.setNa(rs.getInt("na"));
+				dml.setProt(rs.getInt("prot"));
+
 			}
 					
 		}catch(SQLException e) {
@@ -1037,7 +1139,7 @@ public class MemberDao {
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return mml;
+		}return dml;
 	}
 
 
@@ -1212,6 +1314,62 @@ public class MemberDao {
 			close(pstmt);
 		}		
 		return list;
+	}
+
+
+
+
+	public int YNmenuCheckAll(Connection conn, String menudate, String memberid) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String path=MemberDao.class.getResource("/sql/daily_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));		
+		}catch(IOException e) {
+			e.printStackTrace();
+		}		
+		try {
+			pstmt=conn.prepareStatement(p.getProperty("YNmenuCheckAll"));
+			pstmt.setString(1, menudate);
+			pstmt.setString(2, memberid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}		
+		return result;
+	}
+
+
+
+
+	public int YNmenuChseck(Connection conn, String menudate, String memberid) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String path=MemberDao.class.getResource("/sql/daily_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));		
+		}catch(IOException e) {
+			e.printStackTrace();
+		}		
+		try {
+			pstmt=conn.prepareStatement(p.getProperty("YmenuCheck"));
+			pstmt.setString(1, menudate);
+			pstmt.setString(2, memberid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}		
+		return result;
 	}
 
 

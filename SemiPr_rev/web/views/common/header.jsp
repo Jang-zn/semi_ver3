@@ -10,7 +10,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/header.css">
+        <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/header.css"> --%>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/02header.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/font.css">
         <script src="<%=request.getContextPath()%>/Resource/js/jquery-3.6.0.min.js"></script>
         <script src="<%=request.getContextPath()%>/Resource/js/chart.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -34,7 +36,11 @@
 
     <body>
         <div id="header_container" class="row">
+<!-- 로고 3 -->
             <div id="logo_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
+<!-- 공백 -->
+			<div class="col-md-2"></div>
+<!-- 주메뉴(6) -->           	
             <div id="menu_container" class="col-md-6">
                 <div id="menu_line">
                     <div class="col-md-3">
@@ -51,9 +57,9 @@
                     <div class="col-md-3">Progress
                         <div class="sub">
                         	<div class="progress_menu"><a href="<%=request.getContextPath()%>/member/dailyLog">일일 기록</a></div>
-                            <div class="progress_menu"><a href="">주간 실천 현황</a></div>
+                            <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/weeklyTrend">주간 실천 현황</a></div>
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/monthlyTrend">월간 실천 현황</a></div>
-                            <div class="progress_menu"><a href="">My Data</a></div>
+                            <!-- <div class="progress_menu"><a href="">My Data</a></div> -->
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/gallary/list">눈바디</a></div>
                         </div>
                     </div>
@@ -64,6 +70,7 @@
                     </div>
                 </div>
             </div>
+<!-- 로그인 3->1  -->            
             <% if(loginMember!=null){ %>
             	<div id="profile_area" class="col-md-3">
             		<div class="row">
@@ -79,12 +86,12 @@
             		</div>
             	</div>
             <%}else{ %>
-            	<div id="login_area" class="col-md-3">
-            		<span onclick="login();">&#9786;로그인</span>
+            	<div id="login_area" class="col-md-1">
+            		<span onclick="login();">login</span>
             	</div>
-            <%} %>
-            
+            <%} %>            
         </div>
+        
 		<div id="aside_content" class="row">
-      	  <div id="content_container" class="col-md-10">
+      	 <div id="content_container" class="col-md-11">
                 <!-- 이 위까지 header -->

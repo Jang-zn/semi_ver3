@@ -42,9 +42,7 @@ public class InsertExcDailylogServlet extends HttpServlet {
 		String msg="";
 		String loc="";
 		if(sysdate==null||sysdate.equals("")) {
-		for(int i=1;i<excarr.length;i++) {
-			new MemberService().insertExcDaliylog(excarr[i]);
-		}
+			new MemberService().insertExcDaliylog(excarr);
 			msg="일지를 등록했습니다.";
 			loc="/member/dailyLog";
 		}else {

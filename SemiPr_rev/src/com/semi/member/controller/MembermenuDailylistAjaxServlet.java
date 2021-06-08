@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.semi.member.daily.model.vo.DailyMenuList;
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 import com.semi.member.model.vo.MemberExcList;
@@ -41,16 +42,10 @@ public class MembermenuDailylistAjaxServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		Member m=(Member)session.getAttribute("logged");	
 		String memberid=m.getMemberId();
-		int[] menuarr =new MemberService().selectmenuno(menuday,memberid);
-		List<MemberMenuList> list=new ArrayList(); 
-		for(int i=0;i<menuarr.length;i++) {
-			System.out.println(menuarr[i]);
-			if(menuarr[i]!=0) {
-				MemberMenuList mml=new MemberService().selectMemberMenuListbyno(menuarr[i]); 
-				System.out.println(mml);
-				list.add(mml);
-			}
-		}		
+		String daytime="아침";
+		int[] menuarr =new MemberService().selectmenuno(menuday,memberid,daytime);
+		List<DailyMenuList> list=new MemberService().selectMemberMenuListbyno(menuarr); 
+		
 		response.setContentType("application/json;charset=utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}
