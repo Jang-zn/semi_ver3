@@ -28,22 +28,23 @@ public class StatisticService {
 		return list02;
 	}
 	
-	//excId로 정보를 조회해오기
-	public ExcInfo excInfo(String excId){
-		Connection conn=getConnection();
-		ExcInfo excInfo = dao.excInfo(conn, excId);
-		close(conn);
-		//System.out.println(excInfo.getExcName());
-		return excInfo;
-	}
-	
-	//menuId로 정보를 조회해오기
-		public MenuInfo menuInfo(String menuId){
-			Connection conn=getConnection();
-			MenuInfo menuInfo = dao.menuInfo(conn, menuId);
-			close(conn);
-			return menuInfo;
-		}
+
+//	//excId로 정보를 조회해오기
+//	public ExcInfo excInfo(String excId){
+//		Connection conn=getConnection();
+//		ExcInfo excInfo = dao.excInfo(conn, excId);
+//		close(conn);
+//		//System.out.println(excInfo.getExcName());
+//		return excInfo;
+//	}
+//	
+//	//menuId로 정보를 조회해오기
+//		public MenuInfo menuInfo(String menuId){
+//			Connection conn=getConnection();
+//			MenuInfo menuInfo = dao.menuInfo(conn, menuId);
+//			close(conn);
+//			return menuInfo;
+//		}
 	
 	
 	public String weekExcCheck(String weekCheck) {
@@ -73,5 +74,20 @@ public class StatisticService {
 		close(conn);
 		return count;
 	}
+
+	
+	public List<ExcInfo> ExcStatistic(){
+		Connection conn = getConnection();
+		List<ExcInfo> list=dao.excStatistic(conn);
+		close(conn);
+		return list;
+	}
+	public MenuInfo MenuStatistic() {
+		Connection conn = getConnection();
+		MenuInfo menuStatistic=dao.menuStatistic(conn);
+		close(conn);
+		return menuStatistic;
+	}
+	
 
 }

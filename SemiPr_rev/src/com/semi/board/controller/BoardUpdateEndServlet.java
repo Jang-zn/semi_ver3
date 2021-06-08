@@ -72,7 +72,7 @@ public class BoardUpdateEndServlet extends HttpServlet {
 		String loc ="";
 		if(result>0) {
 			msg ="수정성공!";
-			loc ="/board/boardList";
+			loc ="/board/boardList?numPerpage=15";
 		}else {
 			msg="수정실패!";
 			loc="/board/update?no="+b.getContentNo();

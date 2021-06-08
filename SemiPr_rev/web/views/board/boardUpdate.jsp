@@ -62,8 +62,8 @@
 						<div class="col-md-4">
 							<input type="file" id="write_upload" name="upload<%=i %>" style="width: 100%">	
 						</div>
-						<div class="col-md-4 spanstr" style="position: absolute; margin-left: 91px; padding-bottom: 12px; ">
-							<span style="background: white; font-size: 19px"><%=filelist[i] %></span>
+						<div class="col-md-4 spanstr" style="position: absolute; margin-left: 82px; padding-bottom: 12px; ">
+							<span style="background: white; font-size: 19px; position: absolute; width: 150px;"><%=filelist[i] %></span>
 							<input type="hidden" name="oldfile<%=i%>" value="<%=filelist[i]%>">
 						</div>
 						<div class="col-md-4">
@@ -111,7 +111,7 @@
 		$(".btn-reply").click(e=>{
 			const filecount = $(".filecount").length;
 			if(filecount==5){
-				alert("그만!!");
+				alert("더이상 생성 할 수 없습니다.");
 				
 			}else{
 			const imgaddclone = $(e.target).parent("div").next().clone(true);
@@ -139,13 +139,12 @@
 		const bbb=(e)=>{
 			const filecount = $(".filecount").length;
 			if(filecount==1){
-				console.log($(e.target).parent().siblings().find("span").html());
+				//console.log($(e.target).parent().siblings().find("span").html());
 				$.ajax({
 					url:"<%=request.getContextPath()%>/board/fileD",
 					data:{"deletefile" : $(e.target).parent().siblings().find("span").html()},
 					success:data=>{
-						if(data=="true")
-						alert("파일삭제완료!");
+						
 					}
 				})
 				
@@ -153,7 +152,7 @@
 				$("input[type=file]").val("");
 				$(e.target).off("click");
 			}else{
-				alert($(e.target).parent().siblings().find("input").attr("name")+"삭제");
+				//alert($(e.target).parent().siblings().find("input").attr("name")+"삭제");
 					console.log($(e.target).parent().siblings().find("span").length);
 				if($(e.target).parent().siblings().find("span").length==1){
 					console.log($(e.target).parent().siblings().find("span").html());
@@ -161,8 +160,7 @@
 						url:"<%=request.getContextPath()%>/board/fileD",
 						data:{"deletefile" : $(e.target).parent().siblings().find("span").html()},
 						success:data=>{
-							if(data=="true")
-							alert("파일삭제완료!");
+						
 						}
 					})
 				}
