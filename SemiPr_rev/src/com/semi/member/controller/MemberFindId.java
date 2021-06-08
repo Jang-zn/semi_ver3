@@ -42,7 +42,6 @@ public class MemberFindId extends HttpServlet {
 			loc="/views/member/findId.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(loc);
 			rd.forward(request, response);
-			System.out.println(m.getMemberId());
 		}else {
 			 msg="입력한 정보와 일치하는 아이디가 존재하지 않습니다.";
 			 loc="/views/member/findId.jsp";

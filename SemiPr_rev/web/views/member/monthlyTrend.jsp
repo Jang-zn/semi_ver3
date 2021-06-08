@@ -7,103 +7,96 @@
 
 
 <div id="container_progress_trend" class="row">
-	<div class="col-md-1"></div>
-	<div class="col-md-10">
-		<br>
-		<div class='row'>
-
-			<div class="col-md-12">
-				<div class="col-md-12">
-					<div class="col-md-4">이번주 계획</div>
-					<div class="col-md-4">달성현황</div>
-					<div class="col-md-4">건강기록</div>
-				</div>
+	<div class="col-md-12">
+	<br>
+		
+	<div class="row">
+        <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/weeklyTrend" class="btn1">주간 현황</a></div>
+        <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/monthlyTrend" class="btn1">월간 현황</a></div>
+    </div>
+	<br>
+	<div class="row">
+		<div id="container_content_progress_trend" class="col-md-12">
+			<div id="PracticeRate_img" class="col-md-2">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_qscX8L2bnZfZhslTsvDavnGhH16jUEsTRw&usqp=CAU">
 			</div>
 
-		</div>
-		<br>
 
-
-		<div class="row">
-
-			<div id="container_content_progress_trend" class="col-md-12">
-				<div id="PracticeRate_img" class="col-md-2">
-					<img
-						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_qscX8L2bnZfZhslTsvDavnGhH16jUEsTRw&usqp=CAU">
+			<!-- Trend Area -->
+			<div id="Practice_trend" class="col-md-8">
+				<div class="col-md-12">
+					<canvas id="lineChart"></canvas>
 				</div>
-
-
-				<!-- Trend Area -->
-				<div id="Practice_trend" class="col-md-8">
-					<div class="row">
-						<div class="col-md-12" style="height: 230px">
-							<canvas id="lineChart"></canvas>
-						</div>
-					</div>
-				</div>
-
-				<!-- Trend Area -->
-
-				<div id="select_sort" class="col-md-2">
-					<select id="dataType_select">
+			</div>
+			
+			
+			<!-- Sort select -->
+			<div id="select_sort" class="col-md-2">
+				<div class="col-md-12">
+					<select id="dataType_select" style="width:100%">
 						<option name="dataType" value="monthlyExc">운동 실천현황</option>
 						<option name="dataType" value="monthlyMenu">식단 실천현황</option>
 						<option name="dataType" value="stackReps">누적 운동량</option>
 						<option name="dataType" value="stackKcals">누적 섭취량</option>
-					</select><br> 
-					<select id="dataPeriod">
+					</select>
+				</div>
+				<br>
+				<div class="col-md-12">
+					<select id="dataPeriod" style="width:100%">
 						<option name="term" value="1m">1개월 </option>
 						<option name="term" value="3m"> 3개월 </option> 
 						<option name="term" value="6m"> 6개월 </option> 
 						<option name="term" value="12m"> 1년 </option>
 					</select>
-					<button id="read_trend" name="read_trend" onclick="chartCall();">조회하기</button>
 				</div>
-			</div>
-
-		</div>
-
-		<div class="row">
-			<div id="statistics_container" class="col-md-12">
-				<div id="excMonth" class="row">X월 운동 실천율</div>
-				<div id="data_container" class="row">
-					<div id="" class="col-md-6 pieChart">
-						<div class="row cContainer">
-							<canvas id="chart8" class="col-md-12"></canvas>
-						</div>
-					</div>
-					<div id="" class="col-md-6 rank">
-						<div class="row">
-							<div class="col-md-8 cContainer"><canvas id="chart10" ></canvas></div>
-							<div class="col-md-4"></div>		
-						</div>
-					</div>
-				</div>
-
+				<div id="read_trend" class="col-md-12" name="read_trend" onclick="chartCall();">조회하기</div>
 			</div>
 		</div>
-
-
-
-		<div class="row">
-			<div id="statistics_container" class="col-md-12">
-				<div id="menuMonth" class="row">X월 식단 실천율</div>
-				<div id="data_container" class="row">
-					<div id="" class="col-md-6 pieChart">
-						<div class="row cContainer">
-							<canvas id="chart9" ></canvas>
-						</div>
-					</div>
-					<div id="" class="col-md-6 rank">
-						<div class="row">
-							<div class="col-md-8 cContainer"><canvas id="chart11" ></canvas></div>
-							<div class="col-md-4"></div>
-						</div>
+	</div>
+	
+	
+	<!-- 운동 실천 현황 doughnut pie -->
+	<div class="row">
+		<div id="statistics_container" class="col-md-12">
+			<div id="excMonth" class="row"></div>
+			<div id="data_container" class="row">
+				<div id="" class="col-md-6 pieChart">
+					<div class="row cContainer">
+						<canvas id="chart8"></canvas>
 					</div>
 				</div>
-
+				<div id="" class="col-md-6 rank">
+					<div class="row">
+						<div class="col-md-8 cContainer"><canvas id="chart10" ></canvas></div>
+						<div class="col-md-4"></div>		
+					</div>
+				</div>
 			</div>
 		</div>
+	</div>
+
+
+	<!-- 식단 실천 현황 doughnut pie -->
+	<div class="row">
+		<div id="statistics_container" class="col-md-12">
+			<div id="menuMonth" class="row"></div>
+			<div id="data_container" class="row">
+				<div id="" class="col-md-6 pieChart">
+					<div class="row cContainer">
+						<canvas id="chart9" ></canvas>
+					</div>
+				</div>
+				<div id="" class="col-md-6 rank">
+					<div class="row">
+						<div class="col-md-8 cContainer">
+							<canvas id="chart11" ></canvas>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -146,7 +139,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-1"></div>
 </div>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/calendar.css">

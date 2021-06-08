@@ -13,12 +13,12 @@
 	String today=(String)request.getAttribute("today");
 	String time=(String)request.getAttribute("time");
 %>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/memberMyList.css">
-<div id="memberMyList">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberMyList.css">
+<div id="memberMyList" class="row">
+
+	<!-- 요일선택 -->
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div id="select_weekday" class="col-md-10">
+		<div id="select_weekday" class="col-md-12">
 			<div class="day_myList col-md-1">
 				<br> <br>월<br> <br>
 			</div>
@@ -45,33 +45,38 @@
 			<div class="day_myList col-md-1">
 				<br> <br>일<br> <br>
 			</div>
-
 		</div>
-		<div class="col-md-1"></div>
 	</div>
 
+
+	<!-- 운동계획 / 식단계획 -->
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div id="list_title_container" class="col-md-10">
-			<div id="myexc" class="list_title_area col-md-6"
-				style="font-size: 3rem"><%=today %>요일 운동계획</div>
+		<div id="list_title_container" class="col-md-12">
+			
+			<div id="myexc" class="list_title_area col-md-6">
+				<%=today %>요일 운동계획
+			</div>
+			
 			<div id="mymenu" class="list_title_area col-md-6">
-				<div class="col-md-10" style="font-size: 3rem"><%=today %> 요일 식단계획</div>
-				<div class="col-md-2" style="font-size: 2rem">
-					<select>
+				<div class="col-md-10">
+					<%=today %>요일 식단계획
+				</div>
+				<div class="col-md-2">
+					<select style=""width:100%">
 						<option value="아침" <%=time!=null&&time.equals("아침")?"selected":"" %>>아침</option>
 						<option value="점심" <%=time!=null&&time.equals("점심")?"selected":"" %>>점심</option>
 						<option value="저녁" <%=time!=null&&time.equals("저녁")?"selected":"" %>>저녁</option>
 					</select>
 				</div>
 			</div>
+			
 		</div>
-		<div class="col-md-1"></div>
 	</div>
 
+
+	<!-- 운동 / 식단 리스트 -->
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div id="list_container_myList" class="col-md-10">
+		<div id="list_container_myList" class="col-md-12">
 			<div id="my_list_exc" class="col-md-6">
 			
 				<%for(MemberExcList mel : exclist) {%>
@@ -133,11 +138,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>
+	
+	
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div id="mylist_info_container" class="col-md-10">
+		<div id="mylist_info_container" class="col-md-12">
 			<div id="myExc_info" class="mylist_info col-md-6">
 				<h3>대충 선택한 운동 정보</h3>
 				<div id="myExc_info_box" class="mylist_box"></div>
@@ -147,7 +152,6 @@
 				<div id="myMenu_info_box" class="mylist_box"></div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>
 </div>
 <%@ include file="/views/common/footer.jsp"%>
