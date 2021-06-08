@@ -97,7 +97,7 @@ public class DailyLogServlet extends HttpServlet {
 		request.setAttribute("pageBar", pb.getPageBar());
 		request.setAttribute("pageBar2", pb2.getPageBar());
 		request.setAttribute("day", dayval);
-		request.getRequestDispatcher("/views/member/daily/new_dailyLog.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/daily/dailyLog.jsp").forward(request, response);
 		}
 	}
 
