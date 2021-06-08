@@ -1,6 +1,6 @@
 package com.semi.common;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
 
 public class PageBar {
 
