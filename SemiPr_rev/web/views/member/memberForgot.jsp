@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<%@ page import="com.semi.member.model.vo.Member" %>
-   
-	<%  
-	String authNum = (String)request.getAttribute("msg2");
-	Member m = (Member)request.getAttribute("Pw");
-	%>
-    
+    <%
+    String num = (String)session.getAttribute("Number");
+    Member m = (Member)session.getAttribute("m");
+    %>
     
 <%@ include file = "/../views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberForgot.css">
@@ -51,12 +49,14 @@
 					value="이메일 전송" style="width: 110px; height: 25px" onclick="emailCheck(insertform2.forgot_email2.value, insertform2.forgot_name2.value, insertform2.forgot_id2.value);" >인증번호 전송</button>
 				</li>
 				 <li><label for="emailNm" class="label_txt">인증번호 :  </label><input
-					type="text" name="emailAuth" id="emailAuth">
+					type="text" name="emailAuth" id="emailAuth"></li>
+				<li id="emailBox"></li>
+					
+					
 			</ul>
-			<div id="emailBox"></div>
 		</div>
-		<span class="forgot_btn"> <input type="submit" class="" onclick="return emailAuthCheck();"
-			value="확인" title="확인">
+		<span class="forgot_btn"> <input type="submit" class="" 
+			value="확인" id="check">
 
 		</span> <span class="forgot_btn2"> <input type="button" class=""
 			value="취소" title="취소">
@@ -91,7 +91,8 @@
 		var email =$("#forgot_email2").val();
 		var name =$("#forgot_name2").val();
 		var id =$("#forgot_id2").val();
-		var emailAuth =$("#emailAuth").val();
+		
+		console.log(emailAuth);
 		if (forgot_email2 == "") {
 			alert("이메일을 입력 후 눌러주세요.");
 			return;
@@ -110,27 +111,34 @@
 				
 						if(data=="fail"){
 							alert("가입된 회원이 아닙니다. 확인 다시 시도해주세요.");
-							
-								
-							
 						}else{
-							if(emailAuth == <%=authNum%>){
-								$("#emailBox").css('color','green')
-								$("#emailBox").html("이메일 인증성공")
-							}
+							alert("인증번호 발송 완료");
+							
 						}
-				
-			}
-		});
-
-
-		<%-- let url = "<%=request.getContextPath()%>/member/findPw?email=" + forgot_email2;
-		url += "&name="+forgot_name2+"&id="+forgot_id2; --%>
+					}
+			});
+	}
+}	
+	
+	
+	$("#check").click(function(){
 		
-			
+		
+		var email = $("#emailAuth").val();
+		
+		if(email = ""){
+			alert("인증번호를 입력하세요");
+			return;
 		}
 		
-	} 
+		if(email != <%=num%> ){
+				alert("이메일 인증번호가 틀립니다.");
+				return;
+			}else{
+				alert("이메일 인증완료");
+			}
+	});	
+ 
 </script>
 
 <%@ include file = "/../views/common/footer.jsp"%>

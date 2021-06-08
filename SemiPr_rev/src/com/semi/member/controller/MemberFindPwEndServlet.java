@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
@@ -36,18 +37,18 @@ public class MemberFindPwEndServlet extends HttpServlet {
 		String authNum=emailAuth.connectEmail(email);
 		String name = request.getParameter("name");
 		String userId = request.getParameter("id");
-		System.out.println("야이거나오냐");
-		System.out.println(userId);
-		System.out.println(name);
-		System.out.println(email);
+		HttpSession session = request.getSession();
+		session.removeAttribute("num");
+		
+		
+		System.out.println(request.getContextPath());
 		System.out.println(authNum);
 		Member m  = new MemberService().findPw(userId,name,email);
 		String msg="";
-		String msg2="";
 		if(m!=null) {
 			msg="success";
-			request.setAttribute("msg2", authNum);
-			request.setAttribute("Pw", m);
+			session.setAttribute("Number", authNum);
+			session.setAttribute("m", m);
 		}else {
 			 msg="fail";
 			 
@@ -55,8 +56,10 @@ public class MemberFindPwEndServlet extends HttpServlet {
 			
 			
 		}
+		
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().print(msg);
+		response.sendRedirect(request.getContextPath());
 		
 	}
 
