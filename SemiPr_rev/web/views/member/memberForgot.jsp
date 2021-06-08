@@ -24,15 +24,14 @@
 		</div>
 		<span class="forgot_btn"> <input type="submit" class=""
 			value="확인" title="확인" >
-
+"<%=request.getContextPath()%>/member/emailAuth"
 		</span> <span class="forgot_btn2"> <input type="button" class=""
 			value="취소" title="취소">
 		</span> <br>
 	</form>
 	<hr>
 	<br>
-	<form name="insertform2" action="<%=request.getContextPath()%>/member/findPwEnd"
-		method="post">
+	<form name="insertform2" method="post">
 		<div class="question">
 			<h2>비밀번호찾기</h2>
 			회원정보에 등록한 이메일 인증
@@ -68,15 +67,33 @@
 
 <script>
 	
+const emailAuthint=()=>{
+	var emailAu = $("#forgot_email2").val();
+	$.ajax({
+		type : "post",
+		url : "<%=request.getContextPath()%>/member/emailAuth",
+										
+								data : {
+									"email" : emailAu,
+									
+								},
+								success : function(data) {
+									console.log(data)
+									
+								}
+							});
+			
+				};
+
+
+	
+	
 	$("#forgot_email2").blur(function() {
 			
 					var emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 					var email = $("#forgot_email2").val()
 					var email2 = email.replace(/(\s*)/g, "");
-					if (email != email2) {
-							alert("공백없이 입력해주세요");
-							return;
-					}
+			
 					if (!emailReg.test(email)) {
 							alert("잘못된 형식의 이메일주소입니다.");
 							return;
@@ -84,13 +101,7 @@
 
 				})
 	
-			const emailAuthint=()=>{
-			var email = $("#forgot_email2").val();
-			if (email == "") {
-			alert("이메일을 입력 후 눌러주세요.");
-			return;
-				}
-			}
+			
 	
  	$("#forgot_email2").blur(function(){
 		var email =$("#forgot_email2").val();
@@ -108,31 +119,35 @@
 									},
 									success : function(data) {
 										if (data == "fail") {
-											alert("가입된 회원이 아닙니다. 확인 다시 시도해주세요.");
-											//확인버튼 disabled
+											alert("가입된 회원이 아닙니다. 확인 후 다시 시도해주세요.");
+											$("#email-chk").attr("disabled",true);
 										}else{
 											alert("가입된 회원정보가 있습니다. 인증번호 인증을 받으세요!");
+											$("#email-chk").attr("disabled",false);
 										} 
 									}
 								});
+				
 					});
 
 	$("#check").click(function() {
-
-		var email = $("#emailAuth").val();
-
-		if (email = "") {
-			alert("인증번호를 입력하세요");
-			return;
-		}
-
-		if (email !=
-<%=num%> ){
-				alert("이메일 인증번호가 틀립니다.");
-				return;
-			}else{
-				alert("이메일 인증완료");
+		var emailAuth = $("#emailAuth").val();
+		$.ajax({
+			type:'post',
+			url : "<%=request.getContextPath()%>/member/passwordEmailAuth",
+			data : {
+				"emailAuth" : emailAuth
+			},
+			success : function(data){
+				if(data=="success"){
+					alert("이메일 인증에 성공하였습니다.")
+				}else{
+					alert("이메일 인증에 실패했습니다.")
+				}
 			}
+		});	 
+
+		
 	});	
  
 </script>

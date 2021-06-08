@@ -65,7 +65,7 @@ public class EmailAuthenticationServlet extends HttpServlet {
         }
 		
 		
-        String host="smtp.google.com"; //smtp 서버
+        String host="smtp.gmail.com"; //smtp 서버
         String id ="formuscle123@gmail.com"; // 네이버 계정(보내는 사람)
         String password = "formuscle123123"; //패스워드
 		String from ="관리자"; //보내는 이름 설정
@@ -113,7 +113,7 @@ public class EmailAuthenticationServlet extends HttpServlet {
              Transport.send(msg); //javax.mail.Transport.send() 이용
 
 
-             System.out.println("이메일 전송");
+             System.out.println("이메일 전송완료");
              
          }catch(MessagingException e){
         	 e.printStackTrace();
@@ -122,11 +122,11 @@ public class EmailAuthenticationServlet extends HttpServlet {
          }
 
 
-
+         System.out.println(AuthenticationKey);
         HttpSession saveKey = request.getSession();
  		saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
  		
-// 		request.getRequestDispatcher("/views/member/emailCheck.jsp").forward(request, response);
+ 		request.getRequestDispatcher("/").forward(request, response);
  		
 	}
          
