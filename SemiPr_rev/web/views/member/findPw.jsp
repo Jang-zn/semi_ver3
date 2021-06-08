@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
       <%@ page import="com.semi.member.model.vo.Member" %>
     <%
-    Member m = (Member)request.getAttribute("pw");
+    Member m = (Member)session.getAttribute("m");
+    
     %>
 <%@ include file="/../views/common/header.jsp"%>
 
   <%if(m==null) {%>
   <div id="">
-  	<%=request.getAttribute("msg") %>
+  	<p>찾으신 결과 없습니다.</p>
   	<div class="">
 			<a href="<%=request.getContextPath()%>/member/signup">회원가입</a>
 		</div>

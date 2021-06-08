@@ -9,7 +9,7 @@
 <%@ include file = "/../views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberForgot.css">
 <section class="forgot">
-	<form action="<%=request.getContextPath()%>/member/findId"  name="insertform"
+	<form action="<%=request.getContextPath()%>/member/findId"  name="insertform" 
 		method="post">
 		<div class="email">
 			<h2>아이디찾기</h2>
@@ -24,14 +24,14 @@
 		</div>
 		<span class="forgot_btn"> <input type="submit" class=""
 			value="확인" title="확인" >
-"<%=request.getContextPath()%>/member/emailAuth"
+
 		</span> <span class="forgot_btn2"> <input type="button" class=""
 			value="취소" title="취소">
 		</span> <br>
 	</form>
 	<hr>
 	<br>
-	<form name="insertform2" method="post">
+	<form name="insertform2" method="post" action="<%=request.getContextPath()%>/member/printPw" id="insertform">
 		<div class="question">
 			<h2>비밀번호찾기</h2>
 			회원정보에 등록한 이메일 인증
@@ -54,7 +54,7 @@
 					
 			</ul>
 		</div>
-		<span class="forgot_btn"> <input type="submit" class="" 
+		<span class="forgot_btn"> <input type="button" class="" 
 			value="확인" id="check">
 
 		</span> <span class="forgot_btn2"> <input type="button" class=""
@@ -78,7 +78,7 @@ const emailAuthint=()=>{
 									
 								},
 								success : function(data) {
-									console.log(data)
+									alert("메일 전송 완료")
 									
 								}
 							});
@@ -127,25 +127,36 @@ const emailAuthint=()=>{
 										} 
 									}
 								});
-				
 					});
 
+	
+	
+	
 	$("#check").click(function() {
 		var emailAuth = $("#emailAuth").val();
+		var email =$("#forgot_email2").val();
+		var name =$("#forgot_name2").val();
+		var id =$("#forgot_id2").val();
 		$.ajax({
 			type:'post',
 			url : "<%=request.getContextPath()%>/member/passwordEmailAuth",
 			data : {
-				"emailAuth" : emailAuth
+				"emailAuth" : emailAuth,
+				"email" : email,
+				"name" : name,
+				"id" : id
 			},
 			success : function(data){
+				console.log(data);
 				if(data=="success"){
-					alert("이메일 인증에 성공하였습니다.")
+					alert("이메일 인증에 성공하였습니다.");
+					$("#insertform").submit();
 				}else{
-					alert("이메일 인증에 실패했습니다.")
+					alert("이메일 인증에 실패했습니다.");
 				}
+				
 			}
-		});	 
+		});
 
 		
 	});	

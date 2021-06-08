@@ -126,7 +126,7 @@ public class EmailAuthenticationServlet extends HttpServlet {
         HttpSession saveKey = request.getSession();
  		saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
  		
- 		request.getRequestDispatcher("/").forward(request, response);
+ 		//request.getRequestDispatcher("/").forward(request, response);
  		
 	}
          
