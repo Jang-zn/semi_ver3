@@ -38,17 +38,8 @@ public class MemberexcDailylistAjaxServlet extends HttpServlet {
 		Member m=(Member)session.getAttribute("logged");	
 		String memberid=m.getMemberId();
 		int[] excarr =new MemberService().selectExcno(excday,memberid);
-		List<MemberExcList> list=new ArrayList(); 
-		for(int i=0;i<excarr.length;i++) {
-			System.out.println(excarr[i]);
-			if(excarr[i]!=0) {
-				MemberExcList mel=new MemberService().selectMemberExcListbyno(excarr[i]); 
-				list.add(mel);
-			}
-		}		
+		List<MemberExcList> list=new MemberService().selectMemberExcListbyno(excarr); 
 		
-		
-
 		
 		response.setContentType("application/json;charset=utf-8");
 		new Gson().toJson(list,response.getWriter());

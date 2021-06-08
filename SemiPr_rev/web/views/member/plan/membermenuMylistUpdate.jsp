@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <script src="<%=request.getContextPath()%>/Resource/js/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -32,8 +33,24 @@
 						<br>
                      <span> 양:</span>   <input type="number" name="amount" placeholder="양" value="<%=mml.getAmount()%>"><br>
        
-                        <input type="submit" onclick="fn_close();" value="수정하기">
+                        <input type="submit" onsubmit="return fn_close();" value="수정하기">
                     </form>
 </div>
+<script type="text/javascript">
+$("input[type=number]").change(e=>{
+	if($(e.target).val()<0){
+		alert("음수x");
+		$(e.target).val("0");
+	}
+})
+const fn_close=()=>{
+	if($("input[type=number]").val()<0){
+		alert("음수x")
+		return false;
+	}else{
+		return true;
+	}
+}
+</script>
 </body>
 </html>
