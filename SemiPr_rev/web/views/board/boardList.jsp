@@ -1,7 +1,3 @@
-<%@page import="com.semi.common.PageBar2"%>
-
-<%@page import="com.semi.common.PageBar"%>
-
 <%@page import="com.semi.board.model.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -41,6 +37,7 @@
 											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword" 
 											value=<%=searchType!=null&&searchType.equals("title")?searchKeyword:"" %> > 
 											<input type="hidden" name="searchType" value="title">
+												<input type="hidden" value="15" name="numPerpage2">
 											<input type="submit" value="검색">
 										</form>
 									</div>
@@ -49,6 +46,7 @@
 									<input type="text" placeholder="제목+내용을 입력하세요" name="searchKeyword"
 									value=<%=searchType!=null&&searchType.equals("titlecontent")?searchKeyword:"" %>> 
 									<input type="hidden" name="searchType" value="titlecontent">
+										<input type="hidden" value="15" name="numPerpage2">
 									<input type="submit" value="검색">
 								</form>
 							</div>
@@ -57,6 +55,7 @@
 								<input type="text" placeholder="내용을 입력하세요" name="searchKeyword"
 								value=<%=searchType!=null&&searchType.equals("content")?searchKeyword:"" %>> 
 								<input type="hidden" name="searchType" value="content">
+									<input type="hidden" value="15" name="numPerpage2">
 								<input type="submit" value="검색">
 							</form>
 							</div>
@@ -65,6 +64,7 @@
 									<input type="text" placeholder="작성자를 입력하세요" name="searchKeyword"
 									value=<%=searchType!=null&&searchType.equals("writer")?searchKeyword:"" %>>  
 									<input type="hidden" name="searchType" value="writer">
+										<input type="hidden" value="15" name="numPerpage2">
 									<input type="submit" value="검색">
 								</form>
 							</div>
@@ -144,11 +144,14 @@
 							<div class="board_content_info col-md-1">
 								<%=b.getReadCount() %>
 							</div>
-							<%-- <%if(loginM.getUserId("admin")||loginM.getUserId(b.getWriter()) {%> --%>
 							<div class="board_content_info col-md-1">
+							<%if(loginMember!=null) {%>
+								<%if(loginMember.getMemberId().equals("admin")||loginMember.getMemberId().equals(b.getMemberId())){ %>
 								<button value = "<%=b.getContentNo() %>" onclick="deleteBoard(event)">삭제하기</button>
+								 <%} %> 
+							 <%} %>
+							
 							</div>
-							<%-- <%} %> --%>
 						</div>
 					<%} %>
 				<%} %>
@@ -158,7 +161,7 @@
 			
 			<div class="col-md-3"><%=pageBar %></div>
 			<div class="col-md-3"></div>
-			<div class="col-md-1 btn"
+			<div id ="loginCheckId"class="col-md-1 btn"
 				onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</div>
 		</div>
 
@@ -170,6 +173,12 @@
 
 
 <script>
+	$("#loginCheckId").click(e=>{
+			if(<%=loginMember==null%>){
+				alert("로그인 후 이용해주세요.");				
+				location.assign("<%=request.getContextPath()%>/member/login");
+				}	
+		})
 	const deleteBoard=(e)=>{
 		if(confirm("정말 삭제하실껀가요?")){
 				location.assign('<%=request.getContextPath()%>/board/delete?no='+$(e.target).val());			
@@ -177,16 +186,16 @@
 	}
 	$("[name=b_sort]").change(e=>{
 			if($(e.target).val()!='전체'){
-				location.assign('<%=request.getContextPath()%>/board/boardSort?type='+$(e.target).val());
+				location.assign('<%=request.getContextPath()%>/board/boardSort?numPerpage=15&type='+$(e.target).val());
 			}else{
-				location.assign('<%=request.getContextPath()%>/board/boardList');	
+				location.assign('<%=request.getContextPath()%>/board/boardList?numPerpage=15');	
 			}
 			
 		
 	})
 		
 	const boardContent=(e)=>{
-		location.assign("<%=request.getContextPath()%>/board/content?no="+e);
+		location.assign("<%=request.getContextPath()%>/board/content?numPerpage=15&no="+e);
 	}
 	$("#search-Type").change(e=>{
 		const Title = $("#search-Title");

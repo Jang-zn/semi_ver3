@@ -28,6 +28,7 @@ public class StatisticService {
 		return list02;
 	}
 	
+
 //	//excId로 정보를 조회해오기
 //	public ExcInfo excInfo(String excId){
 //		Connection conn=getConnection();
@@ -73,6 +74,7 @@ public class StatisticService {
 		close(conn);
 		return count;
 	}
+
 	
 	public List<ExcInfo> ExcStatistic(){
 		Connection conn = getConnection();

@@ -38,7 +38,8 @@ String pageBar = (String)request.getAttribute("pageBar");
 	            
 	            <%for(Exercise e : list){ %>
 	            	<div id="sort_list" class="row clickcheck">
-	            		<div class="border col-md-2 listimgbox"><img src="<%=request.getContextPath()%>/upload/excList/<%=e.getFileList().get(0)%>"></div>
+	            		<div class="border col-md-2 listimgbox"><img src="<%=e.getFileList().get(0)%>"></div>
+	            		
 	            		<!-- Exercise에 요약정보 row 추가해줘야됨 -->
 	            		<div id="exc_box" class="border col-md-10" style="padding-top:1%;padding-bottom:1%; ">
 	            			<div id="exc_box_name" class="col-md-12"><%=e.getExcName() %></div>
@@ -59,7 +60,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 	        <!-- Ajax 적용영역 -->
 	            <div id="exc_name" class="row"><%=list.get(0).getExcName()%></div>
 	            <div id="exc_select" class="row">
-	                <div id="exc_img" class="col-md-8"><img src="<%=request.getContextPath()%>/upload/excList/<%=list.get(0).getFileList().get(0)%>"></div>
+	                <div id="exc_img" class="col-md-8"><img src="<%=list.get(0).getFileList().get(0)%>"></div>
 	                <div class="col-md-1"></div>
 	                <div id="exc_submit" class="col-md-3">
 	                    <form action="<%=request.getContextPath()%>/member/excPlan/submit" method="post" onsubmit="return excSubmit();">
@@ -82,13 +83,15 @@ String pageBar = (String)request.getAttribute("pageBar");
 	            </div>
 	            <div id="exc_detail_info_container" class="row">
 	            	<%for(int i=1;i<list.get(0).getFileList().size();i++){ %>
-	            		<div class="col-md-12"><img style="width:40%" src="<%=request.getContextPath()%>/upload/excList/<%=list.get(0).getFileList().get(i)%>"></div>
+	            		<div class="col-md-12"><img style="width:40%" src="<%=list.get(0).getFileList().get(i)%>"></div>
 	            	<%} %>
 	                <div class="col-md-12"><%=list.get(0).getExcManual()%></div>
 	            </div>
 	            <div id="exc_video" class="row">
-					<a href="<%=list.get(0).getExcVideo()%>">참고 영상 : <%=list.get(0).getExcVideo()%></a><br>
-	                <p>아니면 영상 띄우기<p>
+					<%-- <a href="<%=list.get(0).getExcVideo()%>">참고 영상 : <%=list.get(0).getExcVideo()%></a><br> --%>
+					<%if(list.get(0).getExcVideo()!=null) %>
+					<iframe src="<%=list.get(0).getExcVideo()%>"></iframe>
+	              
 	            </div>
 	        <!-- Ajax 적용영역 --> 
 	            
@@ -105,11 +108,14 @@ String pageBar = (String)request.getAttribute("pageBar");
 			url:"<%=request.getContextPath()%>/ajax/excListClick.do?name="+name,
 			dataType:"json",
 			success:data=>{
+				
 				$("#exc_name").text(data.excName);
-				$("#exc_img>img").attr("src","<%=request.getContextPath()%>/upload/excList/"+data.fileList[0]);
+				$("#exc_detail_info_container").text(data.excManual);
+				$("#exc_img>img").attr("src",data.fileList[0]);
 				for(let i=1;i<data.fileList.length;i++){
 					let div = $("<div>").addClass("col-md-12");
-					let img = $("<img>").attr("src","<%=request.getContextPath()%>/upload/excList/"+data.fileList[i]).attr("style","width:40%");
+					let img = $("<img>").attr("src",data.fileList[i]).attr("style","width:40%");
+				
 					div.append(img);
 					if(i==1){
 						$("#exc_detail_info_container").html(div);
@@ -119,7 +125,8 @@ String pageBar = (String)request.getAttribute("pageBar");
 				}
 				let div = $("<div>").addClass("col-md-12");
 				div.text(data.excManual);
-				$("#exc_video").html($("<a>").attr("href",data.excVideo).text("참고영상 : "+data.excVideo));
+				//$("#exc_video").html($("<a>").attr("href",data.excVideo).text("참고영상 : "+data.excVideo));
+				$("#exc_video").html($("<iframe>").attr("src",data.excVideo));
 			}
 		});
 	});

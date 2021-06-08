@@ -764,6 +764,7 @@ public class MemberDao {
 
 
 
+
 	public Member login(Connection conn, String userId, String password) {
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
@@ -896,6 +897,7 @@ public class MemberDao {
 
 
 
+
 	public List<MemberExcList> selectDailyExclist(Connection conn,String dayval,String memberid) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -930,6 +932,7 @@ public class MemberDao {
 			close(pstmt);
 		}return list;
 	}
+
 
 	
 	

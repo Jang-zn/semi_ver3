@@ -96,6 +96,7 @@ public class StatisticDao {
 		}return list;
 	}
 	
+
 //	//excId로 정보 조회해오기
 //	public ExcInfo excInfo(Connection conn, String excId){
 //		PreparedStatement pstmt=null;
@@ -143,6 +144,7 @@ public class StatisticDao {
 //			close(pstmt);
 //		}return mInfo;
 //	}
+
 	
 	public String weekExcCheck(Connection conn, String weekCheck) {
 		PreparedStatement pstmt=null;
@@ -309,6 +311,7 @@ public class StatisticDao {
 		
 	}
 	
+
 	//주간 운동 통계
 	public List<ExcInfo> excStatistic(Connection conn){
 		PreparedStatement pstmt=null;
@@ -367,4 +370,5 @@ public class StatisticDao {
 
 		return menuStatistic;
 	}
+
 }

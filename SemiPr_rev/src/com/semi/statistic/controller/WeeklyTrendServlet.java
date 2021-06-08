@@ -15,6 +15,7 @@ import com.semi.statistic.model.service.StatisticService;
 import com.semi.statistic.model.vo.ExcInfo;
 import com.semi.statistic.model.vo.MenuInfo;
 
+
 /**
  * Servlet implementation class WeeklyTrendServlet
  */
@@ -35,6 +36,7 @@ public class WeeklyTrendServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
 		List<MemberExcList> list01=new StatisticService().TodayMemberExcList();			
 		request.setAttribute("list01", list01);
 		List<MemberMenuList> list02=new StatisticService().TodayMemberMenuList();
@@ -45,13 +47,14 @@ public class WeeklyTrendServlet extends HttpServlet {
 		int menuAchieve=new StatisticService().MenuAchieveCount();
 		request.setAttribute("menuAchieve", menuAchieve);
 		
+
 		List<ExcInfo> excStatistic=new StatisticService().ExcStatistic();
 		request.setAttribute("excStatistic", excStatistic);
 		System.out.println(excStatistic.get(0).getExcName());
 		
 		MenuInfo menuStatistic=new StatisticService().MenuStatistic();
 		request.setAttribute("menuStatistic", menuStatistic);
-		
+
 		request.getRequestDispatcher("/views/member/weeklyTrend.jsp").forward(request, response);
 		
 		

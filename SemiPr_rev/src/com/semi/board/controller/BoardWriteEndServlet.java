@@ -71,9 +71,9 @@ public class BoardWriteEndServlet extends HttpServlet {
 		}
 		String msg ="";
 		String loc ="";
-		if(result>0&&result2>0) {
+		if(result>0) {
 			msg ="등록성공!";
-			loc ="/board/boardList";
+			loc ="/board/boardList?numPerpage=15";
 			
 		}else {
 			msg="등록실패!";

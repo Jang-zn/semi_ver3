@@ -5,8 +5,10 @@
  com.semi.member.model.vo.MemberExcList, com.semi.member.model.vo.MemberMenuList,
  com.semi.statistic.model.vo.ExcInfo, com.semi.statistic.model.vo.MenuInfo"
  %>
+
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/02weeklyTrend.css">
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/font.css">
+
 <%
 	// 오늘 날짜 생성
 	Calendar today=Calendar.getInstance();
@@ -36,6 +38,7 @@
 	int excAchieve=(int)request.getAttribute("excAchieve");
 	int menuAchieve=(int)request.getAttribute("menuAchieve");
 	
+
 	//통계 결과 받아오기
 	List<ExcInfo> excStatistic=(List<ExcInfo>)request.getAttribute("excStatistic");
 	MenuInfo menuStatistic=(MenuInfo)request.getAttribute("menuStatistic");
