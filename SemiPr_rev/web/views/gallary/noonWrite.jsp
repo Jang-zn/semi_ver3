@@ -1,5 +1,17 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@ page import="com.semi.member.model.vo.Member" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
+	SimpleDateFormat sf2 = new SimpleDateFormat("a hh시 mm분");
+	Member m=(Member)session.getAttribute("logged");
+%>
+
+
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/noonWrite.css">
@@ -20,17 +32,22 @@
 		<div id="n_content_area" class="col-md-10">
 
 
+
+
+
 			<div id="n_content" class="col-md-6">
-				<div class="col-md-1"></div>s
+				<div class="col-md-1"></div>
 				<div id="n_date" class="col-md-5">
-					<input type="text" name="title" value="21.5.26 / xxx님의 기록" readonly
+					<input type="text" name="title" value="<%= sf.format(nowTime)%> / <%=sf2.format(nowTime) %> " readonly
 						style="font-size: 20px; font-weight: bold;">
+					<input type="text" name ="writer" value="<%=m.getNickname() %>님의 기록 " readonly />
+					<input type="hidden" name="memberId" value="<%=m.getMemberId() %>" />
 				</div>
-				<div class="col-md-2"></div>
-				<div id="n_date" class="col-md-4">
+<!--				<div class="col-md-2"></div>
+ 				<div id="n_date" class="col-md-4">
 					<label>자유게시판공유하기 : <input type="checkbox" name="share">
 					</label>
-				</div>
+				</div> -->
 				<div class="row">
 					<div id="n_content_img" class="col-md-12">
 						<img id="img_preview" src="#">

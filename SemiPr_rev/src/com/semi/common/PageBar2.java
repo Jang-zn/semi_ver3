@@ -98,6 +98,7 @@ public class PageBar2 {
 		if (pageNo2 == 1) {
 			pageBar2 += "<span>&nbsp[이전]&nbsp</span>";
 		} else {
+
 			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage2=" + (pageNo2 - 1) + "&numPerpage2="
 					+ numPerpage2 + "'>[이전]</a>";
 		}

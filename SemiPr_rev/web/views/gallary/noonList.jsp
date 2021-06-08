@@ -1,11 +1,18 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List,com.semi.gallary.model.vo.Gallary"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import="com.semi.member.model.vo.Member" %>
 <% 	List<Gallary> list = (List<Gallary>)request.getAttribute("list");
 	String pageBar=(String)request.getAttribute("pageBar");
 	
+	String searchKeyword=request.getParameter("searchKeyword");
+	Member m=(Member)session.getAttribute("logged");
+
 	
+	SimpleDateFormat sf = new SimpleDateFormat ( "yyyy MM/dd (HH:mm)");
+	Date time = new Date();
 	
 %>		
 	
@@ -29,8 +36,9 @@
 			<div id="n_content_img" class="col-md-12">
 				<img class="content_img" src="">
 			</div>
-			<div id="n_date" class="col-md-12">
-				<p>21.5.26 / xxx님의 기록</p>
+			<div><p align="center"> <%=m.getNickname() %>님의 기록</p></div>
+			<div id="n_date" class="col-md-12 noonDate">
+				
 			</div>
 			<div id="n_comment" class="col-md-12">
 				<div id="comment_area" class="col-md-12">
@@ -38,48 +46,47 @@
 				</div>
 			</div>
 			<input class="deleteNo" type="hidden" value="">
-			<input type="button" class ="btn btn-default" value="수정하기" onclick="gal_update();">
-            <input type="button" class ="btn btn-default" value="삭제하기" onclick="gal_delete();">
+			<input type="button" class ="btn btn-light" value="수정하기" onclick="gal_update();">
+            <input type="button" class ="btn btn-light"value="삭제하기" onclick="gal_delete();">
 		</div>
 		
 
 
 		<div id="n_list" class="col-md-4">
 			<div class="row">
-				<div class="col-md-2 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진등록</div>
+				<div class="col-md-3 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진등록</div>
 				
-				<div class="col-md-10">
-					<form action="" method="GET">
-						<div class="col-md-10">
-							<input type="text" style="width:100%;">
+				<div class="col-md-9">
+						<form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="get">
+						<div class="">
+						<%-- <form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="post"> --%>
+							<input type="text" name="searchKeyword" size="25" placeholder="검색할 월/일을 입력해주세요 "/>
 						</div>
-						<div class="col-md-2 btn">검색</div>
-						</form>
+						<input type="submit" value="검색"/>
+					</form>
 				</div>
 			</div>
  			<%if(list.isEmpty()){ %>
- 					<div></div>
-	<%}else{
-		for(Gallary g : list) { %>
-		
+ 					<div>등록된 이미지가 없습니다.</div>
 			<div id="n_img_list" class="col-md-12">
-					
-				
-					<div class="row">
+							
+					<div class="row"> 
+					<%}else{
+						for(Gallary g : list) {
+							if (m.getMemberId().equals(g.getMemberId())){%>
 						<div class="img_obj col-md-6">
 							<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>"/>
 							<img width="100%" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
-																			
+							<%= sf.format(g.getGallaryDate())%>	 																		
 						</div>
-					</div>
+						<% }
+						}
+					}%>	
+					</div> 
+			
 			</div>
-			<% }
-			}%>			
 							
 <!-- 						<div class="img_obj col-md-6"></div>
-						
-							
-					
 				<div class="img_obj col-md-6"></div>
 						<div class="img_obj col-md-6"></div>
 					</div>
@@ -89,11 +96,10 @@
 					</div>
 			
  -->
-			
-
 			<div id="n_pageBar" class="row">
-				<div class="col-md-12"><%=pageBar %></div>
-			</div>
+				<div class="col-md-8"></div>
+				<div class="col-md-4"><%=pageBar %></div>
+			</div> 
 		</div>
 	</div>
 	<div class="col-md-1"></div>
@@ -115,7 +121,7 @@
 	//onclick = cilck
 		$.ajax({
 			url:"<%=request.getContextPath()%>/gallary/getGallaryList",
-			/* type:"post", */
+			type:"post",
 			data:{"gal_no" : gal_no},
 			dataType:"json",
 			success:getNoon,
@@ -125,11 +131,17 @@
 		});				
 	});
 		function getNoon(data){ 	
-			var imgname=data["imgName"];		
-			console.log("imgname:"+imgname);						
+			var imgname=data["imgName"];
+			console.log("imgname:"+imgname);
+ 			var galdate=data["galDate"];
+			console.log(galdate); 
+			
 			 	$(".content_img").attr("src", "<%=request.getContextPath()%>/upload/gallary/"+imgname);			 	
 				$("#comment_area").html(data["content"]);
 				$(".deleteNo").attr("value" ,data["galNo"]);
+				$("#n_date").html(galdate);
+				
+				
 		}
 	
 	
@@ -156,7 +168,7 @@
 			}
 		}
 	
-		
+
 	
 
 </script>

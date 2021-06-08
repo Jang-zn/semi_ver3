@@ -36,10 +36,10 @@ public class EmailAuthentication {
                 break;
             }
         }
-		
-		String host="smtp.naver.com"; //smtp 서버
-        String id ="ownlife13@naver.com"; // 네이버 계정(보내는 사람)
-        String password = "formuscle1234!"; //패스워드
+		//네이버 smtp 계정막힘
+		String host="smtp.gmail.com"; //smtp 서버
+        String id ="formuscle123@gmail.com"; // 네이버/구글 계정(보내는 사람)
+        String password = "formuscle123123"; //패스워드
 		String from ="관리자"; //보내는 이름 설정
 		String toEmail = email;  //받는 이메일 주소
 		String subject="ForMuscle 인증번호입니다. "; //보내는 제목 설정

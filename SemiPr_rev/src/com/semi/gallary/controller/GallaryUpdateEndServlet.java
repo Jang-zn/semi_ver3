@@ -76,7 +76,7 @@ public class GallaryUpdateEndServlet extends HttpServlet {
 		String loc="";
 		if(result>0&&result2>0) {
 			msg="수정되었습니다.";
-			loc="/gallary/list";
+			loc="/gallary/list?numPerpage=6";
 		}else {
 			//수정실패
 			msg="수정 실패";

@@ -1,6 +1,8 @@
 package com.semi.gallary.model.dao;
 
 
+
+
 import static com.semi.common.JdbcTemplate.close;
 
 
@@ -38,9 +40,9 @@ public class GallaryDao {
 		int result = 0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertGallary"));
-			pstmt.setString(1,"TEST04");
-			pstmt.setString(2,"TEST04");
-			pstmt.setString(3,g.getContent());
+			pstmt.setString(1,g.getMemberId());
+			pstmt.setString(2,g.getWriter());
+			pstmt.setString(3,g.getContent());			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e ) {
 			e.printStackTrace();
@@ -95,7 +97,7 @@ public class GallaryDao {
 			while(rs.next()) {
 				Gallary g=new Gallary();
 				g.setGalNo(rs.getInt("gal_no"));
-				g.setGallaryDate(rs.getDate("gallary_date"));
+				g.setGallaryDate(rs.getTimestamp("gallary_date")); 
 				g.setMemberId(rs.getString("member_id"));
 				g.setWriter(rs.getString("writer"));
 				g.setContent(rs.getString("content"));
@@ -125,6 +127,7 @@ public class GallaryDao {
 				g.setGalNo(rs.getInt("gal_no"));
 				g.setContent(rs.getString("content"));
 				g.setImgName(rs.getString("img_name"));
+				g.setGallaryDate(rs.getDate("gallary_date"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -228,6 +231,58 @@ public class GallaryDao {
 		return result;
 	}
 	
+	public List<Gallary> selectSearchGallary(Connection conn, int cPage, int numPerpage,String keyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Gallary> list=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectSearchGallary"));
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Gallary g=new Gallary();
+				g.setGalNo(rs.getInt("gal_no"));
+				g.setGallaryDate(rs.getDate("gallary_date"));
+				g.setMemberId(rs.getString("member_id"));
+				g.setWriter(rs.getString("writer"));
+				g.setContent(rs.getString("content"));
+				g.setShareCheck(rs.getString("share_check"));
+				g.setImgName(rs.getString("img_name"));
+				list.add(g);										
+			}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return list;
+	}
+		
+
+	
+	public int selectSearchGallaryCount(Connection conn,String keyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectSearchGallaryCount"));
+			
+			pstmt.setString(1, "%"+keyword+"%");
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+						
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+
 
 
 }

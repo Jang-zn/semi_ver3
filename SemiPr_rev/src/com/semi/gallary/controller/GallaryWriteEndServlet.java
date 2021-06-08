@@ -43,6 +43,9 @@ public class GallaryWriteEndServlet extends HttpServlet {
 		
 		Gallary g = new Gallary();
 		g.setContent(mr.getParameter("content"));
+		g.setMemberId(mr.getParameter("memberId"));
+		g.setWriter(mr.getParameter("writer"));
+		
 		String file = mr.getFilesystemName("imgUp");
 		
 		int result = new GallaryService().insertGallary(g);
@@ -54,7 +57,7 @@ public class GallaryWriteEndServlet extends HttpServlet {
 		String loc="";
 		if(result>0&&result2>0) {
 			msg="등록 성공";
-			loc="/gallary/list";
+			loc="/gallary/list?numPerpage=6";
 		}else {
 			msg="등록 실패";
 			loc="/gallary/write";

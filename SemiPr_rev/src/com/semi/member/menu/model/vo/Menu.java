@@ -40,6 +40,9 @@ public class Menu {
 	}
 
 
+
+
+
 	public String getMenuId() {
 		return menuId;
 	}
@@ -152,6 +155,7 @@ public class Menu {
 	}
 
 
+
 	public int getAmount() {
 		return amount;
 	}
@@ -161,5 +165,6 @@ public class Menu {
 		this.amount = amount;
 	}
 		
+
 	
 }

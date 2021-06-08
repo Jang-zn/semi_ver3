@@ -204,6 +204,25 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	public int userIdDuplication(String userId) {
+		Connection conn = getConnection();
+		int result = dao.userIdDuplication(conn,userId);
+		close(conn);
+		return result;
+	}
+	public int nickNameDuplication(String nickName) {
+		Connection conn = getConnection();
+		int result = dao.nickNameDuplication(conn, nickName);
+		close(conn);
+		return result;
+	}
+	public Member findId(String name, String email) {
+		Connection conn = getConnection();
+		Member m = dao.findId(conn, name, email);
+		close(conn);
+		return m;
+		
+	}
 	
 
 	public List<MemberExcList> selectDailyExclist(String dayval, String memberid) {

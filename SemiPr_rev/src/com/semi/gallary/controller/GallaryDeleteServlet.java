@@ -42,18 +42,17 @@ public class GallaryDeleteServlet extends HttpServlet {
 		if(result>0) {
 			msg="삭제되었습니다";
 			
-			File f = new File(filePath);
-			if(f.exists()) {
-				f.delete();
-			}
-			
+//			File f = new File(filePath);
+//			if(f.exists()) {
+//				f.delete();}
+						
 		}else {
 			msg="삭제실패";
 			
 			
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc","/gallary/list");
+		request.setAttribute("loc","/gallary/list?numPerpage=6"); 
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request,response);
 		
 		

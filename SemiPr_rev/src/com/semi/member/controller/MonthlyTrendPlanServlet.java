@@ -1,7 +1,6 @@
 package com.semi.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.semi.exc.model.service.ExcService;
 import com.semi.member.model.vo.Member;
+import com.semi.menu.model.service.MenuService;
 
 /**
  * Servlet implementation class MonthlyTrendPlanServlet
@@ -36,20 +36,31 @@ public class MonthlyTrendPlanServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String date = request.getParameter("yymm01");
 		int length = Integer.parseInt(request.getParameter("length"));
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		Member m = (Member)session.getAttribute("logged");
 		String memberId = "";
 		
 		
 		////////////////////////////////////// Login id 처리해줘야됨 //////////////////////////////////////////
-		if(m==null) {
-			memberId = "test1";
+		String msg="";
+		if(session==null||m==null) {
+			msg = "로그인이 필요한 서비스입니다.";
+			request.setAttribute("msg",msg);
+			request.setAttribute("loc",request.getContextPath());
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			memberId = m.getMemberId();
 		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		Map[] list = new ExcService().planCountExc(memberId, date, length);
+		Map[] liste = new ExcService().planCountExc(memberId, date, length);
+		Map[] listm = new MenuService().planCountMenu(memberId, date, length);
+		
+		
+		Map[][] list = new Map[2][];
+		list[0] = liste;
+		list[1] = listm;
+		
 		
 		new Gson().toJson(list,response.getWriter());
 		

@@ -43,7 +43,7 @@ public class InsertBoardCommentServlet extends HttpServlet {
 			msg="댓글 장난 경고 1회 1/5";
 		}
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/board/content?no="+boardNo);
+		request.setAttribute("loc", "/board/content?numPerpage=15&no="+boardNo);
 		request.getRequestDispatcher("/views/error/errorPage.jsp").forward(request, response);
 	}
 
