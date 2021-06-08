@@ -25,12 +25,13 @@
 }
 
 div#select_weekday {
-	height: 100px;
+	height: 70px;
 }
 
-.day_myList {
+#select_weekday>.col-md-1 {
 	border-radius: 100%;
 	text-align: center;
+	width:calc(100%/13);
 }
 
 div#my_list_exc {
@@ -87,7 +88,7 @@ div.list_button_area {
 	
 }
 #myExc_info, #myMenu_info{
-	
+	height:400px;
 	
 }
 
