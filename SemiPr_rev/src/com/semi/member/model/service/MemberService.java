@@ -13,7 +13,7 @@ import java.util.List;
 
 
 import com.semi.exc.model.dao.ExcDao;
-
+import com.semi.gallary.model.vo.Gallary;
 import com.semi.member.daily.model.vo.DailyExercise;
 import com.semi.member.daily.model.vo.DailyMenu;
 import com.semi.member.daily.model.vo.DailyMenuList;
@@ -304,6 +304,31 @@ public class MemberService {
 		close(conn);	
 		return lastday;
 		
+	}
+	public Member selectMemberinfo(String memberid) {
+		Connection conn =getConnection();
+		Member m =dao.selectMemberinfo(conn,memberid);
+		close(conn);
+		return m;
+	}
+	public String[] selcetGallaryimg(String memberid) {
+		Connection conn =getConnection();
+		String[] gal =new String[2];
+		gal=dao.selcetGallaryimg(conn,memberid);
+		close(conn);
+		return gal;
+	}
+	public String[] exclist(String memberid) {
+		Connection conn =getConnection();
+		String[] exclist=dao.exclist(conn,memberid);
+		close(conn);
+		return exclist;
+	}
+	public String[] menulist(String memberid) {
+		Connection conn =getConnection();
+		String[] menulist=dao.menulist(conn,memberid);
+		close(conn);
+		return menulist;
 	}
 
 	

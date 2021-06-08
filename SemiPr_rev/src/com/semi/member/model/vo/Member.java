@@ -15,13 +15,15 @@ public class Member {
 	private String gender;
 	private Date enrollDate;
 	private String profileImg;
+	//일수 차이 받아올려고 member 클래스에 변수 하나 추가했습니다.! 문제시 수정하겠습니다.
+	private int cha;
 	
 	
 	public Member() {}
 
 
 	public Member(String memberId, String memberPw, String email, String name, String nickname, String phone,
-			Date birth, double height, double weight, String gender, Date enrollDate, String profileImg) {
+			Date birth, double height, double weight, String gender, Date enrollDate, String profileImg,int cha) {
 		super();
 		this.memberId = memberId;
 		this.memberPw = memberPw;
@@ -35,6 +37,7 @@ public class Member {
 		this.gender = gender;
 		this.enrollDate = enrollDate;
 		this.profileImg = profileImg;
+		this.cha=cha;
 	}
 
 
@@ -164,6 +167,16 @@ public class Member {
 				+ ", nickname=" + nickname + ", birth=" + birth + ", phone=" + phone + ", height=" + height
 				+ ", weight=" + weight + ", gender=" + gender + ", enrollDate=" + enrollDate + ", profileImg="
 				+ profileImg + "]";
+	}
+
+
+	public int getCha() {
+		return cha;
+	}
+
+
+	public void setCha(int cha) {
+		this.cha = cha;
 	}
 
 	
