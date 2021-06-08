@@ -44,7 +44,6 @@ public class BoardListServlet extends HttpServlet {
 
 		
 		PageBar sp = new PageBar(request, boardListCount, 5, "/board/boardList");
-		System.out.println(sp.getPageBar());
 
 
 
