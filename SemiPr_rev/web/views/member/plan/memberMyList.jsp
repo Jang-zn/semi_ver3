@@ -25,7 +25,7 @@
 			</div>
 			<div class="col-md-1"></div>
 			<div class="day_myList col-md-1">
-				<<br>화<br> <br>
+				<br>화<br> <br>
 			</div>
 			<div class="col-md-1"></div>
 			<div class="day_myList col-md-1">
