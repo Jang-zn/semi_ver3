@@ -6,15 +6,25 @@
     font-style: normal;
 }
 
-	*{	
-		font-family: 'PFStardust';
-	}
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 	label, h3 {
-		font-size: 16px;
+	font-family: 'PFStardust';
+		font-size: 2rem;
 		color: #000000;
 		margin-left:2px;
 		margin-bottom: 3px;
 		padding:0 0 0 0;
+	}
+	.botton01{
+		font-family: 'GongGothicMedium';
+		margin:1rem 0.5rem 0.5rem 1rem;		
+  		background-color: cadetblue;		
 	}
 	.box {
 		display: block;
@@ -28,7 +38,7 @@
 	}
 	
 	.box02{
-		width: 90px;
+		width: auto;
 		height: 40px;
   		border-radius:0.2em;
   		border:1.5px solid black;
@@ -54,13 +64,9 @@
 	
 	
 	
-	.sta_weight {
-		font-size: 18px;
+	.sta_weight, .sta_height {
+		font-size: 30px;
 		color: #8e8e8e;
-	}
-	.sta_height {
-  		font-size: 18px;
-  		color: #8e8e8e;
 	}
 
 .pswdImg {
@@ -78,6 +84,7 @@
   display: table;
   width: 100%;
 } */
+	
 	
 	
 	

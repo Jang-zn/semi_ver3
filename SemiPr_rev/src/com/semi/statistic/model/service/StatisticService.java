@@ -15,15 +15,15 @@ import com.semi.statistic.model.vo.MenuInfo;
 public class StatisticService {
 	private StatisticDao dao= new StatisticDao();
 	
-	public List<MemberExcList> TodayMemberExcList(){
+	public List<MemberExcList> TodayMemberExcList(String memberId){
 		Connection conn = getConnection();
-		List<MemberExcList> list01 = dao.TodayMemberExcList(conn);
+		List<MemberExcList> list01 = dao.TodayMemberExcList(conn, memberId);
 		close(conn);		
 		return list01;
 	}
-	public List<MemberMenuList> TodayMemberMenuList(){
+	public List<MemberMenuList> TodayMemberMenuList(String memberId){
 		Connection conn = getConnection();
-		List<MemberMenuList> list02 = dao.TodayMemberMenuList(conn);
+		List<MemberMenuList> list02 = dao.TodayMemberMenuList(conn, memberId);
 		close(conn);		
 		return list02;
 	}
@@ -46,43 +46,43 @@ public class StatisticService {
 //		}
 	
 	
-	public String weekExcCheck(String weekCheck) {
+	public String weekExcCheck(String weekCheck, String memberId) {
 		Connection conn = getConnection();
-		String result = dao.weekExcCheck(conn, weekCheck);
+		String result = dao.weekExcCheck(conn, weekCheck, memberId);
 		close(conn);	
 		return result;
 	}
 	
-	public String weekMenuCheck(String weekCheck) {
+	public String weekMenuCheck(String weekCheck, String memberId) {
 		Connection conn = getConnection();
-		String result = dao.weekMenuCheck(conn, weekCheck);
+		String result = dao.weekMenuCheck(conn, weekCheck, memberId);
 		close(conn);	
 		return result;
 	}
 	
-	public int ExcAchieveCount() {
+	public int ExcAchieveCount(String memberId) {
 		Connection conn = getConnection();
-		int count=dao.excAchieveCount(conn);
+		int count=dao.excAchieveCount(conn, memberId);
 		close(conn);
 		return count;
 	}
 	
-	public int MenuAchieveCount() {
+	public int MenuAchieveCount(String memberId) {
 		Connection conn = getConnection();
-		int count=dao.menuAchieveCount(conn);
+		int count=dao.menuAchieveCount(conn, memberId);
 		close(conn);
 		return count;
 	}
 	
-	public List<ExcInfo> ExcStatistic(){
+	public List<ExcInfo> ExcStatistic(String memberId){
 		Connection conn = getConnection();
-		List<ExcInfo> list=dao.excStatistic(conn);
+		List<ExcInfo> list=dao.excStatistic(conn, memberId);
 		close(conn);
 		return list;
 	}
-	public MenuInfo MenuStatistic() {
+	public MenuInfo MenuStatistic(String memberId) {
 		Connection conn = getConnection();
-		MenuInfo menuStatistic=dao.menuStatistic(conn);
+		MenuInfo menuStatistic=dao.menuStatistic(conn, memberId);
 		close(conn);
 		return menuStatistic;
 	}

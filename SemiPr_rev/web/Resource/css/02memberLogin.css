@@ -6,17 +6,23 @@
     font-style: normal;
 }
 
-*{
-	font-family: 'PFStardust';	
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
+
  /* 로그인 로고 */
 	.login {
 		margin-top:5%;
 		margin-bottom:5%;
 		padding:2%;
+		
 	}
 	.login h2 {
 		padding: 0 0 20px;
+		font-family: 'PFStardust';	
 		font-size: 60px;
 		font-weight:bolder;
 		color: black;
@@ -26,10 +32,12 @@
 	}	
 
 	#userId,
-	#password  {
+	#password  {	
 		width: 300px;
 		height: 40px;
-		padding-left: 3px;
+		
+		font-family: 'GongGothicMedium' !important;
+		font-weight:light;
 		
   		border-radius:0.2em;
   		border:1.5px solid black;
@@ -37,9 +45,12 @@
 
 	#saveId {
 		text-align: center;
+		font-family: 'GongGothicMedium';
+		font-weight:light;
 	}
 
 	label, h3 {
+		font-family: 'PFStardust';	
 		font-size: 16px;
 		color: #000000;
 		margin-left:2px;
@@ -49,6 +60,8 @@
 	
 
 	.login li input::-webkit-input-placeholder {
+		font-family: 'GongGothicMedium';
+		font-weight:light;
 		font-size: 16px;
 	}
 
@@ -59,10 +72,16 @@
 	#sign_page {
 		width:300px;
 	}
+	#sign_page>div>a{		
+		font-family: 'GongGothicMedium';
+		font-weight:light;
+	
+	}
 	
 
 	#login_btn {
   		background-color: cadetblue;
+		font-family: 'PFStardust';	
   		font-size: 25px;
   		color: black;
   		width: 300px;

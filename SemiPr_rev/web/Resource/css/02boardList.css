@@ -6,10 +6,13 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
-	*{	
-		font-family: 'PFStardust';
-	}
 
 	#board_container li {
 		list-style: none;
@@ -74,6 +77,8 @@
 		width: 10%;
 		align-self: center;
 		text-align: center;
+		font-family: 'GongGothicMedium';
+		
 	}
 
 	div.board_file_img {

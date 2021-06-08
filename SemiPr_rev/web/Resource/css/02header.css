@@ -5,7 +5,12 @@
     font-weight: normal;
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* ------------------전체 공통---------------------  */
 	*{
 		margin:0;
@@ -17,19 +22,27 @@
 	
 	.sub a:link {
 		color : black;
-		font-family:gothic !important;
+		font-family: 'GongGothicMedium' !important;
+		font-size: 2rem;
+		font-weight: light;
 }
 	.sub a:visited {
 	  color : black;
-	  font-family:gothic !important;
+	  font-family: 'GongGothicMedium' !important;
+	  font-size: 2rem;
+		font-weight: light;
 	}
 	.sub a:hover {
 	  color : black;
-	  font-family:gothic !important;
+	  font-family: 'GongGothicMedium' !important;
+	  font-size: 2rem;
+		font-weight: light;
 	}
 	.sub a:active {
 	  color : black;
-	  font-family:gothic !important;
+	  font-family: 'GongGothicMedium' !important;
+	  font-size: 2rem;
+		font-weight: light;
 	}
 		
 	/* body{

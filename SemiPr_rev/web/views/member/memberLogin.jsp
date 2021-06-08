@@ -32,7 +32,7 @@
 
 	<div class="row">
 		<form action="<%=request.getContextPath()%>/member/memberLogin" method="post">
-			<div class="row">
+			<div class="row align-items-center">
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 					<input type="text" name="userId" id="userId" placeholder="아이디"

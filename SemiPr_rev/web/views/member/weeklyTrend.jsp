@@ -65,12 +65,12 @@
         <br><br>
 
         <!-- 주간 달성 현황 -->
-        <div class="row">
+        <div class="row ">
             <div class="col-md-3 title01">
                 <%=today.get(Calendar.MONTH)+1 %>월 <%=ju %>번째 주 달성 현황
             </div>
             <div class="col-md-12">
-                <div class="row">
+                <div class="row ">
                     <div class="col-md-2 title02">운동</div>
                     <div id="weeklyExcStatus">
                         <div class="col-md-1"><div class="weeklyExcStatus">월</div></div>
@@ -306,7 +306,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row">
+                        <div class="row list03">
                         	<!-- DB에서 데이터 받아와 순위 계산해서 값 넣기 -->
                         	<%for(int i=0; i<5; i++){ %>
                         		<div class="col-md-2"><%=i+1 %>. </div>

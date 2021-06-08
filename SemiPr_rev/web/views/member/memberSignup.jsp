@@ -42,7 +42,7 @@
 					</div>
 					<div class="col-md-12">
 						<button type="button" id="id-chk" onclick="fn_duplicateId();"
-					value="아이디 중복확인" style="width: 120px; height: 25px">아이디중복확인</button>
+					value="아이디 중복확인" class="button01">아이디중복확인</button>
 					</div>
 				<span class="error_next_box"></span>
 				</div>
@@ -186,7 +186,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h3 class="join_title ">
-							<label for="gender">성별</label>
+							<label for="gender"></label>
 						</h3>
 					</div>
 					<div class="col-md-12">
@@ -219,7 +219,7 @@
 					<!-- height -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3>키</h3>
+						<h3 >키</h3>
 					</div>
 					<div class="col-md-11 box03">
 						<span> <input type="text" id="height" placeholder="키 입력" name="height"
