@@ -6,11 +6,14 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Calendar;
 
 import com.semi.member.exc.model.vo.Exercise;
 import com.semi.member.exc.model.vo.MemberExercise;
@@ -236,6 +239,157 @@ public class ExcDao {
 		}
 		return list;
 	}
-
+	
+	public Map[] reasonE (Connection conn, String memberId, String date, int length){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Map map = null;
+		Map[] list = new Map[length];
+		try {
+			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			String sql = p.getProperty("reasonE").replace("<L>", ""+length);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, date);
+			pstmt.setString(3, date);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+			    map = new HashMap();
+			    int d = Integer.parseInt(rs.getString(2).substring(8,10));
+			    map.put("count", rs.getInt(1));
+			    map.put("date", d);
+			    map.put("check", rs.getString(3));
+			    map.put("reason", rs.getString(4));
+			    list[d-1]= map;
+			}
+			for(int i=0;i<length;i++) {
+				if(list[i]!=null) {
+					
+				}else {
+					map = new HashMap();
+					list[i]= map;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return list;
+	}
+	
+	public Map[] planCountExcforChart (Connection conn, String memberId, String date, int length){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Map map = null;
+		Map[] list = new Map[length];
+		try {
+			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			String sql = p.getProperty("planCountExcforChart").replace("<L>", ""+length);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, date);
+			pstmt.setString(3, date);
+			rs=pstmt.executeQuery();
+			int count =length-1;
+			while(rs.next()) {
+			    map = new HashMap();
+			    String day = rs.getString(2).substring(5,10);
+			    map.put("count", rs.getInt(1));
+			    map.put("date", day);
+			    map.put("check", rs.getString(3));
+			    list[count--]= map;
+			}
+			int period=length-1;
+			for(int i=0;i<length;i++) {
+				if(list[i]!=null) {
+					
+				}else {
+					map = new HashMap();
+					String trashD = (String)list[length-1].get("date");
+				    SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
+				    Date trashDate = format1.parse(trashD);			    
+				    Calendar cal = Calendar.getInstance();
+				    cal.setTime(trashDate);
+				    cal.add(Calendar.DATE,-period);
+				    String res = format1.format(cal.getTime());
+				    map.put("date", res);
+					list[i]= map;
+					period--;
+				}
+			}
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return list;
+	}
+	
+	public Map[] planStackExcTotal (Connection conn, String memberId, String date, int length){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Map map = null;
+		Map[] list = new Map[length];
+		try {
+			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			String sql = p.getProperty("planStackExcTotal").replace("<L>", ""+length);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, date);
+			pstmt.setString(3, date);
+			rs=pstmt.executeQuery();
+			int count =length-1;
+			while(rs.next()) {
+			    map = new HashMap();
+			    String day = rs.getString(1).substring(5,10);
+			    map.put("date", day);
+			    map.put("check", rs.getString(2));
+			    map.put("repset", rs.getInt(3));
+			    map.put("repsetwei", rs.getInt(4));
+			    list[count--]= map;
+			}
+			int period=length-1;
+			for(int i=0;i<length;i++) {
+				if(list[i]!=null) {
+					
+				}else {
+					map = new HashMap();
+					String trashD = (String)list[length-1].get("date");
+				    SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
+				    Date trashDate = format1.parse(trashD);			    
+				    Calendar cal = Calendar.getInstance();
+				    cal.setTime(trashDate);
+				    cal.add(Calendar.DATE,-period);
+				    String res = format1.format(cal.getTime());
+				    map.put("date", res);
+					list[i]= map;
+					period--;
+				}
+			}
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return list;
+	}
+	
 	
 }

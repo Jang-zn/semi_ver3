@@ -6,7 +6,7 @@
 <%@ page import ="java.util.List" %>
 <%
 List<Exercise> list =(List<Exercise>)request.getAttribute("excList");
-Member m = (Member)session.getAttribute("loginMember");
+Member m = (Member)session.getAttribute("logged");
 String pageBar = (String)request.getAttribute("pageBar");
 %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberExcPlan.css">

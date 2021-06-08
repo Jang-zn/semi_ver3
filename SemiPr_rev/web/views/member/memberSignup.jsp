@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/../views/common/header.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/memberSignup.css">
-
+<%-- <link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/Resource/css/memberSignup.css"> --%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/02memberSignup.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/font.css">
+        
 <div id="logo" class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
@@ -39,7 +41,6 @@
 						 <span class="error_next_box"></span>
 					</div>
 					<div id="idCheck"></div>
-					
 				<span class="error_next_box"></span>
 				</div>
 
@@ -87,9 +88,10 @@
 						</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
 					</div>
 					<div id="email_chk"> </div>
-					<button type="button" id="email-chk" 
+					<div class="col-md-12">
+						<button type="button" id="email-chk" 
 					value="이메일 인증" style="width: 100px; height: 25px" onclick="emailCheck(insertform.email.value);" >이메일 인증</button>
-					
+					</div>				
 				</div>
 					</form>
 
@@ -109,7 +111,7 @@
 				</div>
 			
 				<!--NickName -->
-				<div>
+				<div class="row">
 					<div class="col-md-12">
 						<h3 class="join_title">
 							<label for="name">닉네임</label>
@@ -132,19 +134,18 @@
 						<h3 class="join_title">
 							<label for="yy">생년월일</label>
 						</h3>
-					</div>
-
+					</div>				
 					<div id="bir_wrap" class="col-md-12">
 						<!-- BIRTH_YY -->
-						<div id="bir_yy" class="col-md-4">
-							<span class="box"> <input type="text" id="yy" class="int" name="yy"
+						<div id="bir_yy" class="col-md-4">						
+							<span class="box02"> <input type="text" id="yy" class="int" name="yy"
 								maxlength="4" placeholder="년(4자)" required>
 							</span>
 						</div>
 
 						<!-- BIRTH_MM -->
 						<div id="bir_mm" class="col-md-4">
-							<span class="box"> <select id="mm" class="sel" name="mm" required>
+							<span class="box02"> <select id="mm" class="sel" name="mm" required>
 									<option>월</option>
 									<option value="01">1</option>
 									<option value="02">2</option>
@@ -164,11 +165,10 @@
 
 						<!-- BIRTH_DD -->
 						<div id="bir_dd" class="col-md-4">
-							<span class="box"> <input type="text" id="dd" class="int" name="dd"
+							<span class="box02"> <input type="text" id="dd" class="int" name="dd"
 								maxlength="2" placeholder="일" required>
 							</span>
-						</div>
-
+						</div>					
 					</div>
 					<span class="error_next_box"></span>
 				</div>
@@ -212,7 +212,7 @@
 					<div class="col-md-12">
 						<h3>키</h3>
 					</div>
-					<div class="col-md-11">
+					<div class="col-md-11 box03">
 						<span> <input type="text" id="height" placeholder="키 입력" name="height"
 							maxlength="3" required></span>
 					</div>
@@ -228,7 +228,7 @@
 					<div class="col-md-12">
 						<h3>체중</h3>
 					</div>
-					<div class="col-md-11">
+					<div class="col-md-11 box03">
 						<span> <input type="text" id="weight" placeholder="체중 입력" name="weight" required
 							maxlength="3"></span>
 					</div>

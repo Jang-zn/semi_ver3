@@ -1,6 +1,6 @@
 package com.semi.gallary.model.vo;
 
-import java.util.*;
+import java.util.Date;
 
 public class Gallary {
 	private int galNo;
@@ -9,10 +9,12 @@ public class Gallary {
 	private String writer;
 	private String content;
 	private String shareCheck="N";
+	private String imgName;
+	
 	
 	public Gallary() {}
 
-	public Gallary(int galNo, Date gallaryDate, String memberId, String writer, String content, String shareCheck) {
+	public Gallary(int galNo, Date gallaryDate, String memberId, String writer, String content, String shareCheck,String imgName) {
 		super();
 		this.galNo = galNo;
 		this.gallaryDate = gallaryDate;
@@ -20,6 +22,8 @@ public class Gallary {
 		this.writer = writer;
 		this.content = content;
 		this.shareCheck = shareCheck;
+		this.imgName= imgName;
+		
 	}
 
 	public int getGalNo() {
@@ -69,5 +73,12 @@ public class Gallary {
 	public void setShareCheck(String shareCheck) {
 		this.shareCheck = shareCheck;
 	}
+	public String getImgName() {
+		return imgName;
+	}
+	public void setImgName(String ImgName) {
+		this.imgName = ImgName;
+	}
+
 	
 }

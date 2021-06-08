@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/boardList.css">
+<%-- <link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/Resource/css/boardList.css"> --%>
+	<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/Resource/css/02boardList.css">
+	<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/Resource/css/font.css">
 <div id="board_container">
 	<div id="content_count">
-		<p style="font-weight: bolder; width: 75%;">
-			글 수 <span style="color: orange; font-weight: bolder;">124214</span>
+		<p style=" width: 75%;">
+			전체 글 수 :  <span >124214</span>
 		</p>
 		<div id="board_search">
 			<form action="" method="GET">
@@ -21,8 +25,8 @@
 	</div>
 	<div id="board_head">
 		<ul>
-			<li class="board_sort"><select>
-					<option>-분류-</option>
+			<li class="board_sort selectSort"><select>
+					<option >분류</option>
 					<option value="자유">자유</option>
 					<option value="눈바디">눈바디</option>
 			</select></li>
