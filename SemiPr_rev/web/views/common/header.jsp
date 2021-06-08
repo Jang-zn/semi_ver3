@@ -91,7 +91,6 @@
             	</div>
             <%} %>            
         </div>
-        
 		<div id="aside_content" class="row">
       	 <div id="content_container" class="col-md-11">
                 <!-- 이 위까지 header -->

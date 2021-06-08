@@ -2,17 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "/../views/common/header.jsp"%>
 
-	<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/2home00.css">
+	<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/02home00.css">
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/font.css">
 	<!--------------- 배너 ---------->
-    
+    <div id="banner_home" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_home.png" alt="" style="width:100%; height:auto">
+    		</div>
+    	</div>
+    </div>
     
     <div id="main_content" class="container"> 
         <div class="row">
-            <div class="col-md-6"> <!-- 설명1-->
+            <div class="col-md-6 box01"> <!-- 설명1-->
                 <div class="row">
-                    <div class="col-md-2">  <img src="" alt="" style="height: 3.5rem; width: auto;"></div>
-                    <div class="col-md-10, title01">Gain Muscle</div>
+                    <div class="col-md-2" style="text-align:right;">  <img src="<%=request.getContextPath()%>/Resource/img/dumbbell.png" alt="" style="height: 3.5rem; width: auto;"></div>
+                    <div class="col-md-10 title01">Gain Muscle</div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">  </div>
@@ -21,17 +27,17 @@
                             코로나 시대, 홈트레이닝은 해야겠는데<br>
                             어떻게 시작해야하는지 모르겠다면?<br>
                             일일히 운동/식단을 검색해야 하는<br>
-                            <span class="content03">어려운 자기관리는 이제 그만!</span>
+                             <span class="emphasis">어려운 자기관리는 이제 그만!</span>
                         </div>                        
                     </div>
                 </div>
             </div>
-            <div class="col-md-6"> <!-- 설명2-->
+            <div class="col-md-6 box01"> <!-- 설명2-->
                 <div class="row">
-                    <div class="col-md-2">  <img src="" alt="" style="height: 3.5rem; width: auto;"></div>
-                    <div class="col-md-10, title01">Log Diet</div>
+                    <div class="col-md-2" style="text-align:right;">  <img src="<%=request.getContextPath()%>/Resource/img/food.png" alt="" style="height: 3.5rem; width: auto;"></div>
+                    <div class="col-md-10 title01">Log Diet</div>
                 </div>
-                <div class="row">
+                <div class="row ">
                     <div class="col-md-2">  </div>
                     <div class="col-md-10">
                         <div class="content01">
@@ -42,10 +48,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6"> <!-- 설명3-->
+            <div class="col-md-6 box01"> <!-- 설명3-->
                 <div class="row">
-                    <div class="col-md-2">  <img src="" alt="" style="height: 3.5rem; width: auto;"></div>
-                    <div class="col-md-10, title01">Simple and Easy</div>
+                    <div class="col-md-2" style="text-align:right;">  <img src="<%=request.getContextPath()%>/Resource/img/magnifier.png" alt="" style="height: 3.5rem; width: auto;"></div>
+                    <div class="col-md-10 title01">Simple and Easy</div>
                 </div>
                 <div class="row">
                     <div class="col-md-2"> </div>
@@ -58,17 +64,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6"> <!-- 설명4-->
+            <div class="col-md-6 box01"> <!-- 설명4-->
                 <div class="row">
-                    <div class="col-md-2">  <img src="" alt="" style="height: 3.5rem; width: auto;"></div>
-                    <div class="col-md-10, title01">Be Healthy</div>
+                    <div class="col-md-2" style="text-align:right;">  <img src="<%=request.getContextPath()%>/Resource/img/thumb.png" alt="" style="height: 3.5rem; width: auto;"></div>
+                    <div class="col-md-10 title01">Be Healthy</div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">  </div>
                     <div class="col-md-10"> 
                         <div class="content01">
-                            운동/식단 계획을 세우고<br>
-                            목표 달성 현황을 확인할뿐만 아니라<br>
+                            운동/식단 계획을 세우고 목표 달성 현황을 확인할뿐만 아니라<br>
                             커뮤니티에서 운동/식단 칼럼, 시설 정보 등<br>
                             건강 관련 정보도 손쉽게 확인 가능!
                         </div>
@@ -85,12 +90,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="content01" style="text-align: center;">더이상 어려운 건강관리는 이제 그만!</div>
+                <div class="content02">더이상 어려운 건강관리는 No</div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="content02" style="text-align: center;">
+                <div class="content02 emphasis" style="font-size:3rem;">
                     ForMucle로 가벼운 자기관리 시작!
                 </div>
             </div>
@@ -99,7 +104,7 @@
     <br>
    <br>
     <!-- 서비스 소개 사진 -->
-   <div class="containe, photo01">
+   <div class="container, photo01">
        <div class="row">
            <div class="col-md-2"></div>
            <div class="col-md-4">
@@ -143,9 +148,9 @@
            <div class="col-md-6">
                <div class="row">
                    <div class="col-md-2"></div>
-                   <div class="col-md-8, title01">Member 혜택</div>
+                   <div class="col-md-8  title01">Member<div class="title02"> 혜택</div></div>
                </div>
-               <div class="content02">
+               <div class="content03">
                <div class="row">
                     <div class="col-md-2" style="text-align: right;">✔️</div>
                     <div class="col-md-10">손쉬운 운동/식단 계획</div>
@@ -167,8 +172,8 @@
                     <div class="col-md-10">건강해짐</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2" style="text-align: right;"></div>
-                    <div class="col-md-10"><a href="<%=request.getContextPath()%>/views/member/memberSignup.jsp">회원가입</a></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10 button01"><a href="<%=request.getContextPath()%>/views/member/memberSignup.jsp">Sign up today!</a></div>
                 </div>
             </div>
            </div>           
