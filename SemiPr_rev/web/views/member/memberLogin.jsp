@@ -70,13 +70,10 @@
 
 	<div id="sign_page row">
 		<div class="col-md-4">
-			<a href="<%=request.getContextPath()%>/views/member/memberSignup.jsp">회원가입</a>
+			<a href="<%=request.getContextPath()%>/member/signup">회원가입</a>
 		</div>
 		<div class="col-md-4">
-			<a href="">ID 찾기</a>
-		</div>
-		<div class="col-md-4">
-			<a href="">PW 찾기</a>
+			<a href="<%=request.getContextPath()%>/member/find">아이디 찾기 / 비밀번호 찾기</a>
 		</div>
 	</div>
 	<br>
