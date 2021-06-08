@@ -1,4 +1,4 @@
-package com.semi.member.controller;
+package com.semi.menu.controller;
 
 import java.io.IOException;
 
@@ -7,21 +7,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.semi.member.model.vo.Member;
+import com.google.gson.Gson;
+import com.semi.member.menu.model.vo.Menu;
+import com.semi.menu.model.service.MenuService;
 
 /**
- * Servlet implementation class MonthlyTrendServlet
+ * Servlet implementation class MemberExcPlanAjaxServlet
  */
-@WebServlet("/member/monthlyTrend")
-public class MonthlyTrendServlet extends HttpServlet {
+@WebServlet("/ajax/menuListClick.do")
+public class MemberMenuPlanAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MonthlyTrendServlet() {
+    public MemberMenuPlanAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +31,11 @@ public class MonthlyTrendServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("logged");
-		if(session==null||m==null) {
-			String msg = "로그인이 필요한 서비스입니다.";
-			request.setAttribute("msg",msg);
-			request.setAttribute("loc","/");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		}else {
-			request.getRequestDispatcher("/views/member/monthlyTrend.jsp").forward(request, response);
-		}
+		String menuName = request.getParameter("name");
+		Menu menu = new MenuService().getMenuInfo(menuName);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(menu,response.getWriter());
+
 	}
 
 	/**

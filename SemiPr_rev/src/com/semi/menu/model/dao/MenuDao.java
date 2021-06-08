@@ -1,4 +1,4 @@
-package com.semi.exc.model.dao;
+package com.semi.menu.model.dao;
 
 import static com.semi.common.JdbcTemplate.close;
 
@@ -8,49 +8,56 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Calendar;
 
+import com.semi.exc.model.dao.ExcDao;
 import com.semi.member.exc.model.vo.Exercise;
-import com.semi.member.exc.model.vo.MemberExercise;
+import com.semi.member.menu.model.vo.MemberMenu;
+import com.semi.member.menu.model.vo.Menu;
 import com.semi.member.model.dao.MemberDao;
 
-public class ExcDao {
+public class MenuDao {
 
-	public ExcDao() {
+	public MenuDao() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public List<Exercise> getExcList(Connection conn, String sort, int cPage, int numPerpage) {
+	public List<Menu> getMenuList(Connection conn, String sort, int cPage, int numPerpage) {
 		PreparedStatement pstmt=null;
 		PreparedStatement pstmt2=null;
 		ResultSet rs=null;
 		ResultSet rs2=null;
-		Exercise exc=null;
-		List<Exercise> list = new ArrayList();
+		Menu m=null;
+		List<Menu> list = new ArrayList();
 		try {
-			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
 			int pageNo = (cPage-1)*numPerpage+1;
 			int pageEnd = cPage*numPerpage;
-			pstmt=conn.prepareStatement(p.getProperty("getExcList"));
+			pstmt=conn.prepareStatement(p.getProperty("getMenuList"));
 			pstmt.setString(1, sort);
 			pstmt.setInt(2, pageNo);
 			pstmt.setInt(3, pageEnd);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				exc=new Exercise();
-			    exc.setExcId(rs.getString(2));
-			    exc.setExcSort(rs.getString(3));
-			    exc.setExcName(rs.getString(4));
-			    exc.setExcManual(rs.getString(5));
-			    exc.setExcVideo(rs.getString(6));
-			    list.add(exc);
+				m=new Menu();
+			    m.setMenuId(rs.getString(2));
+			    m.setMenuSort(rs.getString(3));
+			    m.setMenuName(rs.getString(4));
+			    m.setKcal(rs.getInt(5));
+			    m.setCh(rs.getInt(6));
+			    m.setProt(rs.getInt(7));
+			    m.setFat(rs.getInt(8));
+			    m.setNa(rs.getInt(9));
+			    m.setMenuManual(rs.getString(10));
+			    m.setMenuVideo(rs.getString(11));
+			    list.add(m);
 			}
 			
 		} catch (Exception e) {
@@ -59,13 +66,13 @@ public class ExcDao {
 		
 		//file List 가져옴
 		try {
-			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
 			
-			for(Exercise e : list) {
-				pstmt2=conn.prepareStatement(p.getProperty("getExcFileList"));
-				pstmt2.setString(1,e.getExcId());
+			for(Menu mn : list) {
+				pstmt2=conn.prepareStatement(p.getProperty("getMenuFileList"));
+				pstmt2.setString(1,mn.getMenuId());
 				rs2=pstmt2.executeQuery();
 				
 				List<String> fileList = new ArrayList();
@@ -74,7 +81,7 @@ public class ExcDao {
 					String f =rs2.getString(3);
 					fileList.add(f);
 				}
-				e.setFileList(fileList);
+				mn.setFileList(fileList);
 				close(pstmt2);
 			}
 			
@@ -91,15 +98,15 @@ public class ExcDao {
 		return list;
 	}
 	
-	public int getExcListCount(Connection conn, String sort) {
+	public int getMenuListCount(Connection conn, String sort) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
-			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			pstmt=conn.prepareStatement(p.getProperty("getExcListCount"));
+			pstmt=conn.prepareStatement(p.getProperty("getMenuListCount"));
 			pstmt.setString(1, sort);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
@@ -116,26 +123,31 @@ public class ExcDao {
 		return result;
 	}
 	
-	public Exercise getExcInfo(Connection conn, String excName) {
+	public Menu getMenuInfo(Connection conn, String menuName) {
 		PreparedStatement pstmt=null;
 		PreparedStatement pstmt2=null;
 		ResultSet rs=null;
 		ResultSet rs2=null;
-		Exercise exc=new Exercise();
+		Menu m=new Menu();
 		List<Exercise> list = new ArrayList();
 		try {
-			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			pstmt=conn.prepareStatement(p.getProperty("getExcInfo"));
-			pstmt.setString(1, excName);
+			pstmt=conn.prepareStatement(p.getProperty("getMenuInfo"));
+			pstmt.setString(1, menuName);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-			    exc.setExcId(rs.getString(1));
-			    exc.setExcSort(rs.getString(2));
-			    exc.setExcName(rs.getString(3));
-			    exc.setExcManual(rs.getString(4));
-			    exc.setExcVideo(rs.getString(5));
+				m.setMenuId(rs.getString(1));
+			    m.setMenuSort(rs.getString(2));
+			    m.setMenuName(rs.getString(3));
+			    m.setKcal(rs.getInt(4));
+			    m.setCh(rs.getInt(5));
+			    m.setProt(rs.getInt(6));
+			    m.setFat(rs.getInt(7));
+			    m.setNa(rs.getInt(8));
+			    m.setMenuManual(rs.getString(9));
+			    m.setMenuVideo(rs.getString(10));
 			}
 			
 		} catch (Exception e) {
@@ -144,18 +156,18 @@ public class ExcDao {
 		
 		//file List 가져옴
 		try {
-			String path = MemberDao.class.getResource("/sql/excList_sql.properties").getPath();
+			String path = MemberDao.class.getResource("/sql/menuList_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			pstmt2=conn.prepareStatement(p.getProperty("getExcFileList"));
-			pstmt2.setString(1,exc.getExcId());
+			pstmt2=conn.prepareStatement(p.getProperty("getMenuFileList"));
+			pstmt2.setString(1,m.getMenuId());
 			rs2=pstmt2.executeQuery();
 			List<String> fileList = new ArrayList();
 			while(rs2.next()) {
 				String f =rs2.getString(3);
 				fileList.add(f);
 			}
-				exc.setFileList(fileList);
+				m.setFileList(fileList);
 			
 			
 		} catch (Exception e) {
@@ -168,25 +180,24 @@ public class ExcDao {
 			close(pstmt2);
 			
 		}
-		return exc;
+		return m;
 	}
 	
 	
-	public int insertMemberExc(Connection conn, MemberExercise me) {
+	public int insertMemberMenu(Connection conn, MemberMenu mm) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			pstmt=conn.prepareStatement(p.getProperty("insertMemberExc"));
-			pstmt.setString(1, me.getMemberId());
-			pstmt.setString(2, me.getExcId());
-			pstmt.setString(3, me.getExcId_c());
-			pstmt.setInt(4, me.getReps());
-			pstmt.setInt(5, me.getSets());
-			pstmt.setInt(6, me.getWeight());
-			pstmt.setString(7, me.getExcWeek());
+			pstmt=conn.prepareStatement(p.getProperty("insertMemberMenu"));
+			pstmt.setString(1, mm.getMenuId());
+			pstmt.setString(2, mm.getMenuId_c());
+			pstmt.setString(3, mm.getMemberId());
+			pstmt.setInt(4, mm.getAmount());
+			pstmt.setString(5, mm.getMenuWeek());
+			pstmt.setString(6, mm.getMenuDayTime());
 			result=pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -199,16 +210,16 @@ public class ExcDao {
 	}
 	
 	
-	public Map[] planCountExc (Connection conn, String memberId, String date, int length){
+	public Map[] planCountMenu (Connection conn, String memberId, String date, int length){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Map map = null;
 		Map[] list = new Map[length];
 		try {
-			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/monthly_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			String sql = p.getProperty("planCountExc").replace("<L>", ""+length);
+			String sql = p.getProperty("planCountMenu").replace("<L>", ""+length);
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, date);
@@ -239,17 +250,17 @@ public class ExcDao {
 		}
 		return list;
 	}
-	
-	public Map[] reasonE (Connection conn, String memberId, String date, int length){
+
+	public Map[] reasonM (Connection conn, String memberId, String date, int length){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Map map = null;
 		Map[] list = new Map[length];
 		try {
-			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/monthly_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			String sql = p.getProperty("reasonE").replace("<L>", ""+length);
+			String sql = p.getProperty("reasonM").replace("<L>", ""+length);
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, date);
@@ -282,16 +293,17 @@ public class ExcDao {
 		return list;
 	}
 	
-	public Map[] planCountExcforChart (Connection conn, String memberId, String date, int length){
+	
+	public Map[] planCountMenuforChart (Connection conn, String memberId, String date, int length){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Map map = null;
 		Map[] list = new Map[length];
 		try {
-			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/monthly_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			String sql = p.getProperty("planCountExcforChart").replace("<L>", ""+length);
+			String sql = p.getProperty("planCountMenuforChart").replace("<L>", ""+length);
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, date);
@@ -324,7 +336,6 @@ public class ExcDao {
 					period--;
 				}
 			}
-		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -336,16 +347,17 @@ public class ExcDao {
 		return list;
 	}
 	
-	public Map[] planStackExcTotal (Connection conn, String memberId, String date, int length){
+	
+	public Map[] planStackMenuTotal (Connection conn, String memberId, String date, int length){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Map map = null;
 		Map[] list = new Map[length];
 		try {
-			String path = ExcDao.class.getResource("/sql/monthly_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/monthly_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			String sql = p.getProperty("planStackExcTotal").replace("<L>", ""+length);
+			String sql = p.getProperty("planStackMenuTotal").replace("<L>", ""+length);
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, date);
@@ -357,9 +369,12 @@ public class ExcDao {
 			    String day = rs.getString(1).substring(5,10);
 			    map.put("date", day);
 			    map.put("check", rs.getString(2));
-			    map.put("repset", rs.getInt(3));
-			    map.put("repsetwei", rs.getInt(4));
+			    map.put("kcal", rs.getInt(3));
+			    map.put("ch", rs.getInt(4));
+			    map.put("prot", rs.getInt(5));
+			    map.put("fat", rs.getInt(6));
 			    list[count--]= map;
+			    
 			}
 			int period=length-1;
 			for(int i=0;i<length;i++) {
@@ -379,7 +394,6 @@ public class ExcDao {
 					period--;
 				}
 			}
-		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
