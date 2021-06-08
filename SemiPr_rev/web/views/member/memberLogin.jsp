@@ -16,14 +16,15 @@
 	}
 	%>
 <%@ include file="/../views/common/header.jsp"%>
-<link rel="stylesheet" type="text/css"
+<%-- <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/memberLogin.css">
-
+ --%>
+ <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/02memberLogin.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/font.css">
 
 <div class="logo row"></div>
 <div class="col-md-4"></div>
 <div class="login col-md-4">
-
 
 	<div class="row">
 		<h2>로그인</h2>
@@ -71,7 +72,7 @@
 		<div class="col-md-4">
 			<a href="<%=request.getContextPath()%>/member/signup">회원가입</a>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-8">
 			<a href="<%=request.getContextPath()%>/member/find">아이디 찾기 / 비밀번호 찾기</a>
 		</div>
 	</div>

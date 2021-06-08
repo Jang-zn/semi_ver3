@@ -47,6 +47,7 @@ public class MemberLoginEndServlet extends HttpServlet {
 			response.addCookie(c);
 		}
 		Member m = new MemberService().login(userId,password);
+		
 		if(m!=null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("logged", m);

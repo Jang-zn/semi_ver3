@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.marginlr {
+	margin-left: 1%;
+	margin-right: 1%;
+}
+
+
+#write_upload_area {
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+#write_title_area div{
+		font-family: 'PFStardust';
+		font-size:1.7rem;
+		font-weight:bold;
+		
+		padding:0.3rem;
+		border-radius:0.2em;
+  		border:1.5px solid black;
+}
+#write_content_area{
+		border-radius:0.2em;
+  		border:1.5px solid black;
+  		width:100%;
+}
+#write_btn_area div div button {
+	background-color:transparent;
+}
+#classfication{
+	background-color:lightgray;
+}
+.btnb{
+	border-radius:0.2em;
+  	border:1.5px solid black;
+  	height:100%;
+	font-family: 'PFStardust';
+	font-weight: bold;
+	font-size: 1.7rem;
+	background-color:#009688;
+	color:white;
+	padding:0.3rem;
+}

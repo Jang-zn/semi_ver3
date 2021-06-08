@@ -1,89 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "/../views/common/header.jsp"%>
-	
-	<!-- 부트스트랩 확인용-->
-	<!-- 부트스트랩 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	
-	
+
+	<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/2home00.css">
+<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/font.css">
 	<!--------------- 배너 ---------->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <img src="dummyImage.png"  alt="" style="width: 100%; height:45rem">
-            </div>
-        </div>        
-    </div>
     
-    <br>
-    <br>
+    
     <div id="main_content" class="container"> 
         <div class="row">
             <div class="col-md-6"> <!-- 설명1-->
                 <div class="row">
-                    <div class="col-md-2">  <img src="dumbbell.png" alt="" style="height: 3.5rem; width: auto;"></div>
+                    <div class="col-md-2">  <img src="" alt="" style="height: 3.5rem; width: auto;"></div>
                     <div class="col-md-10, title01">Gain Muscle</div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">  </div>
                     <div class="col-md-10"> 
                         <div class="content01">
-                            코로나 시대, 확찐자가 되었다면?
-                            Don't worry!
-                            For Muscle과 함께라면 득근도 두근두근
+                            코로나 시대, 홈트레이닝은 해야겠는데<br>
+                            어떻게 시작해야하는지 모르겠다면?<br>
+                            일일히 운동/식단을 검색해야 하는<br>
+                            <span class="content03">어려운 자기관리는 이제 그만!</span>
                         </div>                        
                     </div>
                 </div>
             </div>
             <div class="col-md-6"> <!-- 설명2-->
                 <div class="row">
-                    <div class="col-md-2">  <img src="food.png" alt="" style="height: 3.5rem; width: auto;"></div>
+                    <div class="col-md-2">  <img src="" alt="" style="height: 3.5rem; width: auto;"></div>
                     <div class="col-md-10, title01">Log Diet</div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">  </div>
                     <div class="col-md-10">
                         <div class="content01">
-                            홈트 계획은 물론 식단 관리도 간편하게!
-                            올 여름은 자신있게!
-                            아니 글자수를 안 맞추면 왜 밀리는 거지?
-                            높이를 content size에 맞춰서 그런가?
+                             ForMuscle이 제공하는 리스트를 선택하면<br>
+                            운동/식단 계획 세우기, 이보다 쉬울 순 없다!<br>
+                            클릭하면 전체 운동시간과 섭취 칼로리 계산도 자동으로
                         </div>                        
                     </div>
                 </div>
             </div>
             <div class="col-md-6"> <!-- 설명3-->
                 <div class="row">
-                    <div class="col-md-2">  <img src="magnifier.png" alt="" style="height: 3.5rem; width: auto;"></div>
-                    <div class="col-md-10, title01">Simple & Easy</div>
+                    <div class="col-md-2">  <img src="" alt="" style="height: 3.5rem; width: auto;"></div>
+                    <div class="col-md-10, title01">Simple and Easy</div>
                 </div>
                 <div class="row">
                     <div class="col-md-2"> </div>
                     <div class="col-md-10">
                         <div class="content01">
-                            일일히 검색하고 입력해야 하는 불편함은 NO!
-                            귀찮은 건 ForMuscle이 대신해드립니다!
-                            글씨 정렬을 맞추려면 다 row를 따로 만들어야 하나..?
+                            사용자는 자신의 건강정보를 기록해<br>
+                            ForMuscle과 함께하며 목표를 얼마나 이뤘는지 추적하고<br>
+                            건강 현황 및 추이를 확인할 수 있다.
                         </div> 
                     </div>
                 </div>
             </div>
             <div class="col-md-6"> <!-- 설명4-->
                 <div class="row">
-                    <div class="col-md-2">  <img src="muscle.png" alt="" style="height: 3.5rem; width: auto;"></div>
+                    <div class="col-md-2">  <img src="" alt="" style="height: 3.5rem; width: auto;"></div>
                     <div class="col-md-10, title01">Be Healthy</div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">  </div>
                     <div class="col-md-10"> 
                         <div class="content01">
-                            Be with us <br>
-                            For your Muscle
+                            운동/식단 계획을 세우고<br>
+                            목표 달성 현황을 확인할뿐만 아니라<br>
+                            커뮤니티에서 운동/식단 칼럼, 시설 정보 등<br>
+                            건강 관련 정보도 손쉽게 확인 가능!
                         </div>
                     </div>
                 </div>
@@ -98,13 +85,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="content01" style="text-align: center;">마케팅 멘트 ForMuscle과 함께라면</div>
+                <div class="content01" style="text-align: center;">더이상 어려운 건강관리는 이제 그만!</div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="content02" style="text-align: center;">
-                    마케팅 멘트 당신도 내일의 튼튼이!!
+                    ForMucle로 가벼운 자기관리 시작!
                 </div>
             </div>
         </div>
@@ -117,14 +104,14 @@
            <div class="col-md-2"></div>
            <div class="col-md-4">
                <div class="row">
-                   <div class="col-md-12"> <img src="dummyImage.png"  alt="" style="width: 100%; "></div>
+                   <div class="col-md-12"> <img src=""  alt="" style="width: 100%; "></div>
                    <div class="col-md-3"></div>
                    <div class="col-md-6">사진설명</div>
                </div>
            </div>
            <div class="col-md-4">
                <div class="row">
-                   <div class="col-md-12"> <img src="dummyImage.png"  alt="" style="width: 100%;"></div>
+                   <div class="col-md-12"> <img src=""  alt="" style="width: 100%;"></div>
                    <div class="col-md-3"></div>
                    <div class="col-md-6">사진설명</div>
                </div>
@@ -134,14 +121,14 @@
         <div class="col-md-2"></div>
         <div class="col-md-4">
             <div class="row">
-                <div class="col-md-12"> <img src="dummyImage.png"  alt="" style="width: 100%;"></div>
+                <div class="col-md-12"> <img src=""  alt="" style="width: 100%;"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-6">사진설명</div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="row">
-                <div class="col-md-12"> <img src="dummyImage.png"  alt="" style="width: 100%;"></div>
+                <div class="col-md-12"> <img src=""  alt="" style="width: 100%;"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-6">사진설명</div>
             </div>
@@ -152,7 +139,7 @@
    <br>
    <div class="container">
        <div class="row">
-            <<div class="col-md-3"></div>
+            <div class="col-md-3"> </div>
            <div class="col-md-6">
                <div class="row">
                    <div class="col-md-2"></div>
@@ -181,7 +168,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2" style="text-align: right;"></div>
-                    <div class="col-md-10"><button onclick="" class="btn">회원가입</div>
+                    <div class="col-md-10"><a href="<%=request.getContextPath()%>/views/member/memberSignup.jsp">회원가입</a></div>
                 </div>
             </div>
            </div>           
@@ -192,66 +179,5 @@
     <br>
     <br>
     <br>
-    <br>
-     
-     
-     <!-- 참고용 임시 style -->
-    <style>
-        .btn{
-            background-color: orangered;
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: bold;
-            color: white;
-        }
-        .photo01{
-            background-color: lightgrey !important;
-        } 
-        .content01{
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size: 2.3rem;
-            padding-bottom: 2rem;
-        }
-        .content02{
-            font-family: 'Noto Sans KR', sans-serif;
-            font-size: 1.7rem;
-        }
-        .title01{
-            font-family: "Press Start 2P" ;    
-            font-size: 1.9rem; 
-            padding-bottom: 1rem;               
-        }
-
-        #header_container{
-            font-family: "Press Start 2P";
-            color: white;
-            background-color: black !important;
-            font-size: 1.3rem;
-            line-height: 50px;
-            text-align: center;
-            font-weight: 700;
-        }    
-        .container{
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left:auto;
-        }        
-        .container-fluid{
-            margin-right: auto;
-            margin-left: auto;
-            background: lightgrey;
-        }
-
-        [class|="col"] {
-        /* background: #2db34a; */
-        border: 1px solid red;
-        height: fit-content;        
-        }
-
-    </style>
-
-
-
-
 
 <%@ include file = "/../views/common/footer.jsp"%>

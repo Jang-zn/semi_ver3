@@ -1,14 +1,6 @@
 @charset "UTF-8";
 
-#temp_header {
-	height: 200px;
-	margin-top: 50px;
-}
 
-#temp_footer {
-	height: 100px;
-	margin-top: 50px;
-}
 
 
 #container_progress_trend{
@@ -74,20 +66,24 @@
 }
 
 .cheight {
-	padding:1%;
 	
 }
 
 #statistics_container {
-	margin-top: 30px;
+
 }
 
 #data_container {
 	display: flex;
 }
 
-#pieChart, #rank {
-	height: 300px;
+.pieChart, .rank {
+
 	margin: 20px;
 }
-
+.cContainer{
+	height:100%;
+}
+.eReason, .mReason:hover{
+	cursor:pointer
+}

@@ -32,7 +32,6 @@ public class DeleteBoardServlet extends HttpServlet {
 		
 		String[] files = new String[5];
 		files =new BoardService().filesName(boardNo);
-		System.out.println(boardNo);
 		for(int i=0; i<5; i++) {
 			String a = files[i];
 			File f = new File(path+a);
@@ -40,7 +39,6 @@ public class DeleteBoardServlet extends HttpServlet {
 				f.delete();
 		}
 		int result = new BoardService().boardDelete(boardNo);
-		System.out.println("삭제 결과 : "+result);
 		int fileresult = new BoardService().fileDelete(boardNo);
 		
 		
@@ -49,15 +47,15 @@ public class DeleteBoardServlet extends HttpServlet {
 		if(result>0) {
 			msg ="파일없는 글 삭제완료!";
 			if(fileresult>0) {
-				msg ="파일,글 삭제완료! !";
-				loc ="/board/boardList";
+				msg ="파일,글 삭제완료!";
+				loc ="/board/boardList?numPerpage=15";
 			}
 		}else {
 			msg="파일삭제는 됐고 글삭제만 실패!";
 			loc="/board/content?no="+boardNo;
 			if(fileresult==0) {
 				msg ="글 삭제랑 파일삭제실패!";
-				loc ="/board/boardList";
+				loc ="/board/boardList?numPerpage=15";
 			}
 		}
 		

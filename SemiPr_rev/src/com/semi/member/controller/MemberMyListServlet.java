@@ -30,18 +30,22 @@ public class MemberMyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		HttpSession session=request.getSession();
-//		Member m=(Member)session.getAttribute("member");
-//		
-//		//로그인 처리 분기
-//		
-//		if(m==null) {
-//			//로그인 페이지 이동 로직
-//			
-//		}else {
+		HttpSession session=request.getSession();
+		Member m=(Member)session.getAttribute("logged");
+		
+		//로그인 처리 분기
+		
+		if(m==null) {
+			//로그인 페이지 이동 로직
+			String msg="회원만 이용가능합니다";
+			String loc="/member/login";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}else {
 			//아니면 마이 리스트 페이지 이동
 		///운동 목록 리스트 페이징 처리
-		
+		String memberid=m.getMemberId();
 		String time=request.getParameter("time");
 		if(time==null) {time="아침";}
 		//기본값으로 아침,요일가져옴
@@ -53,24 +57,28 @@ public class MemberMyListServlet extends HttpServlet {
 		}
 		
 		System.out.println(dayval);
-		int totalData=new MemberService().SelectMemberExcListCount(dayval);
+		int totalData=new MemberService().SelectMemberExcListCount(dayval,memberid);
 		System.out.println(totalData);
-
-		PageBar pb =new PageBar(request,totalData,5,"/member/myList?val="+dayval);
+		int cPage2;
+		try {
+			cPage2 = Integer.parseInt(request.getParameter("cPage2"));
+		} catch (NumberFormatException e) {
+			cPage2 = 1;
+		}
+		PageBar pb =new PageBar(request,totalData,5,"/member/myList","val="+dayval+"&memberid="+memberid+"&cPage2="+cPage2);
 		//list id값
-		System.out.println(pb.getCPage()+" "+pb.getNumPerpage());
 		
-		List<MemberExcList> list =new MemberService().SelectMemberExcList(pb.getCPage(),pb.getNumPerpage(),dayval);	
+		List<MemberExcList> list =new MemberService().SelectMemberExcList(pb.getCPage(),pb.getNumPerpage(),dayval,memberid);	
 		//식단 리스트
 		/* ~~~~~~~~~~~~~~~~~~~~~~~~~
 		 * 
 		 * 
 		 */
-		int totalData2=new MemberService().SelectMemberMenuListCount(dayval);
-
-		PageBar2 pb2 =new PageBar2(request,totalData2,5,"/member/myList?val="+dayval+"&time="+time);
-		//memberid, 요일 ,시간 
-		List<MemberMenuList> list2 =new MemberService().SelectMemberMenuList(pb2.getCPage(),pb.getNumPerpage(),dayval,time);
+		int totalData2=new MemberService().SelectMemberMenuListCount(dayval,memberid);
+		
+		PageBar2 pb2 =new PageBar2(request,totalData2,5,"/member/myList","val="+dayval+"&time="+time+"&memberid="+memberid+"&cPage="+pb.getCPage());
+		pb2.getCPage();
+		List<MemberMenuList> list2 =new MemberService().SelectMemberMenuList(pb2.getCPage(),pb.getNumPerpage(),dayval,time,memberid);
 	
 		request.setAttribute("time", time);
 		request.setAttribute("today", dayval);
@@ -80,9 +88,9 @@ public class MemberMyListServlet extends HttpServlet {
 		request.setAttribute("list2", list2);
 		
 		
-		request.getRequestDispatcher("/views/member/plan/old_memberMyList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/plan/memberMyList.jsp").forward(request, response);
 		}
-//	}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

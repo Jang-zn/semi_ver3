@@ -42,7 +42,7 @@ public class BoardContentServlet extends HttpServlet {
 	         for(Cookie c : cookies) {
 	            String name=c.getName();
 	            String value=c.getValue();
-	            if(name.equals("noticeReadNo")) { 
+	            if(name.equals("boardReadNo")) { 
 	               if(value.contains("|"+no+"|")) {
 	                  readFlag=true;
 	                  break;
@@ -64,7 +64,13 @@ public class BoardContentServlet extends HttpServlet {
 	      request.setAttribute("boardListCount",boardListCount);
 	      request.setAttribute("board", b);
 	      
+
+
+	     // PageBar2 sp2 = new PageBar2(request, boardListCount, 5, "/board/boardList");
+
+
 	      PageBar sp = new PageBar(request, boardListCount, 5, "/board/boardList");
+
 		  request.setAttribute("pageBar",sp.getPageBar());
 		  List<Board> list = new BoardService().boardList(sp.getCPage(),sp.getNumPerpage());
 			List<Boolean> fileyumu = new ArrayList();

@@ -1,6 +1,6 @@
 package com.semi.common;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
 
 public class PageBar {
 
@@ -63,7 +63,7 @@ public class PageBar {
 			pageBar += "<span>&nbsp[다음]&nbsp</span>";
 		} else {
 
-			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
+			pageBar += "<a href='" + request.getContextPath() + location + "?cPage=" + pageNo + "&numPerpage="+numPerpage+"'>&nbsp[다음]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;

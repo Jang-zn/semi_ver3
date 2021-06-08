@@ -32,7 +32,7 @@ public class CommentDeleteServlet extends HttpServlet {
 				int boardNo =  Integer.parseInt(request.getParameter("boardNo"));
 				int result = new BoardService().commentDelete(no);
 				String msg="";
-				String loc="/board/content?no="+boardNo;
+				String loc="/board/content?numPerpage=15&no="+boardNo;
 				if(result>0) {
 					msg="댓글삭제 완료";
 				}else {
