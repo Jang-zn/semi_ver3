@@ -48,6 +48,8 @@ public class MemberLoginEndServlet extends HttpServlet {
 			response.addCookie(c);
 		}
 		Member m = new MemberService().login(userId,password);
+		System.out.println("뭐야 씨발 :"+userId);
+		
 		if(m!=null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("logged", m);

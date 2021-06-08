@@ -415,7 +415,7 @@ $("#email-chk").click(function(){
 		 return;
 	 } 
 	console.log(email);
-	let url="emailCheck.jsp?email="+email;
+	let url="<%=request.getContextPath()%>/views/member/emailCheck.jsp?email="+email;
 	open(url,"emailwindow","statusbar=no, scrollbar=no, menubar=no, width=400, height=200");
 	
 	<%-- location.assign("<%=request.getContextPath()%>/member/emailAuth?email="+email); --%>

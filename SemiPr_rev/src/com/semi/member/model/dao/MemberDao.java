@@ -788,6 +788,8 @@ public class MemberDao {
 			pstmt.setString(1, userId);
 			pstmt.setString(2, password);
 			rs=pstmt.executeQuery();
+			System.out.println("id "+userId);
+			System.out.println("pw "+password);
 			if(rs.next()) {
 				m=new Member();
 				m.setMemberId(rs.getString("MEMBER_ID"));

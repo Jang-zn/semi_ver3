@@ -1,6 +1,7 @@
 package com.semi.board.controller;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,12 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.*;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.*;
 import com.oreilly.servlet.multipart.*;
-import com.semi.board.model.service.*;
-import com.semi.board.model.vo.*;
+import com.semi.board.model.service.BoardService;
+import com.semi.board.model.vo.Board;
 
 /**
  * Servlet implementation class BoardUpdateEndServlet
