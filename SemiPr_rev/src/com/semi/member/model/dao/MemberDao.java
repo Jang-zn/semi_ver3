@@ -138,7 +138,7 @@ public class MemberDao {
   
   
   
-	public int SelectMemberMenuListCount(Connection conn, String dayval, String memberid) {
+	public int SelectMemberMenuListCount(Connection conn, String dayval, String memberid, String time) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
@@ -152,6 +152,7 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(p.getProperty("SelectMemberMenuListCount"));
 			pstmt.setString(1, memberid);
 			pstmt.setString(2, dayval);;
+			pstmt.setString(3, time);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1); 
 		} catch (SQLException e) {
@@ -1282,6 +1283,33 @@ public class MemberDao {
 			close(pstmt);
 		}		
 		return result;
+	}
+
+
+
+
+	public String DailylogLastDay(Connection conn, String memberid) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String lastday="";
+		String path=MemberDao.class.getResource("/sql/daily_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));		
+		}catch(IOException e) {
+			e.printStackTrace();
+		}		
+		try {
+			pstmt=conn.prepareStatement(p.getProperty("Dailyloglastday"));
+			pstmt.setString(1, memberid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) lastday=rs.getString(1); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}		
+		return lastday;
 	}
 
 }

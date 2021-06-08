@@ -50,9 +50,9 @@ public class MemberService {
 		close(conn);		
 		return list2;
 	}
-	public int SelectMemberMenuListCount(String dayval, String memberid) {
+	public int SelectMemberMenuListCount(String dayval, String memberid, String time) {
 		Connection conn = getConnection();
-		int result= dao.SelectMemberMenuListCount(conn,dayval,memberid);
+		int result= dao.SelectMemberMenuListCount(conn,dayval,memberid,time);
 		close(conn);		
 		return result;
 	}
@@ -297,6 +297,13 @@ public class MemberService {
 		check [1] = dao.YNmenuChseck(conn,menudate,memberid);
 		close(conn);	
 		return check;
+	}
+	public String DailylogLastDay(String memberid) {
+		Connection conn = getConnection();
+		String lastday=dao.DailylogLastDay(conn,memberid);
+		close(conn);	
+		return lastday;
+		
 	}
 
 	
