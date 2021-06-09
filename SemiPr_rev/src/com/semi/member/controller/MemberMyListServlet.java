@@ -56,9 +56,9 @@ public class MemberMyListServlet extends HttpServlet {
 	        dayval=days[calendar.get(Calendar.DAY_OF_WEEK)-1];
 		}
 		
-		
+		System.out.println(dayval);
 		int totalData=new MemberService().SelectMemberExcListCount(dayval,memberid);
-		
+		System.out.println(totalData);
 		int cPage2;
 		try {
 			cPage2 = Integer.parseInt(request.getParameter("cPage2"));
@@ -74,7 +74,7 @@ public class MemberMyListServlet extends HttpServlet {
 		 * 
 		 * 
 		 */
-		int totalData2=new MemberService().SelectMemberMenuListCount(dayval,memberid);
+		int totalData2=new MemberService().SelectMemberMenuListCount(dayval,memberid,time);
 		
 		PageBar2 pb2 =new PageBar2(request,totalData2,5,"/member/myList","val="+dayval+"&time="+time+"&memberid="+memberid+"&cPage="+pb.getCPage());
 		pb2.getCPage();
@@ -88,7 +88,7 @@ public class MemberMyListServlet extends HttpServlet {
 		request.setAttribute("list2", list2);
 		
 		
-		request.getRequestDispatcher("/views/member/plan/memberMyList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/plan/new_memberMyList.jsp").forward(request, response);
 		}
 	}
 

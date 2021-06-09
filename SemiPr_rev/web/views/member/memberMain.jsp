@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/../views/common/header.jsp"%>
+<%
+	Member minfo = (Member)request.getAttribute("memberinfo");
+	String[] gal=(String[])request.getAttribute("galimg");
+	String[] exclist=(String[])request.getAttribute("exclist");
+	String[] menulist=(String[])request.getAttribute("menulist");
+%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/memberMain.css">
-	
-
 <div class="row">
 	<div class="col-md-1"></div>
 	<div id="member_rank" class="col-md-10"></div>
@@ -14,12 +18,12 @@
 	<div id="weekly_container" class="col-md-10">
 		<div id="member_info" class="col-md-4">
 			<div id="profile_area_content" class="col-md-6">
-				<img src="">
+				<img src="<%=request.getContextPath()%>/<%=minfo.getProfileImg()%>">
 			</div>
 			<div id="member_info_area" class="col-md-6">
-				<p></p>
-				<p></p>
-				<p></p>
+				<p><%=minfo.getNickname()%> 환영합니다.</p>
+				<p><%=minfo.getCha()%>일쨰 formnuscle과 함께하고있습니다.</p>
+				<p><button>개인정보 수정</button></p>
 				<p></p>
 				<p></p>
 			</div>
@@ -75,13 +79,10 @@
 			<div class="col-md-2"><button	onclick="location.assign('<%=request.getContextPath()%>/gallary/list')">상세보기</button></div>
 		</div>
 		<div id="noonbody_thumb_area" class="row">
-			<div id="noonbody_left" class="col-md-1"></div>
-			<div class="noonbody_thumb" class="col-md-2"></div>
-			<div class="noonbody_thumb" class="col-md-2"></div>
-			<div class="noonbody_thumb" class="col-md-2"></div>
-			<div class="noonbody_thumb" class="col-md-2"></div>
-			<div class="noonbody_thumb" class="col-md-2"></div>
-			<div id="noonbody_right" class="col-md-1"></div>
+			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[0]%>"></div>
+			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[1]%>"></div>
+			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[2]%>"></div>
+			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[3]%>"></div>
 		</div>
 	</div>
 </div>
@@ -94,16 +95,11 @@
 				<div class="col-md-2"><button onclick="location.assign('<%=request.getContextPath()%>/member/dailyLog')">상세보기</button></div>
 			</div>
 			<div id="daily_log_exc_list" class="row">
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
+			
+			<%for(int i=0;i<exclist.length;i++){ %>
+				<p class="date"><%=exclist[i]%></p>
+				<%} %>
+	
 			</div>
 		</div>
 		<div id="daily_log_menu_area" class="col-md-6">
@@ -112,19 +108,29 @@
 				<div class="col-md-2"><button onclick="location.assign('<%=request.getContextPath()%>/member/dailyLog')">상세보기</button></div>
 			</div>
 			<div id="daily_log_menu_list" class="row">
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
-				<p></p>
+			<%for(int i=0;i<menulist.length;i++){ %>
+				<p class="date"><%=menulist[i]%></p>
+				<%} %>
+		
 			</div>
 		</div>
 	</div>
 </div>
 
+<script>
+$(".date").each((i,v)=>{
+	if($(".date").eq(i).text().indexOf("Y")>0){
+	var text=$(".date").eq(i).text();
+	$(".date").eq(i).text(text.replace("Y",""));	
+	$(".date").eq(i).css("background-color","green");
+}else{
+	var text=$(".date").eq(i).text();
+	$(".date").eq(i).text(text.replace("N",""));	
+}
+	
+})
+
+
+
+</script>
 <%@ include file="/../views/common/footer.jsp"%>
