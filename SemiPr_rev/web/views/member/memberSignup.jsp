@@ -134,7 +134,7 @@
 						<!-- BIRTH_YY -->
 						<div id="bir_yy" class="col-md-4">						
 							<div class="box02 col-md-12"> 
-								<input type="text" id="yy" class="int" name="yy" maxlength="4" placeholder="년(4자)" required>
+								<input type="text" id="yy" class="int" name="yy" maxlength="4" placeholder="년(4자)" onblur="yearCheck();" required>
 							</div>
 							<div class="col-sm-12" id="yyError"></div>
 						</div>
@@ -142,7 +142,7 @@
 						<!-- BIRTH_MM -->
 						<div id="bir_mm" class="col-md-4">
 							<div class="box02 col-md-12"> 
-								<select id="mm" class="sel" name="mm" required style="width:100%; height:100%">
+								<select id="mm" class="sel" name="mm" onblur="monthCheck();" required style="width:100%; height:100%">
 									<option>월</option>
 									<option value="01">1</option>
 									<option value="02">2</option>
@@ -165,7 +165,7 @@
 						<!-- BIRTH_DD -->
 						<div id="bir_dd" class="col-md-4">
 							<div class="box02 col-md-12"> 
-								<input type="text" id="dd" class="int" name="dd" maxlength="2" placeholder="일" required>
+								<input type="text" id="dd" class="int" name="dd" onblur="dayCheck();" maxlength="2" placeholder="일" required>
 							</div>
 							<div class="col-sm-12" id="ddError"></div>
 						</div>					
@@ -252,7 +252,7 @@
 				<!-- JOIN BTN-->
 				<div class="btn_area row">
 					<div class="col-md-12">
-						<button type="submit" id="btnJoin" onsubmit="return emailAuthCheck(); yearCheck(); monthCheck(); dayCheck();">
+						<button type="submit" id="btnJoin" onsubmit="return emailAuthCheck(); vaildation();">
 							가입하기
 						</button>
 					</div>
@@ -263,10 +263,9 @@
 	</div>
 	<div class="col-md-4"></div>
 </div>
-<form name="duplicateFrm" action="" method="post">
-	<input type="hidden" name="email22" id="id" >
-	<input type="hidden" name="nickName">
-</form>
+
+
+
 
 
 <script>
@@ -499,7 +498,7 @@ var isAuth = false;
 
 
 
-$("#email").blur("propertychange change keyup paste input",function(email){
+$("#email").blur(function(email){
 	var emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	var email = $("#email").val()
 	var email2 = email.replace(/(\s*)/g, "");
@@ -584,11 +583,8 @@ $("#nickName_").blur(function(){
 
 
 //<---------------------------------------- 생년월일 시작 ------------------------------------------>
-var yyCheck = false;
-
-
-const yearCheck=()=>{
-$("#yy").blur(function(){
+var yycheck = false;
+function yearCheck(){
 	var yearPattern = /[0-9]{4}/;
 	var toyear = 1997;
 	var year = $("#yy").val();
@@ -598,7 +594,7 @@ $("#yy").blur(function(){
 			$("#yyError").css('color','red');
 			$("#yyError").html('출생년도 4자리 확인 혹은 1900년미만 출생자들은 가입이 제한됩니다.');
 			alert("가입 불가합니다."); 	  
-			return false;
+			yycheck = false;
 			 //함수밖에 변수 만들고false값 준다.
 		  }else if((x == 1) || (x == -11)){
 			    	$("#yyError").css('color','green');
@@ -659,43 +655,45 @@ $("#yy").blur(function(){
 			           }
 		  			  }
 			         }
-				});
 }
+			
+				
+				
 var mmCheck=false;
-const monthCheck=()=>{
-$("#mm").blur(function(){
+
+function monthCheck(){
 	var month = $("#mm").val();
 	console.log(month);
 	if(month=="월"){
 		$("#mmError").css('color','red');
 		$("#mmError").html('태어난 월을 선택해주세요.');
-		return false;
+		mmCheck=false;
 	}else {
 		$("#mmError").css('color','green');
 		$("#mmError").html('좋은 달에 태어나셨군요.');
 		return true;
 	}
-})
 }
 
+
 var ddCheck=false;
-const dayCheck=()=>{
- $("#dd").blur(function(){
+
+function dayCheck(){
 	 var dayPattern = /[0-3]{1,}[0-9]{1}/;
 	 
 	 var day = $("#dd").val();
 	 if(day>32 || !dayPattern.test(day)){
 		$("#ddError").css('color','red');
 		$("#ddError").html('세상에 존재하지 않는 날짜입니다.');
-		return false;
+		ddCheck=false;
 			  
 	 }else {
 		$("#ddError").css('color','green');
 		$("#ddError").html('좋은 날에 태어나셨군요. ');
 		return true;
 	 	}       
-	})
 }
+
 
 //<---------------------------------------- 생년월일 끝 --------------------------------------------->
 
@@ -748,6 +746,18 @@ $("#image").on('change',function(){
 
 //<---------------------------------------- 프로필 끝 ------------------------------------------>
 
+
+function vaildation(){
+		if(ddCheck== false || mmCheck == false || yyCheck == false){
+			return false;
+		}else{
+			return true;
+			
+		}
+	
+	
+	
+}
 
 
  </script>
