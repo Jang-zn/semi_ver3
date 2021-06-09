@@ -14,8 +14,8 @@
 	<div id="member_rank" class="col-md-10"></div>
 </div>
 <div class="row">
-	<div class="col-md-1"></div>
-	<div id="weekly_container" class="col-md-10">
+	
+	<div id="weekly_container" class="col-md-12">
 		<div id="member_info" class="col-md-4">
 			<div id="profile_area_content" class="col-md-6">
 				<img src="<%=request.getContextPath()%>/<%=minfo.getProfileImg()%>">
@@ -59,8 +59,8 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-1"></div>
-	<div id="monthly_container" class="col-md-10">
+	
+	<div id="monthly_container" class="col-md-12">
 		<div id="monthly_check_title_main" class="row">
 			<div class="col-md-10">월간 달성 현황</div>
 			<div class="col-md-2"><button	onclick="location.assign('<%=request.getContextPath()%>/member/monthlyTrend')">상세보기</button></div>
@@ -72,13 +72,13 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-1"></div>
-	<div id="noonbody_container_main" class="col-md-10">
-		<div id="noonbody_title_main" class="row">
+	
+	<div id="noonbody_container_main" class="col-md-12">
+		<div id="noonbody_title_main" class="col-md-12">
 			<div class="col-md-10">눈바디</div>
 			<div class="col-md-2"><button	onclick="location.assign('<%=request.getContextPath()%>/gallary/list')">상세보기</button></div>
 		</div>
-		<div id="noonbody_thumb_area" class="row">
+		<div id="noonbody_thumb_area" class="col-md-12">
 			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[0]%>"></div>
 			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[1]%>"></div>
 			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[2]%>"></div>
@@ -87,8 +87,8 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-1"></div>
-	<div id="daily_log_container_main" class="col-md-10">
+	
+	<div id="daily_log_container_main" class="col-md-12">
 		<div id="daily_log_exc_area" class="col-md-6">
 			<div id="daily_log_exc_title_main" class="row">
 				<div class="col-md-10">운동일지</div>
