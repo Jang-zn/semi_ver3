@@ -31,14 +31,14 @@
 
 				<div id="board_search" class="col-md-5">
 					<div class="row">
-						<div class="col-md-9">
+						<div class="col-md-9 inputBox">
 									<div id="search-Title" >
 										<form action="<%=request.getContextPath()%>/board/boardSearch" method="GET">
 											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword" 
 											value=<%=searchType!=null&&searchType.equals("title")?searchKeyword:"" %> > 
 											<input type="hidden" name="searchType" value="title">
 												<input type="hidden" value="15" name="numPerpage2">
-											<input type="submit" value="검색">
+											<input type="submit" value="검색" class="btn01">
 										</form>
 									</div>
 							<div id="search-TitleContent">
@@ -47,7 +47,7 @@
 									value=<%=searchType!=null&&searchType.equals("titlecontent")?searchKeyword:"" %>> 
 									<input type="hidden" name="searchType" value="titlecontent">
 										<input type="hidden" value="15" name="numPerpage2">
-									<input type="submit" value="검색">
+									<input type="submit" value="검색" class="btn01">
 								</form>
 							</div>
 							<div id="search-Content">
@@ -56,7 +56,7 @@
 								value=<%=searchType!=null&&searchType.equals("content")?searchKeyword:"" %>> 
 								<input type="hidden" name="searchType" value="content">
 									<input type="hidden" value="15" name="numPerpage2">
-								<input type="submit" value="검색">
+								<input type="submit" value="검색" class="btn01">
 							</form>
 							</div>
 							<div id="search-Writer">
@@ -65,7 +65,7 @@
 									value=<%=searchType!=null&&searchType.equals("writer")?searchKeyword:"" %>>  
 									<input type="hidden" name="searchType" value="writer">
 										<input type="hidden" value="15" name="numPerpage2">
-									<input type="submit" value="검색">
+									<input type="submit" value="검색" class="btn01">
 								</form>
 							</div>
 						</div> 
@@ -93,12 +93,11 @@
 					<option value="눈바디" <%=sortType!=null&&sortType.equals("눈바디")?"selected":""%>>눈바디</option>
 				</select>
 			</div>
-			<div class="board_title col-md-7"
-				style="display: inline-block; text-align: center;">제목</div>
+			<div class="board_title col-md-7">제목</div>
 			<div class="board_content_info col-md-1">
 				<span>글쓴이</span>
 			</div>
-			<div class="board_content_info col-md-1">
+			<div class="board_content_info col-md-2">
 				<span>날짜</span>
 			</div>
 			<div class="board_content_info col-md-1">
@@ -117,8 +116,8 @@
 		 		<%for(int i=0; i<list.size(); i++){ %>
 		 			<%Board b = (Board)list.get(i); %>
 						<div id="board_body" class="row">
-							<div class="board_sort col-md-1"><%=b.getCategory() %></div>
-							<div class="board_title col-md-7"  onclick="boardContent(<%=b.getContentNo()%>);">
+							<div class="board_sort col-md-1 categoryLine"><%=b.getCategory() %></div>
+							<div class="board_title col-md-7 "  onclick="boardContent(<%=b.getContentNo()%>);">
 								<div class="board_file_img col-md-1">
 										<%if(fileyumu==null) {%>
 											불러온 request가 없네요
@@ -133,12 +132,12 @@
 											<%} %>
 										<%} %>
 								</div>
-								<div class="col-md-11"><%=b.getTitle() %></div>
+								<div class="col-md-11 categoryLine"><%=b.getTitle() %></div>
 							</div>
-							<div class="board_content_info col-md-1">
+							<div class="board_content_info col-md-1 categoryLine">
 								<%=b.getWriter() %>
 							</div>
-							<div class="board_content_info col-md-1">
+							<div class="board_content_info col-md-2 categoryLine">
 								<%=b.getWriteDate() %>
 							</div>
 							<div class="board_content_info col-md-1">
@@ -161,7 +160,7 @@
 			
 			<div class="col-md-3"><%=pageBar %></div>
 			<div class="col-md-3"></div>
-			<div id ="loginCheckId"class="col-md-1 btn"
+			<div id ="loginCheckId" class="col-md-1 btn01"
 				onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</div>
 		</div>
 

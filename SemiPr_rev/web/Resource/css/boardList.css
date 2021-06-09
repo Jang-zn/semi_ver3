@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-#board_container * {
-	border: 1px skyblue solid;
-}
-
 #board_container li {
 	list-style: none;
 }

@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+h2{
+	font-family: 'PFStardust';
+	font-size:4rem;
+	font-weight:bolder;	
+	display:inline;
+	margin-bottom:1rem;
+}
+h3{
+	font-family: 'GongGothicLight';
+	font-size:1.8rem;
+	display:inline;
+	color:gray;
+}
+.list li {
+  list-style: none;
+  padding-left: 0;
+}
+
+.label_txt {
+	font-family: 'GongGothicLight';
+  	font-size:20px;
+  	width:87px;
+}
+
+#forgot_name, #forgot_email, #forgot_name2, #forgot_id2, #forgot_email2{
+	border-radius:0.2em;
+	border:1.5px solid black;
+	width:300px;
+	height:30px;
+}
+
+input[type=text]{
+	font-family: 'GongGothicMedium';
+	font-weight:light;
+	font-size: 18px;	
+}	
+#emailAuth{
+	border-radius:0.2em;
+	border:1.5px solid gray;
+	width:140px;
+	height:30px;
+}
+#emailAuth:select{
+	border-radius:0.2em;
+	border:1.5px solid black;
+	width:140px;
+	height:30px;
+}
+.forgot {
+  width: 700px;
+  border: 3px solid lightgray;
+  margin-top: 7%;
+  margin-bottom:7%;
+  margin-left:25%;
+  padding :2%
+}
+.question {
+  padding: 0px 0px 0px 30px;
+  padding-top: 0;
+}
+
+.email {
+  padding: 0px 10px 10px 30px;
+  margin-top: 10px;
+}
+
+
+.btn01 {
+ 	background-color: cadetblue;
+	font-family: 'GongGothicMedium';	
+ 	font-size: 20px;
+ 	color: white;
+ 	border-radius:0.2em;
+ 	border:1.5px solid black;
+ 	margin:0.5rem;
+ 	padding:0.3rem;
+ 	text-align:center;
+	}
+
+.btn01:hover, #email-chk:hover{
+	background-color:#da7316;
+}
+
+.btn01 input{
+	background-color:transparent;
+	text-align:center;
+ 	border:0;
+ 	outline:0;
+	padding-left:0.1rem;
+	padding-right:0.1rem;
+}
+
