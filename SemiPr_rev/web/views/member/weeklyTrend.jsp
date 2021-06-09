@@ -203,14 +203,14 @@
             <div class="col-md-6">
                 <!-- 운동 -->
                 <div class="row">
-                    <div class="col-md-4 title01">
+                    <div class="col-md-6 title01">
                     	<div><%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 운동 계획</div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row listContainer01">
                     <div class="col-md-12">
                     <%if(excList.isEmpty()){  %>
-                    	<div class="title01"> 오늘 예정된 운동이 없습니다.</div>
+                    	<div class="list02" style="font-size:2rem; color:#da7316"> 오늘 예정된 운동이 없습니다.</div>
                     <%}else{%>
                     <div class="row list01">
                     	<div class="col-md-3">운동 이름</div>
@@ -258,14 +258,14 @@
             <div class="col-md-6">
                 <!-- 식단 -->
                 <div class="row">
-                    <div class="col-md-4 title01">
+                    <div class="col-md-6 title01">
                     	<div><%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 식단 계획</div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row listContainer">
                     <div class="col-md-12">
                     	<%if(excList.isEmpty()){  %>
-	                    	<div class="title01"> 오늘 예정된 식단이 없습니다.</div>
+	                    	<div class="list02" style="font-size:2rem; color:#da7316"> 오늘 예정된 식단이 없습니다.</div>
 	                    <%}else{%>
 	                    <div class="row list01">
 	                    	<div class="col-md-3">식단 이름</div>

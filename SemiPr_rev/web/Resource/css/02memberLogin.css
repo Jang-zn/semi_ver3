@@ -12,6 +12,12 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
  /* 로그인 로고 */
 	.login {
@@ -43,11 +49,7 @@
   		border:1.5px solid black;
 	}
 
-	#saveId {
-		text-align: center;
-		font-family: 'GongGothicMedium';
-		font-weight:light;
-	}
+	
 
 	label, h3 {
 		font-family: 'PFStardust';	
@@ -57,12 +59,17 @@
 		margin-bottom: 3px;
 		padding:0 0 0 0;
 	}
+	#saveId {
+		text-align: center;
+		font-family: 'GongGothicMedium';
+		font-weight:light;
+	}
 	
 
 	.login li input::-webkit-input-placeholder {
 		font-family: 'GongGothicMedium';
 		font-weight:light;
-		font-size: 16px;
+		font-size: 18px;
 	}
 
 	.login li input[type='checkbox']:checked + label {
@@ -77,12 +84,27 @@
 		font-weight:light;
 	
 	}
-	
+	#sign_page{
+		text-align: center;
+	}
+	.signup{
+		font-family: 'GongGothicLight';
+		text-align: center;
+	}
+	.signup a:link, .signup a:visited, .signup a:active{
+		color: cadetblue;
+		
+	}
+	.signup  a:hover{
+		color: #da7316;
+		text-decoration:none;
+	}
 
 	#login_btn {
   		background-color: cadetblue;
 		font-family: 'PFStardust';	
   		font-size: 25px;
+  		font-weight:bolder;
   		color: black;
   		width: 300px;
   		height: 46px;
@@ -90,3 +112,5 @@
   		border:1.5px solid black;
   		outline:0;
 	}
+	
+	

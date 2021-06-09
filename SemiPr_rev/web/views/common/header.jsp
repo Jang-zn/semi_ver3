@@ -73,24 +73,17 @@
             <% if(loginMember!=null){ %>
             	<div id="profile_area" class="col-md-2">
             		<div class="row">
-            			<div class="col-md-5"></div>
-            			<div class="col-md-7">
-            				<img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="width:80%;height:80%;">
+            			<div class="col-md-6">
+            				<div class="nickName"><%=loginMember.getNickname()%> 님</div> 
             			</div>
-            		</div>
-            		<div class="row">
-            			<div class="col-md-12" style="text-align:center">
-            				<div class="row">
-            					<div class="col-md-5"></div>
-            					<div class="col-md-3"><%=loginMember.getNickname()%></div>
-            					<div class="col-md-4" onclick="location.assign('<%=request.getContextPath()%>/member/logout')">로그아웃</div>
-            				</div>
+            			<div class="col-md-6">            				
+            				<div class="logout" onclick="location.assign('<%=request.getContextPath()%>/member/logout')">로그아웃</div>
             			</div>
             		</div>
             	</div>
             <%}else{ %>
-            	<div class="col-md-1"></div>
-            	<div id="login_area" class="col-md-1" onclick="login();">
+            	<!-- <div class="col-md-1"></div> -->
+            	<div id="login_area" class="col-md-2" onclick="login();">
             		login
             	</div>
             <%} %>            

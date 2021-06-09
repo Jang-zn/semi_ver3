@@ -7,13 +7,13 @@
     %>
     
 <%@ include file = "/../views/common/header.jsp"%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberForgot.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/02memberForgot.css">
 <section class="forgot">
 	<form action="<%=request.getContextPath()%>/member/findId"  name="insertform" 
 		method="post">
 		<div class="email">
-			<h2>아이디찾기</h2>
-			본인확인 이메일로 인증
+			<h2>아이디 찾기</h2>
+			<h3>본인확인 이메일로 인증</h3>
 			<p style="line-height: 0.1">&emsp;&emsp;&emsp;</p>
 			<ul class="list">
 				<li><label for="emailNm" class="label_txt">이름 : </label><input
@@ -21,23 +21,24 @@
 				<li><label for="emailNm" class="label_txt">이메일 :</label><input
 					type="text" name="forgot_email" id="forgot_email" required>
 			</ul>
-		</div>
-		<span class="forgot_btn"> <input type="submit" class=""
+		<span class="btn01"> <input type="submit" class=""
 			value="확인" title="확인" >
-
-		</span> <span class="forgot_btn2"> <input type="button" class=""
+		</span> 
+		<span class="btn01"> <input type="button" class=""
 			value="취소" title="취소">
 		</span> <br>
+		
+		</div>
 	</form>
 	<hr>
 	<br>
 	<form name="insertform2" method="post" action="<%=request.getContextPath()%>/member/printPw" id="insertform">
 		<div class="question">
-			<h2>비밀번호찾기</h2>
-			회원정보에 등록한 이메일 인증
-
+			<h2>비밀번호 찾기</h2>
+			<h3>회원정보에 등록한 이메일 인증</h3>
+			<p style="line-height: 0.1">&emsp;&emsp;&emsp;</p>
 			<ul class="list">
-				<li><label for="emailNm" class="label_txt">이름 :</label> <input
+				<li><label for="emailNm" class="label_txt">이름 :</label><input
 					type="text" name="forgot_name2" id="forgot_name2" required>
 				</li>
 				<li><label for="emailNm" class="label_txt">아이디 : </label><input
@@ -45,7 +46,8 @@
 				<li><label for="emailNm" class="label_txt">이메일 :  </label><input
 					type="text" name="forgot_email2" id="forgot_email2" required>
 					<button type="button" id="email-chk" 
-					value="이메일 전송" style="width: 110px; height: 25px" onclick="emailAuthint();" >인증번호 전송</button>
+					value="이메일 전송"  onclick="emailAuthint();"
+					class="btn01">인증번호 전송</button>
 				</li>
 				 <li><label for="emailNm" class="label_txt">인증번호 :  </label><input
 					type="text" name="emailAuth" id="emailAuth"></li>
@@ -53,14 +55,14 @@
 					
 					
 			</ul>
-		</div>
-		<span class="forgot_btn"> <input type="button" class="" 
+		<span class="btn01"> <input type="button" class="" 
 			value="확인" id="check">
 
-		</span> <span class="forgot_btn2"> <input type="button" class=""
-			value="취소" title="취소">
-		
 		</span>
+		<span class="btn01"> <input type="button" class=""
+			value="취소" title="취소">		
+		</span>
+		</div>
 	</form>
 </section>
 

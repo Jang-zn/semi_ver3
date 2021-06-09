@@ -15,9 +15,7 @@
 	*{
 		margin:0;
 		padding:0;
-		border: 0.1px solid red;
-		
-		
+		/* border: 0.1px solid red; */	
 	}
 	
 	.sub a:link {
@@ -68,23 +66,36 @@
 
 	#menu_container, #profile_area, #login_area{
 		 margin-top:1.5rem;	 
+		 text-align:center;
 	}
 	
-	#aside_container {
-		width: 15%;
-		border: 1px solid lightblue;
-	}
 
 	#logo_area img {
 		height: 70%;
 		width: auto; 	
 	}
 
-	#profile_area>img {
+	.profilePhoto {
 		width: auto;
-		height: 80%;
+		height: 30%;
 	}
 
+	
+	.nickName{	
+		text-align:center;
+		color:cadetblue;
+		font-family: 'GongGothicMedium';
+		font-size:2rem;
+	}
+	.logout{
+		text-align:center;
+		color:white;
+		font-family: 'GongGothicMedium';
+		font-size:2rem;
+	}
+	.logout:hover{
+		color:#da7316;
+	}
 	.navigator_menu {
 		list-style: none;
 		margin-right: 40px;
@@ -120,19 +131,21 @@
 	
         /*로그인 버튼*/
 	#login_area{
-		font-weight:bold;
-		font-size:2.3rem;
+		font-family: "Press Start 2P" !important;
+		text-align: center;
+		font-size: 2rem;
+		color:white;
 	}
-	#login_area>span{
+	/* #login_area>span{
 		font-family: "Press Start 2P";
 		text-align: center;
 		font-size: 1.9rem;
 		color:white;
 		transition: all 0.3s;
 		cursor:pointer;
-        }
+        } */
     
-	#login_area>span:hover{
+	#login_area:hover{
 		color: #009688;
 		text-decoration:underline;
 		font-size: 1.8rem;
