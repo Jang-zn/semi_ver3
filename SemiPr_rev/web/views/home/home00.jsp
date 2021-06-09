@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "/../views/common/header.jsp"%>
-
+	</div>
 	<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/02home00.css">
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/font.css">
 	<!--------------- 배너 ---------->
+
     <div id="banner_home" class="container-fluid">
     	<div class="row">
     		<div class="col-md-12">
-    			<img src="<%=request.getContextPath()%>/Resource/img/banner_home.png" alt="" style="width:100%; height:auto">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_home.png" alt="" style="width:100%; height:auto; margin:0;">
     		</div>
     	</div>
     </div>
-    
+    <br> <br>   
     <div id="main_content" class="container"> 
         <div class="row">
             <div class="col-md-6 box01"> <!-- 설명1-->
@@ -177,8 +178,7 @@
                 </div>
             </div>
            </div>           
-       </div>       
-    </div>
+       </div>  
     <br>
     <br>
     <br>

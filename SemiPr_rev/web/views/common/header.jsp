@@ -35,7 +35,7 @@
     </head>
 
     <body>
-        <div id="header_container" class="row">
+        <div id="header_container" class="row container-fluid">
 <!-- 로고 3 -->
             <div id="logo_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
 <!-- 공백 -->
