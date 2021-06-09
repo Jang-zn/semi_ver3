@@ -13,13 +13,20 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 	#board_container li {
 		list-style: none;
 	}
-
+	
+	
 	#content_count {
-		font-family: 'PFStardust';
+		font-family: 'GongGothicLight';
 		font-size:2rem;	
 		font-weight: bold;	
 		
@@ -27,12 +34,11 @@
   		border:1.5px solid lightgray;
 	}
 
-	#board_search, #board_head, #board_sort{
-		font-family: 'PFStardust';
+	#board_search, #board_head{
+		font-family: 'GongGothicLight';
 		font-size:1.7rem;	
 		font-weight: bold;
 		}
-		
 	#board_body, #board_head {
 		font-size: 1.8rem;
 		
@@ -54,31 +60,20 @@
   		border:1.5px solid black;
 	}
 
-	.board_sort {
+	.board_sort, .board_title, .board_content_info {
 		text-align: center;
-		align-self: center;
-		font-family: 'PFStardust';
-		font-size:1.7rem;	
-		font-weight: bold;
-		width:5rem;	
-	}
-
-	.board_title {
-		width: 65%;
-		display: flex;
+		align-self: center;		
+		font-family: 'GongGothicLight';
+		font-size:1.7rem;
 	}
 
 	#board_head{
 		border-radius:0.2em;
   		border:1.5px solid black;
   		background-color:lightgray;
-	}
-	.board_content_info {
-		width: 10%;
-		align-self: center;
-		text-align: center;
-		font-family: 'GongGothicMedium';
-		
+		margin-top:1rem;
+		margin-bottom:1rem;
+		padding:0.5rem;
 	}
 
 	div.board_file_img {
@@ -91,11 +86,13 @@
 	}
 
 	#board_pageBar {
-		text-align: center;
-		margin: 1%;
-		font-size:1.2rem;
+	margin-top:3rem;
+	font-family: 'GongGothicLight';	
+ 	font-size: 2rem;
+	text-align: center;
 	}
-	#board_pageBar>a {
+	
+	/* #board_pageBar>a {
 		color:black;
 	}
 	
@@ -107,5 +104,43 @@
 		padding:0.3rem;
 		border-radius:0.2em;
   		border:1.5px solid black;
-  		/* 오른쪽으로 정렬 필요 */
+  		오른쪽으로 정렬 필요
+	} */
+	
+	
+	.btn01 {
+ 	background-color: lightgray;
+	font-family: 'GongGothicLight';	
+ 	font-size: 1.8rem;
+ 	color: black;
+ 	border-radius:0.2em;
+ 	border:1px solid black;
+ 	margin:0.5rem;
+ 	padding:0.3rem;
+ 	text-align:center;
 	}
+
+	.btn01:hover{
+		background-color:cadetblue;
+	}
+	
+	.inputBox{
+		border-radius:0.2em;
+  		border:1.px solid black;
+  		}
+  		
+  	#search-Type{
+  		font-family: 'GongGothicLight';
+  	}
+  	
+  	option{
+	border:none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+	
+.categoryLine{
+	border-right:1px dashed gray;
+}

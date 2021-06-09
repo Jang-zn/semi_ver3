@@ -15,9 +15,7 @@
 	*{
 		margin:0;
 		padding:0;
-		border: 0.1px solid red;
-		
-		
+		/* border: 0.1px solid red; */		
 	}
 	
 	.sub a:link {
@@ -68,27 +66,32 @@
 
 	#menu_container, #profile_area, #login_area{
 		 margin-top:1.5rem;	 
+		 text-align:center;
 	}
 	
-	#aside_container {
-		width: 15%;
-		border: 1px solid lightblue;
-	}
 
 	#logo_area img {
 		height: 70%;
 		width: auto; 	
 	}
 
-	#profile_area img {
-		width: 30%;
-		height: auto;
+	.profilePhoto {
+		width: auto;
+		height: 30%;
 	}
 
-	.profileInfo{
+	
+	.nickName{	
+		text-align:center;
+		color:cadetblue;
+		font-family: 'GongGothicMedium';
+		font-size:2rem;
+	}
+	.logout{
 		text-align:center;
 		color:white;
 		font-family: 'GongGothicMedium';
+		font-size:2rem;
 	}
 	.logout:hover{
 		color:#da7316;
@@ -130,7 +133,7 @@
 	#login_area{
 		font-family: "Press Start 2P" !important;
 		text-align: center;
-		font-size: 1.9rem;
+		font-size: 2rem;
 		color:white;
 	}
 	/* #login_area>span{
