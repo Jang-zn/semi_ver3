@@ -43,20 +43,12 @@ public class DeleteBoardServlet extends HttpServlet {
 		
 		
 		String msg ="";
-		String loc ="";
+		String loc ="/board/boardList?numPerpage=15";
+		
 		if(result>0) {
-			msg ="파일없는 글 삭제완료!";
-			if(fileresult>0) {
-				msg ="파일,글 삭제완료!";
-				loc ="/board/boardList?numPerpage=15";
-			}
+			msg ="글 삭제완료!";
 		}else {
-			msg="파일삭제는 됐고 글삭제만 실패!";
-			loc="/board/content?no="+boardNo;
-			if(fileresult==0) {
-				msg ="글 삭제랑 파일삭제실패!";
-				loc ="/board/boardList?numPerpage=15";
-			}
+			msg="글삭제 실패!";
 		}
 		
 		
