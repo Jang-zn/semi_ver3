@@ -207,7 +207,7 @@
                 <div class="row listContainer01">
                     <div class="col-md-12">
                     <%if(excList.isEmpty()){  %>
-                    	<div class="list02" style="font-size:2rem; color:#da7316"> 오늘 예정된 운동이 없습니다.</div>
+                    	<div class="list02" style="font-size:2rem; color:#da7316; margin-top:3rem;margin-bottom:2rem;"> 오늘 예정된 운동이 없습니다.</div>
                     <%}else{%>
                     <div class="row">
                     	<div class="col-md-12">
@@ -271,7 +271,7 @@
                 <div class="row listContainer">
                     <div class="col-md-12">
                     	<%if(excList.isEmpty()){  %>
-	                    	<div class="list02" style="font-size:2rem; color:#da7316"> 오늘 예정된 식단이 없습니다.</div>
+	                    	<div class="list02" style="font-size:2rem; color:#da7316; margin-top:3rem;margin-bottom:2rem;"> 오늘 예정된 식단이 없습니다.</div>
 	                    <%}else{%>
 	                    <div class="row">
 							<div class="col-md-9">
