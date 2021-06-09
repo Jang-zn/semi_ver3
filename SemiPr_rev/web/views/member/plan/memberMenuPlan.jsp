@@ -138,6 +138,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리
 
 	const menuSubmit=()=>{
+		$("#excName").val($("#exc_name").text());
 		return true;
 	}
 	

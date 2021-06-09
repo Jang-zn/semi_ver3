@@ -41,7 +41,6 @@ public class MemberExcPlanSubmitServlet extends HttpServlet {
 		}else {
 			memberId = m.getMemberId();
 		}
-		
 		Exercise exc = new ExcService().getExcInfo(request.getParameter("excName"));
 		MemberExercise me = new MemberExercise();
 		me.setExcId(exc.getExcId());

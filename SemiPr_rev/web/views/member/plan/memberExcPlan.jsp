@@ -138,6 +138,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 	
 	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리..
 	const excSubmit=()=>{
+		$("#excName").val($("#exc_name").text());
 		if($("#weightC").val()>=0&&$("#repsC").val()>0&&$("#setsC").val()>0){
 			return true;
 		}else{

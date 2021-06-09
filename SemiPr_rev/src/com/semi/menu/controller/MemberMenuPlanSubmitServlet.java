@@ -43,11 +43,9 @@ public class MemberMenuPlanSubmitServlet extends HttpServlet {
 			memberId = m.getMemberId();
 		}
 		Menu me = new MenuService().getMenuInfo(request.getParameter("menuName"));
-		
 		MemberMenu mm = new MemberMenu();
 		mm.setMenuId(me.getMenuId());
 		mm.setMemberId(memberId);
-		mm.setAmount(Integer.parseInt(request.getParameter("amount")));
 		mm.setMenuWeek(request.getParameter("week"));
 		mm.setMenuDayTime(request.getParameter("dayTime"));
 		
@@ -63,7 +61,7 @@ public class MemberMenuPlanSubmitServlet extends HttpServlet {
 				}else {
 					int resultF = new MenuService().insertMemberMenu(mm);
 					String msg ="";
-					if(result>0) {
+					if(resultF>0) {
 						msg="등록성공";
 					}else {
 						msg="등록실패";
