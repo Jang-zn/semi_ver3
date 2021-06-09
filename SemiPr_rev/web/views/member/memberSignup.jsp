@@ -443,7 +443,7 @@ $("#mobile").blur(function(){
 					alert("정확한 이메일 주소를 입력 후 다시 시도해주세요.");
 				}else{
 				alert("인증 메일 전송 완료");
-				var text = $("<p>인증 코드 : </p>");
+				var text = $("<p class='text11'>인증 코드 : </p>");
 				var inputAdd = $("<input class='inputAdd' type='text'>");
 				var btnAdd =$("<button class='btnAdd' type='button'>확인</button>");
 				if($('.btnAdd').length == 0){//버튼 한 개만 생성하게 만들기 
@@ -453,6 +453,9 @@ $("#mobile").blur(function(){
 				}
 				btnAdd.click(e=>{
 					emailAuthCheck();
+					$(".inputAdd").remove();
+					$(".text11").remove();
+					$(".btnAdd").remove();
 				});
 			}
 				
@@ -748,7 +751,7 @@ $("#image").on('change',function(){
 
 
 function vaildation(){
-		if(ddCheck== false || mmCheck == false || yyCheck == false){
+		if(ddCheck == false || mmCheck == false || yyCheck == false){
 			return false;
 		}else{
 			return true;
