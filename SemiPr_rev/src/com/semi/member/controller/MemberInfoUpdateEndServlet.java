@@ -72,12 +72,16 @@ public class MemberInfoUpdateEndServlet extends HttpServlet {
 		if(mr.getParameter("password_").length()<1) {
 			m.setMemberPw(EncryptWrapper.getSHA512(mr.getParameter("password")));
 		}
-		m.setEmail(mr.getParameter("email"));
+		try {
+			m.setEmail(AESEncrypt.encrypt(mr.getParameter("email")));
+			m.setPhone(AESEncrypt.encrypt(mr.getParameter("phone")));
+		} catch (Exception e) {
+					e.printStackTrace();
+		}
 		m.setName(mr.getParameter("name"));
 		m.setNickname(mr.getParameter("nickName"));
 		m.setBirth(memberAge);
 		m.setGender(mr.getParameter("gender"));
-		m.setPhone(mr.getParameter("phone"));
 		m.setHeight(Double.parseDouble(mr.getParameter("height")));
 		m.setWeight(Double.parseDouble(mr.getParameter("weight")));
 
