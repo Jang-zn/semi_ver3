@@ -56,7 +56,13 @@
      	width:100%;
      	height:100%;
      }
-	
+	input{
+		border:none;
+	}
+	input:focus{
+		border:none;
+		outline:none;
+	}
 	.box02{
 		width: auto;
 		height: 40px;
@@ -64,6 +70,10 @@
   		border:1.5px solid black;
   		margin-right:5px;
 	}	
+	.box02>input{
+		font-family:'GongGothiclight';
+		padding-left:3px;
+	}
 	.box03{
 		display: block;
 		width: 50%;
@@ -152,7 +162,7 @@
 	border:1px solid black;
 	width: 300px;
 }	
-.inputFile{
+.inputFile, .join_title{
 	font-family:'GongGothiclight';	
 }	
 	

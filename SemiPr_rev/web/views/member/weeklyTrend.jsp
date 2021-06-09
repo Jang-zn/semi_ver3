@@ -44,19 +44,17 @@
 	MenuInfo menuStatistic=(MenuInfo)request.getAttribute("menuStatistic");
 	
 %>
-	
+	</div>
 
 	<!--------------- 배너 ---------->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                배너 이미지
-            </div>
-        </div>        
+     <div id="banner_home" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_weeklyTrend.png" alt="" style="width:100%; height:auto; margin:0;">
+    		</div>
+    	</div>
     </div>
-    
-    <br>
-    <br>
+    <br> <br> 
     
     <div class="container">
         <!-- 카테고리 버튼 -->
@@ -69,13 +67,13 @@
 
         <!-- 주간 달성 현황 -->
         <div class="row">
-            <div class="col-md-3 title01">
-                <%=today.get(Calendar.MONTH)+1 %>월 <%=ju %>번째 주 달성 현황
+            <div class="col-md-3 title01" style="margin-bottom:1rem;">
+                > <%=today.get(Calendar.MONTH)+1 %>월 <%=ju %>번째 주 달성 현황
             </div>
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-2 title02">운동</div>
-                    <div id="weeklyExcStatus">
+                    <div class="col-md-1 title02" style:"text-align:right; font-weight:bolder;">운동</div>
+                    <div id="weeklyExcStatus" style="margin-bottom:3rem;">
                         <div class="col-md-1"><div class="weeklyExcStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">화</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">수</div></div>
@@ -84,12 +82,12 @@
                         <div class="col-md-1"><div class="weeklyExcStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">일</div></div>
                     </div>
-                    <div class="col-md-3 title01">연속 <%=excAchieve %>일 달성</div>
+                    <div class="col-md-3 title01">연속 <%=excAchieve %> 일 달성</div>
                 </div>
             </div>  
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-2 title02">식단</div>
+                    <div class="col-md-1 title02" style:"text-align:right; font-weight:bolder;">식단</div>
                     <div id="weeklyMenuStatus">
                         <div class="col-md-1"><div class="weeklyMenuStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">화</div></div>
@@ -100,7 +98,7 @@
                         <div class="col-md-1"><div class="weeklyMenuStatus">일</div></div>
                     </div>                    
 
-                    <div class="col-md-3 title01">연속 <%=menuAchieve %>일 달성 </div>                    
+                    <div class="col-md-3 title01">연속 <%=menuAchieve %> 일 달성 </div>                    
                     
                 </div>
             </div>         
@@ -132,9 +130,9 @@
 				dataType:"json",
 				success:data=>{//해당 요일 달성 여부를 data로 받아옴
 					switch(data["weekCheck"]){
-					case 'Y': $(this).css('background-color','green'); break;//달성했을 경우 green					
-					case 'N': $(this).css('background-color','red'); break; //달성하지 못했을 경우 red
-					default : $(this).css('background-color','yellow'); break;
+					case 'Y': $(this).css('background-color','#54a635'); break;//달성했을 경우 green					
+					case 'N': $(this).css('background-color','#df4833'); break; //달성하지 못했을 경우 red
+					default : $(this).css('background-color','#e6c050'); break;
 					}
 					
 				},error : (request, status, error)=>{
@@ -175,9 +173,9 @@
 				dataType:"json",
 				success:data=>{//해당 요일 달성 여부를 data로 받아옴
 					switch(data["weekCheck"]){
-					case 'Y': $(this).css('background-color','green'); break;//달성했을 경우 green					
-					case 'N': $(this).css('background-color','red'); break; //달성하지 못했을 경우 red
-					default : $(this).css('background-color','yellow'); break;
+					case 'Y': $(this).css('background-color','#54a635'); break;//달성했을 경우 green					
+					case 'N': $(this).css('background-color','#df4833'); break; //달성하지 못했을 경우 red
+					default : $(this).css('background-color','#e6c050'); break;
 					}
 					
 				},error : (request, status, error)=>{
@@ -204,7 +202,7 @@
                 <!-- 운동 -->
                 <div class="row">
                     <div class="col-md-6 title01">
-                    	<div><%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 운동 계획</div>
+                    	<div>> <%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 운동 계획</div>
                     </div>
                 </div>
                 <div class="row listContainer01">
@@ -212,22 +210,31 @@
                     <%if(excList.isEmpty()){  %>
                     	<div class="list02" style="font-size:2rem; color:#da7316"> 오늘 예정된 운동이 없습니다.</div>
                     <%}else{%>
-                    <div class="row list01">
-                    	<div class="col-md-3">운동 이름</div>
-                    	<div class="col-md-3">reps</div>
-                    	<div class="col-md-3">sets</div>
-                    	<div class="col-md-3">weight</div>
+                    <div class="row">
+                    	<div class="col-md-12">
+                    		<div class="row list01">
+	                    		<div class="col-md-3">운동 이름</div>
+		                    	<div class="col-md-3">reps</div>
+		                    	<div class="col-md-3">sets</div>
+		                    	<div class="col-md-3">weight</div>
+                    		</div>
+                    	</div>
+                    	
                     </div>
 	                    	<!-- 운동 이름은 운동 id로 가져와야 됨 -->
 	                    	
                     <%
                     int count=0;
                     for( MemberExcList m : excList){%>
-                    <div class="row list02">
-                    	<div class="col-md-3"><%=m.getExcId_c() %></div>
-                    	<div class="col-md-3"><%=m.getReps() %> reps</div>
-                    	<div class="col-md-3"><%=m.getSets()%> sets</div>
-                    	<div class="col-md-3"><%=m.getWeight() %> weight</div>
+                    <div class="row">
+                    	<div class="col-md-12">
+                    		<div class="row list02">
+	                    		<div class="col-md-3 categoryLine"><%=m.getExcId_c() %></div>
+		                    	<div class="col-md-3 categoryLine"><%=m.getReps() %> reps</div>
+		                    	<div class="col-md-3 categoryLine"><%=m.getSets()%> sets</div>
+		                    	<div class="col-md-3"><%=m.getWeight() %> weight</div>
+                    		</div>
+                    	</div>                    	
                     </div>
                     <%
                     	count++;
@@ -259,7 +266,7 @@
                 <!-- 식단 -->
                 <div class="row">
                     <div class="col-md-6 title01">
-                    	<div><%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 식단 계획</div>
+                    	<div>> <%=today.get(Calendar.MONTH)+1 %>월 <%=today.get(Calendar.DATE) %>일 식단 계획</div>
                     </div>
                 </div>
                 <div class="row listContainer">
@@ -267,20 +274,29 @@
                     	<%if(excList.isEmpty()){  %>
 	                    	<div class="list02" style="font-size:2rem; color:#da7316"> 오늘 예정된 식단이 없습니다.</div>
 	                    <%}else{%>
-	                    <div class="row list01">
-	                    	<div class="col-md-3">식단 이름</div>
-	                    	<div class="col-md-3">양</div>
-	                    	<div class="col-md-4" >아침/점심/저녁</div>
+	                    <div class="row">
+							<div class="col-md-9">
+								<div class="row list01">
+									<div class="col-md-4">식단 이름</div>
+			                    	<div class="col-md-4">양</div>
+			                    	<div class="col-md-4">언제</div>
+								</div>
+							</div>	                    
+	                    	
 	              		  </div>
 	                    	<!-- 식단 이름은 운동 id로 가져와야 됨 -->
 	                    	
 	                    <%
 	                    int count=0;
 	                    for( MemberMenuList m : menuList){%>
-	                    <div class="row list02">
-	                    	<div class="col-md-3"><%=m.getMenuId_c() %></div>
-	                    	<div class="col-md-3"><%=m.getAmount() %> 양</div>
-	                    	<div class="col-md-4"><%=m.getMenuDaytime() %></div>
+	                    <div class="row">
+	                    	<div class="col-md-9">
+								<div class="row list02">
+									<div class="col-md-4 categoryLine"><%=m.getMenuId_c() %></div>
+			                    	<div class="col-md-4 categoryLine"><%=m.getAmount() %> g</div>
+			                    	<div class="col-md-4" ><%=m.getMenuDaytime() %></div>
+								</div>
+							</div>	    
 	                    </div>
 	                   <%
 	                    	count++;
@@ -305,15 +321,15 @@
             <div class="col-md-6">
                 <!-- 운동 -->
                 <div class="row">
-                    <div class="col-md-6 title01">이번주 많이 한 운동 5</div>
+                    <div class="col-md-6 title01" style="margin-bottom:1rem;">> 이번주 많이 한 운동 5</div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
                         	<!-- DB에서 데이터 받아와 순위 계산해서 값 넣기 -->
                         	<%for(int i=0; i<5; i++){ %>
-                        		<div class="col-md-2"><%=i+1 %>. </div>
-                        		<div class="col-md-10"><%=excStatistic.get(i).getExcName() %></div>
+                        		<div class="col-md-1 num01"><%=i+1 %>. </div>
+                        		<div class="col-md-11 num02"><%=excStatistic.get(i).getExcName() %></div>
                         	<%} %>
                         </div>
                     </div>
@@ -322,7 +338,7 @@
             <div class="col-md-6">
                 <!-- 식단 -->
                 <div class="row">
-                    <div class="col-md-6 title01">식단 분석</div>
+                    <div class="col-md-6 title01" style="margin-bottom:1rem;">> 이번주 식단 분석</div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -360,7 +376,7 @@
             labels: ['탄수화물','단백질','지방'], 
             datasets: [{ 
             data: [ch,prot,fat],
-            backgroundColor: ['rgba(255, 200, 200, 0.2)','rgba(255, 230, 255, 0.2)','rgba(100, 200, 200, 0.2)'], 
+            backgroundColor: ['rgba(223, 72, 51, 0.5)','rgba(230, 192, 80, 0.5)','rgba(84, 166, 53, 0.5)'], 
             borderColor: 'black', 
             borderWidth: 1 }] },           
             options: { 

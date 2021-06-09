@@ -35,7 +35,7 @@
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
-					<input type="text" name="userId" id="userId" placeholder="아이디"
+					<input type="text" name="userId" id="userId" placeholder=" 아이디"
 						title="아이디입력" value="<%=saveId==null?"":saveId%>">
 				</div>
 				<div class="col-md-1"></div>
@@ -44,7 +44,7 @@
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 					<input type="password" name="password" id="password"
-						placeholder="비밀번호" title="비밀번호입력">
+						placeholder=" 비밀번호" title="비밀번호입력">
 				</div>
 				<div class="col-md-1"></div>
 			</div><br>
