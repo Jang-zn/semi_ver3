@@ -80,11 +80,19 @@
 		width: auto; 	
 	}
 
-	#profile_area>img {
-		width: auto;
-		height: 80%;
+	#profile_area img {
+		width: 30%;
+		height: auto;
 	}
 
+	.profileInfo{
+		text-align:center;
+		color:white;
+		font-family: 'GongGothicMedium';
+	}
+	.profileInfo>button{
+		background-color:transparent;
+	}
 	.navigator_menu {
 		list-style: none;
 		margin-right: 40px;

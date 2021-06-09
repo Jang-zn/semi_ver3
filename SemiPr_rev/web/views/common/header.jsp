@@ -72,14 +72,14 @@
             </div>
 <!-- 로그인 3->1  -->            
             <% if(loginMember!=null){ %>
-            	<div id="profile_area" class="col-md-3">
+            	<div id="profile_area" class="col-md-1">
             		<div class="row">
             			<div class="col-md-12">
-            				<img src="<%=request.getContextPath()%>/Resource/img/blankProfile.png" style="border-radius:100%;">
+            				<img src="<%=request.getContextPath()%>/Resource/img/profile.png">
             			</div>
             		</div>
             		<div class="row">
-            			<div class="col-md-12" style="text-align:center">
+            			<div class="col-md-12 profileInfo">
             				<span style="text-align:center"><%=loginMember.getNickname()%></span>
             				<button onclick="location.assign('<%=request.getContextPath()%>/member/logout')">로그아웃</button>
             			</div>
