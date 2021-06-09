@@ -13,40 +13,32 @@
 	String today=(String)request.getAttribute("today");
 	String time=(String)request.getAttribute("time");
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberMyList.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/02memberMyList.css">
+</div>
+<!--------------- 배너 ---------->
+     <div id="banner_home" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_memberMyList.png" alt="" style="width:100%; height:auto; margin:0;">
+    		</div>
+    	</div>
+    </div>
+    <br> <br> 
+    
+    <div class="container">
 <div id="memberMyList" class="row">
 
 	<!-- 요일선택 -->
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div id="select_weekday" class="col-md-10">
-			<div class="day_myList col-md-1">
-				<br>월<br> <br>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="day_myList col-md-1">
-				<br>화<br> <br>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="day_myList col-md-1">
-				<br>수<br> <br>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="day_myList col-md-1">
-				<br>목<br> <br>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="day_myList col-md-1">
-				<br>금<br> <br>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="day_myList col-md-1">
-				<br>토<br> <br>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="day_myList col-md-1">
-				<br>일<br> <br>
-			</div>
+			<div class="day_myList col-md-1">월</div>
+			<div class="day_myList col-md-1">화</div>
+			<div class="day_myList col-md-1">수</div>
+			<div class="day_myList col-md-1">목</div>
+			<div class="day_myList col-md-1">금</div>
+			<div class="day_myList col-md-1">토</div>
+			<div class="day_myList col-md-1">일</div>
 		</div>
 		<div class="col-md-1"></div>
 	</div>
@@ -57,15 +49,15 @@
 		<div id="list_title_container" class="col-md-12">
 			
 			<div id="myexc" class="list_title_area col-md-6">
-				<%=today %>요일 운동계획
+				<%=today %>요일 운동 계획
 			</div>
 			
-			<div id="mymenu" class="list_title_area col-md-6">
+			<div id="mymenu" class="list_title_area col-md-6 ">
 				<div class="col-md-10">
-					<%=today %>요일 식단계획
+					<%=today %>요일 식단 계획
 				</div>
 				<div class="col-md-2">
-					<select style=""width:100%">
+					<select style="width:100%" class="selectBtn">
 						<option value="아침" <%=time!=null&&time.equals("아침")?"selected":"" %>>아침</option>
 						<option value="점심" <%=time!=null&&time.equals("점심")?"selected":"" %>>점심</option>
 						<option value="저녁" <%=time!=null&&time.equals("저녁")?"selected":"" %>>저녁</option>
@@ -85,22 +77,21 @@
 				<%for(MemberExcList mel : exclist) {%>
 				<div class="col-md-12 excinfocho">
 					<div class="list_img_area col-md-2">
-					<!-- br은 리스트 사이즈 맞출라고 넣은거니까 이미지 들어가면 지워주면 됩니다 -->
-						<br> <img src="" class="excimg"> <br> <br> <br>
+ <img src="" class="excimg"> <br> <br> <br>
 					</div>
 					<div class="list_name_area col-md-9">
 						<input type="hidden" name="excid" value="<%=mel.getExcId() %>">
 						<div class="excname data row">대충 저장한 운동이름1</div> 
 						<div class="row">
-							<div class="data col-md-4">무게 : <%=mel.getWeight() %>kg</div>
-							<div class="data col-md-4">횟수 : <%=mel.getReps() %>reps</div>
+							<div class="data col-md-4 categoryLine">무게 : <%=mel.getWeight() %>kg</div>
+							<div class="data col-md-4 categoryLine">횟수 : <%=mel.getReps() %>reps</div>
 							<div class="data col-md-4">세트수 : <%=mel.getSets() %>sets</div>
 						</div>
 					</div>
 					<div class="list_button_area col-md-1">
-						<div class="row" onclick="window.open('<%=request.getContextPath() %>/member/myexclistupdate?no=<%=mel.getExcNo()%>&excid=<%=mel.getExcId() %>',
+						<div class="row btn01" onclick="window.open('<%=request.getContextPath() %>/member/myexclistupdate?no=<%=mel.getExcNo()%>&excid=<%=mel.getExcId() %>',
 							'운동편집','left=500,top=300,width=400,height=400,location=no,status=no,scrollbars=yes');">수정</div>
-						<div class="row" onclick="location.replace('<%=request.getContextPath()%>/member/myexclistdelete?excno=<%=mel.getExcNo()%>')">삭제</div>
+						<div class="row btn01" onclick="location.replace('<%=request.getContextPath()%>/member/myexclistdelete?excno=<%=mel.getExcNo()%>')">삭제</div>
 					</div>
 				</div>
 				<%} %>
@@ -125,17 +116,17 @@
 						<input type="hidden" name="menuid" value=<%=mml.getMenuId() %>>
 						<div class="data row">대충 저장한 메뉴이름1</div>
 						<div class="row">
-							<div class="menuamount data col-md-4"><%=mml.getAmount() %></div>
-							<div class="menukcal data col-md-4">칼로리: xx kcal</div>
+							<div class="menuamount data col-md-4 categoryLine"><%=mml.getAmount() %></div>
+							<div class="menukcal data col-md-4 categoryLine">칼로리: xx kcal</div>
 							<div class="menuget data col-md-4">영양소 : ~~~~</div>
 						</div>
 					</div>
 					<div class="list_button_area col-md-1">
-						<div class="row" onclick="window.open('<%=request.getContextPath() %>/member/mymenulistupdate?no=<%=mml.getMenuNo()%>&menuid=<%=mml.getMenuId() %>',
+						<div class="row btn01" onclick="window.open('<%=request.getContextPath() %>/member/mymenulistupdate?no=<%=mml.getMenuNo()%>&menuid=<%=mml.getMenuId() %>',
 							'메뉴편집','left=500,top=300,width=400,height=400,location=no,status=no,scrollbars=yes');">
 							수정
 						</div>
-						<div class="row" onclick="location.replace('<%=request.getContextPath()%>/member/mymenulistdelete?menuno=<%=mml.getMenuNo()%>')">
+						<div class="row btn01" onclick="location.replace('<%=request.getContextPath()%>/member/mymenulistdelete?menuno=<%=mml.getMenuNo()%>')">
 							삭제
 						</div>
 					</div>

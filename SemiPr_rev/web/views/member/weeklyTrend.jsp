@@ -45,7 +45,6 @@
 	
 %>
 	</div>
-
 	<!--------------- 배너 ---------->
      <div id="banner_home" class="container-fluid">
     	<div class="row">
@@ -352,7 +351,6 @@
 
         </div>
 
-    </div>
     <br>
     <br>
     <br>
