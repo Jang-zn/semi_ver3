@@ -41,8 +41,8 @@ public class DailyLogServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		String sysdate =new MemberService().selectSysdate();		
 //		int[] excno = new MemberService().selectExcno();
-//		System.out.println(excno[1]);
-//		System.out.println(Arrays.toString(excno));
+//		
+		
 //		if(sysdate==null||sysdate.equals("")) {
 //			for(int i=0;i<excno.length;i++) {
 //				if(excno[i]!=0) {new MemberService().insertDailylog(excno[i]);}
@@ -80,7 +80,7 @@ public class DailyLogServlet extends HttpServlet {
 		}
 		List<MemberExcList> list= new MemberService().selectDailyExclist(dayval,memberid);
 		int totaldata= new MemberService().selectDailyexclistCount(memberid);
-		System.out.println(totaldata);
+		
 		PageBar pb =new PageBar(request, totaldata, 5,"/member/dailyLog","cPage2="+cPage2);
 		List<DailyExercise> list2 = new MemberService().selectMemberDailyExcercise(memberid,pb.getCPage(),pb.getNumPerpage()+7);
 		

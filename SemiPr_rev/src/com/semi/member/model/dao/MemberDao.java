@@ -285,7 +285,7 @@ public class MemberDao {
 		return result;
 	}
 	public int excDailyDeleteno(Connection conn, int excno) {
-		System.out.println(excno+"여까진 오냐?");
+	
 		PreparedStatement pstmt=null;
 		int su=0;
 		String path=MemberDao.class.getResource("/sql/mylist_sql.properties").getPath();
@@ -718,7 +718,7 @@ public class MemberDao {
 			if(rs.next()) {
 				
 				result=rs.getInt(1);
-				System.out.println(rs.getInt(1));
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -788,8 +788,7 @@ public class MemberDao {
 			pstmt.setString(1, userId);
 			pstmt.setString(2, password);
 			rs=pstmt.executeQuery();
-			System.out.println("id "+userId);
-			System.out.println("pw "+password);
+			
 			if(rs.next()) {
 				m=new Member();
 				m.setMemberId(rs.getString("MEMBER_ID"));
@@ -832,7 +831,7 @@ public class MemberDao {
 			if(rs.next()) {
 				
 				result=rs.getInt(1);
-				System.out.println(rs.getInt(1));
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -965,7 +964,7 @@ public class MemberDao {
 				DailyExercise de=new DailyExercise();
 				de.seteLogNo(rs.getInt("rnum"));
 				de.setExcDate(rs.getDate("exc_date"));
-				System.out.println(de.getExcDate());
+				
 				list.add(de);			
 			}					
 		}catch(SQLException e) {
@@ -1029,7 +1028,7 @@ public class MemberDao {
 			pstmt.setString(1, memberid);
 			rs=pstmt.executeQuery();
 			if(rs.next()) sysdate=rs.getString(1);
-			System.out.println(sysdate);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

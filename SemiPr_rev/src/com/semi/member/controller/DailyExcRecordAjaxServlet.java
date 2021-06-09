@@ -48,7 +48,7 @@ public class DailyExcRecordAjaxServlet extends HttpServlet {
 			}
 			++exccheck;
 		}
-		System.out.println(exccheck);
+		
 		
 		List<DailyRecordCheck> list2=new MemberService().dailyRecordmenu(memberid);
 		for(DailyRecordCheck drc:list2) {			
