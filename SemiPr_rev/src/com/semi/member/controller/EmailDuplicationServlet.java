@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.common.AESEncrypt;
 import com.semi.member.model.service.MemberService;
 
 /**
@@ -33,7 +34,11 @@ public class EmailDuplicationServlet extends HttpServlet {
 	
 	
 	String email = request.getParameter("email");
-	
+	try {
+		email=AESEncrypt.encrypt(email);
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
 	
 	
 	int result = new MemberService().emailDuplication(email);
