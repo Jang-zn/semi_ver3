@@ -95,6 +95,5 @@
             	</div>
             <%} %>            
         </div>
-        
 		<div class="container">
                 <!-- 이 위까지 header -->

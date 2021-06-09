@@ -5,7 +5,12 @@
     font-weight: normal;
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* .weeklyMenuStatus { 
 	default
 	width:100%;
@@ -75,6 +80,7 @@
   	border:1.5px solid black;
   	background-color:lightgray;
   	
+  	font-family: 'GongGothicMedium';
   	font-size:1.8rem;
   	font-weight:bold;
   	
@@ -84,7 +90,12 @@
 }
 
 .list02{
-	font-size: 1.6rem;	
-	
+	font-family: 'GongGothicMedium';
+	font-size: 1.6rem;		
   	margin-right:0.1rem;
+}
+
+.list03{
+	font-family: 'GongGothicMedium';
+	font-size: 2rem;	
 }
