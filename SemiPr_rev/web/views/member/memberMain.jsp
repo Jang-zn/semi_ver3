@@ -23,7 +23,7 @@
 			<div id="member_info_area" class="col-md-6">
 				<p><%=minfo.getNickname()%> 환영합니다.</p>
 				<p><%=minfo.getCha()%>일쨰 formnuscle과 함께하고있습니다.</p>
-				<p><button>개인정보 수정</button></p>
+				<p><button onclick="location.assign('<%=request.getContextPath()%>/member/memberinfoupdate?memberid=<%=minfo.getMemberId()%>')">개인정보 수정</button></p>
 				<p></p>
 				<p></p>
 			</div>

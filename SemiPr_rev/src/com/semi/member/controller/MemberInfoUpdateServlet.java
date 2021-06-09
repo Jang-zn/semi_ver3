@@ -7,22 +7,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.semi.common.AESEncrypt;
 import com.semi.member.model.service.MemberService;
-import com.semi.member.model.vo.MemberMenuList;
+import com.semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class MembermenuUpdateServlet
+ * Servlet implementation class MemberInfoUpdateServlet
  */
-@WebServlet("/member/mymenulistupdate")
-public class MembermenuUpdateServlet extends HttpServlet {
+@WebServlet("/member/memberinfoupdate")
+public class MemberInfoUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MembermenuUpdateServlet() {
+    public MemberInfoUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +33,12 @@ public class MembermenuUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int no=Integer.parseInt(request.getParameter("no"));
-		System.out.println(no);
-		String menuid=request.getParameter("menuid");
+		String memberid = request.getParameter("memberid");
 		
-		MemberMenuList mml = new MemberService().selectMenubyno(no);
-		request.setAttribute("menu", mml);
-		
-	
-		
-		request.getRequestDispatcher("/views/member/plan/membermenuMylistUpdate.jsp").forward(request, response);
+		Member m= new MemberService().selectmemberinfo(memberid);
+		System.out.println(m);
+		request.setAttribute("m", m);
+		request.getRequestDispatcher("/views/member/memberupdate.jsp").forward(request, response);
 	}
 
 	/**

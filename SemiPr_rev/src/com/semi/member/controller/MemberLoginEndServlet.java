@@ -36,7 +36,9 @@ public class MemberLoginEndServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		String saveId = request.getParameter("saveId");
-		
+		System.out.println(userId);
+		System.out.println(password);
+		System.out.println(saveId);
 		if(saveId!=null) {
 			Cookie c = new Cookie("saveId",userId);
 			c.setMaxAge(7*24*60*60);
@@ -56,8 +58,7 @@ public class MemberLoginEndServlet extends HttpServlet {
 			String msg="아이디 비밀번호가 일치하지 않습니다.";
 			String loc="/views/member/memberLogin.jsp";
 			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			
+			request.setAttribute("loc", loc);			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/common/msg.jsp");
 			rd.forward(request, response);
 		}

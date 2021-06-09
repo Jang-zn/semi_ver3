@@ -9,7 +9,7 @@ public class JdbcTemplate {
 		Connection conn = null;
 		Properties p = new Properties();
 		try {
-			String path = JdbcTemplate.class.getResource("/driver/Driver.properties").getPath();
+			String path = JdbcTemplate.class.getResource("/driver/driver.properties").getPath();
 			p.load(new FileReader(path));
 			Class.forName(p.getProperty("driver"));
 			conn=DriverManager.getConnection(p.getProperty("url"),p.getProperty("user"),p.getProperty("pw"));
