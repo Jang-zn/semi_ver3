@@ -34,14 +34,14 @@ public class StatisticDao {
 		}
 	}
 	
-	public List<MemberExcList> TodayMemberExcList(Connection conn) {
+	public List<MemberExcList> TodayMemberExcList(Connection conn, String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<MemberExcList> list=new ArrayList();
 		try {
 			//결과 보기 위해서 SYSDATE를 SYSDATE-1로 두었음. SQL문 수정할 것
 			pstmt=conn.prepareStatement(prop.getProperty("todayExcList"));
-			pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음
+			pstmt.setString(1, memberId); //아이디 대신 test1 넣었음
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				MemberExcList m=new MemberExcList();			
@@ -63,14 +63,14 @@ public class StatisticDao {
 		}return list;
 	}
 	
-	public List<MemberMenuList> TodayMemberMenuList(Connection conn) {
+	public List<MemberMenuList> TodayMemberMenuList(Connection conn, String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<MemberMenuList> list=new ArrayList();
 		try {
 			//결과 보기 위해서 SYSDATE를 SYSDATE-n로 두었음. SQL문 수정할 것
 			pstmt=conn.prepareStatement(prop.getProperty("todayMenuList"));
-			pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음
+			pstmt.setString(1, memberId); //아이디 대신 test1 넣었음
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				MemberMenuList m=new MemberMenuList();		
@@ -146,7 +146,7 @@ public class StatisticDao {
 //	}
 
 	
-	public String weekExcCheck(Connection conn, String weekCheck) {
+	public String weekExcCheck(Connection conn, String weekCheck, String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String result="";
@@ -168,7 +168,7 @@ public class StatisticDao {
 			
 			if(weekNum==su) { //오늘날짜 조회시
 				pstmt=conn.prepareStatement(prop.getProperty("todayExcCheck"));
-				pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음		
+				pstmt.setString(1, memberId); //아이디 대신 test1 넣었음		
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					if(rs.getString("max(exc_plan_check)")==null) {
@@ -181,7 +181,7 @@ public class StatisticDao {
 			}else {
 				pstmt=conn.prepareStatement(prop.getProperty("weekExcCheck"));
 				pstmt.setString(1, weekCheck);
-				pstmt.setString(2, "test1");	//아이디 대신 test1 넣었음		
+				pstmt.setString(2, memberId);	//아이디 대신 test1 넣었음		
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					result=rs.getString("exc_plan_check");
@@ -200,7 +200,7 @@ public class StatisticDao {
 		
 	}
 		
-	public String weekMenuCheck(Connection conn, String weekCheck) {
+	public String weekMenuCheck(Connection conn, String weekCheck, String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String result="";
@@ -221,7 +221,7 @@ public class StatisticDao {
 			
 			if(weekNum==su) { //오늘날짜 조회시
 				pstmt=conn.prepareStatement(prop.getProperty("todayMenuCheck"));
-				pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음		
+				pstmt.setString(1, memberId); //아이디 대신 test1 넣었음		
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					if(rs.getString("max(menu_plan_check)")==null) {
@@ -234,7 +234,7 @@ public class StatisticDao {
 			}else {
 				pstmt=conn.prepareStatement(prop.getProperty("weekMenuCheck"));
 				pstmt.setString(1, weekCheck);
-				pstmt.setString(2, "test1");	//아이디 대신 test1 넣었음		
+				pstmt.setString(2, memberId);	//아이디 대신 test1 넣었음		
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					result=rs.getString("menu_plan_check");
@@ -253,13 +253,13 @@ public class StatisticDao {
 		
 	}
 	
-	public int excAchieveCount(Connection conn) {
+	public int excAchieveCount(Connection conn, String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int count=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("excAchieveCount"));
-			pstmt.setString(1, "test1");	//아이디 대신 test1 넣었음			
+			pstmt.setString(1, memberId);	//아이디 대신 test1 넣었음			
 			rs=pstmt.executeQuery();
 			here:
 			while(rs.next()) {	
@@ -282,13 +282,13 @@ public class StatisticDao {
 		
 	}
 	
-	public int menuAchieveCount(Connection conn) {
+	public int menuAchieveCount(Connection conn, String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int count=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("menuAchieveCount"));
-			pstmt.setString(1, "test1");	//아이디 대신 test1 넣었음			
+			pstmt.setString(1, memberId);	//아이디 대신 test1 넣었음			
 			rs=pstmt.executeQuery();
 			here:
 			while(rs.next()) {	
@@ -313,13 +313,13 @@ public class StatisticDao {
 	
 
 	//주간 운동 통계
-	public List<ExcInfo> excStatistic(Connection conn){
+	public List<ExcInfo> excStatistic(Connection conn, String memberId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<ExcInfo> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("weeklyExc"));
-			pstmt.setString(1, "test1"); //아이디 대신 test1 넣었음
+			pstmt.setString(1, memberId); //아이디 대신 test1 넣었음
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				ExcInfo e=new ExcInfo();		
@@ -338,7 +338,7 @@ public class StatisticDao {
 	}
 	
 	//주간 식단 %
-	public MenuInfo menuStatistic(Connection conn) {
+	public MenuInfo menuStatistic(Connection conn, String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		MenuInfo menuStatistic=new MenuInfo(); //return할 형태
@@ -347,7 +347,7 @@ public class StatisticDao {
 		int fat=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("weeklyMenu")); //1주일간 영양 합계를 받아올거임
-			pstmt.setString(1, "test1");	//아이디 대신 test1 넣었음			
+			pstmt.setString(1, memberId);	//아이디 대신 test1 넣었음			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {	
 				ch=rs.getInt("sum(ch)");

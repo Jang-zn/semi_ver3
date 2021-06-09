@@ -52,7 +52,7 @@
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 					<input type="checkbox" name="saveId" id="saveId" <%=saveId!=null? "checked" : ""%>>
-					<label for="saveId">아이디저장</label>
+					<label for="saveId" style="font-family: 'GongGothicLight';">아이디 저장</label>
 						
 				</div><br>
 				<div class="col-md-1"></div>
@@ -69,10 +69,10 @@
 	</div>
 
 	<div id="sign_page row">
-		<div class="col-md-4">
+		<div class="col-md-4 signup">
 			<a href="<%=request.getContextPath()%>/member/signup">회원가입</a>
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8 signup">
 			<a href="<%=request.getContextPath()%>/member/find">아이디 찾기 / 비밀번호 찾기</a>
 		</div>
 	</div>

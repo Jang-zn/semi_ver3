@@ -20,23 +20,24 @@
 	
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/boardList.css">
+	href="<%=request.getContextPath()%>/Resource/css/02boardList.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/boardContent.css">
+	href="<%=request.getContextPath()%>/Resource/css/02boardContent.css">
 
 
-<div class=" bord row">
+<div class="board row">
 	<div class="col-md-1"></div>
 
 	<div id="board_container" class="col-md-10">
 		<!-- 글 수 + 검색창 -->
 		<div class="row">
-			<div id="content_count" class="col-md-12">
+			<div id="content_count" class="">
 				<div style="font-weight: bolder;" class="col-md-1">글 수</div>
-				<div style="color: orange; font-weight: bolder;" class="col-md-1"><%=boardListCount %></div>
-				<div class="col-md-6"></div>
+				<div style="color: orange;" class="col-md-1"><%=boardListCount %></div>
+				<div class="col-md-4"></div>
 
-				<div id="board_search" class="col-md-4">
+				<div id="board_search" class="col-md-6">
+					<div class="row">
 						<div class="col-md-8">
 									<div id="search-Title" >
 										<form action="<%=request.getContextPath()%>/board/boardSearch" method="GET">
@@ -83,6 +84,7 @@
 								<option value="Writer"  <%=searchType!=null&&searchType.equals("Writer")?"selected":"" %>>작성자</option>
 							</select> 
 						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -169,8 +171,10 @@
 						</div>
 		
 						<div class="reply_writer_info col-md-1">
-							<p class="reply_writer_info_nickname col-md-12"><%=re.getWriter() %></p>
-							<p class="reply_writer_info_etc col-md-12"><%=re.getReplyDate() %></p>
+							<div class="row">
+								<p class="reply_writer_info_nickname col-md-12"><%=re.getWriter() %></p>
+								<p class="reply_writer_info_etc col-md-12"><%=re.getReplyDate() %></p>
+							</div>
 						</div>
 		
 						<div class="reply_content col-md-10">
@@ -206,8 +210,10 @@
 					</div>
 	
 					<div class="reply_writer_info col-md-1">
-						<p class="reply_writer_info_nickname col-md-12"><%=re.getWriter() %></p>
-						<p class="reply_writer_info_etc col-md-12"><%=re.getReplyDate() %></p>
+						<div class="row">
+							<p class="reply_writer_info_nickname col-md-12"><%=re.getWriter() %></p>
+							<p class="reply_writer_info_etc col-md-12"><%=re.getReplyDate() %></p>
+						</div>
 					</div>
 	
 					<div class="reply_content col-md-9">
@@ -244,8 +250,10 @@
 					</div>
 	
 					<div class="reply_writer_info col-md-1">
-						<p class="reply_writer_info_nickname col-md-12"><%=re.getWriter() %></p>
-						<p class="reply_writer_info_etc col-md-12"><%=re.getReplyDate() %></p>
+						<div class="row"></div>
+							<p class="reply_writer_info_nickname col-md-12"><%=re.getWriter() %></p>
+							<p class="reply_writer_info_etc col-md-12"><%=re.getReplyDate() %></p>
+						</div>
 					</div>
 	
 					<div class="reply_content col-md-8">
@@ -311,12 +319,12 @@
 					<option value="눈바디">눈바디</option>
 				</select>
 			</div>
-			<div class="board_title col-md-8"
+			<div class="board_title col-md-7"
 				style="display: inline-block; text-align: center;">제목</div>
 			<div class="board_content_info col-md-1">
 				<span>글쓴이</span>
 			</div>
-			<div class="board_content_info col-md-1">
+			<div class="board_content_info col-md-2">
 				<span>날짜</span>
 			</div>
 			<div class="board_content_info col-md-1">
@@ -368,7 +376,7 @@
 		<div id="board_pageBar" class="row">
 			<div class="col-md-5"></div>
 			
-			<div class="col-md-2">	<%=pageBar %> </div>
+			<div class="col-md-2" style="font-size:1.6rem;">	<%=pageBar %> </div>
 			<div class="col-md-4"></div>
 			<div class="col-md-1 btn"
 				onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</div>
