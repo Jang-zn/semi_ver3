@@ -66,8 +66,12 @@
 			<div class="col-md-2"><button	onclick="location.assign('<%=request.getContextPath()%>/member/monthlyTrend')">상세보기</button></div>
 		</div>
 		<div id="monthly_check_content" class="row">
-			<div id="monthly_plan_trend" class="col-md-8">월간 트렌드 넣을것</div>
-			<div id="monthly_plan_analysis" class="col-md-4">분석결과?</div>
+			<div id="monthly_plan_trend" class="col-md-8">
+				<canvas></canvas>
+			</div>
+			<div id="monthly_plan_analysis" class="col-md-4">
+				<canvas></canvas>
+			</div>
 		</div>
 	</div>
 </div>
