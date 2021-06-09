@@ -13,4 +13,5 @@
 	<div id="temp_index_page">
 		<h1> temp index</h1>
 	</div>
+	
 <%@ include file = "views/common/footer.jsp"%>
