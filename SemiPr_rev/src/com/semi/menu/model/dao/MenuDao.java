@@ -412,7 +412,7 @@ public class MenuDao {
 		ResultSet rs=null;
 		int result=0;
 		try {
-			String path = ExcDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
 			pstmt=conn.prepareStatement(p.getProperty("checkDupMenu"));
@@ -431,6 +431,135 @@ public class MenuDao {
 			close(pstmt);
 			
 		}
+		return result;
+	}
+	
+	
+	public List<MemberMenu> getWlist(Connection conn, String memberId, String date){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<MemberMenu> wlist = new ArrayList();
+		MemberMenu mem = null;
+		try {
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("getWlist"));
+			
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, date.split(",")[1]); //요일만 떼서 검색
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				mem=new MemberMenu();
+				mem.setMenuNo(rs.getInt(1));
+				mem.setMenuId(rs.getString(3));
+				mem.setMemberId(rs.getString(4));
+				mem.setMenuWeek(rs.getString(6));
+				wlist.add(mem);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return wlist;
+	}
+	
+	public int getPlanCheck(Connection conn, String memberId, String date) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("getPlanCheck"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, date.split(",")[0]);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int setMonthlyPlan(Connection conn, List<MemberMenu> wlist, String date) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		int count = 0;
+		try {
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			System.out.println(path);
+			System.out.println(p.getProperty("setMonthlyPlan"));
+			pstmt=conn.prepareStatement(p.getProperty("setMonthlyPlan"));
+			for(MemberMenu me:wlist) {
+				pstmt.setInt(1, me.getMenuNo());
+				pstmt.setString(2, date.split(",")[0]);
+				result=pstmt.executeUpdate();
+				if(result!=0) {
+					count++;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return count;
+	}
+	
+	public int todayCheck(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("todayCheck"));
+			pstmt.setString(1, memberId);
+			result=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int autoN(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("autoN"));
+			System.out.println(p.getProperty("autoN"));
+			System.out.println(memberId);
+			pstmt.setString(1, memberId);
+			result=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 	

@@ -461,10 +461,10 @@ public class ExcDao {
 				mem.setExcNo(rs.getInt(1));
 				mem.setMemberId(rs.getString(2));
 				mem.setExcId(rs.getString(3));
-				mem.setReps(rs.getInt(4));
-				mem.setSets(rs.getInt(5));
-				mem.setWeight(rs.getInt(6));
-				mem.setExcWeek(rs.getString(7));
+				mem.setReps(rs.getInt(5));
+				mem.setSets(rs.getInt(6));
+				mem.setWeight(rs.getInt(7));
+				mem.setExcWeek(rs.getString(8));
 				wlist.add(mem);
 			}
 		} catch (Exception e) {

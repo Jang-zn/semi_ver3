@@ -94,4 +94,57 @@ public class MenuService {
 		return result;
 	}
 	
+	public List<MemberMenu> getWlist(String memberId, String date){
+		Connection conn = getConnection();
+		List<MemberMenu> wlist = dao.getWlist(conn, memberId, date);
+		close(conn);		
+		return wlist;
+	}
+	
+	public int getPlanCheck(String memberId, String date) {
+		Connection conn = getConnection();
+		int result = dao.getPlanCheck(conn, memberId, date);
+		close(conn);
+		return result;
+	}
+	
+	public int setMonthlyPlan(List<MemberMenu> wlist, String date) {
+		Connection conn = getConnection();
+		int result = dao.setMonthlyPlan(conn, wlist, date);
+		if(result!=0) {
+			commit(conn);
+			close(conn);
+		}else {
+			rollback(conn);
+			close(conn);
+		}
+		return result;
+	}
+	
+	public int todayCheck(String memberId) {
+		Connection conn = getConnection();
+		int result = dao.todayCheck(conn, memberId);
+		if(result!=0) {
+			commit(conn);
+			close(conn);
+		}else {
+			rollback(conn);
+			close(conn);
+		}
+		return result;
+	}
+	
+	public int autoN(String memberId) {
+		Connection conn = getConnection();
+		int result = dao.autoN(conn, memberId);
+		if(result!=0) {
+			commit(conn);
+			close(conn);
+		}else {
+			rollback(conn);
+			close(conn);
+		}
+		return result;
+	}
+	
 }
