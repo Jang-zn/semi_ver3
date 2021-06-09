@@ -69,18 +69,30 @@
 				</div>
 			</div>
  			<%if(list.isEmpty()){ %>
- 					<div>등록된 이미지가 없습니다.</div>
-			<div id="n_img_list" class="col-md-12">							
-				<div class="row"> 
-					<%}else{
-						for(Gallary g : list) {
-							if (m.getMemberId().equals(g.getMemberId())){%>
+ 				<div class="row">
+                	<div class="col-md-6 noUpload"></div>
+                    <div class="col-md-6 noUpload"></div>                                                       
+                </div>
+             	<div class="row">
+                	<div class="col-md-6 noUpload"></div>
+                    <div class="col-md-6 noUpload"></div>                                                       
+                </div>
+                <div class="row">
+                	<div class="col-md-6 noUpload"></div>
+                    <div class="col-md-6 noUpload"></div>                                                       
+                </div>
+			<!-- <div id="n_img_list" class="col-md-12">	 -->						
+				
+				<%}else{
+					for(Gallary g : list) {%>
+							<!-- if (m.getMemberId().equals(g.getMemberId())){ -->
+						<div class="row"> 
 						<div class="img_obj col-md-6">
 							<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>"/>
 							<img class="upload_img" width="100%" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
 							<%= sf.format(g.getGallaryDate())%>	 																		
 						</div>
-						<% }
+						<% 
 						}
 					}%>	
 				</div> 
@@ -97,11 +109,11 @@
 					</div>
 			
  -->
-			<div id="n_pageBar" class="row">
-				<div class="col-md-8"></div>
-				<div class="col-md-4"><%=pageBar %></div>
-			</div> 
-		</div> <!-- 갤러리 리스트 cloumn 끝-->
+				<div id="n_pageBar" class="row">
+					<div class="col-md-8"></div>
+					<div class="col-md-4"><%=pageBar %></div>
+				</div> 
+			</div> <!-- 갤러리 리스트 cloumn 끝-->
 			<div class="col-md-1"></div>
 			</div> <!--noonList row끝 -->
 		</div>	<!-- 전체 column끝-->

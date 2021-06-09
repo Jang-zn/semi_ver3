@@ -49,11 +49,8 @@
 #comment_area{
 	
 }
-.img_obj{
-	height:200px;
-	
-	border: 1px skyblue solid;
-}
+
+
 
 #n_pageBar{
 	
@@ -62,10 +59,10 @@
 #n_img_list{
 	
 }
-#n_img_list>table{
+/* #n_img_list>table{
 	width:100%;
 	border-spacing:10px;
-}
+} */
 
 input[type="button"] {
 	background-color :cadetblue;
@@ -83,5 +80,14 @@ input[type="button"] {
 .btn{
 	background-color :cadetblue;
 	
+}
+.noUpload{
+	height:200px;	
+	border: 1px black solid;
+}
+.img_obj{
+	height:200px;
+	
+	border: 1px black solid;
 }
 
