@@ -508,7 +508,7 @@
 	});
 
 	const boardContent=(e)=>{
-		location.assign("<%=request.getContextPath()%>/board/content?no="+e);
+		location.assign("<%=request.getContextPath()%>/board/content?numPerpage=15&no="+e);
 	}
 	
 	$("#search-Type").change(e=>{

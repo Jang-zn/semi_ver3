@@ -16,9 +16,9 @@ public class dummy {
 			 //board에는 bfile1.png~ / excList에는 efile1.png~ / gallary에는 gfile1.png~ / menuList에는 mfile1.png~ 로 들어갑니다.
 			
 			
-			 byte[] img = new byte[(int)(new File("C:/Users/jaja5/git/semi_ver8/SemiPr_rev/web/Resource/upload/board/juliaRoberts.jpg").length())];
+			 byte[] img = new byte[(int)(new File("C:/Users/jaja5/git/semi_ver8/SemiPr_rev/web/upload/board/juliaRoberts.jpg").length())];
 			 
-			 fis = new FileInputStream("C:/Users/jaja5/git/semi_ver8/SemiPr_rev/web/Resource/upload/board/juliaRoberts.jpg");
+			 fis = new FileInputStream("C:/Users/jaja5/git/semi_ver8/SemiPr_rev/web/upload/board/juliaRoberts.jpg");
 			 fis.read(img);
 			 
 			 
@@ -27,7 +27,7 @@ public class dummy {
 			 for(int i=2;i<=510;i++) {
 				 
 				 //경로 및 파일명 수정해서 쓰면 됩니다
-				 String path = "C:/Users/jaja5/git/semi_ver8/SemiPr_rev/web/Resource/upload/board/";
+				 String path = "C:/Users/jaja5/git/semi_ver8/SemiPr_rev/web/upload/board/";
 				 String name = "bfile"+i+".png";
 				 
 				 File f = new File(path+name);

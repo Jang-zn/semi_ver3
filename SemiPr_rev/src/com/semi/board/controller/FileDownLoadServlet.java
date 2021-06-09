@@ -31,7 +31,7 @@ public class FileDownLoadServlet extends HttpServlet {
 		
 		
 			String fileName = request.getParameter("filename");
-			String path = getServletContext().getRealPath("/Resource/upload/board/");//-> 서블릿 안에서만 가능
+			String path = getServletContext().getRealPath("/upload/board/");//-> 서블릿 안에서만 가능
 			File f= new File(path+fileName);
 			FileInputStream is = new FileInputStream(f);
 			BufferedInputStream bis = new BufferedInputStream(is);

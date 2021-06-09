@@ -32,7 +32,7 @@ public class UpdateBoardFileDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		String path = getServletContext().getRealPath("/Resource/upload/board/");
+		String path = getServletContext().getRealPath("/upload/board/");
 		String dfile = request.getParameter("deletefile");
 		int result = new BoardService().deleteFile(dfile);
 		File f = new File(path+dfile);
