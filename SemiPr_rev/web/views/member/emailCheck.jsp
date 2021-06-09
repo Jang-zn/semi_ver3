@@ -54,7 +54,7 @@ function confirmemail(emailconfirm, authNum ){
 		emailconfirm.value="";
 		self.close();
 		return true;
-		//opener.document.insertform.emailconfirm.value.value=1;
+		window.opener.document.getElementById("").value =
 		
 	}
 }

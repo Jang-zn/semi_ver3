@@ -82,7 +82,7 @@
 							<input type="text" id="email" name="email" class="int" maxlength="50" placeholder="이메일입력">
 						</div> 
 						<div class="error_next_box col-md-12">
-							이메일 주소를 다시 확인해주세요.
+							
 						</div>
 					</div>
 					<div id="email_chk" class="col-md-12"> </div>
@@ -267,7 +267,7 @@
 	<div class="col-md-4"></div>
 </div>
 <form name="duplicateFrm" action="" method="post">
-	<input type="hidden" name="userId">
+	<input type="hidden" name="email" id="id">
 	<input type="hidden" name="nickName">
 </form>
 
@@ -464,7 +464,7 @@ function numberMaxLength(e){
 //닉네임 중복검사 -> ajax로 교체할 예정
 //onchange
 $("#nickName_").blur(function(){
-	var isNickname = ^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,}\$; //인스타그램아이디 정규표현식 가운데 공백 제거추가필요
+	var isNickname = /^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,13}\$/; //인스타그램아이디 정규표현식 가운데 공백 제거추가필요
 	var nickName =$('#nickName_').val();
 	var nickName2 = nickName.replace(/(\s*)/g, "");
 	console.log(nickName2); 
