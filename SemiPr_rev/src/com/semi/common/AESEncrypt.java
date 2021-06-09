@@ -33,7 +33,7 @@ public class AESEncrypt {
 		KeyGenerator keyGen = null;
 		try {
 			keyGen = KeyGenerator.getInstance("AES");
-			keyGen.init(128,secure);
+			keyGen.init(128,secure); //비트, sort
 			AESEncrypt.key = keyGen.generateKey();
 			
 		}catch(Exception e) {
