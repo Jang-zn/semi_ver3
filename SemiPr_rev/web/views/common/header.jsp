@@ -39,13 +39,12 @@
 <!-- 로고 3 -->
             <div id="logo_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
 <!-- 공백 -->
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 <!-- 주메뉴(6) -->           	
             <div id="menu_container" class="col-md-6">
-                <div id="menu_line">
-                    <div class="col-md-3">
-                        <a href="<%=request.getContextPath()%>/member/main">My Page</a>
-
+                <div id="menu_line" class="row">
+                    <div class="col-md-3" onclick="location.assign('<%=request.getContextPath()%>/member/main')">
+                       	My Page
                     </div>
                     <div class="col-md-3">Plan
                         <div class="sub">
@@ -72,25 +71,30 @@
             </div>
 <!-- 로그인 3->1  -->            
             <% if(loginMember!=null){ %>
-            	<div id="profile_area" class="col-md-1">
+            	<div id="profile_area" class="col-md-2">
             		<div class="row">
-            			<div class="col-md-12">
-            				<img src="<%=request.getContextPath()%>/Resource/img/profile.png">
+            			<div class="col-md-5"></div>
+            			<div class="col-md-7">
+            				<img src="<%=request.getContextPath()%>/Resource/img/profile.png" style="width:80%;height:80%;">
+
             			</div>
             		</div>
             		<div class="row">
-            			<div class="col-md-12 profileInfo">
-            				<span style="text-align:center"><%=loginMember.getNickname()%></span>
-            				<button onclick="location.assign('<%=request.getContextPath()%>/member/logout')">로그아웃</button>
+            			<div class="col-md-12" style="text-align:center">
+            				<div class="row profileInfo">
+            					<div class="col-md-5"></div>
+            					<div class="col-md-3"><%=loginMember.getNickname()%></div>
+            					<div class="col-md-4 logout" onclick="location.assign('<%=request.getContextPath()%>/member/logout')">로그아웃</div>
+            				</div>
             			</div>
             		</div>
             	</div>
             <%}else{ %>
-            	<div id="login_area" class="col-md-1">
-            		<span onclick="login();">login</span>
+            	<!-- <div class="col-md-1"></div> -->
+            	<div id="login_area" class="col-md-2" onclick="login();">
+            		login
             	</div>
             <%} %>            
         </div>
-		<div id="aside_content" class="row">
-      	 <div id="content_container" class="col-md-11">
+		<div class="container">
                 <!-- 이 위까지 header -->

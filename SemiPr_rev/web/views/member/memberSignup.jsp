@@ -17,135 +17,131 @@
 
 <div class="row">
 	<div class="col-md-4"></div>
-	<div class="col-md-4">
-		
-	<form name="insertform" action="<%=request.getContextPath()%>/member/memberSignup" method="post" onsubmit="return fn_invalidate" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
-
+	
+	<div class="col-md-4">	
+		<form name="insertform" action="<%=request.getContextPath()%>/member/memberSignup" method="post" onsubmit="return fn_invalidate" enctype="multipart/form-data" onsubmit="return fn_invalidate();" style="border:none;">
+			
 
 			<!-- content-->
 			<div id="content" class="row">
 
+
 				<!-- ID -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3 class="join_title">
-							<label for="id">아이디</label>
-						</h3>
+					<div class="join_title col-md-12">
+						<label for="id">아이디</label>
 					</div>
 					<div class="col-md-12">
-						<span class="box int_id"> <input
-						type="text" id="userId_" name="userId" class="int" maxlength="13" placeholder="아이디" 
-						style="width: 100%; height: 100%" required></span>
-						<input type="hidden"
-						name="idDuplication" value="idUncheck">
-						 <span class="error_next_box"></span>
+						<div class="box int_id col-md-12"> 
+							<input type="text" id="userId_" name="userId" class="int" maxlength="13" placeholder="아이디" required>
+						</div>
+						<div id="idCheck" class="col-md-12">
+							<input type="hidden" name="idDuplication" value="idUncheck">
+						</div>
+						<div class="error_next_box col-md-12"></div>
 					</div>
-					<div id="idCheck"></div>
-				<span class="error_next_box"></span>
+				<div class="error_next_box"></div>
 				</div>
+
 
 				<!-- PW1 -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3 class="join_title">
-							<label for="pswd1">비밀번호</label>
-						</h3>
+					<div class="join_title col-md-12">
+						<label for="pswd1">비밀번호</label>
 					</div>
 					<div class="col-md-12">
-						<span class="box int_pass"> <input type="password" id="pswd1" name="password" placeholder="비밀번호"
-					class="int" maxlength="16" required> 
-						</span> 
-						<div id="pw-chk"></div>
+						<div class="box int_pass col-md-12"> 
+							<input type="password" id="pswd1" name="password" placeholder="비밀번호" class="int" maxlength="16" required> 
+						</div> 
+						<div id="pw-chk" class="col-md-12"></div>
 					</div>
 				</div>
 
+
 				<!-- PW2 -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3 class="join_title">
-							<label for="pswd2">비밀번호 재확인</label>
-						</h3>
+					<div class="join_title col-md-12">
+						<label for="pswd2">비밀번호 재확인</label>
 					</div>
 					<div class="col-md-12">
-						<span class="box int_pass_check"> <input type="password" 
-							id="pswd2" class="int" maxlength="16" required>
-						</span> 
-						<div id="pw-chk2"></div>
+						<div class="box int_pass_check col-md-12"> 
+							<input type="password" id="pswd2" class="int" maxlength="16" required>
+						</div> 
+						<div id="pw-chk2" class="col-md-12"></div>
 					</div>
 				</div>
 
 					
 				<!-- EMAIL -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3 class="join_title">
-							<label for="email">이메일</label>
-						</h3>
+					<div class="join_title col-md-12">
+						<label for="email">이메일</label>
 					</div>
 					<div class="col-md-12">
-						<span class="box int_email"> <input type="text" id="email" name="email"
-							class="int" maxlength="50" placeholder="이메일입력">
-						</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
+						<div class="box int_email col-md-12""> 
+							<input type="text" id="email" name="email" class="int" maxlength="50" placeholder="이메일입력">
+						</div> 
+						<div class="error_next_box col-md-12">
+							
+						</div>
 					</div>
-					<div id="email_chk"> </div>
+					<div id="email_chk" class="col-md-12"> </div>
 					<div class="col-md-12">
-						<button type="button" id="email-chk" 
-					value="이메일 인증" style="width: 100px; height: 25px" onclick="emailCheck(insertform.email.value);" >이메일 인증</button>
+						<div id="email-chk"	class="col-md-4" value="이메일 인증" onclick="emailCheck(insertform.email.value);" >
+							이메일 인증
+						</div>
 					</div>				
 				</div>
-					</form>
+			</form>
 
 
 				<!-- NAME -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3 class="join_title">
-							<label for="name">이름</label>
-						</h3>
+					<div class="join_title col-md-12">
+						<label for="name">이름</label>
 					</div>
 					<div class="col-md-12">
-						<span class="box int_name"> <input type="text" id="name" name="name"
-							class="int" maxlength="12" required>
-						</span> <span class="error_next_box"></span>
+						<div class="box int_name col-md-12"> 
+							<input type="text" id="name" name="name" class="int" maxlength="12" required>
+						</div> 
+						<div class="error_next_box col-md-12"></div>
 					</div>
 				</div>
+			
 			
 				<!--NickName -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3 class="join_title">
+					<div class="join_title col-md-12">
 							<label for="name">닉네임</label>
-						</h3>
-						<span class="box int_Nickname"> <input type="text"
-							id="nickName_" name="nickName" placeholder="닉네임" class="int"
-							maxlength="12" required>
-						</span> <span class="error_next_box"></span>
 					</div>
-					<div id="nickCheck"></div>
-					<span class="error_next_box"></span>
+					<div class="col-md-12"> 
+						<div class="box int_Nickname col-md-12"> 
+							<input type="text" id="nickName_" name="nickName" placeholder="닉네임" class="int" maxlength="12" required>
+						</div>
+					</div> 
+					<div class="error_next_box col-md-12"></div>
+					<div id="nickCheck" class="col-md-12"></div>
+					<div class="error_next_box col-md-12"></div>
 				</div>
 				
 				
-			
-			
 				<!-- BIRTH -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3 class="join_title">
-							<label for="yy">생년월일</label>
-						</h3>
+					<div class="join_title col-md-12">
+						<label for="yy">생년월일</label>
 					</div>				
 					<div id="bir_wrap" class="col-md-12">
 						<!-- BIRTH_YY -->
 						<div id="bir_yy" class="col-md-4">						
-							<span class="box02"> <input type="text" id="yy" class="int" name="yy"
-								maxlength="4" placeholder="년(4자)" required>
-							</span>
+							<div class="box02 col-md-12"> 
+								<input type="text" id="yy" class="int" name="yy" maxlength="4" placeholder="년(4자)" required>
+							</div>
 						</div>
 
 						<!-- BIRTH_MM -->
 						<div id="bir_mm" class="col-md-4">
-							<span class="box02"> <select id="mm" class="sel" name="mm" required>
+							<div class="box02 col-md-12"> 
+								<select id="mm" class="sel" name="mm" required style="width:100%; height:100%">
 									<option>월</option>
 									<option value="01">1</option>
 									<option value="02">2</option>
@@ -159,95 +155,98 @@
 									<option value="10">10</option>
 									<option value="11">11</option>
 									<option value="12">12</option>
-							</select>
-							</span>
+								</select>
+							</div>
 						</div>
+
 
 						<!-- BIRTH_DD -->
 						<div id="bir_dd" class="col-md-4">
-							<span class="box02"> <input type="text" id="dd" class="int" name="dd"
-								maxlength="2" placeholder="일" required>
-							</span>
+							<div class="box02 col-md-12"> 
+								<input type="text" id="dd" class="int" name="dd" maxlength="2" placeholder="일" required>
+							</div>
 						</div>					
 					</div>
-					<span class="error_next_box"></span>
+					<div class="error_next_box"></div>
 				</div>
+
 
 				<!-- GENDER -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3 class="join_title ">
-							<label for="gender">성별</label>
-						</h3>
+					<div class="join_title col-md-12">
+						<label for="gender">성별</label>
 					</div>
 					<div class="col-md-12">
-						<span class="box gender_code"> <select id="gender" name="gender" required
-							class="sel">
+						<div class="box gender_code col-md-12"> 
+							<select id="gender" name="gender" required class="sel" style="width:100%; height:100%">
 								<option>성별</option>
 								<option value="M">남자</option>
 								<option value="F">여자</option>
-						</select>
-						</span> <span class="error_next_box">필수 정보입니다.</span>
+							</select>
+						</div> 
+						<div class="error_next_box col-md-12">
+							필수 정보입니다.
+						</div>
 					</div>
 				</div>
 
 		
 				<!-- MOBILE -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3 class="join_title">
-							<label for="phoneNo">휴대전화</label>
-						</h3>
+					<div class="join_title col-md-12">
+						<label for="phoneNo">휴대전화</label>
 					</div>
 					<div class="col-md-12">
-						<span class="box int_mobile"> <input type="tel" id="mobile" name="phone"
-							class="int"  placeholder="(-)하이픈 없이 입력" required>
-						</span> <span class="error_next_box"></span>
+						<div class="box int_mobile col-md-12"> 
+							<input type="tel" id="mobile" name="phone" class="int"  placeholder="(-)하이픈 없이 입력" required>
+						</div> 
+						<div class="error_next_box col-md-12"></div>
 					</div>
 				</div>
 
 
 					<!-- height -->
 				<div class="row">
+					<div class="join_title col-md-12">
+						<label>키</label>
+					</div>
 					<div class="col-md-12">
-						<h3>키</h3>
-					</div>
-					<div class="col-md-11 box03">
-						<span> <input type="text" id="height" placeholder="키 입력" name="height"
-							maxlength="3" required></span>
-					</div>
-					<div class="col-md-1">
-						<span class="sta_height">cm</span>
+						<div class="box int_mobile col-md-11">
+							<input type="text" id="height" placeholder="키 입력" name="height" maxlength="3" required>
+						</div>
+						<div class="col-md-1">
+							<div class="sta_height col-md-12">cm</div>
+						</div>
 					</div>
 				</div>
-
 
 
 				<!-- weight-->
 				<div class="row">
+					<div class="join_title col-md-12">
+						<label>체중</label>
+					</div>
 					<div class="col-md-12">
-						<h3>체중</h3>
-					</div>
-					<div class="col-md-11 box03">
-						<span> <input type="text" id="weight" placeholder="체중 입력" name="weight" required
-							maxlength="3"></span>
-					</div>
-					<div class="col-md-1">
-						<span class="sta_weight">Kg</span>
+						<div class="box int_mobile col-md-11">
+							<input type="text" id="weight" placeholder="체중 입력" name="weight" required maxlength="3">
+						</div>
+						<div class="col-md-1">
+							<div class="sta_weight col-md-12">kg</div>
+						</div>
 					</div>
 				</div>
 			
+			
 				<!-- 프로필 사진 -->
 				<div class="row">
-					<div class="col-md-12">
-						<h3>프로필 사진</h3>
-						<input type="file" id="image" accept="image/*" name="userProfile"/>
+					<div class="join_title col-md-12">
+						<label>프로필 사진</label>
 					<!-- onchange="setThumbnail(event);" -->
-
 					</div>
-					<div id="image_container"></div>
+					<div class="col-md-12"><input type="file" id="image" accept="image/*" name="userProfile"/></div>
+					<div id="image_container" class="col-md-12"></div>
 					<!-- <button class="btn-delete">삭제</button> -->
-					<div id="btn-container"></div>
+					<div id="btn-container" class="col-md-12"></div>
 				</div>
 			
 
@@ -255,7 +254,7 @@
 				<div class="btn_area row">
 					<div class="col-md-12">
 						<button type="submit" id="btnJoin">
-							<span>가입하기</span>
+							가입하기
 						</button>
 					</div>
 				</div>
@@ -268,7 +267,7 @@
 	<div class="col-md-4"></div>
 </div>
 <form name="duplicateFrm" action="" method="post">
-	<input type="hidden" name="userId">
+	<input type="hidden" name="email" id="id">
 	<input type="hidden" name="nickName">
 </form>
 
@@ -341,6 +340,9 @@
 		if(pw1 != pw2){
 			$("#pw-chk2").css('color','red');
 			$("#pw-chk2").html("비밀번호가 맞지않습니다. 다시 확인해주세요.");
+		}else{
+			$("#pw-chk2").css('color','green');
+			$("#pw-chk2").html("비밀번호가 일치합니다.");
 		}
 	})
     
@@ -411,7 +413,6 @@ $("#email-chk").click(function(){
  function emailCheck(email){
 	 if(email == ""){
 		 alert("이메일을 입력 후 눌러주세요.");
-		 $("#email-chk").attr("disabled");
 		 return;
 	 } 
 	console.log(email);
@@ -463,7 +464,7 @@ function numberMaxLength(e){
 //닉네임 중복검사 -> ajax로 교체할 예정
 //onchange
 $("#nickName_").blur(function(){
-	var isNickname = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,15}/; //인스타그램아이디 정규표현식 가운데 공백 제거추가필요
+	var isNickname = /^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,13}\$/; //인스타그램아이디 정규표현식 가운데 공백 제거추가필요
 	var nickName =$('#nickName_').val();
 	var nickName2 = nickName.replace(/(\s*)/g, "");
 	console.log(nickName2); 

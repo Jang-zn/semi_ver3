@@ -1,8 +1,10 @@
 package com.semi.member.controller;
 
+import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
 
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -10,13 +12,37 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class EmailAuthentication {
+import com.semi.member.model.service.MemberService;
+import com.semi.member.model.vo.Member;
 
-	public String connectEmail(String email) {
-		 
-		//인증 번호 생성기
+/**
+ * Servlet implementation class EmailAuthentication
+ */
+@WebServlet("/member/emailAuth")
+public class EmailAuthenticationServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public EmailAuthenticationServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		 //인증 번호 생성기
         StringBuffer temp =new StringBuffer();
         Random rnd = new Random();
         for(int i=0;i<10;i++)
@@ -37,12 +63,13 @@ public class EmailAuthentication {
                 break;
             }
         }
-		//네이버 smtp 계정막힘
-		String host="smtp.gmail.com"; //smtp 서버
-        String id ="formuscle123@gmail.com"; // 네이버/구글 계정(보내는 사람)
+		
+		
+        String host="smtp.gmail.com"; //smtp 서버
+        String id ="formuscle123@gmail.com"; // 네이버 계정(보내는 사람)
         String password = "formuscle123123"; //패스워드
 		String from ="관리자"; //보내는 이름 설정
-		String toEmail = email;  //받는 이메일 주소
+		String toEmail = request.getParameter("email");  //받는 이메일 주소
 		String subject="ForMuscle 인증번호입니다. "; //보내는 제목 설정
 		String content ="인증번호 ["+temp+"]입니다."; //이메일 내용설정
 		System.out.println(toEmail);
@@ -85,15 +112,35 @@ public class EmailAuthentication {
              
              Transport.send(msg); //javax.mail.Transport.send() 이용
 
-             
-     			
-             System.out.println("이메일 전송");
+
+             System.out.println("이메일 전송완료");
              
          }catch(MessagingException e){
         	 e.printStackTrace();
          }catch(Exception e){
         	 e.printStackTrace();
          }
-         return AuthenticationKey;
+
+
+         System.out.println(AuthenticationKey);
+        HttpSession saveKey = request.getSession();
+ 		saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
+ 		
+ 		//request.getRequestDispatcher("/").forward(request, response);
+ 		
 	}
+         
+      
+		
+
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
 }

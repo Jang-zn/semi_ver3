@@ -90,8 +90,8 @@
 		color:white;
 		font-family: 'GongGothicMedium';
 	}
-	.profileInfo>button{
-		background-color:transparent;
+	.logout:hover{
+		color:#da7316;
 	}
 	.navigator_menu {
 		list-style: none;
@@ -128,19 +128,21 @@
 	
         /*로그인 버튼*/
 	#login_area{
-		font-weight:bold;
-		font-size:2.3rem;
+		font-family: "Press Start 2P" !important;
+		text-align: center;
+		font-size: 1.9rem;
+		color:white;
 	}
-	#login_area>span{
+	/* #login_area>span{
 		font-family: "Press Start 2P";
 		text-align: center;
 		font-size: 1.9rem;
 		color:white;
 		transition: all 0.3s;
 		cursor:pointer;
-        }
+        } */
     
-	#login_area>span:hover{
+	#login_area:hover{
 		color: #009688;
 		text-decoration:underline;
 		font-size: 1.8rem;

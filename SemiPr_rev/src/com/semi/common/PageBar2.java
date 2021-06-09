@@ -35,7 +35,7 @@ public class PageBar2 {
 
 		int pageEnd = pageNo + pageBarSize - 1;
 
-		System.out.println(cPage2 + " " + pageNo + " " + pageEnd);
+		
 
 		String pageBar2 = "";
 
@@ -91,7 +91,7 @@ public class PageBar2 {
 
 		int pageEnd = pageNo2 + pageBarSize - 1;
 
-		System.out.println(cPage2 + " " + pageNo2 + " " + pageEnd);
+		
 
 		String pageBar2 = "";
 
@@ -116,7 +116,8 @@ public class PageBar2 {
 		if (pageNo2 > totalPage) {
 			pageBar2 += "<span>&nbsp[다음]&nbsp</span>";
 		} else {
-			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage2=" + pageNo2 + "'>&nbsp[다음]&nbsp</a>";
+			pageBar2 += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage2=" + pageNo2 + "&numPerpage2="
+					+ numPerpage2 + "'>&nbsp[다음]&nbsp</a>";
 		}
 		
 		this.pageBar2 = pageBar2;

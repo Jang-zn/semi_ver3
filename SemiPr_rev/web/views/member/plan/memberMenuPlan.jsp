@@ -13,17 +13,16 @@ String pageBar = (String)request.getAttribute("pageBar");
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/memberExcPlan.css">
 	<br>
 	<div class=row>
-		<div class="col-md-1"></div>
-		<div id="sub_change" class="col-md-10">
+		
+		<div id="sub_change" class="col-md-12">
 		        <div class="btn col-md-2">식단 List</div>
-		        <div class="btn col-md-2">나만의 식단 등록</div>
 		        <div class="btn col-md-2">식단 등록하기(ADMIN)</div>
     	</div>
     </div>
     
     <div class=row>
-    	<div class="col-md-1"></div>
-	    <div id="list_container" class="col-md-10">
+    	
+	    <div id="list_container" class="col-md-12">
 	        <div id="exc_list" class="col-md-5">
 	            <div id="sort_container" class="row">
 	                <div class="col-md-3">

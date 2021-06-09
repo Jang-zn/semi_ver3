@@ -118,7 +118,7 @@ public class PageBar {
 		if (pageNo > totalPage) {
 			pageBar += "<span>&nbsp[다음]&nbsp</span>";
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "'>&nbsp[다음]&nbsp</a>";
+			pageBar += "<a href='" + request.getContextPath() + location + "?"+query+"&cPage=" + pageNo + "&numPerpage="+numPerpage+"'>&nbsp[다음]&nbsp</a>";
 		}
 		
 		this.pageBar = pageBar;

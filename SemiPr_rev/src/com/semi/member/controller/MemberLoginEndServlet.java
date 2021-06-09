@@ -35,7 +35,6 @@ public class MemberLoginEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
-		
 		String saveId = request.getParameter("saveId");
 		
 		if(saveId!=null) {
@@ -48,7 +47,6 @@ public class MemberLoginEndServlet extends HttpServlet {
 			response.addCookie(c);
 		}
 		Member m = new MemberService().login(userId,password);
-		System.out.println("뭐야 씨발 :"+userId);
 		
 		if(m!=null) {
 			HttpSession session = request.getSession();

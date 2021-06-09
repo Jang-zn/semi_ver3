@@ -1,7 +1,6 @@
 package com.semi.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,22 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.semi.member.daily.model.vo.DailyRecordCheck;
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class DailyExcRecordAjaxServlet
+ * Servlet implementation class PasswordEmailAuthServlet
  */
-@WebServlet("/ajax/dailyrecord")
-public class DailyExcRecordAjaxServlet extends HttpServlet {
+@WebServlet("/member/passwordEmailAuth")
+public class PasswordEmailAuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DailyExcRecordAjaxServlet() {
+    public PasswordEmailAuthServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,37 +31,30 @@ public class DailyExcRecordAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session=request.getSession();
-		Member m=(Member)session.getAttribute("logged");
-		String memberid=m.getMemberId();
-	
-		List<DailyRecordCheck> list=new MemberService().dailyRecord(memberid);
-		int exccheck=0;
-		int menucheck=0;
-		for(DailyRecordCheck drc:list) {			
-			if(drc.getExcYN().equals("N")) {
-				break;
-			}
-			++exccheck;
+		String emailAuth = request.getParameter("emailAuth");
+		String email = request.getParameter("email");
+		String name = request.getParameter("name");
+		String userId = request.getParameter("id");
+		System.out.println(userId);
+		HttpSession session = request.getSession();
+		String authNum = (String)session.getAttribute("AuthenticationKey");
+		String msg = "";
+		Member m = new MemberService().findPw(userId,name,email);
+		System.out.println(emailAuth);
+		System.out.println(authNum);
+		if(emailAuth.equals(authNum)) {
+			msg="success";
+			session.removeAttribute("AuthenticationKey");
+			session.setAttribute("m", m);
+			
+		}else {
+			msg="fail";		
+			
 		}
 		
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().print(msg);
 		
-		List<DailyRecordCheck> list2=new MemberService().dailyRecordmenu(memberid);
-		for(DailyRecordCheck drc:list2) {			
-			if(drc.getMenuYN().equals("N")) {
-				break;
-			}
-			++menucheck;
-		}
-		int[] checkarr=new int[2];
-		checkarr[0]=exccheck;
-		checkarr[1]=menucheck;
-		
-		
-		
-		response.setContentType("application/json;charset=utf-8");
-		new Gson().toJson(checkarr,response.getWriter());
 	}
 
 	/**

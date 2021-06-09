@@ -1,27 +1,23 @@
-package com.semi.board.controller;
+package com.semi.member.controller;
 
-import java.io.File;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.board.model.service.BoardService;
-
 /**
- * Servlet implementation class UpdateBoardFileDeleteServlet
+ * Servlet implementation class PrintPw
  */
-@WebServlet("/board/fileD")
-public class UpdateBoardFileDeleteServlet extends HttpServlet {
+@WebServlet("/member/printPw")
+public class EmailAuthenticationResultServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateBoardFileDeleteServlet() {
+    public EmailAuthenticationResultServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +26,7 @@ public class UpdateBoardFileDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-		String path = getServletContext().getRealPath("/upload/board/");
-		String dfile = request.getParameter("deletefile");
-		int result = new BoardService().deleteFile(dfile);
-		File f = new File(path+dfile);
-		f.delete();
-		response.setContentType("text/csv;charset=utf-8");
-		response.getWriter().print(result==0?false:true);
-		
-		
+		request.getRequestDispatcher("/views/member/findPw.jsp").forward(request, response);
 	}
 
 	/**
