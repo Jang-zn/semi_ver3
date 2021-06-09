@@ -17,6 +17,7 @@ import java.util.Properties;
 
 import com.semi.exc.model.dao.ExcDao;
 import com.semi.member.exc.model.vo.Exercise;
+import com.semi.member.exc.model.vo.MemberExercise;
 import com.semi.member.menu.model.vo.MemberMenu;
 import com.semi.member.menu.model.vo.Menu;
 import com.semi.member.model.dao.MemberDao;
@@ -195,7 +196,7 @@ public class MenuDao {
 			pstmt.setString(1, mm.getMenuId());
 			pstmt.setString(2, mm.getMenuId_c());
 			pstmt.setString(3, mm.getMemberId());
-			pstmt.setInt(4, mm.getAmount());
+			pstmt.setInt(4, 1);
 			pstmt.setString(5, mm.getMenuWeek());
 			pstmt.setString(6, mm.getMenuDayTime());
 			result=pstmt.executeUpdate();
@@ -403,6 +404,34 @@ public class MenuDao {
 			
 		}
 		return list;
+	}
+	
+	
+	public int checkDupMenu (Connection conn, MemberMenu mm){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			String path = ExcDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("checkDupMenu"));
+			pstmt.setString(1, mm.getMemberId());
+			pstmt.setString(2, mm.getMenuId());
+			pstmt.setString(3, mm.getMenuWeek());
+			pstmt.setString(4, mm.getMenuDayTime());
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+			    result=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return result;
 	}
 	
 	

@@ -97,7 +97,6 @@ public class ExcService {
 	public int updateMemberExc(MemberExercise me) {
 		Connection conn = getConnection();
 		int result = dao.updateMemberExc(conn, me);
-		System.out.println(me);
 		if(result!=0) {
 			commit(conn);
 			close(conn);

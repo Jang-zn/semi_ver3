@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.semi.exc.model.dao.ExcDao;
 import com.semi.member.exc.model.vo.Exercise;
+import com.semi.member.exc.model.vo.MemberExercise;
 import com.semi.member.menu.model.vo.MemberMenu;
 import com.semi.member.menu.model.vo.Menu;
 import com.semi.menu.model.dao.MenuDao;
@@ -85,4 +86,12 @@ public class MenuService {
 		return result;
 		
 	}
+	
+	public int checkDupMenu(MemberMenu mm) {
+		Connection conn = getConnection();
+		int result = dao.checkDupMenu(conn, mm);
+		close(conn);
+		return result;
+	}
+	
 }

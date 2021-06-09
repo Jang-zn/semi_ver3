@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.semi.exc.model.service.ExcService;
 import com.semi.member.menu.model.vo.MemberMenu;
 import com.semi.member.menu.model.vo.Menu;
 import com.semi.member.model.vo.Member;
@@ -34,17 +35,14 @@ public class MemberMenuPlanSubmitServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Member m = (Member)session.getAttribute("loginMember");
+		Member m = (Member)session.getAttribute("logged");
 		String memberId = "";
 		if(m==null) {
-			// m null처리 해줘야됨///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			memberId="test50";
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		}else {
 			memberId = m.getMemberId();
 		}
 		Menu me = new MenuService().getMenuInfo(request.getParameter("menuName"));
-		System.out.println(request.getParameter("menuName"));
 		
 		MemberMenu mm = new MemberMenu();
 		mm.setMenuId(me.getMenuId());
@@ -52,17 +50,30 @@ public class MemberMenuPlanSubmitServlet extends HttpServlet {
 		mm.setAmount(Integer.parseInt(request.getParameter("amount")));
 		mm.setMenuWeek(request.getParameter("week"));
 		mm.setMenuDayTime(request.getParameter("dayTime"));
-		int result = new MenuService().insertMemberMenu(mm);
-		String msg ="";
-		if(result>0) {
-			msg="등록성공";
-		}else {
-			msg="등록실패";
-		}
-		String location = "/member/menuPlan?numPerpage=10";
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", location);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
+		//중복체크 - 중복이면 암것도 안함 새거면 등록
+				int result = new MenuService().checkDupMenu(mm);				
+				if(result>0) {
+					String msg ="이미 등록된 메뉴입니다.";
+					String location = "/member/menuPlan?numPerpage=6";
+					request.setAttribute("msg", msg);
+					request.setAttribute("loc", location);
+					request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
+					
+				}else {
+					int resultF = new MenuService().insertMemberMenu(mm);
+					String msg ="";
+					if(result>0) {
+						msg="등록성공";
+					}else {
+						msg="등록실패";
+					}
+					String location = "/member/menuPlan?numPerpage=6";
+					request.setAttribute("msg", msg);
+					request.setAttribute("loc", location);
+					request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+				}
+		
 	}
 
 	/**

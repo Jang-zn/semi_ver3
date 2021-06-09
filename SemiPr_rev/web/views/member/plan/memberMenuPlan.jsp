@@ -76,7 +76,6 @@ String pageBar = (String)request.getAttribute("pageBar");
 	                            <option value="점심">점심</option>
 	                            <option value="저녁">저녁</option>
 	                        </select><br>
-	                        <input type="number" name="amount" placeholder="양(g)" required><br>
 	                        <input type="submit" value="등록하기"><br>
 	                        <input id="excName" type="hidden" name="menuName">
 	                    </form>
@@ -135,13 +134,10 @@ String pageBar = (String)request.getAttribute("pageBar");
 		location.assign("<%=request.getContextPath()%>/member/menuPlan?numPerpage=10&menuSort="+menuSort);
 	});
 	
-	// 숫자 음수 / 0일때 처리
+	 
 	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리
-	
-	
-	//확인창은 알림이나 모달로 띄워주는걸로
+
 	const menuSubmit=()=>{
-		$("#excName").val($("#exc_name").text());
 		return true;
 	}
 	

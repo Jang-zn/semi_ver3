@@ -55,10 +55,6 @@ public class MemberExcPlanSubmitServlet extends HttpServlet {
 		//중복체크 - 중복이면 업데이트 새거면 등록
 		int result = new ExcService().checkDupExc(me);
 		
-		
-		System.out.println(request.getParameter("excName"));
-		
-		
 		if(result>0) {
 			int resultD = new ExcService().updateMemberExc(me);
 			String msg ="";
