@@ -5,39 +5,32 @@
 }
 
 #weekly_container {
-	margin: 1%;
 	height: 250px;
 	display: flex;
 }
 
 #monthly_container {
-	margin: 1%;
 	height: 300px;
 }
 
 #noonbody_container_main {
-	margin: 1%;
 	height: 250px;
 }
 
 #daily_log_container_main {
-	margin: 1%;
 	height: 300px;
 	display: flex;
 }
 
 div#member_rank {
 	height: 150px;
-	margin: 1%;
 }
 
 div#member_info {
-	margin-right: 2%;
 	display: flex;
 }
 
 div#profile_area_content {
-	margin: 2%
 }
 
 div#profile_area_content>img {
@@ -46,14 +39,14 @@ div#profile_area_content>img {
 }
 
 div#member_info_area {
-	margin: 2%
+
 }
 
 div#weekly_check {
 }
 
 div#weekly_check_title_main {
-	margin: 0;
+
 	height: 17%;
 	display: flex;
 }
@@ -66,15 +59,15 @@ div#weekly_check_title_main>button {
 }
 
 div#weekly_check_daybyday_exc {
-	margin: 0;
+
 	display: flex;
 	height: 36%;
-	margin-top: 1%;
-	margin-bottom: 1%;
+
+
 }
 
 div#weekly_check_daybyday_menu {
-	margin: 0;
+
 	display: flex;
 	height: 36%;
 }
@@ -82,8 +75,6 @@ div#weekly_check_daybyday_menu {
 div.day {
 	border-radius: 100%;
 	border: 3px black solid;
-	margin-left: 1%;
-	margin-right: 1%;
 	text-align: center;
 }
 
@@ -136,6 +127,7 @@ div#noonbody_thumb_area {
 }
 
 div.noonbody_thumb {
+	width:100%;
 }
 
 div#noonbody_left, div#noonbody_right {
