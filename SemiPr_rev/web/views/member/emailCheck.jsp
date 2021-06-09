@@ -51,10 +51,8 @@ function confirmemail(emailconfirm, authNum ){
     // 인증코드가 일치하는 경우
 	}else if(emailconfirm==authNum ){
 		alert("인증에 성공하셨습니다.");
-		emailconfirm.value="";
-		self.close();
+		window.opener.document.getElementById("id").value = 1;
 		return true;
-		window.opener.document.getElementById("").value =
 		
 	}
 }

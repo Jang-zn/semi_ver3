@@ -87,12 +87,12 @@
 					</div>
 					<div id="email_chk" class="col-md-12"> </div>
 					<div class="col-md-12">
-						<div id="email-chk"	class="col-md-4" value="이메일 인증" onclick="emailCheck(insertform.email.value);" >
-							이메일 인증
+						<div class="col-md-4" id="email-chk" >
+						<button type="button" id="emailbtn"  onclick="emailCheck();" >이메일 인증</button>
 						</div>
 					</div>				
 				</div>
-			</form>
+			
 
 
 				<!-- NAME -->
@@ -267,7 +267,7 @@
 	<div class="col-md-4"></div>
 </div>
 <form name="duplicateFrm" action="" method="post">
-	<input type="hidden" name="email" id="id">
+	<input type="hidden" name="email22" id="id" >
 	<input type="hidden" name="nickName">
 </form>
 
@@ -398,30 +398,45 @@ $("#mobile").on('keyup',function(event){
 
 //이메일이 입력되지 않고 이메일 인증버튼을 눌렀을 때 block
 
-$("#email-chk").click(function(){
-	var emailChk=$("#email-chk").val();
-	if(emailChk == ""){
-		alert("이메일을 입력 후 눌러주세요.");
-	
-		return;
-	}
-});
-
-
 
 	//이메일 인증 창
- function emailCheck(email){
-	 if(email == ""){
+<%--  function emailCheck(){
+	 var email = $("#email").val();
+	 
+		if(email == ""){
 		 alert("이메일을 입력 후 눌러주세요.");
 		 return;
 	 } 
-	console.log(email);
 	let url="<%=request.getContextPath()%>/views/member/emailCheck.jsp?email="+email;
 	open(url,"emailwindow","statusbar=no, scrollbar=no, menubar=no, width=400, height=200");
 	
-	<%-- location.assign("<%=request.getContextPath()%>/member/emailAuth?email="+email); --%>
 	
-}
+	console.log(duplicateFrm.email22.value);
+	if(duplicateFrm.email22.value == 1){
+		alert("이미 회원가입된 이메일입니다.");
+	}
+} --%>
+
+
+	function emailCheck(){
+		var email = $("#email").val();
+		if(email == ""){
+			alert("이메일을 입력 후 인증버튼을 눌러주세요.");
+			return;
+		}
+		$.ajax({
+			type:"post",
+			url:"<%=request.getContextPath()%>/member/signUpemailAuth",
+			data : {
+				"email":email
+			}
+			
+		})
+	}
+	
+
+
+
 //이메일 중복검사 ajax
 $("#email").blur(function(email){
 	 const email2 = $("#email").val();
@@ -442,10 +457,12 @@ $("#email").blur(function(email){
 				if(data=='fail'){
 					$("#email_chk").css('color','red')
 					$("#email_chk").html("사용할 수 없는 이메일입니다.")
+					$("#emailbtn").attr("disabled",true);
 					
 				}else{
 					$("#email_chk").css('color','blue')
 					$("#email_chk").html("사용할 수 있는 이메일입니다.")
+					$("#emailbtn").attr("disabled",false);
 				}
 				
 				}
