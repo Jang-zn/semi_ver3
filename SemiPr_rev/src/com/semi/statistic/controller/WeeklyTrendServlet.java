@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.semi.member.model.vo.Member;
 import com.semi.member.model.vo.MemberExcList;
 import com.semi.member.model.vo.MemberMenuList;
 import com.semi.statistic.model.service.StatisticService;
@@ -37,25 +39,40 @@ public class WeeklyTrendServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		List<MemberExcList> list01=new StatisticService().TodayMemberExcList();			
-		request.setAttribute("list01", list01);
-		List<MemberMenuList> list02=new StatisticService().TodayMemberMenuList();
-		request.setAttribute("list02", list02);	
+		HttpSession session=request.getSession();
+		Member m=(Member)session.getAttribute("logged");
 		
-		int excAchieve=new StatisticService().ExcAchieveCount();
-		request.setAttribute("excAchieve", excAchieve);
-		int menuAchieve=new StatisticService().MenuAchieveCount();
-		request.setAttribute("menuAchieve", menuAchieve);
-		
+		//로그인 처리 분기
+		if(m==null) {
+			String msg="회원 전용 기능입니다.";
+			String loc="/member/login";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}else {
+			String memberId=m.getMemberId();
+			List<MemberExcList> list01=new StatisticService().TodayMemberExcList(memberId);			
+			request.setAttribute("list01", list01);
+			List<MemberMenuList> list02=new StatisticService().TodayMemberMenuList(memberId);
+			request.setAttribute("list02", list02);	
+			
+			int excAchieve=new StatisticService().ExcAchieveCount(memberId);
+			request.setAttribute("excAchieve", excAchieve);
+			int menuAchieve=new StatisticService().MenuAchieveCount(memberId);
+			request.setAttribute("menuAchieve", menuAchieve);
+			
 
-		List<ExcInfo> excStatistic=new StatisticService().ExcStatistic();
-		request.setAttribute("excStatistic", excStatistic);
-		System.out.println(excStatistic.get(0).getExcName());
-		
-		MenuInfo menuStatistic=new StatisticService().MenuStatistic();
-		request.setAttribute("menuStatistic", menuStatistic);
+			List<ExcInfo> excStatistic=new StatisticService().ExcStatistic(memberId);
+			request.setAttribute("excStatistic", excStatistic);
+			System.out.println(excStatistic.get(0).getExcName());
+			
+			MenuInfo menuStatistic=new StatisticService().MenuStatistic(memberId);
+			request.setAttribute("menuStatistic", menuStatistic);
 
-		request.getRequestDispatcher("/views/member/weeklyTrend.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/member/weeklyTrend.jsp").forward(request, response);
+		
+		}
+		
 		
 		
 	}
