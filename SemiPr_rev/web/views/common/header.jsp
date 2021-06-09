@@ -59,7 +59,7 @@
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/weeklyTrend">주간 실천 현황</a></div>
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/monthlyTrend">월간 실천 현황</a></div>
                             <!-- <div class="progress_menu"><a href="">My Data</a></div> -->
-                            <div class="progress_menu"><a href="<%=request.getContextPath()%>/gallary/list">눈바디</a></div>
+                            <div class="progress_menu"><a href="<%=request.getContextPath()%>/gallary/list?numPerpage=6">눈바디</a></div>
                         </div>
                     </div>
                     <div class="col-md-3">Community
