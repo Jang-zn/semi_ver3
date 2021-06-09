@@ -136,6 +136,7 @@
 							<div class="box02 col-md-12"> 
 								<input type="text" id="yy" class="int" name="yy" maxlength="4" placeholder="년(4자)" required>
 							</div>
+							<div class="col-sm-12" id="yyError"></div>
 						</div>
 
 						<!-- BIRTH_MM -->
@@ -157,6 +158,7 @@
 									<option value="12">12</option>
 								</select>
 							</div>
+							<div class="col-sm-12" id="mmError"></div>
 						</div>
 
 
@@ -165,9 +167,9 @@
 							<div class="box02 col-md-12"> 
 								<input type="text" id="dd" class="int" name="dd" maxlength="2" placeholder="일" required>
 							</div>
+							<div class="col-sm-12" id="ddError"></div>
 						</div>					
 					</div>
-					<div class="error_next_box"></div>
 				</div>
 
 
@@ -184,9 +186,6 @@
 								<option value="F">여자</option>
 							</select>
 						</div> 
-						<div class="error_next_box col-md-12">
-							필수 정보입니다.
-						</div>
 					</div>
 				</div>
 
@@ -253,14 +252,12 @@
 				<!-- JOIN BTN-->
 				<div class="btn_area row">
 					<div class="col-md-12">
-						<button type="submit" id="btnJoin" onsubmit="return emailAuthCheck();">
+						<button type="submit" id="btnJoin" onsubmit="return emailAuthCheck(); yearCheck(); monthCheck(); dayCheck();">
 							가입하기
 						</button>
 					</div>
-				</div>
-			</div>
+				</div>			</div>
 			<!-- content-->
-
 
 		</form>
 	</div>
@@ -273,8 +270,7 @@
 
 
 <script>
-//<------------------------------ 생년월일 시작 ---------------------------->
-function 
+
 
 //<------------------------------ 아이디 시작 ---------------------------->
 //아이디 정규표현식
@@ -445,7 +441,7 @@ $("#mobile").blur(function(){
 			
 			success : function(data){
 				if(data == "fail"){
-					alert("정확한 이메일 주소를 입력 후 다시 시도해주세요");
+					alert("정확한 이메일 주소를 입력 후 다시 시도해주세요.");
 				}else{
 				alert("인증 메일 전송 완료");
 				var text = $("<p>인증 코드 : </p>");
@@ -468,7 +464,7 @@ $("#mobile").blur(function(){
 		})
 	}
 	
-		var isAuth = false;
+var isAuth = false;
 	function emailAuthCheck(){
 		var emailAuth = $(".inputAdd").val();
 		$.ajax({
@@ -588,58 +584,122 @@ $("#nickName_").blur(function(){
 
 
 //<---------------------------------------- 생년월일 시작 ------------------------------------------>
+var yyCheck = false;
 
-function isBirthCompleted() {
-  var yearPattern = /[0-9]{4}/;
+
+const yearCheck=()=>{
+$("#yy").blur(function(){
+	var yearPattern = /[0-9]{4}/;
+	var toyear = 1997;
+	var year = $("#yy").val();
+	 x = (toyear - year) % 12	// x값을 구합니다.
+	console.log(year)
+	if(year<1900 || !yearPattern.test(year)){
+			$("#yyError").css('color','red');
+			$("#yyError").html('출생년도 4자리 확인 혹은 1900년미만 출생자들은 가입이 제한됩니다.');
+			alert("가입 불가합니다."); 	  
+			return false;
+			 //함수밖에 변수 만들고false값 준다.
+		  }else if((x == 1) || (x == -11)){
+			    	$("#yyError").css('color','green');
+			 		$("#yyError").html('쥐띠시네요 ');     }
+			         else  {
+			          if (x == 0)             {
+			        	  $("#yyError").css('color','green');
+					 		$("#yyError").html('소띠시네요 ');           }
+			          else  {
+			           if ((x == 11) || (x == -1)) {
+			        	   $("#yyError").css('color','green');
+					 		$("#yyError").html('호랑이띠시네요 ');           }
+			           else  {
+			            if ((x == 10) || (x == -2)) {
+			            	$("#yyError").css('color','green');
+					 		$("#yyError").html('토끼띠시네요 ');      }
+			            else  {
+			             if ((x == 9) || (x == -3))  {
+			            	 $("#yyError").css('color','green');
+						 		$("#yyError").html('용띠시네요 ');       }
+			             else  {
+			              if ((x == 8) || (x == -4))  { 
+			            	  $("#yyError").css('color','green');
+						 		$("#yyError").html('뱀띠시네요 ');           }
+			              else  {
+			               if ((x == 7) || (x == -5))  { 
+			            	   $("#yyError").css('color','green');
+						 		$("#yyError").html('말띠시네요 ');        }
+			               else  {
+			                if ((x == 6) || (x == -6))  { 
+			                	$("#yyError").css('color','green');
+						 		$("#yyError").html('양띠시네요 ');       }
+			                else  {
+			                 if ((x == 5) || (x == -7))  {  
+			                	 $("#yyError").css('color','green');
+			 			 		$("#yyError").html('원숭이띠시네요 ');       }
+			                 else  {
+			                  if ((x == 4) || (x == -8))  {
+			                	  $("#yyError").css('color','green');
+			  			 		$("#yyError").html('닭띠시네요 ');      }
+			                  else  {
+			                   if ((x == 3) || (x == -9))  {
+			                	   $("#yyError").css('color','green');
+			   			 		$("#yyError").html('개띠시네요 ');       }
+			                   else  {
+			                    if ((x == 2) || (x == -10))  {
+			                    	$("#yyError").css('color','green');
+			    			 		$("#yyError").html('돼지띠시네요 ');              }  
+			                    return true;
+			                   }
+			                  }
+			                 }
+			                }
+			               }
+			              }
+			             }
+			            }
+			           }
+		  			  }
+			         }
+				});
+}
+var mmCheck=false;
+const monthCheck=()=>{
+$("#mm").blur(function(){
+	var month = $("#mm").val();
+	console.log(month);
+	if(month=="월"){
+		$("#mmError").css('color','red');
+		$("#mmError").html('태어난 월을 선택해주세요.');
+		return false;
+	}else {
+		$("#mmError").css('color','green');
+		$("#mmError").html('좋은 달에 태어나셨군요.');
+		return true;
+	}
+})
+}
+
+var ddCheck=false;
+const dayCheck=()=>{
+ $("#dd").blur(function(){
+	 var dayPattern = /[0-3]{1,}[0-9]{1}/;
 	 
-  if(!yearPattern.test(yy.value)) {
-      
-  } else {
-     
-  }
-
-
-  function isMonthSelected() {
-      if(mm.value === "월") {
-          error[4].innerHTML = "태어난 월을 선택하세요.";
-      } else {
-          isDateCompleted();
-      }
-  }
-
-  function isDateCompleted() {
-      if(dd.value === "") {
-          error[4].innerHTML = "태어난 일(날짜) 2자리를 정확하게 입력하세요.";
-      } else {
-          isBirthRight();
-      }
-  }
-}
-
-
-
-function isBirthRight() {
-  var datePattern = /\d{1,2}/;
-  if(!datePattern.test(dd.value) || Number(dd.value)<1 || Number(dd.value)>31) {
-      error[4].innerHTML = "생년월일을 다시 확인해주세요.";
-  } else {
-      checkAge();
-  }
-}
-
-function checkAge() {
-  if(Number(yy.value) < 1920) {
-      error[4].innerHTML = "정말이세요?";
-  } else if(Number(yy.value) > 2019) {
-      error[4].innerHTML = "미래에서 오셨군요. ^^";
-  } else if(Number(yy.value) > 2005) {
-      error[4].innerHTML = "만 14세 미만의 어린이는 보호자 동의가 필요합니다.";
-  } else {
-      error[4].style.display = "none";
-  }
+	 var day = $("#dd").val();
+	 if(day>32 || !dayPattern.test(day)){
+		$("#ddError").css('color','red');
+		$("#ddError").html('세상에 존재하지 않는 날짜입니다.');
+		return false;
+			  
+	 }else {
+		$("#ddError").css('color','green');
+		$("#ddError").html('좋은 날에 태어나셨군요. ');
+		return true;
+	 	}       
+	})
 }
 
 //<---------------------------------------- 생년월일 끝 --------------------------------------------->
+
+
 
 
 
@@ -664,7 +724,6 @@ function readInputFile(input){
 			$("#image_container").html("<img src="+e.target.result+">");
 		}
 		reader.readAsDataURL(input.files[0]);
-		
 		
 	}
 }
