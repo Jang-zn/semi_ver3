@@ -23,22 +23,8 @@ import javax.servlet.http.HttpSession;
 				DispatcherType.INCLUDE
 		}
 					, 
-		urlPatterns = { "/loginFilter" }, 
-		servletNames = { 
-				"WeeklyTrendServlet", 
-				"MyExcServlet", 
-				"BoardUpdateServlet", 
-				"BoardWriteServlet", 
-				"DailyLogServlet", 
-				"GallaryListServlet", 
-				"MemberDietPlanServlet", 
-				"MemberExcPlanServlet", 
-				"MemberMainServlet", 
-				"MonthlyTrendServlet", 
-				"GallaryWriteServlet", 
-				"MemberInfoUpdateServlet", 
-				"MemberMyListServlet", 
-				"MemberMenuPlanServlet"
+		urlPatterns = { "/member/main", "/member/myList", "/member/excPlan", "/member/menuPlan", "/member/dailyLog","/member/weeklyTrend",
+				"/member/monthlyTrend", "/gallary/*", "/board/write", "/board/update", "/board/delete",
 		})
 public class LoginCheckFilter implements Filter {
 
@@ -64,7 +50,7 @@ public class LoginCheckFilter implements Filter {
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		if(session.getAttribute("logged")==null) {
 			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/member/login");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			chain.doFilter(request, response);
