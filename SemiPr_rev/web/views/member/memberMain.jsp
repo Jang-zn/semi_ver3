@@ -267,7 +267,7 @@ $("#trendSort").change(e=>{
 					data.forEach(function(el){
 						if(el.check==null){
 							planYN[countIndex++]=null;
-							n++;
+							
 						}else{
 							planYN[countIndex++]=el.check=='Y'?1:0;
 							el.check=='Y'?y++:n++;
@@ -336,7 +336,7 @@ $("#trendSort").change(e=>{
 					data.forEach(function(el){
 						if(el.check==null){
 							planYN[countIndex++]=null;
-							n++;
+							
 						}else{
 							planYN[countIndex++]=el.check=='Y'?1:0;
 							el.check=='Y'?y++:n++;

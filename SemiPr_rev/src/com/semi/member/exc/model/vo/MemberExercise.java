@@ -90,6 +90,12 @@ public class MemberExercise {
 	public void setExcWeek(String excWeek) {
 		this.excWeek = excWeek;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberExercise [excNo=" + excNo + ", memberId=" + memberId + ", excId=" + excId + ", excId_c=" + excId_c
+				+ ", reps=" + reps + ", sets=" + sets + ", weight=" + weight + ", excWeek=" + excWeek + "]";
+	}
 	
 	
 	

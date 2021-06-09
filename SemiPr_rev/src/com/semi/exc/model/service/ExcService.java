@@ -86,4 +86,26 @@ public class ExcService {
 		return result;
 		
 	}
+	
+	public int checkDupExc(MemberExercise me) {
+		Connection conn = getConnection();
+		int result = dao.checkDupExc(conn, me);
+		close(conn);
+		return result;
+	}
+	
+	public int updateMemberExc(MemberExercise me) {
+		Connection conn = getConnection();
+		int result = dao.updateMemberExc(conn, me);
+		System.out.println(me);
+		if(result!=0) {
+			commit(conn);
+			close(conn);
+		}else {
+			rollback(conn);
+			close(conn);
+		}
+		return result;
+		
+	}
 }

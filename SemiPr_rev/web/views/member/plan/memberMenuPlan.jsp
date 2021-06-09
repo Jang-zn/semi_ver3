@@ -135,7 +135,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 		location.assign("<%=request.getContextPath()%>/member/menuPlan?numPerpage=10&menuSort="+menuSort);
 	});
 	
-	// 운동 중복등록시 처리 / 숫자 음수 / 0일때 처리
+	// 숫자 음수 / 0일때 처리
 	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리
 	
 	
