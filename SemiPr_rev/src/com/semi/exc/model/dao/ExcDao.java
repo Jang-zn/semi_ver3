@@ -299,6 +299,7 @@ public class ExcDao {
 			rs=pstmt.executeQuery();
 			int count =length-1;
 			while(rs.next()) {
+				System.out.println(rs.getString(2));
 			    map = new HashMap();
 			    String day = rs.getString(2).substring(5,10);
 			    map.put("count", rs.getInt(1));
@@ -307,23 +308,26 @@ public class ExcDao {
 			    list[count--]= map;
 			}
 			int period=length-1;
-			for(int i=0;i<length;i++) {
-				if(list[i]!=null) {
-					
-				}else {
-					map = new HashMap();
-					String trashD = (String)list[length-1].get("date");
-				    SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
-				    Date trashDate = format1.parse(trashD);			    
-				    Calendar cal = Calendar.getInstance();
-				    cal.setTime(trashDate);
-				    cal.add(Calendar.DATE,-period);
-				    String res = format1.format(cal.getTime());
-				    map.put("date", res);
-					list[i]= map;
-					period--;
+			
+			
+				for(int i=0;i<length;i++) {
+					if(list[i]!=null) {
+						
+					}else {
+						map = new HashMap();
+						String trashD = (String)list[length-1].get("date"); //
+					    SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
+					    Date trashDate = format1.parse(trashD);			    
+					    Calendar cal = Calendar.getInstance();
+					    cal.setTime(trashDate);
+					    cal.add(Calendar.DATE,-period);
+					    String res = format1.format(cal.getTime());
+					    map.put("date", res);
+						list[i]= map;
+						period--;
+					}
 				}
-			}
+			
 		
 			
 		} catch (Exception e) {
