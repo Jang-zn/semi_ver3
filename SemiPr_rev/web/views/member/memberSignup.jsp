@@ -19,7 +19,7 @@
 	<div class="col-md-4"></div>
 	
 	<div class="col-md-4">	
-		<form name="insertform" action="<%=request.getContextPath()%>/member/memberSignup" method="post" enctype="multipart/form-data"  style="border:none;">
+		<form name="insertform" action="<%=request.getContextPath()%>/member/memberSignup" method="post" enctype="multipart/form-data" onsubmit="return vaildation();"  style="border:none;">
 			
 
 			<!-- content-->
@@ -255,9 +255,9 @@
 				<div class="btn_area row">
 					<div class="col-md-12">
 
-						<button type="submit" id="btnJoin" onsubmit="return vaildation();">
+						<button type="submit" id="btnJoin" onsubmit="emailAuthCheck();">
 							가입하기
-						</button> <!--  emailAuthCheck(); -->
+						</button>
 					</div>
 				</div>			</div>
 			<!-- content-->
@@ -482,7 +482,7 @@ var isAuth = false;
 		success : function(data){
 			console.log(data);
 			if(data == "Good"){
-				alert("인증 성공완료");
+				alert("인증 완료");
 				isAuth =true;
 			}else if(data == "Bad"){
 			alert("인증 실패");
@@ -595,67 +595,73 @@ $("#nickName_").blur(function(){
 
 
 //<---------------------------------------- 생년월일 시작 ------------------------------------------>
-var yycheck = false;
+var yyCheck = false;
 function yearCheck(){
-	var yearPattern = /[0-9]{4}/;
+	
 	var toyear = 1997;
 	var year = $("#yy").val();
 	 x = (toyear - year) % 12	// x값을 구합니다.
 	console.log(year)
-	if(year<1900 || !yearPattern.test(year)){
+	if(year<=1900 || year>2021 ){
 			$("#yyError").css('color','red');
-			$("#yyError").html('출생년도 4자리 확인 혹은 1900년미만 출생자들은 가입이 제한됩니다.');
-			alert("가입 불가합니다."); 	  
-			yycheck = false;
+			$("#yyError").html('다시확인해주세요');
+			  
+			yyCheck = false;
 			 //함수밖에 변수 만들고false값 준다.
 		  }else if((x == 1) || (x == -11)){
 			    	$("#yyError").css('color','green');
-			 		$("#yyError").html('쥐띠시네요 ');     }
-			         else  {
-			          if (x == 0)             {
+			 		$("#yyError").html('쥐띠시네요 ');     
+			 		
+		 
+		  }else  {
+			       if (x == 0){
 			        	  $("#yyError").css('color','green');
-					 		$("#yyError").html('소띠시네요 ');           }
-			          else  {
+					 		$("#yyError").html('소띠시네요 ');           
+					 	
+			       }else  {
 			           if ((x == 11) || (x == -1)) {
 			        	   $("#yyError").css('color','green');
-					 		$("#yyError").html('호랑이띠시네요 ');           }
-			           else  {
+					 		$("#yyError").html('호랑이띠시네요 ');           
+					 		
+			           }else  {
 			            if ((x == 10) || (x == -2)) {
 			            	$("#yyError").css('color','green');
-					 		$("#yyError").html('토끼띠시네요 ');      }
-			            else  {
+					 		$("#yyError").html('토끼띠시네요 ');      
+			            } else  {
 			             if ((x == 9) || (x == -3))  {
 			            	 $("#yyError").css('color','green');
-						 		$("#yyError").html('용띠시네요 ');       }
-			             else  {
+						 		$("#yyError").html('용띠시네요 ');       
+			             } else  {
 			              if ((x == 8) || (x == -4))  { 
 			            	  $("#yyError").css('color','green');
-						 		$("#yyError").html('뱀띠시네요 ');           }
-			              else  {
+						 		$("#yyError").html('뱀띠시네요 ');          
+			              } else  {
 			               if ((x == 7) || (x == -5))  { 
 			            	   $("#yyError").css('color','green');
-						 		$("#yyError").html('말띠시네요 ');        }
-			               else  {
+						 		$("#yyError").html('말띠시네요 ');       
+			               } else  {
 			                if ((x == 6) || (x == -6))  { 
 			                	$("#yyError").css('color','green');
-						 		$("#yyError").html('양띠시네요 ');       }
-			                else  {
+						 		$("#yyError").html('양띠시네요 ');       
+			                } else  {
 			                 if ((x == 5) || (x == -7))  {  
 			                	 $("#yyError").css('color','green');
-			 			 		$("#yyError").html('원숭이띠시네요 ');       }
-			                 else  {
+			 			 		$("#yyError").html('원숭이띠시네요 ');      
+			                 }else  {
 			                  if ((x == 4) || (x == -8))  {
 			                	  $("#yyError").css('color','green');
-			  			 		$("#yyError").html('닭띠시네요 ');      }
-			                  else  {
+			  			 		$("#yyError").html('닭띠시네요 ');      
+			                  } else  {
 			                   if ((x == 3) || (x == -9))  {
 			                	   $("#yyError").css('color','green');
-			   			 		$("#yyError").html('개띠시네요 ');       }
-			                   else  {
+			   			 		$("#yyError").html('개띠시네요 ');       
+			                   } else  {
 			                    if ((x == 2) || (x == -10))  {
 			                    	$("#yyError").css('color','green');
-			    			 		$("#yyError").html('돼지띠시네요 ');              }  
-			                    return true;
+			    			 		$("#yyError").html('돼지띠시네요 ');             
+			    			 		}  
+			                  
+			                    
 			                   }
 			                  }
 			                 }
@@ -665,8 +671,10 @@ function yearCheck(){
 			             }
 			            }
 			           }
+	 yyCheck = true;
 		  			  }
 			         }
+	 console.log(yyCheck);
 }
 			
 				
@@ -678,23 +686,25 @@ function monthCheck(){
 	console.log(month);
 	if(month=="월"){
 		$("#mmError").css('color','red');
-		$("#mmError").html('태어난 월을 선택해주세요.');
+		$("#mmError").html('다시 확인해주세요');
 		mmCheck=false;
 	}else {
 		$("#mmError").css('color','green');
 		$("#mmError").html('좋은 달에 태어나셨군요.');
-		return true;
+		mmCheck=true;
 	}
+    console.log(mmCheck);
+
 }
 
 
 var ddCheck=false;
 
 function dayCheck(){
-	 var dayPattern = /[0-3]{1,}[0-9]{1}/;
+	 //var dayPattern = /[0-3]{1,}[0-9]{1}/;
 	 
 	 var day = $("#dd").val();
-	 if(day>32 || !dayPattern.test(day)){
+	 if(00>=day || day>32 ){
 		$("#ddError").css('color','red');
 		$("#ddError").html('세상에 존재하지 않는 날짜입니다.');
 		ddCheck=false;
@@ -703,7 +713,8 @@ function dayCheck(){
 		$("#ddError").css('color','green');
 		$("#ddError").html('좋은 날에 태어나셨군요. ');
 		ddCheck = true;
-	 	}       
+	 	}
+	 console.log(ddCheck);
 }
 
 
@@ -760,14 +771,15 @@ $("#image").on('change',function(){
 //<---------------------------------------- 프로필 끝 ------------------------------------------>
 
 
+
 function vaildation(){
+	
 		if(ddCheck == false || mmCheck == false || yyCheck == false){
+			alert("생년월일 확인 후 다시 시도하세요.")
 			return false;
 		}else{
 			return true;
-			
 		}
-	
 	
 	
 }
