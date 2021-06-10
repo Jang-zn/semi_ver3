@@ -72,9 +72,9 @@ String pageBar = (String)request.getAttribute("pageBar");
 	                            <option value="토">토</option>
 	                            <option value="일">일</option>
 	                        </select><br>
-	                        <input type="number" name="weight" placeholder="kg / 불필요시 미입력"><br>
-	                        <input type="number" name="reps" placeholder="횟수" required><br>
-	                        <input type="number" name="sets" placeholder="세트수" required><br>
+	                        <input id="weightC" type="number" name="weight" placeholder="kg / 불필요시 미입력"><br>
+	                        <input id="repsC" type="number" name="reps" placeholder="횟수" required><br>
+	                        <input id="setsC" type="number" name="sets" placeholder="세트수" required><br>
 	                        <input type="submit" value="등록하기"><br>
 	                        <input id="excName" type="hidden" name="excName">
 	                    </form>
@@ -135,12 +135,16 @@ String pageBar = (String)request.getAttribute("pageBar");
 		location.assign("<%=request.getContextPath()%>/member/excPlan?numPerpage=10&excSort="+excSort);
 	});
 	
-	// 운동 중복등록시 처리 / 숫자 음수 / 0일때 처리
-	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리
 	
+	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리..
 	const excSubmit=()=>{
 		$("#excName").val($("#exc_name").text());
-		return true;
+		if($("#weightC").val()>=0&&$("#repsC").val()>0&&$("#setsC").val()>0){
+			return true;
+		}else{
+			alert("0보다 큰 수를 입력하세요");
+			return false;
+		}
 	}
 	
 </script>	
