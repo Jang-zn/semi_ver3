@@ -370,4 +370,10 @@ public class MemberService {
 		close(conn);		
 		return m;
 	}
+	public int MemberPwdCheck(String id, String pwd) {
+		Connection conn = getConnection();
+		int result= dao.MemberPwdCheck(conn,id,pwd);
+		close(conn);		
+		return result;
+	}
 }

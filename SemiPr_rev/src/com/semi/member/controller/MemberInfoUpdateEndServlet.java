@@ -18,6 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 import com.semi.common.AESEncrypt;
+import com.semi.common.filter.EncryptWrapper;
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 
@@ -51,7 +52,6 @@ public class MemberInfoUpdateEndServlet extends HttpServlet {
 		
 		String path=getServletContext().getRealPath("/upload/profile");
 		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"utf-8",new DefaultFileRenamePolicy());
-		System.out.println(path);
 		
 		Member m=new Member();
 		String memberAgeyy=mr.getParameter("yy");
@@ -67,21 +67,38 @@ public class MemberInfoUpdateEndServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		m.setMemberId(mr.getParameter("memberid"));
-		m.setEmail(mr.getParameter("email"));
+		
+		m.setMemberPw(EncryptWrapper.getSHA512(mr.getParameter("password_")));
+		if(mr.getParameter("password_").length()<1) {
+			m.setMemberPw(EncryptWrapper.getSHA512(mr.getParameter("password")));
+		}
+		try {
+			m.setEmail(AESEncrypt.encrypt(mr.getParameter("email")));
+			m.setPhone(AESEncrypt.encrypt(mr.getParameter("phone")));
+		} catch (Exception e) {
+					e.printStackTrace();
+		}
 		m.setName(mr.getParameter("name"));
 		m.setNickname(mr.getParameter("nickName"));
 		m.setBirth(memberAge);
 		m.setGender(mr.getParameter("gender"));
-		m.setPhone(mr.getParameter("phone"));
 		m.setHeight(Double.parseDouble(mr.getParameter("height")));
 		m.setWeight(Double.parseDouble(mr.getParameter("weight")));
+
 		
-		if(mr.getFilesystemName("userProfile")==null) {
-			m.setProfileImg( mr.getParameter("old_file"));
+		//이전 파일 삭제 로직
+		String fileName=mr.getFilesystemName("userProfile");
+		File f=mr.getFile("userProfile");
+		if(f!=null&&f.length()>0) {
+			File del=new File(path+"/"+mr.getParameter("old_file"));
+			del.delete();
 		}else {
-			m.setProfileImg(mr.getFilesystemName("userProfile"));
+			fileName=mr.getParameter("old_file");
+			
 		}
+			m.setProfileImg(fileName);
 		
+	
 
 		System.out.println(m);
 		int result=new MemberService().updateMember(m);
@@ -89,10 +106,10 @@ public class MemberInfoUpdateEndServlet extends HttpServlet {
 		String loc="";
 		if(result>0) {
 			msg="수정 성공";
-			loc="/";
+			loc="/member/main";
 		}else {
 			msg="수정 실패";
-			loc="/";
+			loc="/member/memberinfoupdateEnd";
 		}
 		
 		request.setAttribute("msg", msg);

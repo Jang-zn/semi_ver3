@@ -23,7 +23,7 @@
 	<div class="col-md-4"></div>
 	
 	<div class="col-md-4">	
-		<form name="insertform" action="<%=request.getContextPath()%>/member/memberinfoupdateEnd?memberid=<%=m.getMemberId() %>" method="post" enctype="multipart/form-data" style="border:none;">
+		<form name="insertform" action="<%=request.getContextPath()%>/member/memberinfoupdateEnd?memberid=<%=m.getMemberId() %>" method="post" enctype="multipart/form-data" onsubmit="return checkpassword();" style="border:none;">
 			
 
 			<!-- content-->
@@ -51,13 +51,14 @@
 				<!-- PW1 -->
 				<div class="row">
 					<div class="join_title col-md-12">
-						<label for="pswd1">비밀번호</label>
+						<label for="pswd1">현재 비밀번호 확인</label>
 					</div>
 					<div class="col-md-12">
 						<div class="box int_pass col-md-12"> 
-							<input type="password" id="pswd1" name="password" placeholder="비밀번호" class="int" maxlength="16"> 
+							<input type="password" id="pswd1" name="password" placeholder="비밀번호" class="int" maxlength="16" required>
+							<input type="hidden" name="pwdcheck">
 						</div> 
-						<div id="pw-chk" class="col-md-12"></div>
+						<div id="pw-chk" class="col-md-12">확인하기</div>
 					</div>
 				</div>
 
@@ -65,13 +66,25 @@
 				<!-- PW2 -->
 				<div class="row">
 					<div class="join_title col-md-12">
-						<label for="pswd2">비밀번호 재확인</label>
+						<label for="pswd2">새 비밀번호 </label>
 					</div>
 					<div class="col-md-12">
 						<div class="box int_pass_check col-md-12"> 
-							<input type="password" id="pswd2" class="int" maxlength="16">
+							<input type="password" id="pswd2" name="password_" class="int" maxlength="16">
 						</div> 
 						<div id="pw-chk2" class="col-md-12"></div>
+					</div>
+				</div>
+				
+								<div class="row">
+					<div class="join_title col-md-12">
+						<label for="pswd2">새 비밀번호 재확인</label>
+					</div>
+					<div class="col-md-12">
+						<div class="box int_pass_check col-md-12"> 
+							<input type="password" id="pswd3" class="int" maxlength="16">
+						</div> 
+						<div id="pw-chk3" class="col-md-12"></div>
 					</div>
 				</div>
 
@@ -92,7 +105,6 @@
 					<div id="email_chk" class="col-md-12"> </div>
 					<div class="col-md-12">
 						<div id="email-chk"	class="col-md-4" value="이메일 인증" onclick="emailCheck(insertform.email.value);" >
-							이메일 인증
 						</div>
 					</div>				
 				</div>
@@ -258,9 +270,7 @@
 				<!-- JOIN BTN-->
 				<div class="btn_area row">
 					<div class="col-md-12">
-						<button type="submit" id="btnJoin">
-							수정하기
-						</button>
+						<input type="submit" onsubmit="return checkpassword();" value="수정하기">
 					</div>
 				</div>
 			</div>
@@ -274,7 +284,201 @@
 	<input type="hidden" name="email" id="id">
 	<input type="hidden" name="nickName">
 </form>
+  <script>
+  const checkpassword=()=>{
+	 if($("input[name=pwdcheck]").val()!=1){
+		 alert("비밀번호 확인해야 수정가능합니다")
+		 return false;
+	 }
+	 	return true;
+		
+  }
+	$("#pswd2").blur(function(){
+    	var pw1 = $("#pswd2").val();
+ 		
+    	console.log(pw1);
+		var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
+		if(pw1.trim().length==0){
+			
+			$("#pw-chk2").css('color','red');
+			$("#pw-chk2").html("공백없이 패스워드를 입력하세요");
+			
+			
+		}else if(!pwPattern.test(pw1)){
+			alert("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+			return;
+		}else {
+			$("#pw-chk2").css('color','green');
+			$("#pw-chk2").html("아름다운 비밀번호입니다.");
+		}
+	});
+	
+	$("#pswd3").blur(function(){
+		var pw1 = $("#pswd2").val();
+		var pw2 = $("#pswd3").val();
+		if(pw1 != pw2){
+			$("#pw-chk3").css('color','red');
+			$("#pw-chk3").html("비밀번호가 맞지않습니다. 다시 확인해주세요.");
+		}else{
+			$("#pw-chk3").css('color','green');
+			$("#pw-chk3").html("비밀번호가 일치합니다.");
+		}
+	})
+  var id = document.querySelector('#userId_');
 
+  var pw1 = document.querySelector('#pswd2');
+  var pwMsg = document.querySelector('#alertTxt');
+  var pwImg1 = document.querySelector('#pswd1_img1');
+
+  var pw2 = document.querySelector('#pswd3');
+  var pwImg2 = document.querySelector('#pswd2_img1');
+  var pwMsgArea = document.querySelector('.int_pass');
+
+  var userName = document.querySelector('#name_');
+
+  var yy = document.querySelector('#yy');
+  var mm = document.querySelector('#mm');
+  var dd = document.querySelector('#dd');
+  var pwMsg = document.querySelector('#alertTxt');
+
+  var gender = document.querySelector('#gender');
+
+  var email = document.querySelector('#email');
+
+  //var mobile = document.querySelector('#mobile');
+
+  var error = document.querySelectorAll('.error_next_box');
+  
+  
+  		$("#pw-chk").click(e=>{
+  			$("#pw-chk>p").remove();
+  			$.ajax({
+  				url:"<%=request.getContextPath()%>/ajax/pwdcheck",
+  				type:"get",
+  				data:{			
+  					pwd:$("#pswd1").val(),
+  					id:$("#userId_").val()
+  					},
+  					success:data=>{
+  					if(data==1){
+  						$("#pw-chk").append($("<p>").text("현재 비밀번호와 일치합니다").css("color","green"));
+  						$("input[name=pwdcheck]").val(data);
+  					}else{
+  						$("#pw-chk").append($("<p>").text("현재 비밀번호와 불일치합니다").css("color","red"));
+  					}
+  							}
+  					})
+  			})
+  			$("#pswd2,#pswd3").click(e=>{
+  					if($("input[name=pwdcheck]").val()!=1){
+  						alert("현재비밀번호를 입력하세요")
+  						$("#pswd1").focus();  						
+  					}	
+  			})
+  	
+  
+    	let date=$("input[name=date]").val();
+    	let datearr=date.split("-");
+    	$("input[name=yy]").val(datearr[0]);
+    	$("select[name=mm]").val(datearr[1]);
+    	$("input[name=dd]").val(datearr[2]); 	
+  
+    	
+    	if($("input[name=old_file]").val()!=null){
+    		$("#image_container").append($("<img>").attr("src","<%=request.getContextPath()%>/upload/profile/<%=m.getProfileImg()%>"));
+    	}
+    	
+    	function readInputFile(input){
+    		if(input.files){
+    			let reader = new FileReader();
+    			f=event.target.files[0]
+    			console.log(event.target.files[0].size);
+    			if(f.size>1024*1024*2){
+    				alert("2mb까지의 사지만 업데이트 할 수 있습니다.");
+    				return;
+    			}
+    				
+    			reader.onload = function(e){
+    				$("#image_container").html("<img src="+e.target.result+">");
+    			}
+    			reader.readAsDataURL(input.files[0]);
+    			
+    			
+    		}
+    	}
+
+
+    	//프로필 사진 미리보기 및 삭제버튼
+    	$("#image").on('change',function(){
+    		readInputFile(this);
+    		
+    		var btnDel =$("<button class='btnDel' type='button'>삭제</button>");
+
+    		btnDel.click(e=>{
+    			$("#image_container").empty(); 
+    			$(".btnDel").remove();
+    		});
+    		if($('.btnDel').length == 0){//버튼 한 개만 생성하게 만들기 
+    		$("#btn-container").append(btnDel);
+    			
+    		}
+    	});  //요소 생성시 중간에 값이 들어가므로 생성시에 이벤트를 걸어줘야 한다.
+		
+    	$("#nickName_").blur(function(){
+    		var isNickname = /^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,13}\$/; //인스타그램아이디 정규표현식 가운데 공백 제거추가필요
+    		var nickName =$('#nickName_').val();
+    		var nickName2 = nickName.replace(/(\s*)/g, "");
+    		console.log(nickName2); 
+    		console.log(nickName); 
+    		var nick = nickName.trim();
+    		
+    		if(nickName != nickName2){
+    			alert("공백없이 입력해주세요");
+    		}
+    		if(!isNickname.test(nickName2)){ 
+    			alert("잘못된 형식의 닉네임입니다.");
+    		     
+    			}else {
+    				$.ajax ({
+    					url:"<%=request.getContextPath()%>/member/nickNameDuplication",
+    					type : "post",
+    					dataType:"text",
+    					data:{
+    						
+    						"nickName":nickName2 //trim 처리하기
+    						
+    					},
+    					success:data=>{
+    						
+    						if(data=="fail"){
+    							$("#nickCheck").css('color','red')
+    							$("#nickCheck").html("이미 사용중인 닉네임입니다.")
+    						}else{
+    							$("#nickCheck").css('color','green')
+    							$("#nickCheck").html("아주 멋지네요!")
+    						}
+    					}
+    					})
+    			}
+    	});
+    	
+    	function comparePw() {
+    	    if(pw2.value === pw1.value) {
+    	        
+    	        error[2].style.display = "none";
+    	    } else if(pw2.value !== pw1.value) {
+    	        
+    	        error[2].innerHTML = "비밀번호가 일치하지 않습니다.";
+    	        error[2].style.display = "block";
+    	    } 
+
+    	    if(pw2.value === "") {
+    	        error[2].innerHTML = "필수 정보입니다.";
+    	        error[2].style.display = "block";
+    	    }
+    	}
+    	
+    </script>
 
 <script>
 
@@ -323,17 +527,6 @@
 } */
     </script>
     
-    <script>
-    	let date=$("input[name=date]").val();
-    	let datearr=date.split("-");
-    	$("input[name=yy]").val(datearr[0]);
-    	$("select[name=mm]").val(datearr[1]);
-    	$("input[name=dd]").val(datearr[2]);
-    	
-    	$("select[name=gender]").val(<%=m.getGender()%>);
-
-         
-    	
-    </script>
+  
 
 <%@ include file="/../views/common/footer.jsp"%>

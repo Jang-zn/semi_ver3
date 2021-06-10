@@ -1586,11 +1586,14 @@ public class MemberDao {
 			pstmt.setDouble(7, m.getWeight());
 			pstmt.setString(8,m.getGender());
 			pstmt.setString(9, m.getProfileImg());
-			pstmt.setString(10, m.getMemberId());
+			pstmt.setString(10, m.getMemberPw());
+			pstmt.setString(11, m.getMemberId());
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally {
+			close(pstmt);
+		}	
 		return result;
 		
 	}
@@ -1625,8 +1628,32 @@ public class MemberDao {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+		}finally {
+			close(rs);
+			close(pstmt);
+		}	
 		return m;
+	}
+
+
+
+
+	public int MemberPwdCheck(Connection conn, String id, String pwd) {
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		int result=0;	
+		String path=MemberDao.class.getResource("/sql/mypage_sql.properties").getPath();
+		try {
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("MemberPwdCheck"));
+			pstmt.setString(1,id);
+			pstmt.setString(2, pwd);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=1; 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
 
