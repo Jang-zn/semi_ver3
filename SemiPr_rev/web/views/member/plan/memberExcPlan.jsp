@@ -14,17 +14,18 @@ String pageBar = (String)request.getAttribute("pageBar");
 <br>
 <div class=row>
 
-	<div style="font-family: 'GongGothicMedium'; font-size: 2.3rem; font-weight: bold;" class="">
-		<div class="btn col-md-2">운동 List</div>
-		<div id="sort_container" style="margin-top: 13px;" class="col-md-2">
-				<div class="col-md-3" style="margin-top: 8px;">
-					<select id="excSort">
-						<option>분류 선택</option>
-						<option value="상체">- 상체 -</option>
-						<option value="하체">- 하체 -</option>
-					</select>
-				</div>
+	<div class="row">
+		<div class="title02 col-md-2">운동 List</div>
+		<div id="sort_container" class="col-md-2">
+			<div class="row">&nbsp;</div>
+			<div class="row paddingb">
+				<select id="excSort">
+					<option>분류 선택</option>
+					<option value="상체">- 상체 -</option>
+					<option value="하체">- 하체 -</option>
+				</select>
 			</div>
+		</div>
 	</div>
 </div>
 
@@ -37,16 +38,16 @@ String pageBar = (String)request.getAttribute("pageBar");
 
 			<%for(Exercise e : list){ %>
 			<div id="sort_list" class="row clickcheck">
-				<div class="border col-md-2 listimgbox">
+				<div class="border col-md-3 listimgbox">
 					<img src="<%=e.getFileList().get(0)%>">
 				</div>
 
 				
-				<div id="exc_box" class="border col-md-10"
+				<div id="exc_box" class="border col-md-9"
 					style="padding-top: 1%; padding-bottom: 1%;">
-					<div id="exc_box_name" class="col-md-10"><%=e.getExcName() %></div>
-					<div id="exc_box_sort" class="col-md-2"><%=e.getExcSort() %></div>
-					<div id="exc_box_info" class="col-md-12"><%=e.getExcManual()%></div>
+					<div id="exc_box_name" class="col-md-9"><%=e.getExcName() %></div>
+					<div id="exc_box_sort" class="col-md-3"><%=e.getExcSort() %></div>
+					<div id="exc_box_info" class="col-md-12 exc_box_info"><%=e.getExcManual()%></div>
 				</div>
 			</div>
 			<%} %>
@@ -62,7 +63,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 
 			<!-- Ajax 적용영역 -->
 			<br>
-			<div id="exc_name" class="row"><%=list.get(0).getExcName()%></div>
+			<div id="exc_name" class="row title02"><%=list.get(0).getExcName()%></div>
 			<div id="exc_select" class="row">
 				<div id="exc_img" class="col-md-8">
 					<img src="<%=list.get(0).getFileList().get(0)%>">
@@ -142,7 +143,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 	
 	$("#excSort").change(e=>{
 		let excSort = $(e.target).val();
-		location.assign("<%=request.getContextPath()%>/member/excPlan?numPerpage=10&excSort="+excSort);
+		location.assign("<%=request.getContextPath()%>/member/excPlan?numPerpage=6&excSort="+excSort);
 	});
 	
 	
