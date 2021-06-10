@@ -43,7 +43,7 @@ public class DailyExcRecordAjaxServlet extends HttpServlet {
 		int exccheck=0;
 		int menucheck=0;
 		for(DailyRecordCheck drc:list) {			
-			if(drc.getExcYN().equals("N")) {
+			if(drc.getExcYN().equals("N")||drc.getExcYN().equals("C")) {
 				break;
 			}
 			++exccheck;
@@ -52,7 +52,7 @@ public class DailyExcRecordAjaxServlet extends HttpServlet {
 		
 		List<DailyRecordCheck> list2=new MemberService().dailyRecordmenu(memberid);
 		for(DailyRecordCheck drc:list2) {			
-			if(drc.getMenuYN().equals("N")) {
+			if(drc.getMenuYN().equals("N")||drc.getMenuYN().equals("C")) {
 				break;
 			}
 			++menucheck;
