@@ -251,7 +251,7 @@
                 </div> -->
                 <div class="row">
                     <div class="col-md-4"></div>
-                    <div class="col-md-4"><button onclick="" class="btn01">달성 확인</button></div>
+                    <div class="col-md-4"><button onclick="excUpdate();" class="btn01">달성 확인</button></div>
                 </div>
             </div>
             
@@ -310,10 +310,18 @@
                 </div> -->
                 <div class="row">
                     <div class="col-md-4"></div>
-                    <div class="col-md-4"><button onclick="" class="btn01">달성 확인</button></div>
+                    <div class="col-md-4"><button onclick="menuUpdate();" class="btn01">달성 확인</button></div>
                 </div>
             </div>
-
+			 <script>
+			    	const excUpdate=()=>{
+			    		location.replace("<%=request.getContextPath()%>/member/todayExcUpdate");
+			    	}
+			    	
+			    	const menuUpdate=()=>{
+			    		location.replace("<%=request.getContextPath()%>/member/todayMenuUpdate");
+			    	}
+			    </script>
 
             <!-- 주간 통계 -->
             <div class="col-md-6">

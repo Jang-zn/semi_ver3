@@ -2,6 +2,8 @@ package com.semi.statistic.model.service;
 
 import static com.semi.common.JdbcTemplate.close;
 import static com.semi.common.JdbcTemplate.getConnection;
+import static com.semi.common.JdbcTemplate.commit;
+import static com.semi.common.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -27,25 +29,7 @@ public class StatisticService {
 		close(conn);		
 		return list02;
 	}
-	
-
-//	//excId로 정보를 조회해오기
-//	public ExcInfo excInfo(String excId){
-//		Connection conn=getConnection();
-//		ExcInfo excInfo = dao.excInfo(conn, excId);
-//		close(conn);
-//		//System.out.println(excInfo.getExcName());
-//		return excInfo;
-//	}
-//	
-//	//menuId로 정보를 조회해오기
-//		public MenuInfo menuInfo(String menuId){
-//			Connection conn=getConnection();
-//			MenuInfo menuInfo = dao.menuInfo(conn, menuId);
-//			close(conn);
-//			return menuInfo;
-//		}
-	
+		
 	
 	public String weekExcCheck(String weekCheck, String memberId) {
 		Connection conn = getConnection();
@@ -88,6 +72,18 @@ public class StatisticService {
 		close(conn);
 		return menuStatistic;
 	}
-	
-
+	public int excUpdate(String memberId) {
+		Connection conn = getConnection();
+		int result=dao.excUpdate(conn, memberId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public int menuUpdate(String memberId) {
+		Connection conn = getConnection();
+		int result=dao.menuUpdate(conn, memberId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }
