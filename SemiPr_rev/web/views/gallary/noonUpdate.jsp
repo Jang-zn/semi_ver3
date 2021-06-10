@@ -21,23 +21,21 @@
 <div class="container-fluid">
 	<div class="row">
 	<form action="<%=request.getContextPath() %>/gallary/updateGallaryEnd"  method="post" enctype="multipart/form-data" id="frm">
-		<div id="n_title" class="col-md-12">
-			<img src="<%=request.getContextPath()%>/Resource/img/noonbody.png"><hr/>
+		<div id="n_title" class="col-md-12 title01"> > 눈바디
+			<%-- <img src="<%=request.getContextPath()%>/Resource/img/noonbody.png"><hr/> --%>
 		</div>
 	</div>
-	<div class="row"> <!-- write 전체 -->	
+	<br>
+	<div class="row writeGap"> <!-- write 전체 -->	
 		<div class="col-md-5"> <!-- write 프리뷰 시작 -->
 			<div class="row">
 				<div id="n_title" class="col-md-12">
-						<p> <%=g.getGallaryDate()%><p><br/>
-					<input type="text" name ="writer" value="<%=m.getNickname() %>님의 기록 " readonly />
-					<input type="hidden" name="memberId" value="<%=m.getMemberId() %>" />	
+						<p><%=g.getGallaryDate()%><p>
+					<input type="text" name ="writer" value="<%=m.getNickname() %>님의 기록 " readonly class="title02">
+					<input type="hidden" name="memberId" value="<%=m.getMemberId() %>">	
 				</div>
 			</div>
 			<div class="row">
-				<div id="n_content_img" class="col-md-12">
-					<img id="img_preview" src="<%=request.getContextPath() %>/upload/gallary/<%=g.getImgName()%>">
-				</div>
 			</div>
 		</div> <!--Write 프리뷰 끝  -->	
 		
@@ -53,13 +51,13 @@
 				</div>
 			</div>
 			<div class="row" >
-				<div id="upload_area" class="col-md-5" >
+				<div id="upload_area" class="col-md-7" >
 					<input type="file" name="imgUp" id="imgInput"/>	
 						<span id="fname"><%=g.getImgName() %></span>
 						<input type="hidden" name="oldFile" value="<%=g.getImgName()%>">												
 				</div>
-				<div id="submit_area" class="col-md-7">
-					<input type="submit" id="submit" value="수정"/>					
+				<div id="submit_area" class="col-md-3 btn02">
+					<input type="submit" id="submit" value="수정">					
 				</div>
 			</div>
 			</form>	

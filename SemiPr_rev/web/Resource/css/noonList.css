@@ -1,5 +1,10 @@
 @charset "UTF-8";
-
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 @font-face {
     font-family: 'GongGothicMedium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
@@ -12,33 +17,16 @@
     font-weight: normal;
     font-style: normal;
 }
-
- #n_content_area * {
-	/* border: 1px skyblue solid; */
-}
-
-/* #n_content_area{
-	display:flex;
-} */
-
-
-#n_title {
-	
-}
-
-#n_content {
-	
-}
-#n_list{
-	
-}
-h2 {
-	
+.title01{	
+	font-family: 'PFStardust';
+	font-size:3.5rem;
+	font-weight:bold;	
 }
 #n_date{
 	text-align:center;
 	
 } 
+
 
 #n_content_img{
 	padding-right:15%;
@@ -55,9 +43,7 @@ h2 {
 .content_img {
 	border-radius:0.2em;
 }
-#n_comment{
 
-}
 #date_search{
 	padding-top:1%;
 	padding-bottom:1%;
@@ -68,41 +54,29 @@ h2 {
 	margin-right:2%;
 	
 }
-#comment_area{
-	
-}
-
-
-
-#n_pageBar{
-	
-}
-
-#n_img_list{
-	
-}
-/* #n_img_list>table{
-	width:100%;
-	border-spacing:10px;
-} */
 
 input[type="button"] {
-	padding:5px;
-	background-color :lightgrey;
-	border :lightgrey 1px solid;
+	background:lightgrey;
+	margin-bottom:8px;
 	border-radius:0.2em;
+	border:1.5px solid black;
 	font-family: 'GongGothicMedium';
+	font-size:1.5rem;
+	height:3.5rem;
+	width:8rem;
 }
 input[type="button"]:hover{
 	 background: #009688;
-            color: #fff;
+           /*  color: #fff; */
 }
 p {
 	font-family: 'GongGothicMedium';
 }
-.nickname{
-	font-size:20px;
-	 
+.nickname02{
+	font-size:2.3rem;
+	 font-family: 'GongGothicLight';
+	 text-align:center;
+	 margin-top:1rem;
 }
 
 
@@ -122,13 +96,31 @@ input[type="submit"]{
 .btn{
 	background:lightgrey;
 	margin-bottom:8px;
+	border-radius:0.2em;
+	border:1.5px solid black;
 	font-family: 'GongGothicMedium';
+	font-size:1.5rem;
 }
-.btn:hover{
+.btn02{
+	background:lightgrey;
+	margin-bottom:8px;
+	border-radius:0.2em;
+	border:1.5px solid black;
+	font-family: 'GongGothicMedium';
+	font-size:1.5rem;
+	height:3.5rem;
+	width:6rem;
+	margin-left:0.3rem;
+}
+.btn:hover, .btn02:hover{
             background: #009688;
-            color: #fff;
+            /* color: #fff; */
         }
-
+.searchLine{
+	border-radius:0.2em;
+	border:1.5px solid black;
+	height:3.5rem;
+}
 .noUpload{
 	height:200px;	
 	border: 1px black solid;
@@ -142,3 +134,20 @@ input[type="submit"]{
 	font-family: 'GongGothicMedium';
 }
 
+/* #n_list,#n_content_area{
+	border:3px solid blue;
+}
+ */
+#n_content_img{
+	border-radius:0.2em;
+	border:1.5px solid gray;
+}
+#n_list{
+	border-radius:0.2em;
+	border:1.5px solid gray;
+	padding:1.5rem 1.5rem 2rem 2rem;
+}
+#n_pageBar{
+	margin-top:1.5rem;
+	font-size:1.7rem;
+}

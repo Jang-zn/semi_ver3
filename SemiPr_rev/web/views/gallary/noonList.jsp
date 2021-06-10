@@ -23,11 +23,13 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/font.css">	
 
 <div class="container">
+<br><br>
 	<div class="row">
-		<div id="n_title" class="col-md-12">
-			<img src="<%=request.getContextPath()%>/Resource/img/noonbody.png"><hr/>
+		<div id="n_title" class="col-md-12 title01">> 눈바디</div>		
+			<%-- <img src="<%=request.getContextPath()%>/Resource/img/noonbody.png"><hr/> --%>
+	</div>	
+	<br>
 		<div class="row">	
-			<div class="col-md-1"></div> <!-- 공백 -->
 			<div id="n_content_area" class="col-md-6"> <!-- 상세눈바디 column시작 -->
 				<!-- <span class="gal_no"></span> -->
 				<div class="row">
@@ -37,7 +39,7 @@
 					</div>
 				</div>
 				<div class="row">					
-					<div class="col-md-12 nickname" ><p><%=m.getNickname() %>님의 기록</p></div>
+					<div class="col-md-12 nickname02"><p><%=m.getNickname() %>님의 기록</p></div>
 				</div>
 				<div class="row">
 					<div id="n_date" class="col-md-12"></div>
@@ -56,17 +58,18 @@
 		<!-- </div> -->
 		</div> <!-- 상세눈바디 column끝  -->
 
+			<div class="col-md-1"></div> <!-- 공백 -->
 
 		<div id="n_list" class="col-md-4"> <!-- 갤러리 리스트 cloumn 시작-->
 			<div class="row">
-				<div class="col-md-3 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진등록</div>				
+				<div class="col-md-3 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진 등록</div>				
 				<div class="col-md-9">
 						<form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="get">
 						
 						<%-- <form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="post"> --%>
-							<input type="text" name="searchKeyword" size="20" placeholder="검색할 월/일을 입력해주세요 "/>
+							<input type="text" name="searchKeyword" size="20" placeholder=" 검색할 월/일을 입력해주세요 " class="searchLine">
 						
-						<input type="submit" value="검색"/>
+						<input type="submit" value="검색" class="btn02">
 					</form>
 				</div>
 			</div>
@@ -93,8 +96,8 @@
 							<!-- if (m.getMemberId().equals(g.getMemberId())){ -->
 						<!-- <div class="row">  -->
 							<div class="img_obj col-md-6">
-								<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>"/>
-								<img class="upload_img" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
+								<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>">
+								<img class="upload_img" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" style="margin-bottom:0;">
 								<p>⌚<%= sf.format(g.getGallaryDate())%></p> 																		
 							</div>
 					 																		
@@ -102,9 +105,8 @@
 						}
 					}%>	
 				</div>				
-				<div id="n_pageBar" class="row">
-					<div class="col-md-5"></div>
-					<div class="col-md-7"><%=pageBar %></div>
+				<div id="n_pageBar" class="row" style="text-align:center;">
+					<div class="col-md-12"><%=pageBar %></div>
 				</div> 
 			</div><!-- 갤러리 리스트 cloumn 끝-->
 			<div class="col-md-1"></div>
