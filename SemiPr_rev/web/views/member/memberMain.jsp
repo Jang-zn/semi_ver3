@@ -27,10 +27,11 @@
     	</div>
     </div>
     <br><br>
-<div class="row">
+<!-- <div class="row">
 	<div class="col-md-1"></div>
 	<div id="member_rank" class="col-md-10"></div>
-</div>
+</div> -->
+<div class="container">
 <div class="row">	
 	<div id="weekly_container">
 		<div id="member_info" class="col-md-4">

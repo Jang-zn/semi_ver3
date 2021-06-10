@@ -25,7 +25,10 @@
     font-weight: normal;
     font-style: normal;
 }
-
+.container-fluid{
+		margin:0;
+		padding:0;
+	}
 #member_info{
 	border-radius:0.2em;
 	border:1.5px dashed darkgray;
