@@ -43,9 +43,9 @@ public class GallaryService {
 		close(conn);
 		return result;
 	}
-	public List<Gallary> selectGallaryList(int cPage, int numPerpage){
+	public List<Gallary> selectGallaryList(String memberId,int cPage, int numPerpage){
 		Connection conn=getConnection();
-		List<Gallary> list=dao.selectGallaryList(conn,cPage,numPerpage);
+		List<Gallary> list=dao.selectGallaryList(conn,memberId,cPage,numPerpage);
 		close(conn);
 		return list;
 	}
