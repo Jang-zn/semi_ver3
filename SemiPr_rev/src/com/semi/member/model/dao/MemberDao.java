@@ -218,6 +218,7 @@ public class MemberDao {
 				m.setFat(rs.getInt("fat"));
 				m.setKcal(rs.getInt("kcal"));
 				m.setNa(rs.getInt("na"));
+				m.setProt(rs.getInt("prot"));
 				m.setMenuManual(rs.getString("menu_manual"));
 				m.setMenuVideo(rs.getString("menu_video"));
 			}
@@ -603,7 +604,8 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(p.getProperty("selectSysdate"));
 			pstmt.setString(1, memberid);
 			rs=pstmt.executeQuery();
-			if(rs.next()) sysdate=rs.getString("exc_date");
+			if(rs.next()) sysdate=rs.getString(1);
+			System.out.println(sysdate+"안녕녕");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
