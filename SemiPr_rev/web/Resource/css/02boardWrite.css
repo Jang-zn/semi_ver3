@@ -30,7 +30,6 @@
 #write_content_area{
 		border-radius:0.2em;
   		border:1.5px solid black;
-  		width:100%;
 }
 #write_btn_area div div button {
 	background-color:transparent;
