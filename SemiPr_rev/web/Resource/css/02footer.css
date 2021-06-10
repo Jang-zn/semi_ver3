@@ -1,0 +1,48 @@
+@charset "EUC-KR";
+
+@charset "UTF-8";
+@font-face {
+    font-family: 'PFStardust';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GongGothicLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.container-fluid{
+	margin:0;
+	padding:0;
+}
+#footer_container{	
+	background-color:gray;
+	color:white;
+	text-align:center;	
+	margin-top:13rem;
+	padding-top:0.5rem;
+	padding-bottom:1rem;
+}
+
+.btn05{
+	font-family:'GongGothicMedium';
+	font-size:20px;
+	margin:10px;
+}
+.txt01{
+	font-family:'GongGothicLight';
+	font-size:15px;	
+	margin: 5px;
+}
+.line01{
+	border-right:1px solid white;
+}

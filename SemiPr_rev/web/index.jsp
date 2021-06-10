@@ -5,6 +5,8 @@
 	<link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/02home00.css">
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/font.css">
 	<!--------------- 배너 ---------->
+	</div>
+	
     <div id="banner_home" class="container-fluid">
     	<div class="row">
     		<div class="col-md-12">
@@ -12,6 +14,7 @@
     		</div>
     	</div>
     </div>
+    <br><br><br>
     
     <div id="main_content" class="container"> 
         <div class="row">
@@ -90,7 +93,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="content02">더이상 어려운 건강관리는 No</div>
+                <div class="content02">더이상 어려운 건강관리는 No 🚫</div>
+
             </div>
         </div>
         <div class="row">

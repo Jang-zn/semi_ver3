@@ -63,12 +63,10 @@ public class WeeklyTrendServlet extends HttpServlet {
 			
 
 			List<ExcInfo> excStatistic=new StatisticService().ExcStatistic(memberId);
-			request.setAttribute("excStatistic", excStatistic);
-			System.out.println(excStatistic.get(0).getExcName());
-			
+			request.setAttribute("excStatistic", excStatistic);	
 			MenuInfo menuStatistic=new StatisticService().MenuStatistic(memberId);
 			request.setAttribute("menuStatistic", menuStatistic);
-
+			
 			request.getRequestDispatcher("/views/member/weeklyTrend.jsp").forward(request, response);
 		
 		}

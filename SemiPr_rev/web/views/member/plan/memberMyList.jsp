@@ -156,10 +156,10 @@
 		</div>
 	</div>
 </div>
-<%@ include file="/views/common/footer.jsp"%>
-<style>
+
+<!-- <style>
 .data { pointer-events: none; }
-</style>
+</style> -->
 <script>
 	
 	$(".day_myList").click(e=>{
@@ -253,4 +253,4 @@
 		});
 
 </script>	
-	
+	<%@ include file="/views/common/footer.jsp"%>
