@@ -28,7 +28,9 @@ input[name="writer"] {
 	margin:0;
 	padding:0;
 }
-
+span{
+	font-family: 'GongGothicLight';
+}
 #n_content_img{	
 	padding-top:3%;
 	padding-bottom:2%;	
@@ -78,9 +80,13 @@ input[name="writer"] {
 	height:7.8rem;
 }
 
-#n_title>p{
-	font-family: 'GongGothicLight';
-	padding-right:1rem;
+
+#n_content_img{
+	border-radius:0.2em;
+  	border:1px solid lightgray;
+  	padding:0;
+  	height:100%;
+  	width:100%;
 }
 .btn02>input{
 	border-radius:0.2em;

@@ -19,6 +19,7 @@
 %>	
 
 <div class="container-fluid">
+<br><br>
 	<div class="row">
 	<form action="<%=request.getContextPath() %>/gallary/updateGallaryEnd"  method="post" enctype="multipart/form-data" id="frm">
 		<div id="n_title" class="col-md-12 title01"> > 눈바디
@@ -28,14 +29,16 @@
 	<br>
 	<div class="row writeGap"> <!-- write 전체 -->	
 		<div class="col-md-5"> <!-- write 프리뷰 시작 -->
-			<div class="row">
+			<div class="row" style="margin-bottom:1rem;">
 				<div id="n_title" class="col-md-12">
-						<p><%=g.getGallaryDate()%><p>
-					<input type="text" name ="writer" value="<%=m.getNickname() %>님의 기록 " readonly class="title02">
+					<input type="text" name ="writer" value="<%=m.getNickname() %> 님의 기록 " readonly class="title02"> <span><%=g.getGallaryDate()%></span>
 					<input type="hidden" name="memberId" value="<%=m.getMemberId() %>">	
 				</div>
 			</div>
 			<div class="row">
+				<div id="n_content_img" class="col-md-12">
+					<img id="img_preview" src="<%=request.getContextPath() %>/upload/gallary/<%=g.getImgName()%>">
+				</div>
 			</div>
 		</div> <!--Write 프리뷰 끝  -->	
 		

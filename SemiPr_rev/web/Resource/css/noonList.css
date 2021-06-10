@@ -24,6 +24,7 @@
 }
 #n_date{
 	text-align:center;
+    font-family: 'GongGothicLight';
 	
 } 
 
@@ -126,10 +127,22 @@ input[type="submit"]{
 	border: 1px black solid;
 }
 .img_obj{
-	height:200px;
-	
+	height:200px;	
 	/* border: 1px black solid */;
+	
+	border-radius:0.2em;
+  	border:1px solid lightgray;
+  	padding:1rem;
 }
+.img_obj>img{
+	border-bottom:1px dashed lightgray;
+	padding-bottom:0.5rem;
+}
+.img_obj>p{
+	margin:0.5rem;
+	text-align:center;
+}
+
 #n_pageBar {
 	font-family: 'GongGothicMedium';
 }
