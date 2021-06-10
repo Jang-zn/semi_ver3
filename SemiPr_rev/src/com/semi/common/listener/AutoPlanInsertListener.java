@@ -38,6 +38,7 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 	    	String memberId = member.getMemberId();
 	    	Calendar cal = Calendar.getInstance();
 			int last = cal.getActualMaximum(cal.DAY_OF_MONTH); //월 길이 (length로 사용)
+			int today = cal.get(cal.DATE); //오늘 날짜
 			
 			
 			int y = cal.get(cal.YEAR);
@@ -51,10 +52,10 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 			}else {
 				month="0"+(m+1);
 			}
-			String[] arrayCal = new String[last];
+			String[] arrayCal = new String[last-today+1];
 			
-			for(int i = 0;i<last;i++) {
-				cal.set(y, m, i+1);
+			for(int i = 0 ;i<last-today+1;i++) {
+				cal.set(y, m, today+i);
 				int wnum = cal.get(cal.DAY_OF_WEEK);
 				String week ="";
 				switch(wnum) {
@@ -74,7 +75,7 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 			}
 			ExcService ex = new ExcService();
 			MenuService ms = new MenuService();
-			//arrayCal에는 한달치 yy/mm/dd,요일 이 저장됨
+			//arrayCal에는 오늘~말일 yy/mm/dd,요일 이 저장됨
 			for(String s : arrayCal) {
 				
 				List<MemberExercise> wlist = ex.getWlist(memberId, s);
