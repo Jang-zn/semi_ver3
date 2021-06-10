@@ -126,7 +126,7 @@
 	<div id="noonbody_thumb_area" class="col-md-12">
 		<%for(int i=0;i<gal.length;i++){
 			if(gal[i]!=null){%>
-				<div class="noonbody_thumb col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[i]%>"></div>
+				<div class="noonbody_thumb col-md-3"><img src="<%=request.getContextPath()%>/upload/gallary/<%=gal[i]%>"></div>
 			<%}else{ %>
 				<div class="noonbody_thumb col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/profile.png"></div>
 			<%} %>

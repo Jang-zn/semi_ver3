@@ -181,7 +181,7 @@ const pieE = $("#chart10");
 const pieChartE = new Chart(pieE, {
 	type:'pie',
 	data:{
-		labels:["게으름","다른 일정","피치못할사정","기타","데이터 없음"],
+		labels:["게으름","다른 일정","피치못할사정","기타","향후계획"],
 		datasets: [{
 		    data: [0,0,0,0,0],
 		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)", "rgba(15, 28, 65, 0.49)"],
@@ -206,7 +206,7 @@ const pieM = $("#chart11");
 const pieChartM = new Chart(pieM, {
 	type:'pie',
 	data:{
-		labels:["게으름","회식","야식","기타","데이터 없음"],
+		labels:["게으름","회식","야식","기타","향후계획"],
 		datasets: [{
 		    data: [0,0,0,0,0],
 		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)", "rgba(15, 28, 65, 0.49)"],
@@ -240,20 +240,19 @@ $.ajax({
 	url:"<%=request.getContextPath()%>/member/monthlyTrend/piecall?length="+list.length+"&yymm01="+yymm01,
 	dataType:"json",
 	success:data=>{
-		console.log(data);
 		let dataE = [0,0,0,0,0];
 		let dataM = [0,0,0,0,0];
 		data[0].forEach(function(ep){
 			if(ep!=null&&ep.check=='N'){
 				dataE[ep.reason]+=1
-			}else{
+			}else if(ep.check==null&&ep.count>0){
 				dataE[4]+=1
 			}
 		});
 		data[1].forEach(function(mp){
 			if(mp!=null&&mp.check=='N'){
 				dataM[mp.reason]+=1
-			}else{
+			}else if(mp.check==null&&mp.count>0){
 				dataM[4]+=1
 			}
 		});
@@ -272,7 +271,7 @@ $.ajax({
 
 
 const callPlan=()=>{
-	let list = $("div.thism");
+	let list = $("span.thism");
 	let yymm01=null;
 	if(viewMonth<10){
 		yymm01=viewYear+"/0"+(viewMonth+1)+"/01"
@@ -283,6 +282,7 @@ const callPlan=()=>{
 		url:"<%=request.getContextPath()%>/member/monthlyTrend/plancall?length="+list.length+"&yymm01="+yymm01,
 		dataType:"json",
 		success:data=>{
+			console.log(data);
 			let ey=0;
 			let en=0;
 			let my=0;
@@ -700,7 +700,6 @@ const chartCall=()=>{
 				url:"<%=request.getContextPath()%>/member/monthlyChart?length="+length+"&sysdate="+sysdate+"&key=stackKcals",
 				dataType:"json",
 				success:data=>{
-					console.log(data);
 					//labels
 					let labels=[];
 					let countIndex=0;

@@ -50,12 +50,13 @@
 	<!-- 운동계획 / 식단계획 -->
 	<div class="row">
 		<div id="list_title_container" class="col-md-12">
-			
-			<div id="myexc" class="list_title_area col-md-6">
+			<div class="col-md-6">
+			<div id="myexc" class="list_title_area col-md-12">
 				<%=today %>요일 운동 계획
 			</div>
-			
-			<div id="mymenu" class="list_title_area col-md-6 ">
+			</div>
+			<div class="col-md-6">
+			<div id="mymenu" class="list_title_area col-md-12 ">
 				<div class="col-md-10">
 					<%=today %>요일 식단 계획
 				</div>
@@ -67,7 +68,7 @@
 					</select>
 				</div>
 			</div>
-			
+			</div>
 		</div>
 	</div>
 
@@ -76,8 +77,8 @@
 	<div class="row">
 		<div id="list_container_myList" class="col-md-12">
 			<!-- 운동리스트 -->	
-						
-			<div id="my_list_exc" class="col-md-6">
+			<div class="col-md-6">			
+			<div id="my_list_exc" class="col-md-12">
 				<%int ecount=1; %>
 				<%for(MemberExcList mel : exclist) {%>
 				<div class="col-md-12 excinfocho">
@@ -85,7 +86,7 @@
  					<img src="" class="excimg"> <br> <br> <br>
 					</div>
 					<div class="list_name_area col-md-9">
-						<input type="hidden" id="excid" name="excid<%=ecount++%>" value="<%=mel.getExcId()%>">
+						<input type="hidden" class="excid" name="excid" value="<%=mel.getExcId()%>">
 						<div class="excname data row">대충 저장한 운동이름1</div> 
 						<div class="row data">
 							<div class="data col-md-4 categoryLine data">무게 : <%=mel.getWeight() %>kg</div>
@@ -107,20 +108,20 @@
 					<%=excpagebar %>
 				</div>
 			</div>
-			
+			</div>
 			
 			
 			<!-- 식단리스트 -->	
-				
-			<div id="my_list_menu" class="col-md-6">
+			<div class="col-md-6">	
+			<div id="my_list_menu" class="col-md-12">
 				<%int mcount=1; %>
 				<%for(MemberMenuList mml:menulist){%>
 				<div class="col-md-12 menuinfocho">
 					<div class="list_img_area col-md-2" style="height:80px;">
 						<img src="" class="menuimg">
 					</div>
-					<div class="list_name_area col-md-9">
-						<input type="hidden" id="menuid<%=mcount++%>" name="menuid" value=<%=mml.getMenuId() %>>
+					<div class="list_name_area2 col-md-9">
+						<input type="hidden" class="menuid" name="menuid" value=<%=mml.getMenuId() %>>
 						<div class="menuname data row"></div>
 						<div class="row data">
 							<div class="menuamount data col-md-3 categoryLine data"><%=mml.getAmount() %></div>
@@ -147,7 +148,7 @@
 					<%=menupagebar %>
 				</div>
 			</div>
-			
+			</div>
 		</div>
 	</div>
 	
@@ -155,12 +156,12 @@
 	<div class="row">
 		<div id="mylist_info_container" class="col-md-12">
 			<div id="myExc_info" class="mylist_info col-md-6">
-				<h3>운동 정보</h3>
-				<div id="myExc_info_box" class="mylist_box"></div>
+				<div class="list_title_area col-md-12">운동 정보</div>
+				<div id="myExc_info_box" class="mylist_box col-md-12"></div>
 			</div>
 			<div id="myMenu_info" class="mylist_info col-md-6">
-				<h3>메뉴 정보</h3>
-				<div id="myMenu_info_box" class="mylist_box"></div>
+				<div class="list_title_area col-md-12">메뉴 정보</div>
+				<div id="myMenu_info_box" class="mylist_box col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -186,11 +187,17 @@
 	
 	$(".excinfocho").click(e=>{	
 		$("#myExc_info_box").html("");
+		let tlist
+		if($(e.target).parents(".excinfocho").length!=0){
+			 tlist= $(e.target).parents(".excinfocho");
+		}else{
+			tlist = $(e.target);
+		}
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/exclist",
-			type:"get",
+			type:"post",
 			data:{
-				excid:$("excid").val()
+				excid:tlist.children(".list_name_area").children(".excid").val()
 				},
 			success:data=>{
 				
@@ -209,13 +216,18 @@
 		
 	$(".menuinfocho").click(e=>{	
 		$("#myMenu_info_box").html("");
-		console.log($(e.target).parents(".menuinfocho"));
-		console.log($())
+		let tlist
+		if($(e.target).parents(".menuinfocho").length!=0){
+			 tlist= $(e.target).parents(".menuinfocho");
+		}else{
+			tlist = $(e.target);
+		}
+
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/selectmenu",
 			type:"post",
 			data:{
-				Menuid:$("#menuid").val()
+				Menuid:tlist.children(".list_name_area").children(".menuid").val()
 				},
 			success:data=>{
 				

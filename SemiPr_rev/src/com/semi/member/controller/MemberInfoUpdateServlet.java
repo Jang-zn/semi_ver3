@@ -39,11 +39,10 @@ public class MemberInfoUpdateServlet extends HttpServlet {
 		try {
 			m.setEmail(AESEncrypt.decrypt(m.getEmail()));
 			m.setPhone(AESEncrypt.decrypt(m.getPhone()));
-			m.setMemberPw(AESEncrypt.decrypt(m.getMemberPw()));
+			m.setMemberPw(m.getMemberPw());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(m);
 		request.setAttribute("m", m);
 		request.getRequestDispatcher("/views/member/memberupdate.jsp").forward(request, response);
 	}
