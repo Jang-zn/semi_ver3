@@ -143,7 +143,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 	
 	$("#excSort").change(e=>{
 		let excSort = $(e.target).val();
-		location.assign("<%=request.getContextPath()%>/member/excPlan?numPerpage=10&excSort="+excSort);
+		location.assign("<%=request.getContextPath()%>/member/excPlan?numPerpage=6&excSort="+excSort);
 	});
 	
 	
