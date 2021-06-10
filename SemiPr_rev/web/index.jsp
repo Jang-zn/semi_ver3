@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css"	href="<%=request.getContextPath()%>/Resource/css/font.css">
 	<!--------------- 배너 ---------->
 	</div>
+	
     <div id="banner_home" class="container-fluid">
     	<div class="row">
     		<div class="col-md-12">
