@@ -245,7 +245,7 @@ $.ajax({
 
 
 const callPlan=()=>{
-	let list = $("span.thism");
+	let list = $("div.thism");
 	let yymm01=null;
 	if(viewMonth<10){
 		yymm01=viewYear+"/0"+(viewMonth+1)+"/01"
