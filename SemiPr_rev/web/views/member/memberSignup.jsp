@@ -117,7 +117,7 @@
 					</div>
 					<div class="col-md-12"> 
 						<div class="box int_Nickname col-md-12"> 
-							<input type="text" id="nickName_" name="nickName" placeholder="닉네임" class="int" maxlength="12" required>
+							<input type="text" id="nickName_" name="nickName" placeholder="닉네임" class="int" maxlength="13" required>
 						</div>
 					</div> 
 					<div class="error_next_box col-md-12"></div>
