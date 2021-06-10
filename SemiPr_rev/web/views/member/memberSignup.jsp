@@ -15,6 +15,7 @@
 	<div class="col-md-4"></div>
 </div>
 <style>
+//jsp
 #pw-chk,#pw-chk2,#pw-chk3{font-family: 'GongGothicLight';}
 #gender{border:none;}
 #email-chk>p{font-family: 'GongGothicLight';}
