@@ -34,6 +34,7 @@
 	  font-family: 'GongGothicMedium' !important;
 	  font-size: 2rem;
 		font-weight: light;
+		cursor:pointer;
 	}
 	.sub a:active {
 	  color : black;
@@ -73,7 +74,12 @@
 		height: 70%;
 		width: auto; 	
 	}
-
+	
+	#logo_area img:hover{
+		cursor:pointer;
+	}
+	
+	
 	.profilePhoto {
 		width: auto;
 		height: 30%;
@@ -94,6 +100,7 @@
 	}
 	.logout:hover{
 		color:#da7316;
+		cursor:pointer;
 	}
 	.navigator_menu {
 		list-style: none;
@@ -126,6 +133,7 @@
 		font-size: 1.7rem;
 		color: #fff;
 		text-decoration:underline;
+		cursor:pointer;
 	}	
 	
         /*로그인 버튼*/
@@ -148,6 +156,7 @@
 		color: #009688;
 		text-decoration:underline;
 		font-size: 1.8rem;
+		cursor:pointer;
 	}	
 
          /* 하위메뉴 */
@@ -179,6 +188,7 @@
 	.sub>div:hover {
 		background: #009688;
 		color: #fff;
+		cursor:pointer;
 	}	
 
 
