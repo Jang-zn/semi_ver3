@@ -73,6 +73,7 @@ public class EmailAuthenticationServlet extends HttpServlet {
 		String subject="ForMuscle 인증번호입니다. "; //보내는 제목 설정
 		String content ="인증번호 ["+temp+"]입니다."; //이메일 내용설정
 		System.out.println(toEmail);
+		String ms ="";
 		Properties p = new Properties();
 		
 		//SMTP 서버 정보 설정
@@ -114,15 +115,20 @@ public class EmailAuthenticationServlet extends HttpServlet {
 
 
              System.out.println("이메일 전송완료");
-             
+              
          }catch(MessagingException e){
         	 e.printStackTrace();
+        	  ms ="fail";
+        	 response.setContentType("text/html;charset=utf-8");
+        	 response.getWriter().print(ms);
          }catch(Exception e){
         	 e.printStackTrace();
+        	 ms="fail";
+        	 response.setContentType("text/html;charset=utf-8");
+        	 response.getWriter().print(ms);
          }
-
-
-         System.out.println(AuthenticationKey);
+         
+        System.out.println(AuthenticationKey);
         HttpSession saveKey = request.getSession();
  		saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
  		
