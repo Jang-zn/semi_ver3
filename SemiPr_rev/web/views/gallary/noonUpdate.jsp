@@ -14,84 +14,60 @@
 	Date nowTime = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	Gallary g =(Gallary)request.getAttribute("gallary");
-	Member m=(Member)session.getAttribute("logged");
-	
+	Member m=(Member)session.getAttribute("logged");	
 	
 %>	
-	
-	
-	
-<div class="row">
-	<div class="col-md-1"></div>
-	<div id="n_title" class="col-md-10">
-		<h2>눈바디</h2>
-	</div>
-	<div class="col-md-1"></div>
-</div>
-<form action="<%=request.getContextPath() %>/gallary/updateGallaryEnd"  method="post" enctype="multipart/form-data" id="frm">
+
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-1"></div>
-
-		<div id="n_content_area" class="col-md-10">
-
-
-			<div id="n_content" class="col-md-6">
-				<div class="col-md-1"></div>s
-				<div id="n_date" class="col-md-5">
-					<input type="text" name="title" value="<%=g.getGallaryDate()%> " readonly
-						style="font-size: 20px; font-weight: bold;">
+	<form action="<%=request.getContextPath() %>/gallary/updateGallaryEnd"  method="post" enctype="multipart/form-data" id="frm">
+		<div id="n_title" class="col-md-12">
+			<img src="<%=request.getContextPath()%>/Resource/img/noonbody.png"><hr/>
+		</div>
+	</div>
+	<div class="row"> <!-- write 전체 -->	
+		<div class="col-md-5"> <!-- write 프리뷰 시작 -->
+			<div class="row">
+				<div id="n_title" class="col-md-12">
+						<p> <%=g.getGallaryDate()%><p><br/>
 					<input type="text" name ="writer" value="<%=m.getNickname() %>님의 기록 " readonly />
 					<input type="hidden" name="memberId" value="<%=m.getMemberId() %>" />	
 				</div>
-				<div class="col-md-2"></div>
-<!-- 				<div id="n_date" class="col-md-4">
-					<label>자유게시판공유하기 : <input type="checkbox" name="share">
-					</label>
-				</div> -->
-				<div class="row">
-					<div id="n_content_img" class="col-md-12">
-						<img id="img_preview" src="<%=request.getContextPath() %>/upload/gallary/<%=g.getImgName()%>">
-					</div>
+			</div>
+			<div class="row">
+				<div id="n_content_img" class="col-md-12">
+					<img id="img_preview" src="<%=request.getContextPath() %>/upload/gallary/<%=g.getImgName()%>">
 				</div>
 			</div>
-
-
-			<div id="n_list" class="col-md-6">
-				<br><br>
-				
-				<div id="comment_area" class="row">
-					<input type="hidden" name="galno" value="<%=g.getGalNo() %>" />
-					<textarea name="content" id="ir1" rows="19" cols="100" required><%=g.getContent()%></textarea>
+		</div> <!--Write 프리뷰 끝  -->	
+		
+		<div class="col-md-7"> <!-- write작성란 -->
+			<div id ="writegap" class="row">
+				<div  class="col-md-12"> </div>
+			</div>
+			
+			<div id="comment_area" class="row">
+	        	<div class="col-md-12">
+	        		<input type="hidden" name="galno" value="<%=g.getGalNo() %>" />
+					<textarea name="content" id="ir1" rows="19" cols="" required> <%=g.getContent()%></textarea>
 				</div>
-				
-
-
-				<div id="upload_area" class="row">
-					<div class="col-md-1 btn">+</div>
-					<div class="col-md-10">					
-						<input type="file" name="imgUp" id="imgInput"/>
+			</div>
+			<div class="row" >
+				<div id="upload_area" class="col-md-5" >
+					<input type="file" name="imgUp" id="imgInput"/>	
 						<span id="fname"><%=g.getImgName() %></span>
-						<input type="hidden" name="oldFile" value="<%=g.getImgName()%>">
-						
-						</div>
+						<input type="hidden" name="oldFile" value="<%=g.getImgName()%>">												
 				</div>
-
-				<br>
-				<div id="submit_area" class="row">
-					<div class="col-md-9"></div>
-					<div class="col-md-3 btn">
-						<div class="col-md-1"></div>
-						<div class="col-md-4"><img src="<%=request.getContextPath()%>/Resource/img/btn-check.png"></div>
-						<div class="col-md-5"><button type="submit" id="submit"><img src="<%=request.getContextPath()%>/Resource/img/btn-check.png"><span>등록</span></button></div>
-					</div>
+				<div id="submit_area" class="col-md-7">
+					<input type="submit" id="submit" value="수정"/>					
 				</div>
 			</div>
+			</form>	
 		</div>
+		 
 		
-		
-		<div class="col-md-1"></div>
-	</div>
-</form>
+	</div> <!-- 전체 row끝 -->
+</div> <!-- container 끝 -->
 
 <script type="text/javascript">
 
