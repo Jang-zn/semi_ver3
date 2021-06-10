@@ -31,14 +31,16 @@
 	<!-- 요일선택 -->
 	<div class="row">
 		<div class="col-md-1"></div>
-		<div id="select_weekday" class="col-md-10">
-			<div class="day_myList col-md-1">월</div>
-			<div class="day_myList col-md-1">화</div>
-			<div class="day_myList col-md-1">수</div>
-			<div class="day_myList col-md-1">목</div>
-			<div class="day_myList col-md-1">금</div>
-			<div class="day_myList col-md-1">토</div>
-			<div class="day_myList col-md-1">일</div>
+		<div id="select_weekday" class="col-md-10" style="align-text:center;">
+			<div class="row">
+				<div class="day_myList col-md-1" style="background-color:#df4833;">월</div>
+				<div class="day_myList col-md-1" style="background-color:orange">화</div>
+				<div class="day_myList col-md-1" style="background-color:#e6c050">수</div>
+				<div class="day_myList col-md-1" style="background-color:#54a635">목</div>
+				<div class="day_myList col-md-1" style="background-color:#28a0c8">금</div>
+				<div class="day_myList col-md-1" style="background-color:#4650aa">토</div>
+				<div class="day_myList col-md-1" style="background-color:#7850b4">일</div>
+			</div>
 		</div>
 		<div class="col-md-1"></div>
 	</div>

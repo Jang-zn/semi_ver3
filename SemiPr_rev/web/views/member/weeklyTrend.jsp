@@ -71,8 +71,8 @@
             </div>
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-1 title02" style:"text-align:right; font-weight:bolder;">운동</div>
-                    <div id="weeklyExcStatus" style="margin-bottom:3rem;">
+                    <div class="col-md-1 title02" style="text-align:right; font-weight:bolder;  margin-top:1rem;">운동</div>
+                    <div id="weeklyExcStatus">
                         <div class="col-md-1"><div class="weeklyExcStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">화</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">수</div></div>
@@ -81,12 +81,12 @@
                         <div class="col-md-1"><div class="weeklyExcStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">일</div></div>
                     </div>
-                    <div class="col-md-3 title01">연속 <%=excAchieve %> 일 달성</div>
+                    <div class="col-md-3 title01" style="margin-top:1.2rem;">연속 <%=excAchieve %> 일 달성</div>
                 </div>
             </div>  
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-1 title02" style:"text-align:right; font-weight:bolder;">식단</div>
+                    <div class="col-md-1 title02" style="text-align:right; font-weight:bolder;  margin-top:1rem;">식단</div>
                     <div id="weeklyMenuStatus">
                         <div class="col-md-1"><div class="weeklyMenuStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">화</div></div>
@@ -95,9 +95,8 @@
                         <div class="col-md-1"><div class="weeklyMenuStatus">금</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">일</div></div>
-                    </div>                    
-
-                    <div class="col-md-3 title01">연속 <%=menuAchieve %> 일 달성 </div>                    
+                    </div>
+                    <div class="col-md-3 title01" style="margin-top:1.2rem;">연속 <%=menuAchieve %> 일 달성 </div>                    
                     
                 </div>
             </div>         
@@ -375,7 +374,7 @@
             labels: ['탄수화물','단백질','지방'], 
             datasets: [{ 
             data: [ch,prot,fat],
-            backgroundColor: ['rgba(223, 72, 51, 0.5)','rgba(230, 192, 80, 0.5)','rgba(84, 166, 53, 0.5)'], 
+            backgroundColor:  , 
             borderColor: 'black', 
             borderWidth: 1 }] },           
             options: { 
