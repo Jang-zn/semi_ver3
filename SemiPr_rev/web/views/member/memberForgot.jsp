@@ -77,15 +77,12 @@ const emailAuthint=()=>{
 										
 								data : {
 									"email" : emailAu,
-									
 								},
 								success : function(data) {
 									alert("메일 전송 완료")
-									
 								}
 							});
-			
-				};
+					};
 
 
 	
@@ -104,7 +101,7 @@ const emailAuthint=()=>{
 				})
 	
 			
-	
+	//추후 패스워드를 이메일로 쏴주는
  	$("#forgot_email2").blur(function(){
 		var email =$("#forgot_email2").val();
 		var name =$("#forgot_name2").val();

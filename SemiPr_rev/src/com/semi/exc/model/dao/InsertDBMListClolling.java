@@ -23,6 +23,7 @@ public class InsertDBMListClolling {
 		    for(int i=250; i<400; i++) {
 		 		newsCrawling("https://www.nongsaro.go.kr/portal/ps/psz/psza/contentSub.ps?menuId=PS00152&pageIndex=1&pageSize=10&pageUnit=12&cntntsNo=89"+Integer.toString(i)+"&dietSeCode=254002");
 		      }
+		    System.out.println("완료");
 		   }
 		   
 		   public static void newsCrawling(String url) {
@@ -63,7 +64,8 @@ public class InsertDBMListClolling {
 			        }
 			    	String im = i.next().absUrl("src");
 			        insertEList(t,iarr,c,im);
-		      }
+			      }
+			      
 		   }
 		   
 		   	public static void insertEList(String t,int[] iarr,String c,String im) {

@@ -111,10 +111,10 @@
 	.btn01 {
  	background-color: lightgray;
 	font-family: 'GongGothicLight';	
- 	font-size: 1.8rem;
- 	color: black;
+ 	 	color: black;
  	border-radius:0.2em;
  	border:1px solid black;
+ 	
  	margin:0.5rem;
  	padding:0.3rem;
  	text-align:center;
@@ -140,7 +140,7 @@
 	appearance: none;
 }
 
-	
+
 .categoryLine{
 	border-right:1px dashed gray;
 }

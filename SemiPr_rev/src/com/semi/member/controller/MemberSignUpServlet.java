@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Membersignup
+ * Servlet implementation class MemberSignUpServlet
  */
 @WebServlet("/member/signup")
-public class MemberSignupservlet extends HttpServlet {
+public class MemberSignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSignupservlet() {
+    public MemberSignUpServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,6 @@ public class MemberSignupservlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/views/member/memberSignup.jsp").forward(request, response);
 	}
 

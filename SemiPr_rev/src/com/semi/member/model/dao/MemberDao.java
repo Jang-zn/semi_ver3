@@ -1426,10 +1426,10 @@ public class MemberDao {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				m=new Member();
-				m.setProfileImg(rs.getString("profile_img"));
-				m.setNickname(rs.getString("nickname"));
+				m.setProfileImg(rs.getString("PROFILE_IMG"));
+				m.setNickname(rs.getString("NICKNAME"));
 				m.setCha(rs.getInt(1));
-				m.setMemberId(rs.getString("member_id"));
+				m.setMemberId(memberid);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1608,7 +1608,7 @@ public class MemberDao {
 		String path=MemberDao.class.getResource("/sql/mypage_sql.properties").getPath();
 		try {
 			p.load(new FileReader(path));
-			pstmt=conn.prepareStatement(p.getProperty("selectmemberinfo"));
+			pstmt=conn.prepareStatement(p.getProperty("selectMemberinfo"));
 			pstmt.setString(1,memberid);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {

@@ -391,5 +391,182 @@ public class ExcDao {
 		return list;
 	}
 	
+	public int checkDupExc (Connection conn, MemberExercise me){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("checkDupExc"));
+			pstmt.setString(1, me.getMemberId());
+			pstmt.setString(2, me.getExcId());
+			pstmt.setString(3, me.getExcWeek());
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+			    result=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return result;
+	}
 	
+	public int updateMemberExc(Connection conn, MemberExercise me) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("updateMemberExc"));
+			pstmt.setInt(1, me.getReps());
+			pstmt.setInt(2, me.getSets());
+			pstmt.setInt(3, me.getWeight());
+			pstmt.setString(4, me.getMemberId());
+			pstmt.setString(5, me.getExcId());
+			pstmt.setString(6, me.getExcWeek());
+			result=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public List<MemberExercise> getWlist(Connection conn, String memberId, String date){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<MemberExercise> wlist = new ArrayList();
+		MemberExercise mem = null;
+		try {
+			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("getWlist"));
+			
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, date.split(",")[1]); //요일만 떼서 검색
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				mem=new MemberExercise();
+				mem.setExcNo(rs.getInt(1));
+				mem.setMemberId(rs.getString(2));
+				mem.setExcId(rs.getString(3));
+				mem.setReps(rs.getInt(5));
+				mem.setSets(rs.getInt(6));
+				mem.setWeight(rs.getInt(7));
+				mem.setExcWeek(rs.getString(8));
+				wlist.add(mem);
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return wlist;
+	}
+	
+	public int getPlanCheck(Connection conn, String memberId, String date) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("getPlanCheck"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, date.split(",")[0]);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int setMonthlyPlan(Connection conn, List<MemberExercise> wlist, String date) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		int count = 0;
+		try {
+			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("setMonthlyPlan"));
+			for(MemberExercise me:wlist) {
+				pstmt.setInt(1, me.getExcNo());
+				pstmt.setString(2, date.split(",")[0]);
+				result=pstmt.executeUpdate();
+				if(result!=0) {
+					count++;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return count;
+	}
+	
+	public int todayCheck(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("todayCheck"));
+			pstmt.setString(1, memberId);
+			result=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int autoN(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("autoN"));
+			pstmt.setString(1, memberId);
+			result=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

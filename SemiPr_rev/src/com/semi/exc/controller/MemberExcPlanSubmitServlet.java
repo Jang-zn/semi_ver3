@@ -34,18 +34,14 @@ public class MemberExcPlanSubmitServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Member m = (Member)session.getAttribute("loginMember");
+		Member m = (Member)session.getAttribute("logged");
 		String memberId = "";
 		if(m==null) {
-			// m null처리 해줘야됨///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			memberId="test50";
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
 		}else {
 			memberId = m.getMemberId();
 		}
 		Exercise exc = new ExcService().getExcInfo(request.getParameter("excName"));
-		
-		
 		MemberExercise me = new MemberExercise();
 		me.setExcId(exc.getExcId());
 		me.setMemberId(memberId);
@@ -53,17 +49,37 @@ public class MemberExcPlanSubmitServlet extends HttpServlet {
 		me.setSets(Integer.parseInt(request.getParameter("sets")));
 		me.setWeight(Integer.parseInt(request.getParameter("weight")));
 		me.setExcWeek(request.getParameter("week"));
-		int result = new ExcService().insertMemberExc(me);
-		String msg ="";
+		
+		
+		//중복체크 - 중복이면 업데이트 새거면 등록
+		int result = new ExcService().checkDupExc(me);
+		
 		if(result>0) {
-			msg="등록성공";
+			int resultD = new ExcService().updateMemberExc(me);
+			String msg ="";
+			if(resultD>0) {
+				msg="수정성공";
+			}else {
+				msg="수정실패";
+			}
+			String location = "/member/excPlan?numPerpage=6";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", location);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			
 		}else {
-			msg="등록실패";
+			int resultF = new ExcService().insertMemberExc(me);
+			String msg ="";
+			if(resultF>0) {
+				msg="등록성공";
+			}else {
+				msg="등록실패";
+			}
+			String location = "/member/excPlan?numPerpage=6";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", location);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		String location = "/member/excPlan?numPerpage=10";
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", location);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

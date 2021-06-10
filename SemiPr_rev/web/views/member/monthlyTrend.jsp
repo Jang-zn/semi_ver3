@@ -223,7 +223,6 @@ $.ajax({
 		data[0].forEach(function(ep){
 			if(ep!=null&&ep.check=='N'){
 				dataE[ep.reason]+=1
-				console.log(ep);
 			}
 		});
 		data[1].forEach(function(mp){
@@ -267,9 +266,11 @@ const callPlan=()=>{
 					if(data[0][i].check=="Y"){
 						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
 						ey++;
-					}else{
+					}else if(data[0][i].check=="N"){
 						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("eReason");
 						en++
+					}else{
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(204,204,204,0.8); color:white;");
 					}
 				}
 				if(data[1][i]!=null && data[1][i].date==$($("span.thism")[i]).text() && data[1][i].count>0){
@@ -277,9 +278,12 @@ const callPlan=()=>{
 					if(data[1][i].check=="Y"){
 						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
 						my++;
-					}else{
+					}else if(data[1][i].check=="N"){
 						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("mReason");
 						mn++;
+					}else{
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(204,204,204,0.8); color:white;");
+						
 					}
 				}
 			}
@@ -305,7 +309,7 @@ const excPie=(y, n, l)=>{
 	    labels: ["실천","미실천","남은 일자"],
 	
 	    datasets: [{
-	        data: [y/l, n/l, 1-(y/l+n/l)],
+	        data: [y, n, l-y-n],
 	        backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
 	    }]
 	};
@@ -329,7 +333,7 @@ const menuPie=(y, n, l)=>{
 			  //ajax 처리
 		labels: ["실천","미실천","남은 일자"],
 		datasets: [{
-		    data: [y/l, n/l, 1-(y/l+n/l)],
+		    data: [y, n, l-y-n],
 		    backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
 		}]
 	};
@@ -350,7 +354,7 @@ const menuPie=(y, n, l)=>{
 
 
 const reloadChart=(chart, y, n, l)=>{
-	Data = {data: [y/l, n/l, 1-(y/l+n/l)]};
+	Data = {data: [y, n, l-y-n]};
 	chart.data.datasets.forEach((dataset) => {
         dataset.data.pop();
         dataset.data.pop();
@@ -438,16 +442,16 @@ const chartCall=()=>{
 					let labels=[];
 					let countIndex=0;
 					data.forEach(function(el){
-						labels[countIndex++]=el.date;
+						if(el.check!=null){
+							labels[countIndex++]=el.date;
+						}
 					});
 					
 					//YN check
 					let planYN=[];
 					countIndex=0;
 					data.forEach(function(el){
-						if(el.check==null){
-							planYN[countIndex++]=null;
-						}else{
+						if(el.check!=null){
 							planYN[countIndex++]=el.check=='Y'?1:0;
 						}
 					});
@@ -512,15 +516,15 @@ const chartCall=()=>{
 					let labels=[];
 					let countIndex=0;
 					data.forEach(function(el){
-						labels[countIndex++]=el.date;
+						if(el.check!=null){
+							labels[countIndex++]=el.date;
+						}
 					});
 					//YN check
 					let planYN=[];
 					countIndex=0;
 					data.forEach(function(el){
-						if(el.check==null){
-							planYN[countIndex++]=null;
-						}else{
+						if(el.check!=null){
 							planYN[countIndex++]=el.check=='Y'?1:0;
 						}
 					});

@@ -35,7 +35,7 @@
     </head>
 
     <body>
-        <div id="header_container" class="row">
+        <div id="header_container" class="row container-fluid">
 <!-- 로고 3 -->
             <div id="logo_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
 <!-- 공백 -->
@@ -49,8 +49,8 @@
                     <div class="col-md-3">Plan
                         <div class="sub">
                         	<div class="plan_menu"><a href="<%=request.getContextPath()%>/member/myList">My List</a></div>
-                            <div class="plan_menu"><a href="<%=request.getContextPath()%>/member/excPlan?numPerpage=10">운동 계획 관리</a></div>
-                            <div class="plan_menu"><a href="<%=request.getContextPath()%>/member/menuPlan?numPerpage=10">식단 계획 관리</a></div>
+                            <div class="plan_menu"><a href="<%=request.getContextPath()%>/member/excPlan?numPerpage=6">운동 계획 관리</a></div>
+                            <div class="plan_menu"><a href="<%=request.getContextPath()%>/member/menuPlan?numPerpage=6">식단 계획 관리</a></div>
                         </div>
                     </div>
                     <div class="col-md-3">Progress
@@ -59,7 +59,7 @@
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/weeklyTrend">주간 실천 현황</a></div>
                             <div class="progress_menu"><a href="<%=request.getContextPath()%>/member/monthlyTrend">월간 실천 현황</a></div>
                             <!-- <div class="progress_menu"><a href="">My Data</a></div> -->
-                            <div class="progress_menu"><a href="<%=request.getContextPath()%>/gallary/list">눈바디</a></div>
+                            <div class="progress_menu"><a href="<%=request.getContextPath()%>/gallary/list?numPerpage=6">눈바디</a></div>
                         </div>
                     </div>
                     <div class="col-md-3">Community
