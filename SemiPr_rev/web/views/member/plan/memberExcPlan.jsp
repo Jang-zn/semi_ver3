@@ -146,6 +146,10 @@ String pageBar = (String)request.getAttribute("pageBar");
 		location.assign("<%=request.getContextPath()%>/member/excPlan?numPerpage=6&excSort="+excSort);
 	});
 	
+	$(function() {
+		let sort = $("#exc_box_sort").text();
+		$("#excSort").val(sort);
+	}); 
 	
 	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리..
 	const excSubmit=()=>{
