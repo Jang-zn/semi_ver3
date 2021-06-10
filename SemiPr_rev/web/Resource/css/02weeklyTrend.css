@@ -116,6 +116,7 @@
 	font-size:2.3rem;
 	font-weight:bold;	
 	text-align:left;
+	margin-bottom:0.8rem;
 }
 .list03{
 	font-family: 'GongGothicMedium';
@@ -124,4 +125,13 @@
 }
 .categoryLine{
 	border-right:1px dashed gray;
+}
+.noPlan{
+	font-size:2.3rem; 
+	color:#da7316; 
+	margin-top:3rem;
+	margin-bottom:2rem;
+	border:1.5px dashed darkgray;
+	height:20rem;
+	padding-top:8.5rem;
 }

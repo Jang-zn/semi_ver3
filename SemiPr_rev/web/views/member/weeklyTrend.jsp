@@ -81,7 +81,7 @@
                         <div class="col-md-1"><div class="weeklyExcStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">일</div></div>
                     </div>
-                    <div class="col-md-3 title01" style="margin-top:1.2rem;">연속 <%=excAchieve %> 일 달성</div>
+                    <div class="col-md-3 title01" >연속 <%=excAchieve %> 일 달성</div>
                 </div>
             </div>  
             <div class="col-md-12">
@@ -206,7 +206,7 @@
                 <div class="row listContainer01">
                     <div class="col-md-12">
                     <%if(excList.isEmpty()){  %>
-                    	<div class="list02" style="font-size:2rem; color:#da7316; margin-top:3rem;margin-bottom:2rem;"> 오늘 예정된 운동이 없습니다.</div>
+                    	<div class="list02 noPlan"> 오늘 예정된 운동이 없습니다.</div>
                     <%}else{%>
                     <div class="row">
                     	<div class="col-md-12">
@@ -270,7 +270,7 @@
                 <div class="row listContainer">
                     <div class="col-md-12">
                     	<%if(excList.isEmpty()){  %>
-	                    	<div class="list02" style="font-size:2rem; color:#da7316; margin-top:3rem;margin-bottom:2rem;"> 오늘 예정된 식단이 없습니다.</div>
+	                    	<div class="list02 noPlan"> 오늘 예정된 식단이 없습니다.</div>
 	                    <%}else{%>
 	                    <div class="row">
 							<div class="col-md-9">
@@ -328,7 +328,7 @@
                         	 <%for(int i=0; i<5; i++){ %>
                         	 		<%if(excStatistic.isEmpty() || excStatistic.get(i)==null){ %>
 	                        	 		<div class="col-md-1 num01"><%=i+1 %>. </div>
-	                        			<div class="col-md-11 num02">회원 통계 자료가 없습니다.</div>
+	                        			<div class="col-md-11 num02" style="color:gray; font-weight:light;">회원 통계 자료가 없습니다.</div>
                         	 		<%}else{ %>
 	                        	 		<div class="col-md-1 num01"><%=i+1 %>. </div>
 	                        			<div class="col-md-11 num02"><%=excStatistic.get(i).getExcName() %></div>
@@ -374,7 +374,7 @@
             labels: ['탄수화물','단백질','지방'], 
             datasets: [{ 
             data: [ch,prot,fat],
-            backgroundColor:  , 
+            backgroundColor: ['rgba(223, 72, 51, 0.5)','rgba(230, 192, 80, 0.5)','rgba(84, 166, 53, 0.5)'], 
             borderColor: 'black', 
             borderWidth: 1 }] },           
             options: { 

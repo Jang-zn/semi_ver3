@@ -17,32 +17,41 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/02memberMain.css">
 	
-	<br><br><br>
+</div>
+	<!--------------- 배너 ---------->
+     <div id="banner_home" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_memberMain.png" alt="" style="width:100%; height:auto; margin:0;">
+    		</div>
+    	</div>
+    </div>
+    <br><br>
 <div class="row">
 	<div class="col-md-1"></div>
 	<div id="member_rank" class="col-md-10"></div>
 </div>
-<div class="row">
-	
-	<div id="weekly_container" class="col-md-12">
+<div class="row">	
+	<div id="weekly_container">
 		<div id="member_info" class="col-md-4">
 			<div id="profile_area_content" class="col-md-6">
 				<img src="<%=request.getContextPath()%>/<%=minfo.getProfileImg()%>">
 			</div>
 			<div id="member_info_area" class="col-md-6">
-				<p class="profile01"><%=minfo.getNickname()%>님과</p>
+				<p class="profile01"><span class="memberName"><%=minfo.getNickname()%></span> 님과</p>
 				<p class="profile01">ForMuscle이</p>
 				<p class="profile01">함께한지 <%=minfo.getCha()%>일째</p>
-				<p class="btn02"><button onclick="location.assign('<%=request.getContextPath()%>/member/memberinfoupdate?memberid=<%=minfo.getMemberId()%>')">개인정보 수정</button></p>	
+				<p class="btn02" style="margin-left:1.5rem"><button onclick="location.assign('<%=request.getContextPath()%>/member/memberinfoupdate?memberid=<%=minfo.getMemberId()%>')">개인정보 수정</button></p>	
 			</div>
 		</div>
+		
 		<div id="weekly_check" class="col-md-8">
 			<div id="weekly_check_title_main" class="row">
-				<div class="col-md-10 title01">> 주간 달성 현황</div>
-				<div class="col-md-2 btn01">상세보기</div>
+				<div class="col-md-10 title01" style="margin-right:4.8rem;">> 주간 달성 현황</div>
+				<div class="col-md-2 btn01" >상세보기</div>
 			</div>
 			<div id="weekly_check_daybyday_exc" class="row">
-				<div class="text_plan col-md-4 title02" style="width:15rem; margin-top:1rem">운동 현황</div>
+				<div class="text_plan col-md-4 title02" style="width:15rem; margin-top:1rem; text-align:right">운동 현황</div>
 				<div class="day col-md-1 weeklyExcStatus">월</div>
 				<div class="day col-md-1 weeklyExcStatus">화</div>
 				<div class="day col-md-1 weeklyExcStatus">수</div>
@@ -52,7 +61,7 @@
 				<div class="day col-md-1 weeklyExcStatus">일</div>
 			</div>
 			<div id="weekly_check_daybyday_menu" class="row">
-				<div class="text_plan col-md-4 title02" style="width:15rem; margin-top:1rem">식단 현황</div>
+				<div class="text_plan col-md-4 title02" style="width:15rem; margin-top:1rem; text-align:right">식단 현황</div>
 				<div class="day col-md-1 weeklyMenuStatus">월</div>
 				<div class="day col-md-1 weeklyMenuStatus">화</div>
 				<div class="day col-md-1 weeklyMenuStatus">수</div>
@@ -62,10 +71,9 @@
 				<div class="day col-md-1 weeklyMenuStatus">일</div>
 			</div>
 		</div>
-	</div>
 </div>
+	</div><br><br>
 <div class="row">
-	<br><br>
 	<div id="monthly_container" class="col-md-12">
 		<div id="monthly_check_title_main" class="row">
 			<div class="col-md-7 title01">> 월간 달성 현황</div>
@@ -86,10 +94,10 @@
 		
 		<!-- 차트영역 -->
 		<div id="monthly_check_content" class="row" >
-			<div id="monthly_plan_trend" class="col-md-8" style="margin-top:10rem">
+			<div id="monthly_plan_trend" class="col-md-8" style="height:25rem;">
 				<canvas id="line"></canvas>
 			</div>
-			<div id="monthly_plan_analysis" class="col-md-4">
+			<div id="monthly_plan_analysis" class="col-md-4" style="height:25rem;">
 				<canvas id="pie"></canvas>
 			</div>
 		</div>
@@ -102,7 +110,7 @@
 <div class="row">
 	<div id="noonbody_container_main" class="col-md-12">
 		<div id="noonbody_title_main" class="row">
-			<div class="col-md-11 title01">눈바디</div>
+			<div class="col-md-11 title01">> 눈바디</div>
 				<div class="col-md-1">
 					<div class="btn01" onclick="location.assign('<%=request.getContextPath()%>/gallary/list')">
 					상세보기
@@ -119,12 +127,12 @@
 		</div>
 	</div>
 </div>
-<br><br>
+<br><br><br>
 <div class="row">	
 	<div id="daily_log_container_main">
 		<div id="daily_log_exc_area" class="col-md-6">
 			<div id="daily_log_exc_title_main" class="row">
-				<div class="col-md-10 title01">운동일지</div>
+				<div class="col-md-10 title01">> 운동일지</div>
 				<div class="col-md-2">
 					<div class="col-md-12 btn01" onclick="location.assign('<%=request.getContextPath()%>/member/dailyLog')">
 						상세보기
@@ -133,13 +141,13 @@
 			</div>
 			<div id="daily_log_exc_list" class="row">			
 			<%for(int i=0;i<exclist.length;i++){ %>
-				<p class="date"><%=exclist[i]%></p>
+				<p class="date">- <%=exclist[i]%></p>
 				<%} %>	
 			</div>
 		</div>
 		<div id="daily_log_menu_area" class="col-md-6">
 			<div id="daily_log_menu_title_main" class="row">
-				<div class="col-md-10 title01">식단일지</div>
+				<div class="col-md-10 title01">> 식단일지</div>
 				<div class="col-md-2">
 					<div class="col-md-12  btn01" onclick="location.assign('<%=request.getContextPath()%>/member/dailyLog')">
 						상세보기
@@ -148,7 +156,7 @@
 			</div>
 			<div id="daily_log_menu_list" class="row">
 			<%for(int i=0;i<menulist.length;i++){ %>
-				<p class="date"><%=menulist[i]%></p>
+				<p class="date">- <%=menulist[i]%></p>
 				<%} %>
 		
 			</div>
