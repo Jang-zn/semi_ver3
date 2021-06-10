@@ -17,11 +17,13 @@
 </head>
 <body>
 	<h2> </h2>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/02memberMyList.css">
 <div id="excUpdate-container">
    			
 	                    <form action="<%=request.getContextPath() %>/member/myexclistupdateEnd" method="post">
 	                    <input type="hidden" name="no" value="<%=mel.getExcNo()%>">
-                       	<span>요일 : </span> <select name="week">
+                       	<span class="title01">요일 : </span>
+                       	<select name="week" class="updateList">
                             <option value="월" <%=mel.getExcWeek()!=null&&mel.getExcWeek().equals("월")?"selected":"" %>>월</option>
                             <option value="화" <%=mel.getExcWeek()!=null&&mel.getExcWeek().equals("화")?"selected":"" %>>화</option>
                             <option value="수" <%=mel.getExcWeek()!=null&&mel.getExcWeek().equals("수")?"selected":"" %>>수</option>
@@ -30,10 +32,10 @@
                             <option value="토" <%=mel.getExcWeek()!=null&&mel.getExcWeek().equals("토")?"selected":"" %>>토</option>
                             <option value="일" <%=mel.getExcWeek()!=null&&mel.getExcWeek().equals("일")?"selected":"" %>>일</option>
                         </select><br>
-                       	<span>weight : </span> <input type="number" name="weight" placeholder="kg" value="<%=mel.getWeight()%>"><br>
-                       	<span>reps : </span> <input type="number" name="reps" placeholder="횟수" value="<%=mel.getReps()%>"><br>
-                        <span>sets : </span><input type="number" name="sets" placeholder="세트수" value="<%=mel.getSets()%>"><br>
-                        <input type="submit" onsubmit="return fn_close();" value="수정하기">
+                       	<span class="title01">weight : </span><input type="number" name="weight" placeholder="kg" value="<%=mel.getWeight()%>" class="updateList"><br>
+                       	<span class="title01">reps : </span><input type="number" name="reps" placeholder="횟수" value="<%=mel.getReps()%>" class="updateList"><br>
+                        <span class="title01">sets : </span><input type="number" name="sets" placeholder="세트수" value="<%=mel.getSets()%>" class="updateList"><br>
+                         <input type="submit" onsubmit="return fn_close();" value="수정하기" class="btn01" style="font-size:1.3rem;margin-top:0.5rem;">
                     </form>
 </div>
 </body>

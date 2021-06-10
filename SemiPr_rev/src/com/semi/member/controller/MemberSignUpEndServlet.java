@@ -51,7 +51,7 @@ public class MemberSignUpEndServlet extends HttpServlet {
 		
 		String path= getServletContext().getRealPath("/upload/profile");
 	
-		
+
 		int maxSize = 2*1024*1024; //2mb
 		String encode="UTF-8"; //인코딩값
 		FileRenamePolicy policy =new DefaultFileRenamePolicy();
@@ -73,7 +73,9 @@ public class MemberSignUpEndServlet extends HttpServlet {
 		}
 		
 		m.setMemberId(mr.getParameter("userId"));
+		
 		m.setMemberPw(EncryptWrapper.getSHA512(mr.getParameter("password")));
+		
 		//m.setEmail(mr.getParameter("email"));
 		String email = mr.getParameter("email");
 		try {

@@ -14,9 +14,9 @@
     font-weight: normal;
     font-style: normal;
 }
-#banner_home{
-	padding-bottom:3rem;
-	
+.container-fluid{
+	margin:0;
+	padding:0;
 }
 .box01{
 	height:15rem;
