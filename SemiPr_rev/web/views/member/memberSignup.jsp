@@ -256,10 +256,9 @@
 				<div class="btn_area row">
 					<div class="col-md-12">
 
-						<button type="submit" id="btnJoin" onsubmit="return emailAuthCheck(); vaildation();">
+						<button type="submit" id="btnJoin" onsubmit="return vaildation();">
 							가입하기
-						</button>
-
+						</button> <!--  emailAuthCheck(); -->
 					</div>
 				</div>			</div>
 			<!-- content-->
@@ -280,19 +279,21 @@
 //아이디 정규표현식
 
  	$("#userId_").blur(function(){
-		var userId=$("#userId_").val();
-		console.log(userId);
-		var idPattern = /[a-zA-Z0-9_-]{5,13}/; //아이디 13자리까지 가능
-		if(!idPattern.test(userId)){
-			alert("5~13자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
-			userId="";
-		}
+		
 		
 	}); 
 	
 //아이디 중복 	
 	$("#userId_").blur(function(userId){
-	
+		var userId=$("#userId_").val();
+		console.log(userId);
+		var idPattern = /[a-zA-Z0-9_-]{5,13}/; //아이디 13자리까지 가능
+		if(!idPattern.test(userId)){
+			$("#idCheck").css('color','#da7316');
+			$("#idCheck").css('font-family', 'GongGothiclight');
+			$("#idCheck").html("5~13자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+			return;
+		}
 			$.ajax({
 				url:"<%=request.getContextPath()%>/member/idDuplication",
 				type : "post",
