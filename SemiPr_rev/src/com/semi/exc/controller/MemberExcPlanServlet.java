@@ -38,7 +38,7 @@ public class MemberExcPlanServlet extends HttpServlet {
 		}
 		int totalData = new ExcService().getExcListCount(sort);
 		
-		PageBar p = new PageBar(request, totalData, 4, "/member/excPlan");
+		PageBar p = new PageBar(request, totalData, 4, "/member/excPlan","excSort="+sort);
 		int cPage = p.getCPage();
 		int numPerpage = p.getNumPerpage();
 		String pageBar = p.getPageBar();

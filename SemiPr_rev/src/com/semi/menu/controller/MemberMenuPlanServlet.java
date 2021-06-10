@@ -38,7 +38,7 @@ public class MemberMenuPlanServlet extends HttpServlet {
 		}
 		int totalData = new MenuService().getMenuListCount(sort);
 		
-		PageBar p = new PageBar(request, totalData, 4, "/member/menuPlan");
+		PageBar p = new PageBar(request, totalData, 4, "/member/menuPlan","menuSort="+sort);
 		int cPage = p.getCPage();
 		int numPerpage = p.getNumPerpage();
 		String pageBar = p.getPageBar();

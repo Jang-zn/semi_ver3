@@ -163,6 +163,17 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="modal-con modalE">
+    <a href="javascript:openModal(modalE);" class="close">X</a>
+    <p class="title">미실천 사유를 골라주세요</p>
+    <div class="con">
+      
+    </div>
+</div>
+
+
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/calendar.css">
 
@@ -176,12 +187,13 @@
 
 
 <script>
+
 //Piechart(10, 11) 작성 : 미실천 분류
 const pieE = $("#chart10");
 const pieChartE = new Chart(pieE, {
 	type:'pie',
 	data:{
-		labels:["게으름","다른 일정","피치못할사정","기타","향후계획"],
+		labels:["게으름","다른 일정","피치못할사정","기타","예정"],
 		datasets: [{
 		    data: [0,0,0,0,0],
 		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)", "rgba(15, 28, 65, 0.49)"],
@@ -206,7 +218,7 @@ const pieM = $("#chart11");
 const pieChartM = new Chart(pieM, {
 	type:'pie',
 	data:{
-		labels:["게으름","회식","야식","기타","향후계획"],
+		labels:["게으름","회식","야식","기타","예정"],
 		datasets: [{
 		    data: [0,0,0,0,0],
 		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)", "rgba(15, 28, 65, 0.49)"],
@@ -847,6 +859,21 @@ const chartCall=()=>{
 
 window.onload=chartCall();
 
+$(".eReason").click(e=>{
+	console.log(e.target);
+	openModal('modalE');
+});
+
+function openModal(modalname){
+	  document.get
+	  $("#modalE").fadeIn(300);
+	  $("."+modalname).fadeIn(300);
+}
+
+$("#modalE, .close").on('click',function(){
+	  $("#modalE").fadeOut(300);
+	  $(".modal-con").fadeOut(300);
+});
 
 </script>
 <script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>
