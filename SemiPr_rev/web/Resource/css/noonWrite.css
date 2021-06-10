@@ -13,27 +13,27 @@
     font-style: normal;
 }
 
-#n_content_area * {
-	border: 1px skyblue solid;
-}
-
-#n_content_area{
-	/* display:flex; */
-}
-
 input[name="writer"] {
 	border: 1px white solid;
 	font-size:20px;
 }
-#n_title{
-	font-family: 'GongGothicMedium';
+.title01{
+	font-family: 'PFStardust';
+	font-size:3.5rem;
+	font-weight:bold;	
 }
-
-#n_content_img{
-	
+.title02{
+	font-family:'GongGothicMedium';
+	font-size:3rem;
+	margin:0;
+	padding:0;
+}
+span{
+	font-family: 'GongGothicLight';
+}
+#n_content_img{	
 	padding-top:3%;
-	padding-bottom:2%;
-	
+	padding-bottom:2%;	
 	height:600px;
 }
 
@@ -49,22 +49,21 @@ input[name="writer"] {
 }
 #upload_area{
 	padding:1%;
-	margin:1%;
-		
-	
+	margin:1%;	
 }
-
+/* .writeGap{
+	height:10rem;
+} */
 #submit_area{
 	padding-top:1%;
 	padding-bottom:1%;
 	
 }
-#submit_area>button{
+/* #submit_area>button{
 	margin:1%;
-	
 
 	
-}
+} */
 #submit_area img{
 	width:100%;
 }
@@ -76,24 +75,30 @@ input[name="writer"] {
 #upload_area{
 	font-family: 'GongGothicLight';
 }
-input[type="submit"]{
-	padding:5px 10px 5px 10px; 
-	border-radius:0.2em;
-	font-family: 'GongGothicLight';
-}
-input[type="submit"]:hover{
-		 background: #009688;
-         color: #fff;
-         border-radius:0.2em;
-         border:#009688 1px solid;
-}
-
-	
-
-.btnb{
-	border:1px solid black;
-}
 
 #writegap{
-	height:80px;
+	height:7.8rem;
+}
+
+
+#n_content_img{
+	border-radius:0.2em;
+  	border:1px solid lightgray;
+  	padding:0;
+  	height:100%;
+  	width:100%;
+}
+.btn02>input{
+	border-radius:0.2em;
+  	border:1px solid black;
+  	background-color:lightgray;
+  	font-family: 'GongGothicLight';
+  	font-size:2rem;
+  	text-align: center;
+  	padding:0.3rem;
+  	width:7rem;
+}
+
+.btn02>input:hover{
+	background-color:cadetblue;
 }
