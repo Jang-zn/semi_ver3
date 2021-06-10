@@ -14,7 +14,18 @@
 	</div>
 	<div class="col-md-4"></div>
 </div>
-
+<style>
+#pw-chk,#pw-chk2,#pw-chk3{font-family: 'GongGothicLight';}
+#gender{border:none;}
+#email-chk>p{font-family: 'GongGothicLight';}
+#email-chk>button{	border-radius:0.2em;
+  	border:1px solid black;
+  	background-color:lightgray;
+  	font-family: 'GongGothicLight';
+  	font-size:1.5rem;
+  	text-align: center;
+  	margin-bottom:0.1rem;}
+</style>
 
 <div class="row">
 	<div class="col-md-4"></div>

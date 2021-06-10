@@ -17,8 +17,10 @@
 	</div>
 	<div class="col-md-4"></div>
 </div>
-
-
+<style>
+#pw-chk,#pw-chk2,#pw-chk3{font-family: 'GongGothicLight';}
+#gender{border:none;}
+</style>
 <div class="row">
 	<div class="col-md-4"></div>
 	
