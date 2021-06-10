@@ -18,7 +18,7 @@ String pageBar = (String)request.getAttribute("pageBar");
     font-size: 2.3rem;
     font-weight: bold;"id="sub_change" class="">
 		        <div class="btn col-md-2">식단 List</div>
-		        <div class="btn col-md-2">식단 등록하기(ADMIN)</div>
+		        
     	</div>
     </div>
     
@@ -119,7 +119,6 @@ String pageBar = (String)request.getAttribute("pageBar");
 			url:"<%=request.getContextPath()%>/ajax/menuListClick.do?name="+name,
 			dataType:"json",
 			success:data=>{
-				console.log(data);
 				$("#exc_name").text(data.menuName);
 				$("#exc_detail_info_container>div").text(data.menuManual);
 				$("#exc_img>img").attr("src",data.fileList[0]);
