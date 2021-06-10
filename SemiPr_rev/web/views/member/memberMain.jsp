@@ -36,7 +36,11 @@
 	<div id="weekly_container">
 		<div id="member_info" class="col-md-4">
 			<div id="profile_area_content" class="col-md-6">
-				<img src="<%=request.getContextPath()%>/<%=minfo.getProfileImg()%>">
+			<%if(minfo.getProfileImg()!=null) {%>
+				<img src="<%=request.getContextPath()%>/upload/profile/<%=minfo.getProfileImg()%>">
+			<%}else{ %>
+				<img src="<%=request.getContextPath()%>/Resource/img/profile.png">
+			<%} %>
 			</div>
 			<div id="member_info_area" class="col-md-6">
 				<p class="profile01"><span class="memberName"><%=minfo.getNickname()%></span> 님과</p>
@@ -120,12 +124,13 @@
 		</div>
 	</div>
 	<div id="noonbody_thumb_area" class="col-md-12">
-		<div class="row">
-			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[0]%>"></div>
-			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[1]%>"></div>
-			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[2]%>"></div>
-			<div class="noonbody_thumb" class="col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[3]%>"></div>
-		</div>
+		<%for(int i=0;i<gal.length;i++){
+			if(gal[i]!=null){%>
+				<div class="noonbody_thumb col-md-3"><img src="<%=request.getContextPath()%>/<%=gal[i]%>"></div>
+			<%}else{ %>
+				<div class="noonbody_thumb col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/profile.png"></div>
+			<%} %>
+		<%} %>
 	</div>
 </div>
 <br><br><br>
@@ -141,9 +146,17 @@
 				</div>
 			</div>
 			<div id="daily_log_exc_list" class="row">			
-			<%for(int i=0;i<exclist.length;i++){ %>
-				<p class="date">- <%=exclist[i]%></p>
-				<%} %>	
+			<%for(int i=0;i<menulist.length;i++){ %>
+				<%if(menulist[i]!=null){%>
+					<p class="date">- <%=exclist[i]%></p>	
+				<%}else{%>
+					<%if(i==0){ %>
+						<p class="date">- 계획을 등록하고 실천해보세요!</p>
+					<%}else{ %>
+						<p class="date">-C</p>
+					<%} %>
+				<%} %>
+			<%} %>
 			</div>
 		</div>
 		<div id="daily_log_menu_area" class="col-md-6">
@@ -157,9 +170,16 @@
 			</div>
 			<div id="daily_log_menu_list" class="row">
 			<%for(int i=0;i<menulist.length;i++){ %>
-				<p class="date">- <%=menulist[i]%></p>
+				<%if(menulist[i]!=null){%>
+					<p class="date">- <%=menulist[i]%></p>	
+				<%}else{%>
+					<%if(i==0){ %>
+						<p class="date">- 계획을 등록하고 실천해보세요!</p>
+					<%}else{ %>
+						<p class="date">-C</p>
+					<%} %>
 				<%} %>
-		
+			<%} %>
 			</div>
 		</div>
 	</div>
@@ -172,7 +192,7 @@ const Pie=()=>{
 	let ctx = $('#pie').get(0).getContext("2d");
 	let Data = {
 		    //ajax 처리
-	    labels: ["실천","미실천","남은 일자"],
+	    labels: ["실천","미실천","계획없음"],
 	    datasets: [{
 	        data: [0, 0, 0],
 	        backgroundColor: ['rgba(84, 166, 53, 0.5)','rgba(223, 72, 51, 0.5)','rgba(230, 192, 80, 0.5)'],
@@ -412,15 +432,22 @@ window.onload=$("#trendSort").trigger("change");
 
 $(".date").each((i,v)=>{
 	if($(".date").eq(i).text().indexOf("Y")>0){
-	var text=$(".date").eq(i).text();
-	$(".date").eq(i).text(text.replace("Y",""));	
-	$(".date").eq(i).css("background-color","#54a635");
-}else{
-	var text=$(".date").eq(i).text();
-	$(".date").eq(i).text(text.replace("N",""));	
-}
-	
-})
+		var text=$(".date").eq(i).text();
+		$(".date").eq(i).text(text.replace("Y",""));	
+		$(".date").eq(i).css("background-color","rgba(84, 166, 53, 0.7)");
+		
+	}else if($(".date").eq(i).text().indexOf("N")>0){
+		var text=$(".date").eq(i).text();
+		$(".date").eq(i).text(text.replace("N",""));
+		$(".date").eq(i).css("background-color","rgba(223, 72, 51, 0.7)");
+		
+	}else{
+		var text=$(".date").eq(i).text();
+		$(".date").eq(i).text(text.replace("C",""));
+		$(".date").eq(i).css("background-color","rgba(230, 192, 80, 0.7)");
+		
+	}
+});
 
 
 /* 주간 달성 현황 색상 */

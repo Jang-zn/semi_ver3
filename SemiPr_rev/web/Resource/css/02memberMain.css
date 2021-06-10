@@ -35,10 +35,16 @@
 	height:19rem;
 	padding-top:1.5rem;
 }
+#profile_area_content{
+	height:150px;
+	border:1.5px dashed darkgray;
+	
+}
+
 #profile_area_content>img{
 	height:100%;
 	width:100%;
-	text-align:center;
+	
 }
 .profile01{	
 	font-family: 'GongGothicMedium';
@@ -137,9 +143,19 @@ button{
 }
 .noonbody_thumb{
 	max-width: 95%;
-	height:95%;
+	height:100%;
+	border:1.5px dashed darkgray;
 }
+.noonbody_thumb>img{
+	width:100%;
+	height:100%;
+}
+
 
 #monthly_plan_analysis{
 	border-left:1.5px dashed darkgray;	
+}
+
+.date{
+	border-bottom:2px dashed gray;
 }

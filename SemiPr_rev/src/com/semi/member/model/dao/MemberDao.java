@@ -1494,7 +1494,7 @@ public class MemberDao {
 			pstmt.setString(1, memberid);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				exclist[num]=rs.getString("exc_date");
+				exclist[num]=rs.getString("exc_date").substring(0,10);
 				exclist[num]+=rs.getString("exc_plan_check");
 				num++;
 			}
@@ -1526,9 +1526,9 @@ public class MemberDao {
 			pstmt.setString(1, memberid);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				menulist[num]=rs.getString("menu_date");
+				
+				menulist[num]=rs.getString("menu_date").substring(0,10);
 				menulist[num]+=rs.getString("menu_plan_check");
-				System.out.println(menulist[num]);
 				num++;
 			}
 		} catch (SQLException e) {
