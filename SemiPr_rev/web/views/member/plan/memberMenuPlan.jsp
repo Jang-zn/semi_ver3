@@ -20,7 +20,15 @@ String pageBar = (String)request.getAttribute("pageBar");
 		        <div class="btn col-md-2">식단 List</div>
 		        
     	</div>
-    </div>
+    	<div id="sort_container" style="margin-top: 13px;" class="col-md-2">
+    	<div class="col-md-3" style="margin-top: 8px;">
+    			<select id="excSort">
+	                		<option>분류 선택</option>
+		                    <option value="고기">- 고기 -</option>
+		                    <option value="채소">- 채소 -</option>
+	                	</select></div>
+  	  </div>
+  	  </div>
     
     <div class=row style="
     border: 2px solid;
@@ -31,16 +39,8 @@ String pageBar = (String)request.getAttribute("pageBar");
 	             <div id="sort_container"style="
     margin-top: 13px;
 " class="row">
-	                <div class="col-md-3" style="
-    margin-top: 8px;
-">
-	                	<select id="excSort">
-	                		<option>분류 선택</option>
-		                    <option value="고기">- 고기 -</option>
-		                    <option value="채소">- 채소 -</option>
-	                	</select>
-	                </div>
-	                <div class="btn col-md-2">인기 식단</div>
+	
+	               
 	            </div>
 	            <br>
 	            

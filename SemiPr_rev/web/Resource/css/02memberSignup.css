@@ -173,6 +173,11 @@ select#mm{
 	font-family:'GongGothiclight';
 	font-size:15px;
 }
+#pw-chk>p{
+	font-family: 'GongGothicLight';
+}
+#pw-chk,#pw-chk2,#pw-chk3{font-family: 'GongGothicLight';}
+#gender{border:none;}
 	
 	
 	
