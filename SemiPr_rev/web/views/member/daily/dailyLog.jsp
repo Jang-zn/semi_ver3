@@ -48,7 +48,7 @@
 				<div class="exc_plan_list row excday">
 					<input type="hidden" name="excno" value="<%=mel.getExcNo() %>">
 					<input type="hidden" name="excid" value="<%=mel.getExcId() %>">	
-					<span><%=mel.getExcName() %></span><span><%=mel.getReps() %></span><span><%=mel.getSets() %></span>
+					<span>운동이름: <%=mel.getExcName() %></span><span>reps: <%=mel.getReps() %></span><span>sets: <%=mel.getSets() %></span>
 				</div>
 				<%} %>
 				</div>
@@ -183,7 +183,7 @@ $(".excday2").click(e=>{
 				let div=$("<div>").attr("class","exc_plan_list row");
 				console.log(div);
 				let span=$("<span>")			
-				$("#excdown").append(div.append(span.html(data[i].excName+" "+data[i].reps+" "+data[i].sets)));
+				$("#excdown").append(div.append(span.html("운동이름:"+data[i].excName+"reps:"+data[i].reps+"sets:"+data[i].sets)));
 				}
 			}
 		})
@@ -295,7 +295,7 @@ $(".excday2").click(e=>{
 				data=data.split(",");
 				$("#excrecord").text(data[0].replace("[",""));
 				$("#menurecord").text(data[1].replace("]",""));
-				
+				console.log(data);
 			}		
 	});
 	

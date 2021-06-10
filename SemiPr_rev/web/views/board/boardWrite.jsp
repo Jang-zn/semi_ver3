@@ -15,11 +15,11 @@
 	charset="utf-8"></script>
 
 
-
+<br>
+<br>
 <div class="row">
 
-	<div class="col-md-1"></div>
-	<div class="col-md-10">
+	<div class="col-md-12">
 		<form action="<%=request.getContextPath()%>/board/boardWriteEnd" method="post" enctype="multipart/form-data"
 		onsubmit="return submitContents();">
 			
@@ -48,36 +48,36 @@
 
 
 			<div id="write_content_area" class="row">
-				<div class="col-md-12">
+				<div class="">
 					<textarea name="content" id="ir1" rows="30" cols="180" required> 내용을 입력하세요 </textarea>
 				</div>
-				<br>
-				<button type="button" class="btn-reply">추가</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn-reply btnb btn">추가</button>
 			</div>
-
-			<div id="write_upload_area" class="row filecount">
+			
+			<div id="write_upload_area" style="    text-align: center;
+			    align-self: center;
+			    font-family: 'GongGothicLight';
+			    font-size: 1.7rem;
+			    border-radius: 0.2em;
+			    border: 1.5px solid lightgray;"class="row filecount">
 					<div class="col-md-4">
 						<input type="file" id="write_upload" name="upload0" style="width: 100%">	
 					</div>
-					<div class="col-md-8">
-						<button type="button" onclick="bbb(event);">삭제</button>
+					<div class="col-md-1">
+						<button class="btn btnb"type="button" onclick="bbb(event);">삭제</button>
 					</div>
 			</div>
-
+			<br>
 			<div id="write_btn_area" class="row">
 				<div class="col-md-4"></div>
-				<div class="btnb col-md-2 btn ">
-					<div class="col-md-3" style="margin-left:30px">
-						<img src="<%=request.getContextPath()%>/Resource/img/btn-check.png" style="width:100%">
-					</div>
-					<div class="col-md-6"><button type="submit">등록하기</button></div>
-				</div>
-				<div class="btn col-md-2 btnb"  onclick='location.assign("<%=request.getContextPath()%>/board/boardList?numPerpage=15")'>돌아가기</div>
+					
+				<button style=" margin-right: 20px;"type="submit" class="btnb btn col-md-2">등록하기</button>
+				
+				<div class="btn col-md-2 btnb"  style ="padding:3px;"onclick='location.assign("<%=request.getContextPath()%>/board/boardList?numPerpage=15")'>돌아가기</div>
 				<div class="col-md-4"></div>
 			</div>
 		</form>
 	</div>
-	<div class="col-md-1"></div>
 </div>
 
 
@@ -92,7 +92,7 @@
 		$(".btn-reply").click(e=>{
 			const filecount = $(".filecount").length;
 			if(filecount==5){
-				alert("그만!!");
+				alert("더이상 생성 할 수 없습니다.");
 				
 			}else{
 			const imgaddclone = $(e.target).parent("div").next().clone(true);
@@ -111,10 +111,8 @@
 		const bbb=(e)=>{
 			const filecount = $(".filecount").length;
 			if(filecount==1){
-				alert("그만!!");
 				$(e.target).off("click");
 			}else{
-			alert($(e.target).parent().siblings().find("input").attr("name")+"삭제");
 			$(e.target).parent().parent().remove();
 				
 			}
