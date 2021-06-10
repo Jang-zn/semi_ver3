@@ -243,11 +243,10 @@
 				<div class="row">
 					<div class="join_title col-md-12">
 						<label>프로필 사진</label>
-					<!-- onchange="setThumbnail(event);" -->
+					
 					</div>
 					<div class="col-md-12 inputFile"><input type="file" id="image" accept="image/*" name="userProfile"/></div>
 					<div id="image_container" class="col-md-12"></div>
-					<!-- <button class="btn-delete">삭제</button> -->
 					<div id="btn-container" class="col-md-12"></div>
 				</div>
 			
@@ -709,7 +708,7 @@ function dayCheck(){
 	 }else {
 		$("#ddError").css('color','green');
 		$("#ddError").html('좋은 날에 태어나셨군요. ');
-		return true;
+		ddCheck = true;
 	 	}       
 }
 
@@ -738,7 +737,8 @@ function readInputFile(input){
 		}
 			
 		reader.onload = function(e){
-			$("#image_container").html("<img src="+e.target.result+">");
+			$("#image_container").html("<img src="+e.target.result+" style='width:300px; height:140px;'>");
+			//attr('src', e.target.result);
 		}
 		reader.readAsDataURL(input.files[0]);
 		
@@ -754,6 +754,7 @@ $("#image").on('change',function(){
 	btnDel.click(e=>{
 		$("#image_container").empty(); 
 		$(".btnDel").remove();
+		
 	});
 	if($('.btnDel').length == 0){//버튼 한 개만 생성하게 만들기 
 	$("#btn-container").append(btnDel);
