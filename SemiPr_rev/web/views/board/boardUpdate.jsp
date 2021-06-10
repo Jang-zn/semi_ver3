@@ -8,29 +8,46 @@
 %>
 <%@ include file="/views/common/header.jsp"%>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/boardWrite.css">
+	href="<%=request.getContextPath()%>/Resource/css/02boardWrite.css">
+	<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/Resource/css/font.css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/views/board/editor/js/service/HuskyEZCreator.js"
 	charset="utf-8"></script>
 
 
-
+<br>
+<br>
 <div class="row">
 
-	<div class="col-md-1"></div>
-	<div class="col-md-10">
+	<div class="col-md-12">
 		<form action="<%=request.getContextPath()%>/board/updateEnd" method="post" enctype="multipart/form-data"
 		onsubmit="submitContents();">
 			<input type="hidden" value="<%=b.getContentNo()%>" name="contentNo">
-			<div id="write_title_area" class="flex margin1 row">
-				<div class="col-md-1">
-					<select class="marginlr" name="classfication" required>
-						<option value="">-분류-</option>
+			<div id="write_title_area" class="row"style="    text-align: center;
+    align-self: center;
+    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;"class="flex margin1 row">
+				<div class="col-md-1" style="    font-family: 'PFStardust';
+    font-size: 1.7rem;
+    font-weight: bold;
+    padding: 0.3rem;
+    border-radius: 0.2em;
+    border: 1.5px solid black;">
+					<select  name="classfication" required>
+						<option value="">분류</option>
 						<option value="자유" <%=b.getCategory()==null?"":"selected" %>>자유</option>
 						<option value="눈바디" <%=b.getCategory()==null?"":"selected" %>>눈바디</option>
 					</select>
 				</div>
-				<div class="col-md-11">
+				<div class="col-md-11" style="    font-family: 'PFStardust';
+    font-size: 1.7rem;
+    font-weight: bold;
+    padding: 0.3rem;
+    border-radius: 0.2em;
+    border: 1.5px solid black;">
 					<input type="text" id="write_title" name="title"
 						placeholder="제목을 입력하세요" required style="width: 100%;" value="<%=b.getTitle()%>">
 					<!-- 임의로 준부분  -->
@@ -41,24 +58,34 @@
 
 
 
-			<div id="write_content_area" class="row">
+			<div id="write_content_area" class="row" style="border-radius:0.2em;
+		border:1.5px solid black;">
 				<textarea name="content" id="ir1" rows="30" cols="180" required><%=b.getContent() %></textarea>
 				<br>
-				<button type="button" class="btn-reply">추가</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn-reply btnb btn">추가</button>
 			</div>
 			<%if(filelist[0]==null){ %>
-				<div id="write_upload_area" class="row filecount">
+				<div id="write_upload_area" class="row filecount"style="
+			    font-family: 'GongGothicLight';
+			    font-size: 1.7rem;
+			    border-radius: 0.2em;
+			    border: 1.5px solid lightgray;
+			    ">
 							<div class="col-md-4">
 								<input type="file" id="write_upload" name="upload0" style="width: 100%">	
 							</div>
 							<div class="col-md-8">
-									<button type="button" onclick="bbb(event);">삭제</button>
+									<button class="btnb btn"type="button" onclick="bbb(event);">삭제</button>
 							</div>
 				</div>
 			<%} else{%>
 			<%for(int i=0; i<5; i++) {%>
 				<%if(filelist[i]==null) break; else{%>
-					<div id="write_upload_area" class="row filecount">
+					<div id="write_upload_area" class="row filecount" style="
+			    font-family: 'GongGothicLight';
+			    border-radius: 0.2em;
+			    border: 1.5px solid lightgray;
+			    ">
 						<div class="col-md-4">
 							<input type="file" id="write_upload" name="upload<%=i %>" style="width: 100%">	
 						</div>
@@ -66,8 +93,8 @@
 							<span style="background: white; font-size: 19px; position: absolute; width: 150px;"><%=filelist[i] %></span>
 							<input type="hidden" name="oldfile<%=i%>" value="<%=filelist[i]%>">
 						</div>
-						<div class="col-md-4">
-								<button type="button" onclick="bbb(event);">삭제</button>
+						<div style="text-align:center"class="col-md-4">
+								<button class="btn btnb"type="button" onclick="bbb(event);">삭제</button>
 						</div>
 						<%if(filelist[i]!=null){ %>	
 							<input type="hidden" name="oldfileR<%=i%>" value="<%=filelist[i]%>">
@@ -77,21 +104,15 @@
 			<%} %>
 			<%} %>
 			
-
+			<br>
 			<div id="write_btn_area" class="row">
 				<div class="col-md-4"></div>
-				<div class="btnb col-md-2 btn ">
-					<div class="col-md-3" style="margin-left:30px">
-						<img src="<%=request.getContextPath()%>/Resource/img/btn-check.png" style="width:100%">
-					</div>
-					<div class="col-md-6" style="padding-left:0; text-align:left;"><button type="submit" style="font-size:9px">수정하기</button></div>
-				</div>
+					<button style="margin-right:20px;"class= "col-md-2 btnb btn"type="submit" >수정하기</button>
 				<div class="btn col-md-2 btnb"  onclick='location.assign("<%=request.getContextPath()%>/board/content?no=<%=b.getContentNo()%>")'>돌아가기</div>
 				<div class="col-md-4"></div>
 			</div>
 		</form>
 	</div>
-	<div class="col-md-1"></div>
 </div>
 
 

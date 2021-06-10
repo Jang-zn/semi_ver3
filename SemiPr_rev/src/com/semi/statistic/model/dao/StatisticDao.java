@@ -5,7 +5,7 @@ import static com.semi.common.JdbcTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.Date;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -204,24 +204,32 @@ public class StatisticDao {
 		int count=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("excAchieveCount"));
-			pstmt.setString(1, memberId);			
+			pstmt.setString(1, memberId);		
 			rs=pstmt.executeQuery();
-			Calendar cal = Calendar.getInstance(); //오늘 날짜 생성			
+			Calendar cal = Calendar.getInstance(); //오늘 날짜 생성	
+			Calendar cal2 = Calendar.getInstance();
+			cal2.add(Calendar.DATE, -1);
 			here:
 			while(rs.next()) {	
 				Date d=new Date(cal.getTimeInMillis());
-				if(d==rs.getDate("exc_date")) { //해당 날짜 값이 null이 아니면
+				Date d2=new Date(cal2.getTimeInMillis());
+				String day1=d.toString();
+				String day2=d2.toString();
+				String day=rs.getDate("exc_date").toString();
+				if(day.equals(day1)||day.equals(day2)) { //해당 날짜 값이 null이 아니면
 					if(rs.getString("max(exc_plan_check)").equals("Y")){
+						System.out.println(day1+" : "+day2+" : "+day);
 						count++;						
 					}else {
 						break here;
 					}
 					cal.add(Calendar.DATE, -1); //1일 마이너스
+					cal2.add(Calendar.DATE, -1);
 				}else {
 					break here;
 				}
 				
-			}				
+			}					
 			
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -243,17 +251,25 @@ public class StatisticDao {
 			pstmt=conn.prepareStatement(prop.getProperty("menuAchieveCount"));
 			pstmt.setString(1, memberId);		
 			rs=pstmt.executeQuery();
-			Calendar cal = Calendar.getInstance(); //오늘 날짜 생성			
+			Calendar cal = Calendar.getInstance(); //오늘 날짜 생성	
+			Calendar cal2 = Calendar.getInstance();
+			cal2.add(Calendar.DATE, -1);
 			here:
 			while(rs.next()) {	
 				Date d=new Date(cal.getTimeInMillis());
-				if(d==rs.getDate("menu_date")) { //해당 날짜 값이 null이 아니면
+				Date d2=new Date(cal2.getTimeInMillis());
+				String day1=d.toString();
+				String day2=d2.toString();
+				String day=rs.getDate("menu_date").toString();
+				if(day.equals(day1)||day.equals(day2)) { //해당 날짜 값이 null이 아니면
 					if(rs.getString("max(menu_plan_check)").equals("Y")){
+						System.out.println(day1+" : "+day2+" : "+day);
 						count++;						
 					}else {
 						break here;
 					}
 					cal.add(Calendar.DATE, -1); //1일 마이너스
+					cal2.add(Calendar.DATE, -1);
 				}else {
 					break here;
 				}

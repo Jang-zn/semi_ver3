@@ -25,27 +25,27 @@
 	href="<%=request.getContextPath()%>/Resource/css/02boardContent.css">
 
 
+<br>
 <div class="board row">
 	<div class="col-md-1"></div>
 
-	<div id="board_container" class="col-md-10">
+	<div id="board_container" class="col-md-12">
 		<!-- 글 수 + 검색창 -->
-		<div class="row">
-			<div id="content_count" class="">
-				<div style="font-weight: bolder;" class="col-md-1">글 수</div>
-				<div style="color: orange;" class="col-md-1"><%=boardListCount %></div>
-				<div class="col-md-4"></div>
+			<div id="content_count" class="row">
+				<div class="col-md-1" style="    margin-top: 10px;">전체 글 </div>
+				<div style="color: orange; margin-top: 10px;" class="col-md-1" ><%=boardListCount %></div>
+				<div class="col-md-5"></div>
 
-				<div id="board_search" class="col-md-6">
+				<div id="board_search" class="col-md-5">
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-8 inputBox">
 									<div id="search-Title" >
 										<form action="<%=request.getContextPath()%>/board/boardSearch" method="GET">
-											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword"
-											value=<%=searchType!=null&&searchType.equals("title")?searchKeyword:"" %>> 
+											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword" 
+											value=<%=searchType!=null&&searchType.equals("title")?searchKeyword:"" %> > 
 											<input type="hidden" name="searchType" value="title">
-											<input type="hidden" value="15" name="numPerpage2">
-											<input type="submit" value="검색">
+												<input type="hidden" value="15" name="numPerpage2">
+											<input type="submit" value="검색" class="btn01">
 										</form>
 									</div>
 							<div id="search-TitleContent">
@@ -53,8 +53,8 @@
 									<input type="text" placeholder="제목+내용을 입력하세요" name="searchKeyword"
 									value=<%=searchType!=null&&searchType.equals("titlecontent")?searchKeyword:"" %>> 
 									<input type="hidden" name="searchType" value="titlecontent">
-									<input type="hidden" value="15" name="numPerpage2">
-									<input type="submit" value="검색">
+										<input type="hidden" value="15" name="numPerpage2">
+									<input type="submit" value="검색" class="btn01">
 								</form>
 							</div>
 							<div id="search-Content">
@@ -62,8 +62,8 @@
 								<input type="text" placeholder="내용을 입력하세요" name="searchKeyword"
 								value=<%=searchType!=null&&searchType.equals("content")?searchKeyword:"" %>> 
 								<input type="hidden" name="searchType" value="content">
-								<input type="hidden" value="15" name="numPerpage2">
-								<input type="submit" value="검색">
+									<input type="hidden" value="15" name="numPerpage2">
+								<input type="submit" value="검색" class="btn01">
 							</form>
 							</div>
 							<div id="search-Writer">
@@ -71,12 +71,12 @@
 									<input type="text" placeholder="작성자를 입력하세요" name="searchKeyword"
 									value=<%=searchType!=null&&searchType.equals("writer")?searchKeyword:"" %>>  
 									<input type="hidden" name="searchType" value="writer">
-									<input type="hidden" value="15" name="numPerpage2">
-									<input type="submit" value="검색">
+										<input type="hidden" value="15" name="numPerpage2">
+									<input type="submit" value="검색" class="btn01">
 								</form>
 							</div>
 						</div> 
-						<div class="col-md-4">
+						<div class="col-md-2" style="margin-top: 10px;">
 							<select id="search-Type">
 								<option value="Title" <%=searchType!=null&&searchType.equals("title")?"selected":"" %>>제목</option>
 								<option value="Content"  <%=searchType!=null&&searchType.equals("content")?"selected":"" %>>내용</option>
@@ -87,8 +87,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
+		<br>
 
 
 
@@ -97,15 +96,20 @@
 		<%if (b==null){%>
 			게시글이 삭제 되었습니다.
 		<%} else{%>
-		<div id="board_content_area" class="row">
+		<div id="board_content_area" class="row" style="text-align: center;
+    align-self: center;
+    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;">
 			<div id="title" class="col-md-1"><%=b.getCategory()%></div>
-			<div id="title" class="col-md-8"><%=b.getTitle() %></div>
-			<div class="content_info col-md-1"><%=b.getWriter() %></div>
-			<div class="content_info col-md-1"><%=b.getWriteDate() %></div>
+			<div id="title" class="col-md-6"><%=b.getTitle() %></div>
+			<div class="content_info col-md-2"><%=b.getWriter() %></div>
+			<div class="content_info col-md-2"><%=b.getWriteDate() %></div>
 			<div class="content_info col-md-1"><%=b.getReadCount() %></div>
 		</div>
 		<%} %>
-
+		<br>
 
 
 		<div id="content_file" class="row">
@@ -131,19 +135,21 @@
 
 
 
-		<div id="content_detail" class="row">
+		<div id="content_detail" class="row" style="align-self: center;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;">
 			<div id="content_text">
 				<div style="height:400px;"><%=b.getContent()%></div>
 			</div>
 		</div>
-
+		<br>
 		<div id="content_btn_area" class="row">
 			<div class="col-md-5"></div>
 			<!-- 관리자 or 작성자만 수정 삭제 가능하게 -->
 			<%if(loginMember!=null) {%>
 				<%if(loginMember.getMemberId().equals("admin")||loginMember.getMemberId().equals(b.getMemberId())){ %>
-					<div class="btn col-md-1" onclick="location.assign('<%=request.getContextPath()%>/board/update?no=<%=b.getContentNo()%>');">수정하기</div>
-					<div class="btn col-md-1" onclick="deleteBoard();">삭제하기</div>
+					<button class="btn01 btnb col-md-1" onclick="location.assign('<%=request.getContextPath()%>/board/update?no=<%=b.getContentNo()%>');">수정하기</button>
+					<button class="btn01 btnb col-md-1" onclick="deleteBoard();">삭제하기</button>
 				 <%} %> 
 			 <%} %>
 			<div class="col-md-5"></div>
@@ -152,45 +158,53 @@
 
 		<div id="reply_area" class="col-md-12">
 			<br>
-
+		
 			<div id="reply_count" class="row">
-				<span> 댓글 : <%=commentCount %>개</span>
+				<span style="    font-family: 'GongGothicLight';
+    font-size: 1.7rem;"> 댓글 : <%=commentCount %>개</span>
 			</div>
-
+			<br>
 
 
 			<!-- Lv1 -->
+		
 			<%if(relist==null){ %>
 				자료가 없어요!
 			<%} else{%>
 				<%for(Reply re : relist) {%>
 					<%if(re.getReplyLevel()==1) {%>
-					<div class="reply row">
+					<div class="reply row" style="    align-self: center;
+    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;
+    padding: 10px;">
 						<div class="reply_img col-md-1">
 							<img src="<%=request.getContextPath()%>/Resource/img/no_image.png">
 						</div>
 		
 						<div class="reply_writer_info col-md-1">
-							<div class="row">
-								<p class="reply_writer_info_nickname col-md-12"><%=re.getWriter() %></p>
-								<p class="reply_writer_info_etc col-md-12"><%=re.getReplyDate() %></p>
-							</div>
+							<p class="reply_writer_info_nickname "style="font-size:12px"><%=re.getWriter() %></p>
+							<p class="reply_writer_info_etc "style="font-size:10px"><%=re.getReplyDate() %></p>
 						</div>
 		
 						<div class="reply_content col-md-10">
 							<div class="reply_content_area row">
-								<p><%=re.getReplyContent() %></p>
+								<p style="    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;"><%=re.getReplyContent() %></p>
 							</div>
 							<div class="reply_btn_area row">
 								<div class="col-md-9"></div>
-								<div class="reply_btn col-md-1"><button onclick="loginCheckReply();" value ="<%=re.getReplyNo()%>" class="lev1">댓글</button></div>
+								<div class="reply_btn col-md-1"><button style="width:50px;" onclick="loginCheckReply();" value ="<%=re.getReplyNo()%>" class="lev1 btn01">댓글</button></div>
 								<input type="hidden" value="<%=re.getReplyNo()%>">
 								<!-- 관리자 or 작성자만 수정 삭제 가능하게 -->
 							<%if(loginMember!=null){ %>
 								<%if(loginMember.getMemberId().equals("admin")||loginMember.getNickname().equals(re.getWriter())||loginMember.getMemberId().equals(b.getMemberId())){ %> 
-									<div class="reply_btn col-md-1 deleteComment" >삭제</div>
+									<div class="reply_btn col-md-1 deleteComment btn01" style="width:50px;" >삭제</div>
 								<%}if(loginMember.getNickname().equals(re.getWriter())){ %> 
-									<div class="reply_btn col-md-1 updateComment">수정</div>
+									<div class="reply_btn col-md-1 updateComment btn01" style="width:50px;" >수정</div>
 								<%} %>
 							<%} %>
 							</div>
@@ -199,7 +213,12 @@
 					<%} else if(re.getReplyLevel()==2) {%>
 				
 				<!-- Lv2 -->
-				<div class="reply row">
+				<div class="reply row" style="    align-self: center;
+    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;
+    padding: 10px;">
 					<div class="col-md-1">
 						<img
 							src="<%=request.getContextPath()%>/Resource/img/list-arrow.png"
@@ -210,25 +229,26 @@
 					</div>
 	
 					<div class="reply_writer_info col-md-1">
-						<div class="row">
-							<p class="reply_writer_info_nickname col-md-12"><%=re.getWriter() %></p>
-							<p class="reply_writer_info_etc col-md-12"><%=re.getReplyDate() %></p>
-						</div>
+						<p class="reply_writer_info_nickname "style="font-size:12px"><%=re.getWriter() %></p>
+						<p class="reply_writer_info_etc "style="font-size:10px"><%=re.getReplyDate() %></p>
 					</div>
 	
 					<div class="reply_content col-md-9">
 						<div class="reply_content_area row">
-							<p><%=re.getReplyContent() %></p>
+							<p style="    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;"><%=re.getReplyContent() %></p>
 						</div>
 						<div class="reply_btn_area row">
 							<div class="col-md-9"></div>
-							<div class="reply_btn col-md-1"><button   onclick="loginCheckReply();" class="lev2" value="<%=re.getReplyNo()%>">댓글</button></div>
+							<div class="reply_btn col-md-1"><button  style="width:50px;" onclick="loginCheckReply();" class="lev2  btn01 " value="<%=re.getReplyNo()%>">댓글</button></div>
 							<input type="hidden" value="<%=re.getReplyNo()%>">
 							<%if(loginMember!=null){ %>
 								<%if(loginMember.getMemberId().equals("admin")||loginMember.getNickname().equals(re.getWriter())||loginMember.getMemberId().equals(b.getMemberId())){ %> 
-									<div class="reply_btn col-md-1 deleteComment" >삭제</div>
+									<div class="reply_btn col-md-1 deleteComment btn01"style=" width:50px;"  >삭제</div>
 								<%}if(loginMember.getNickname().equals(re.getWriter())){ %> 
-									<div class="reply_btn col-md-1 updateComment">수정</div>
+									<div class="reply_btn col-md-1 updateComment btn01" style="width:50px;" >수정</div>
 								<%} %>
 							<%} %>
 						</div>
@@ -238,7 +258,12 @@
 				
 				
 				<!-- Lv3 -->
-				<div class="reply row">
+				<div class="reply row" style="    align-self: center;
+    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;
+    padding: 10px;">
 					<div class="col-md-1"></div>
 					<div class="col-md-1">
 						<img
@@ -250,24 +275,25 @@
 					</div>
 	
 					<div class="reply_writer_info col-md-1">
-						<div class="row"></div>
-							<p class="reply_writer_info_nickname col-md-12"><%=re.getWriter() %></p>
-							<p class="reply_writer_info_etc col-md-12"><%=re.getReplyDate() %></p>
-						</div>
+						<p class="reply_writer_info_nickname"style="font-size:12px"><%=re.getWriter() %></p>
+						<p class="reply_writer_info_etc "style="font-size:10px"><%=re.getReplyDate() %></p>
 					</div>
 	
 					<div class="reply_content col-md-8">
 						<div class="reply_content_area row">
-							<p><%=re.getReplyContent() %></p>
+							<p style="    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;"><%=re.getReplyContent() %></p>
 						</div>
 						<div class="reply_btn_area row">
 							<div class="col-md-9"></div>
 							<input type="hidden" value="<%=re.getReplyNo()%>">
 							<%if(loginMember!=null){ %>
 								<%if(loginMember.getMemberId().equals("admin")||loginMember.getNickname().equals(re.getWriter())||loginMember.getMemberId().equals(b.getMemberId())){ %> 
-									<div class="reply_btn col-md-1 deleteComment" >삭제</div>
+									<div class="reply_btn col-md-1 deleteComment btn01" style="width: 50px;" >삭제</div>
 								<%}if(loginMember.getNickname().equals(re.getWriter())){ %> 
-									<div class="reply_btn col-md-1 updateComment">수정</div>
+									<div class="reply_btn col-md-1 updateComment btn01"style="width: 50px; " >수정</div>
 								<%} %>
 							<%} %>
 						</div>
@@ -276,14 +302,15 @@
 				<%} %>
 			<%} %>
 		<%} %>
+		<br>
 			<div id="reply_write_area" class="row">
 				<form action="<%=request.getContextPath() %>/board/InsertNoticeComment" method="post" onsubmit="return checkContent();">
 					<div class="reply_write_content">
-						<textarea rows="5" cols="180" name ="CommentContent"style="resize: none"></textarea>
+						<textarea rows="5" cols="159" name ="CommentContent"style="resize: none"></textarea>
 					</div>
 					<hr>
-					<div class="reply_write_btn">
-						<input type="submit" value="댓글 등록">
+					<div class="reply_write_btn" style="text-align:center">
+						<input class="btn01"type="submit" value="댓글 등록">
 					</div>
 					<!-- 임의로 준 부분 -->
 					<%if(loginMember!=null){ %>
@@ -308,26 +335,30 @@
 <br>
 <br>
 <div id="board_container" class="row">
-	<div class="col-md-1"></div>
-	<div class="col-md-10">
+	<div class="col-md-12">
 		<div id="board_head" class="row">
 			<!-- 글 리스트 헤드 -->
-			<div class="board_sort col-md-1">
+			<div style="text-align: center;
+    align-self: center;
+    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;"class="board_sort col-md-1">
 				<select name="b_sort">
 					<option value="전체">전체</option>
 					<option value="자유">자유</option>
 					<option value="눈바디">눈바디</option>
 				</select>
 			</div>
-			<div class="board_title col-md-7"
+			<div class="board_title col-md-5"
 				style="display: inline-block; text-align: center;">제목</div>
-			<div class="board_content_info col-md-1">
+			<div class="board_content_info col-md-2">
 				<span>글쓴이</span>
 			</div>
 			<div class="board_content_info col-md-2">
 				<span>날짜</span>
 			</div>
-			<div class="board_content_info col-md-1">
+			<div class="board_content_info col-md-2">
 				<span>조회수</span>
 			</div>
 
@@ -341,9 +372,14 @@
 		 		<%-- <%for(Board b : list) {%> --%>
 		 		<%for(int i=0; i<list.size(); i++){ %>
 		 			<%Board bb = (Board)list.get(i); %>
-						<div id="board_body" class="row">
-							<div class="board_sort col-md-1"><%=bb.getCategory() %></div>
-							<div class="board_title col-md-8"  onclick="boardContent(<%=bb.getContentNo()%>);">
+						<div id="board_body" class="row" style="padding-bottom: 10px; text-align: center;
+    align-self: center;
+    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray; padding-bottom: 10px; padding-top: 10px;">
+							<div class="board_sort col-md-1 categoryLine"><%=bb.getCategory() %></div>
+							<div class="board_title col-md-5"  onclick="boardContent(<%=bb.getContentNo()%>);">
 								<div class="board_file_img col-md-1">
 										<%if(fileyumu==null) {%>
 											불러온 request가 없네요
@@ -360,13 +396,13 @@
 								</div>
 								<div class="col-md-11"><%=bb.getTitle() %></div>
 							</div>
-							<div class="board_content_info col-md-1">
+							<div class="board_content_info col-md-2 categoryLine">
 								<%=bb.getWriter() %>
 							</div>
-							<div class="board_content_info col-md-1">
+							<div class="board_content_info col-md-2 categoryLine">
 								<%=bb.getWriteDate() %>
 							</div>
-							<div class="board_content_info col-md-1">
+							<div class="board_content_info col-md-2 ">
 								<%=bb.getReadCount() %>
 							</div>
 						</div>
@@ -374,17 +410,16 @@
 				<%} %>
 
 		<div id="board_pageBar" class="row">
-			<div class="col-md-5"></div>
-			
-			<div class="col-md-2" style="font-size:1.6rem;">	<%=pageBar %> </div>
 			<div class="col-md-4"></div>
-			<div class="col-md-1 btn"
+			
+			<div class="col-md-4" style="margin-top: 10px;"><%=pageBar %></div>
+			<div class="col-md-2"></div>
+			<div id ="loginCheckId" class="col-md-1 btn01"
 				onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</div>
 		</div>
 
 	</div>
 	
-	<div class="col-md-1"></div>
 </div>
 <script>
 	const loginCheckReply=()=>{
@@ -483,7 +518,7 @@
 		})
 		form.find("textarea").attr({
 				rows:1,
-				cols:100,
+				cols:88,
 				id:"CommentContentLev1"
 			});
 			form.find('[name=replyLevel]').val("2");
@@ -498,7 +533,7 @@
 			})
 			form.find("textarea").attr({
 					rows:1,
-					cols:100,
+					cols:80,
 					id:"CommentContentLev2"
 				});
 				form.find('[name=replyLevel]').val("3");

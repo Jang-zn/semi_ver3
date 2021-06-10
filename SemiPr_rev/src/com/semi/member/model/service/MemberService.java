@@ -356,4 +356,24 @@ public class MemberService {
 		close(conn);		
 		return result;
 	}
+	public int updateMember(Member m) {
+		Connection conn = getConnection();
+		int result = dao.updateMember(conn, m);	
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		close(conn);
+		return result;
+	}
+	public Member selectmemberinfo(String memberid) {
+		Connection conn = getConnection();
+		Member m= dao.selectmemberinfo(conn,memberid);
+		close(conn);		
+		return m;
+	}
+	public int MemberPwdCheck(String id, String pwd) {
+		Connection conn = getConnection();
+		int result= dao.MemberPwdCheck(conn,id,pwd);
+		close(conn);		
+		return result;
+	}
 }

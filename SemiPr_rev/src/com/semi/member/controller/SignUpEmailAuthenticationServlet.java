@@ -2,27 +2,24 @@ package com.semi.member.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.semi.common.AESEncrypt;
-import com.semi.member.model.service.MemberService;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class EmailDuplication
+ * Servlet implementation class SignUpEmailAuthenticationServlet
  */
-@WebServlet("/member/emailDuplication")
-public class EmailDuplicationServlet extends HttpServlet {
+@WebServlet("/member/signUpemailAuth")
+public class SignUpEmailAuthenticationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EmailDuplicationServlet() {
+    public SignUpEmailAuthenticationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,33 +28,19 @@ public class EmailDuplicationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	
-	String email = request.getParameter("email");
-	try {
-		email=AESEncrypt.encrypt(email);
-	}catch(Exception e) {
-		e.printStackTrace();
-	}
-	
-	
-	int result = new MemberService().emailDuplication(email);
-	System.out.println(result);
-	String msg="";
-	if(result>0) {
-			//중복
-			msg="fail";
-			
+		HttpSession session =request.getSession();
+		String emailAuth = request.getParameter("email");
+		String authNum = (String)session.getAttribute("AuthenticationKey");
+		String msg="";
+		if(emailAuth.equals(authNum)) {
+			msg="Good";
+			session.removeAttribute("AuthenticationKey");
 		}else {
-			//노중복 & null
-			msg="success";
+			msg="Bad";
 		}
-		
-	response.setContentType("text/html;charset=utf-8");
-	response.getWriter().print(msg);
-	
-	
-}
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().print(msg);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

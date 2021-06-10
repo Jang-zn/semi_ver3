@@ -1,13 +1,16 @@
 package com.semi.member.controller;
 
-import java.io.*;
+import java.io.IOException;
 
-import javax.servlet.*;
-import javax.servlet.annotation.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.semi.member.model.service.*;
-import com.semi.member.model.vo.*;
+import com.semi.common.AESEncrypt;
+import com.semi.member.model.service.MemberService;
+import com.semi.member.model.vo.MemberMenuList;
 
 /**
  * Servlet implementation class MembermenuUpdateServlet
@@ -35,6 +38,8 @@ public class MembermenuUpdateServlet extends HttpServlet {
 		
 		MemberMenuList mml = new MemberService().selectMenubyno(no);
 		request.setAttribute("menu", mml);
+		
+	
 		
 		request.getRequestDispatcher("/views/member/plan/membermenuMylistUpdate.jsp").forward(request, response);
 	}

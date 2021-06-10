@@ -23,6 +23,7 @@ public class InsertDBMListClolling {
 		    for(int i=250; i<400; i++) {
 		 		newsCrawling("https://www.nongsaro.go.kr/portal/ps/psz/psza/contentSub.ps?menuId=PS00152&pageIndex=1&pageSize=10&pageUnit=12&cntntsNo=89"+Integer.toString(i)+"&dietSeCode=254002");
 		      }
+		    System.out.println("완료");
 		   }
 		   
 		   public static void newsCrawling(String url) {
@@ -48,8 +49,8 @@ public class InsertDBMListClolling {
 			        String c2 = content2.next().text();
 			        String[] c3 = c2.split(",");
 			        String z ="";
-			        for(int j=0; j<4; j++) {
-			        	if(j!=3) {
+			        for(int j=0; j<c3.length; j++) {
+			        	if(j!=c3.length) {
 			        		z += c3[j].replaceAll("[^0-9]", "")+",";
 			        	}else {
 			        		z += c3[j].replaceAll("[^0-9]", "");
@@ -57,13 +58,14 @@ public class InsertDBMListClolling {
 			        }
 			        String[] zz = z.split(",");
 			     
-			        int[] iarr = new int[4];
-			        for(int g=0; g<4; g++) {
+			        int[] iarr = new int[zz.length];
+			        for(int g=0; g<zz.length; g++) {
 			        	iarr[g] = Integer.parseInt(zz[g]);
 			        }
 			    	String im = i.next().absUrl("src");
 			        insertEList(t,iarr,c,im);
-		      }
+			      }
+			      
 		   }
 		   
 		   	public static void insertEList(String t,int[] iarr,String c,String im) {
@@ -79,7 +81,11 @@ public class InsertDBMListClolling {
 		   			pstmt.setInt(2,iarr[0]);
 		   			pstmt.setInt(3, iarr[1]);
 		   			pstmt.setInt(4, iarr[2]);
-		   			pstmt.setInt(5, iarr[3]);
+		   			try {
+		   				pstmt.setInt(5, iarr[3]);
+		   			}catch(Exception e){
+		   				pstmt.setInt(5, 0);
+		   			}
 		   			pstmt.setString(6, c);
 		   			pstmt.setString(7, im);
 		   			result = pstmt.executeUpdate();

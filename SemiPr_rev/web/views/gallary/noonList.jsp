@@ -20,69 +20,82 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/noonList.css">
 
-<div class="row">
-
-	<div id="n_title" class="col-md-12">
+<div class="container-fluid">
+	<div class="row">
+		<div id="n_title" class="col-md-12">
 		<h2>눈바디</h2>
-	</div>
-	<div class="col-md-1"></div>
-</div>
-<div class="row">
-	<div class="col-md-1"></div>
-
-	<div id="n_content_area" class="col-md-10">
-		<span class="gal_no"></span>
-		<div id="n_content" class="col-md-8">
-			<div id="n_content_img" class="col-md-12">							
-				<img class="content_img" src="<%=request.getContextPath()%>/Resource/img/noNoon.jpg">				
-			</div>
-			<div><p align="center"> <%=m.getNickname() %>님의 기록</p></div>
-			<div id="n_date" class="col-md-12 noonDate">
-				
-			</div>
-			<div id="n_comment" class="col-md-12">
-				<div id="comment_area" class="col-md-12">
-					<textarea rows="10" cols="100"></textarea>
+		<div class="row">	
+			<div class="col-md-1"></div> <!-- 공백 -->
+			<div id="n_content_area" class="col-md-6"> <!-- 상세눈바디 column시작 -->
+				<!-- <span class="gal_no"></span> -->
+				<div class="row">
+			<!-- <div id="n_content" class="col-md-8"> -->
+					<div id="n_content_img" class="col-md-12">							
+						<img class="content_img" src="<%=request.getContextPath()%>/Resource/img/noNoon.jpg">				
+					</div>
 				</div>
-			</div>
-			<input class="deleteNo" type="hidden" value="">
-			<input class ="updateBtn" >
-			<input class="deleteBtn" >
-		</div>
-		
-
-
-		<div id="n_list" class="col-md-4">
-			<div class="row">
-				<div class="col-md-3 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진등록</div>
+				<div class="row">					
+					<div class="col-md-12"><p align="center"><p><%=m.getNickname() %>님의 기록</p></div>
+				</div>
+				<div class="row">
+					<div id="n_date" class="col-md-12 noonDate"></div>
+				</div>
 				
+				<div class="row">			
+				<!-- <div id="n_comment" class="col-md-12"> -->
+					<div id="comment_area" class="col-md-12">
+						<!-- <textarea rows="10" cols="100"></textarea> -->
+					</div>
+				</div>
+			
+				<input class="deleteNo" type="hidden" value="">
+				<input class ="updateBtn" >
+				<input class="deleteBtn" >
+		<!-- </div> -->
+		</div> <!-- 상세눈바디 column끝  -->
+
+
+		<div id="n_list" class="col-md-4"> <!-- 갤러리 리스트 cloumn 시작-->
+			<div class="row">
+				<div class="col-md-3 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진등록</div>				
 				<div class="col-md-9">
 						<form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="get">
-						<div class="">
+						<!-- <div class=""> -->
 						<%-- <form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="post"> --%>
 							<input type="text" name="searchKeyword" size="25" placeholder="검색할 월/일을 입력해주세요 "/>
-						</div>
+						<!-- </div> -->
 						<input type="submit" value="검색"/>
 					</form>
 				</div>
 			</div>
  			<%if(list.isEmpty()){ %>
- 					<div>등록된 이미지가 없습니다.</div>
-			<div id="n_img_list" class="col-md-12">
-							
-					<div class="row"> 
-					<%}else{
-						for(Gallary g : list) {
-							if (m.getMemberId().equals(g.getMemberId())){%>
+ 				<div class="row">
+                	<div class="col-md-6 noUpload"></div>
+                    <div class="col-md-6 noUpload"></div>                                                       
+                </div>
+             	<div class="row">
+                	<div class="col-md-6 noUpload"></div>
+                    <div class="col-md-6 noUpload"></div>                                                       
+                </div>
+                <div class="row">
+                	<div class="col-md-6 noUpload"></div>
+                    <div class="col-md-6 noUpload"></div>                                                       
+                </div>
+			<!-- <div id="n_img_list" class="col-md-12">	 -->						
+				
+				<%}else{
+					for(Gallary g : list) {%>
+							<!-- if (m.getMemberId().equals(g.getMemberId())){ -->
+						<div class="row"> 
 						<div class="img_obj col-md-6">
 							<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>"/>
-							<img width="100%" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
+							<img class="upload_img" width="100%" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
 							<%= sf.format(g.getGallaryDate())%>	 																		
 						</div>
-						<% }
+						<% 
 						}
 					}%>	
-					</div> 
+				</div> 
 			
 			</div>
 							
@@ -96,14 +109,16 @@
 					</div>
 			
  -->
-			<div id="n_pageBar" class="row">
-				<div class="col-md-8"></div>
-				<div class="col-md-4"><%=pageBar %></div>
-			</div> 
-		</div>
-	</div>
-	
-</div>
+				<div id="n_pageBar" class="row">
+					<div class="col-md-8"></div>
+					<div class="col-md-4"><%=pageBar %></div>
+				</div> 
+			</div> <!-- 갤러리 리스트 cloumn 끝-->
+			<div class="col-md-1"></div>
+			</div> <!--noonList row끝 -->
+		</div>	<!-- 전체 column끝-->
+	</div> <!-- 전체 row끝 -->
+</div> <!-- container 끝 -->
 
 <script>
 	$(".img_obj").click(e=>{
