@@ -16,6 +16,7 @@
 }
 
 #list_container {
+	
 }
 
 div#exc_list {
@@ -71,12 +72,16 @@ img{
 }
 .clickcheck{
 	transition:all 0.3s;
-	padding-bottom:20px;
+	margin:1%;
+	border-bottom:1px dashed gray;
+	height:68.9px;
+	overflow:hidden;
 }
 .clickcheck:hover{
 	cursor:pointer;
-	border:3px solid gold;
+	background-color:rgba(104, 255, 12, 0.26);
 }
+
 #exc_video{
 	position: relative;
 	width:100%;
