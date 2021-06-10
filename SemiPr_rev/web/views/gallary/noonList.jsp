@@ -40,7 +40,7 @@
 					<div class="col-md-12 nickname" ><p><%=m.getNickname() %>님의 기록</p></div>
 				</div>
 				<div class="row">
-					<div id="n_date" class="col-md-12 noonDate"></div>
+					<div id="n_date" class="col-md-12"></div>
 				</div>
 				
 				<div class="row">			
