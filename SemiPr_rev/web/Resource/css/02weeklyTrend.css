@@ -62,7 +62,10 @@
    	margin:auto;
  
 }
-
+.excName, .menuName{
+	word-break:keep-all;
+	
+}
 #weeklyExcStatus, #weeklyMenuStatus { 
 		align-items:center;		
 }
@@ -104,6 +107,11 @@
 	font-size: 1.7rem;		
   	margin-right:0.1rem;
   	text-align:center;
+  	height:3rem;
+  	margin-bottom:0.5rem;
+}
+.excName, .menuName{
+	content-overflow: ellipsis;
 }
 .num01{
 	font-family: 'PFStardust';
@@ -135,3 +143,15 @@
 	height:20rem;
 	padding-top:8.5rem;
 }
+/* .todayPlan{
+	height:43rem;
+	overflow: hidden;
+	 white-space: nowrap;
+	 text-overflow: ellipsis;
+}
+.todayPlan_l{
+	width:14rem;
+	 text-overflow: ellipsis;
+	overflow: hidden;
+} */
+
