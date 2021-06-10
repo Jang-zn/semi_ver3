@@ -214,7 +214,7 @@ const Line=()=>{
 };
 
 const reloadPie=(chart, y, n, l)=>{
-	Data = {data: [y/l, n/l, 1-(y/l+n/l)]};
+	Data = {data: [y, n, l-y-n]};
 	chart.data.datasets.forEach((dataset) => {
         dataset.data.pop();
         dataset.data.pop();
@@ -256,7 +256,9 @@ $("#trendSort").change(e=>{
 					let labels=[];
 					let countIndex=0;
 					data.forEach(function(el){
-						labels[countIndex++]=el.date;
+						if(el.check!=null){
+							labels[countIndex++]=el.date;
+						}
 					});
 					
 					//YN check
@@ -265,10 +267,7 @@ $("#trendSort").change(e=>{
 					let n=0;
 					countIndex=0;
 					data.forEach(function(el){
-						if(el.check==null){
-							planYN[countIndex++]=null;
-							
-						}else{
+						if(el.check!=null){
 							planYN[countIndex++]=el.check=='Y'?1:0;
 							el.check=='Y'?y++:n++;
 						}
@@ -326,7 +325,9 @@ $("#trendSort").change(e=>{
 					let labels=[];
 					let countIndex=0;
 					data.forEach(function(el){
-						labels[countIndex++]=el.date;
+						if(el.check!=null){
+							labels[countIndex++]=el.date;
+						}
 					});
 					//YN check
 					let planYN=[];
@@ -334,10 +335,7 @@ $("#trendSort").change(e=>{
 					let n=0;
 					countIndex=0;
 					data.forEach(function(el){
-						if(el.check==null){
-							planYN[countIndex++]=null;
-							
-						}else{
+						if(el.check!=null){
 							planYN[countIndex++]=el.check=='Y'?1:0;
 							el.check=='Y'?y++:n++;
 						}

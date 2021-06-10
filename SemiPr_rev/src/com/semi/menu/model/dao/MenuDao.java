@@ -500,8 +500,6 @@ public class MenuDao {
 			String path = MenuDao.class.getResource("/sql/menuList_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			System.out.println(path);
-			System.out.println(p.getProperty("setMonthlyPlan"));
 			pstmt=conn.prepareStatement(p.getProperty("setMonthlyPlan"));
 			for(MemberMenu me:wlist) {
 				pstmt.setInt(1, me.getMenuNo());
@@ -549,8 +547,6 @@ public class MenuDao {
 			Properties p = new Properties();
 			p.load(new FileReader(path));
 			pstmt=conn.prepareStatement(p.getProperty("autoN"));
-			System.out.println(p.getProperty("autoN"));
-			System.out.println(memberId);
 			pstmt.setString(1, memberId);
 			result=pstmt.executeUpdate();
 			

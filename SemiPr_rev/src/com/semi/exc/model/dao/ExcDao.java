@@ -511,8 +511,6 @@ public class ExcDao {
 			String path = ExcDao.class.getResource("/sql/excList_sql.properties").getPath();
 			Properties p = new Properties();
 			p.load(new FileReader(path));
-			System.out.println(path);
-			System.out.println(p.getProperty("setMonthlyPlan"));
 			pstmt=conn.prepareStatement(p.getProperty("setMonthlyPlan"));
 			for(MemberExercise me:wlist) {
 				pstmt.setInt(1, me.getExcNo());
@@ -560,8 +558,6 @@ public class ExcDao {
 			Properties p = new Properties();
 			p.load(new FileReader(path));
 			pstmt=conn.prepareStatement(p.getProperty("autoN"));
-			System.out.println(p.getProperty("autoN"));
-			System.out.println(memberId);
 			pstmt.setString(1, memberId);
 			result=pstmt.executeUpdate();
 			
