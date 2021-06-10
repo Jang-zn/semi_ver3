@@ -17,6 +17,9 @@
         <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/weeklyTrend" class="btn1">주간 현황</a></div>
         <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/monthlyTrend" class="btn1">월간 현황</a></div>
     </div>
+	<br><br>
+	<div class="row"><div class="col-md-12 title02">월간 차트</div></div>
+	<div class="main row"></div>
 	<br>
 	<div class="row">
 		<div id="container_content_progress_trend" class="col-md-12">
@@ -40,7 +43,9 @@
 			
 			<!-- Sort select -->
 			<div id="select_sort" class="col-md-2">
-				<div class="col-md-12">
+			<br>
+			<br>
+				<div class="col-md-12 box">
 					<select id="dataType_select" style="width:100%">
 						<option name="dataType" value="monthlyExc">운동 실천현황</option>
 						<option name="dataType" value="monthlyMenu">식단 실천현황</option>
@@ -49,7 +54,9 @@
 					</select>
 				</div>
 				<br>
-				<div class="col-md-12">
+				<br>
+				<br>
+				<div class="col-md-12 box">
 					<select id="dataPeriod" style="width:100%">
 						<option name="term" value="1m">1개월 </option>
 						<option name="term" value="3m"> 3개월 </option> 
@@ -57,16 +64,22 @@
 						<option name="term" value="12m"> 1년 </option>
 					</select>
 				</div>
-				<div id="read_trend" class="col-md-12" name="read_trend" onclick="chartCall();">조회하기</div>
+				<br>
+				<br>
+				<br>
+				<div id="read_trend" class="col-md-12 btn01" name="read_trend" onclick="chartCall();">조회하기</div>
 			</div>
 		</div>
 	</div>
 	
-	
+	<br>
+	<br>
 	<!-- 운동 실천 현황 doughnut pie -->
 	<div class="row">
 		<div id="statistics_container" class="col-md-12">
-			<div id="excMonth" class="row"></div>
+			<div id="excMonth" class="row title02"></div>
+			<div class="main row"></div>
+			<br>
 			<div id="data_container" class="row">
 				<div id="" class="col-md-6 pieChart">
 					<div class="row cContainer">
@@ -75,19 +88,21 @@
 				</div>
 				<div id="" class="col-md-6 rank">
 					<div class="row">
-						<div class="col-md-8 cContainer"><canvas id="chart10" ></canvas></div>
-						<div class="col-md-4"></div>		
+						<div class="col-md-12 cContainer"><canvas id="chart10" ></canvas></div>	
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
+<br>
+<br>
 	<!-- 식단 실천 현황 doughnut pie -->
 	<div class="row">
 		<div id="statistics_container" class="col-md-12">
-			<div id="menuMonth" class="row"></div>
+			<div id="menuMonth" class="row title02"></div>
+			<div class="main row"></div>
+			<br>
 			<div id="data_container" class="row">
 				<div id="" class="col-md-6 pieChart">
 					<div class="row cContainer">
@@ -96,17 +111,17 @@
 				</div>
 				<div id="" class="col-md-6 rank">
 					<div class="row">
-						<div class="col-md-8 cContainer">
+						<div class="col-md-12 cContainer">
 							<canvas id="chart11" ></canvas>
 						</div>
-						<div class="col-md-4"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
+	<br>
+	<br>
 
 
 
@@ -166,10 +181,10 @@ const pieE = $("#chart10");
 const pieChartE = new Chart(pieE, {
 	type:'pie',
 	data:{
-		labels:["게으름","다른 일정","피치못할사정","기타"],
+		labels:["게으름","다른 일정","피치못할사정","기타","데이터 없음"],
 		datasets: [{
-		    data: [0,0,0,0],
-		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)"],
+		    data: [0,0,0,0,0],
+		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)", "rgba(15, 28, 65, 0.49)"],
 		}]
 	},
 	options: {
@@ -191,10 +206,10 @@ const pieM = $("#chart11");
 const pieChartM = new Chart(pieM, {
 	type:'pie',
 	data:{
-		labels:["게으름","회식","야식","기타"],
+		labels:["게으름","회식","야식","기타","데이터 없음"],
 		datasets: [{
-		    data: [0,0,0,0],
-		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)"],
+		    data: [0,0,0,0,0],
+		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)", "rgba(15, 28, 65, 0.49)"],
 		}]
 	},
 	options: {
@@ -226,16 +241,20 @@ $.ajax({
 	dataType:"json",
 	success:data=>{
 		console.log(data);
-		let dataE = [0,0,0,0];
-		let dataM = [0,0,0,0];
+		let dataE = [0,0,0,0,0];
+		let dataM = [0,0,0,0,0];
 		data[0].forEach(function(ep){
 			if(ep!=null&&ep.check=='N'){
 				dataE[ep.reason]+=1
+			}else{
+				dataE[4]+=1
 			}
 		});
 		data[1].forEach(function(mp){
 			if(mp!=null&&mp.check=='N'){
 				dataM[mp.reason]+=1
+			}else{
+				dataM[4]+=1
 			}
 		});
 		
@@ -272,25 +291,30 @@ const callPlan=()=>{
 				if(data[0][i]!=null && data[0][i].date==$($("span.thism")[i]).text() && data[0][i].count>0){
 					$($(".eCheck.thism")[i]).text("운동계획");
 					if(data[0][i].check=="Y"){
-						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(84, 166, 53, 0.7); color:rgba(15, 28, 65, 0.38);");
 						ey++;
 					}else if(data[0][i].check=="N"){
-						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("eReason");
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(223, 72, 51, 0.7); color:rgba(15, 28, 65, 0.38);").addClass("eReason");
 						en++
+					}else if(data[0][i].check=="C"){
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(230, 192, 80, 0.7); color:rgba(15, 28, 65, 0.38);");
 					}else{
-						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(204,204,204,0.8); color:white;");
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(15, 10, 12, 0.4); color:rgba(15, 28, 65, 0.38);");
 					}
 				}
 				if(data[1][i]!=null && data[1][i].date==$($("span.thism")[i]).text() && data[1][i].count>0){
 					$($(".mCheck.thism")[i]).text("식단계획");
 					if(data[1][i].check=="Y"){
-						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(84, 166, 53, 0.7); color:rgba(15, 28, 65, 0.38);");
 						my++;
 					}else if(data[1][i].check=="N"){
-						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("mReason");
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(223, 72, 51, 0.7); color:rgba(15, 28, 65, 0.38);").addClass("mReason");
 						mn++;
+					}else if(data[1][i].check=="C"){
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(230, 192, 80, 0.7); color:rgba(15, 28, 65, 0.38);");
+						
 					}else{
-						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(204,204,204,0.8); color:white;");
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(15, 10, 12, 0.4); color:rgba(15, 28, 65, 0.38);");
 						
 					}
 				}
@@ -452,6 +476,8 @@ const chartCall=()=>{
 					data.forEach(function(el){
 						if(el!=null&&el.check!=null){
 							labels[countIndex++]=el.date;
+						}else{
+							labels[countIndex++]='0/0';
 						}
 					});
 					
@@ -461,6 +487,8 @@ const chartCall=()=>{
 					data.forEach(function(el){
 						if(el.check!=null){
 							planYN[countIndex++]=el.check=='Y'?1:0;
+						}else{
+							planYN[countIndex++]=0;
 						}
 					});
 					
@@ -523,10 +551,11 @@ const chartCall=()=>{
 					//labels
 					let labels=[];
 					let countIndex=0;
-					if(el!=null){
 						data.forEach(function(el){
 							if(el.check!=null){
 								labels[countIndex++]=el.date;
+							}else{
+								labels[countIndex++]='0/0';
 							}
 						});
 						//YN check
@@ -535,7 +564,10 @@ const chartCall=()=>{
 						data.forEach(function(el){
 							if(el.check!=null){
 								planYN[countIndex++]=el.check=='Y'?1:0;
+							}else{
+								planYN[countIndex++]=0;
 							}
+							
 						});
 						lineChart.options={
 							plugins: {
@@ -579,10 +611,7 @@ const chartCall=()=>{
 						lineChart.data.labels=labels;
 						lineChart.data.datasets[0].data=planYN;
 						lineChart.update();
-					}else{
-						$("#Practice_trend").html("<div class='lineEmpty col-md-12'>계획을 세우고 실천해보세요! 결과를 그래프로 확인해 볼 수 있습니다</div>");
 					}
-				}
 			});
 			break;
 			
@@ -806,11 +835,6 @@ const chartCall=()=>{
 							}
 
 					lineChart.data.labels=labels;
-					console.log(lineChart.data.datasets);
-					console.log(stackKcal);
-					console.log(stackCH);
-					console.log(stackProt);
-					
 					lineChart.data.datasets[0].data=stackKcal;
 					lineChart.data.datasets[1].data=stackCH;
 					lineChart.data.datasets[2].data=stackProt;
@@ -823,6 +847,7 @@ const chartCall=()=>{
 };
 
 window.onload=chartCall();
+
 
 </script>
 <script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>
