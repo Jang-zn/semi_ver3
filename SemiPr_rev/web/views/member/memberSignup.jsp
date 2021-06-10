@@ -145,7 +145,7 @@
 						<!-- BIRTH_MM -->
 						<div id="bir_mm" class="col-md-4">
 							<div class="box02 col-md-12"> 
-								<select id="mm" class="sel" name="mm" onblur="monthCheck();" required style="width:100%; height:100%">
+								<select style="font-size:21px;"  id="mm" class="sel" name="mm" onblur="monthCheck();" required style="width:100%; height:100%">
 									<option>월</option>
 									<option value="01">1</option>
 									<option value="02">2</option>
@@ -275,14 +275,9 @@
 
 
 //<------------------------------ 아이디 시작 ---------------------------->
-//아이디 정규표현식
 
- 	$("#userId_").blur(function(){
-		
-		
-	}); 
 	
-//아이디 중복 	
+//아이디 중복 & 정규표현식
 	$("#userId_").blur(function(userId){
 		var userId=$("#userId_").val();
 		console.log(userId);
@@ -332,7 +327,6 @@
 	$("#pswd1").blur(function(){
     	var pw1 = $("#pswd1").val();
  		
-    	console.log(pw1);
 		var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
 		if(pw1.trim().length==0){
 			
@@ -730,7 +724,6 @@ function readInputFile(input){
 	if(input.files){
 		let reader = new FileReader();
 		f=event.target.files[0]
-		console.log(event.target.files[0].size);
 		if(f.size>1024*1024*2){
 			alert("2mb까지의 사지만 업데이트 할 수 있습니다.");
 			return;
