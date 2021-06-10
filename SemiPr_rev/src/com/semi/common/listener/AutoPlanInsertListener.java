@@ -72,25 +72,27 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 					arrayCal[i] = (""+year+"/"+month+"/"+(i+1)+","+week);
 				}		
 			}
-	    	
+			ExcService ex = new ExcService();
+			MenuService ms = new MenuService();
 			//arrayCal에는 한달치 yy/mm/dd,요일 이 저장됨
 			for(String s : arrayCal) {
-				List<MemberExercise> wlist = new ExcService().getWlist(memberId, s);
-				List<MemberMenu> mlist = new MenuService().getWlist(memberId, s);
+				
+				List<MemberExercise> wlist = ex.getWlist(memberId, s);
+				List<MemberMenu> mlist = ms.getWlist(memberId, s);
 				if(wlist.size()==0) {
 					continue;
 				}else {
 					//해당일에 계획 등록됐는지 확인
-					int planCheck = new ExcService().getPlanCheck(memberId, s);
+					int planCheck = ex.getPlanCheck(memberId, s);
 					if(planCheck==0) {
 						//안돼있으면 등록해줌
-						int result = new ExcService().setMonthlyPlan(wlist, s);
+						int result = ex.setMonthlyPlan(wlist, s);
 					}
 					
-					int planCheckM = new MenuService().getPlanCheck(memberId, s);
+					int planCheckM = ms.getPlanCheck(memberId, s);
 					if(planCheckM==0) {
 						//안돼있으면 등록해줌
-						int result = new MenuService().setMonthlyPlan(mlist, s);
+						int result = ms.setMonthlyPlan(mlist, s);
 					}else {
 						continue;
 					}
@@ -98,11 +100,11 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 				
 			}
 	    	//오늘날짜는 PlanCheck='C' 로 표기
-			new ExcService().todayCheck(memberId);
-			new MenuService().todayCheck(memberId);
+			ex.todayCheck(memberId);
+			ms.todayCheck(memberId);
 			//날짜 지났는데 C면 자동으로 N으로 바꿈
-			int tr = new ExcService().autoN(memberId);
-			int trm = new MenuService().autoN(memberId);
+			int tr = ex.autoN(memberId);
+			int trm = ms.autoN(memberId);
 			
     	}
     }
