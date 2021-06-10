@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/../views/common/header.jsp"%>
+<%
+	Member m = (Member)session.getAttribute("logged");
+%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/monthlyTrend.css">
 
@@ -18,7 +21,12 @@
 	<div class="row">
 		<div id="container_content_progress_trend" class="col-md-12">
 			<div id="PracticeRate_img" class="col-md-2">
-				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_qscX8L2bnZfZhslTsvDavnGhH16jUEsTRw&usqp=CAU">
+				<%if(m.getProfileImg()!=null){ %>
+					<img src="<%=request.getContextPath()%>/upload/profile/<%=m.getProfileImg()%>">
+				<%} else{%>
+					<img src="<%=request.getContextPath()%>/Resource/img/profile.png">
+					
+				<%}%>
 			</div>
 
 
@@ -442,7 +450,7 @@ const chartCall=()=>{
 					let labels=[];
 					let countIndex=0;
 					data.forEach(function(el){
-						if(el.check!=null){
+						if(el!=null&&el.check!=null){
 							labels[countIndex++]=el.date;
 						}
 					});
@@ -515,61 +523,65 @@ const chartCall=()=>{
 					//labels
 					let labels=[];
 					let countIndex=0;
-					data.forEach(function(el){
-						if(el.check!=null){
-							labels[countIndex++]=el.date;
-						}
-					});
-					//YN check
-					let planYN=[];
-					countIndex=0;
-					data.forEach(function(el){
-						if(el.check!=null){
-							planYN[countIndex++]=el.check=='Y'?1:0;
-						}
-					});
-					lineChart.options={
-						plugins: {
-							legend: {
-								display: false,
+					if(el!=null){
+						data.forEach(function(el){
+							if(el.check!=null){
+								labels[countIndex++]=el.date;
+							}
+						});
+						//YN check
+						let planYN=[];
+						countIndex=0;
+						data.forEach(function(el){
+							if(el.check!=null){
+								planYN[countIndex++]=el.check=='Y'?1:0;
+							}
+						});
+						lineChart.options={
+							plugins: {
+								legend: {
+									display: false,
+								},
+								title: {
+				            		display: true,
+				            		text: '식단 실천현황'
+				    			}
+							},    
+							maintainAspectRatio : false,
+							scales:{
+							   	y: {
+							   	suggestedMax: 1.2,
+							   	display:false
+							    },
 							},
-							title: {
-			            		display: true,
-			            		text: '식단 실천현황'
-			    			}
-						},    
-						maintainAspectRatio : false,
-						scales:{
-						   	y: {
-						   	suggestedMax: 1.2,
-						   	display:false
-						    },
-						},
+						}
+						length>31?
+							lineChart.data={
+								datasets:[{
+									label: '식단',
+							          borderColor : 'green',
+							          backgroundColor:'rgba(0,255,0,0.3)',
+							          borderWidth:2,
+							          fill:true,
+							          pointRadius:2
+								}]
+							}
+				        :lineChart.data={
+								datasets:[{
+									label: '식단',
+							           borderColor : 'green',
+							           backgroundColor:'rgba(0,255,0,0.3)',
+							           borderWidth:2,
+							           fill:true,
+								}]
+							}
+	
+						lineChart.data.labels=labels;
+						lineChart.data.datasets[0].data=planYN;
+						lineChart.update();
+					}else{
+						$("#Practice_trend").html("<div class='lineEmpty col-md-12'>계획을 세우고 실천해보세요! 결과를 그래프로 확인해 볼 수 있습니다</div>");
 					}
-					length>31?
-						lineChart.data={
-							datasets:[{
-								label: '식단',
-						          borderColor : 'green',
-						          backgroundColor:'rgba(0,255,0,0.3)',
-						          borderWidth:2,
-						          fill:true,
-						          pointRadius:2
-							}]
-						}
-			        :lineChart.data={
-							datasets:[{
-								label: '식단',
-						           borderColor : 'green',
-						           backgroundColor:'rgba(0,255,0,0.3)',
-						           borderWidth:2,
-						           fill:true,
-							}]
-						}
-
-					lineChart.data.labels=labels;
-					lineChart.data.datasets[0].data=planYN;
-					lineChart.update();
 				}
 			});
 			break;

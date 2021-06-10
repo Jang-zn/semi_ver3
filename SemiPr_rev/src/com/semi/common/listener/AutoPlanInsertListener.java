@@ -67,10 +67,10 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 					case 6: week="금"; break;
 					case 7: week="토"; break;
 				}
-				if(i<9) {
-					arrayCal[i] = (""+year+"/"+month+"/0"+(i+1)+","+week);
+				if(today+i<9) {
+					arrayCal[i] = (""+year+"/"+month+"/0"+(today+i)+","+week);
 				}else {
-					arrayCal[i] = (""+year+"/"+month+"/"+(i+1)+","+week);
+					arrayCal[i] = (""+year+"/"+month+"/"+(today+i)+","+week);
 				}		
 			}
 			ExcService ex = new ExcService();
