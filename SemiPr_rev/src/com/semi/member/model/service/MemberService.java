@@ -66,6 +66,7 @@ public class MemberService {
 	}
 	public Menu selectMenu(String menuid) {
 		Connection conn = getConnection();
+		System.out.println("뭐야?" +menuid);
 		Menu m= dao.selectMenu(conn,menuid);
 		m.setFileList(dao.selectMenuimg(conn,menuid));
 		close(conn);		
