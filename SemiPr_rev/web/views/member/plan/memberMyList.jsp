@@ -116,7 +116,7 @@
 					</div>
 					<div class="list_name_area col-md-9">
 						<input type="hidden" name="menuid" value=<%=mml.getMenuId() %>>
-						<div class="data row">대충 저장한 메뉴이름1</div>
+						<div class="menuname data row">대충 저장한 메뉴이름1</div>
 						<div class="row data">
 							<div class="menuamount data col-md-3 categoryLine data"><%=mml.getAmount() %></div>
 							<div class="menukcal data col-md-3 categoryLine data">칼로리: xx kcal</div>
@@ -167,13 +167,13 @@
 	
 	$(".day_myList").click(e=>{
 		var dayval=$(e.target).text().trim();
-		console.log(dayval);
+		
 		location.assign("<%=request.getContextPath()%>/member/myList?val="+dayval);	
 	});
 	
 	$("#mymenu>div>select").change(e=>{
 		var dayval="<%=today%>";
-		console.log(dayval);
+		
 		const daytime=$(e.target).val();
 		location.assign("<%=request.getContextPath()%>/member/myList?val="+dayval+"&time="+daytime);	
 	})
@@ -187,7 +187,7 @@
 				excid:$(e.target).children(1).eq(0).val()
 				},
 			success:data=>{
-				console.log(data);
+				
 				const div=$("<div>");
 				const excvideo=$("<iframe>").attr({
 					"src":data.excVideo,
@@ -210,7 +210,7 @@
 				Menuid:$(e.target).children(1).eq(0).val()
 				},
 			success:data=>{
-				console.log(data);
+				
 				const div=$("<div>");
 				const menuvideo=$("<img>").attr({
 					"src":data.menuVideo,
@@ -233,7 +233,6 @@
 				excid:$("input[name=excid]").eq(i).val()
 				},
 				success:data=>{
-				console.log(data);
 				$(".excimg").eq(i).attr({
 					"src":data.fileList[0],
 					"width":"50px",
@@ -255,12 +254,13 @@
 				Menuid:$("input[name=menuid]").eq(i).val()
 				},
 				success:data=>{
-					console.log(data)
+					console.log("이거니",data)
 					$(".menuimg").eq(i).attr({
 						"src":data.fileList[0],
 						"width":"50px",
 						"height":"50px"
 					})
+					$(".menuname").eq(i).html(data.menuName);
 					$(".menuamount").eq(i).html("칼로리"+"<br>"+data.kcal);
 					$(".menukcal").eq(i).html("탄수화물"+"<br>"+data.ch);		
 					$(".menuget").eq(i).html("지방"+"<br>"+data.fat);
