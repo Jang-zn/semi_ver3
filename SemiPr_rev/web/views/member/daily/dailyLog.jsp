@@ -65,7 +65,7 @@
 				<%for(DailyExercise de:delist){ %>
 				<div class="exc_list row excday2">
 					<input type="hidden" name="excdate" value="<%=de.getExcDate()%>">
-					<span><%=de.geteLogNo() %></span><span class="date"><%=de.getExcDate()%></span>
+					<span><%=de.geteLogNo() %></span><span class="date"><%=de.getExcDate()%></span><span class="plancheck"><%=de.getExcPlanCheck()%></span>
 				</div>
 				<%} %>
 			
@@ -118,11 +118,11 @@
 				<div id="menudown">
 				
 				<%for(DailyMenuList dml:menulist){ %>
-				<%int am=dml.getAmount();%>
+				<%int am=1;%>
 				<div class="exc_plan_list row">
 				<input type="hidden" name="menuno" value="<%=dml.getMenuNo()%>">
 					<span><%=dml.getMenuName() %> <%=dml.getMenuDaytime() %></span><span class="menuData">kcal:<%=dml.getKcal()*am%>
-					탄수화물:<%=dml.getProt()*am%> 지방:<%=dml.getFat()*am%> 나트륨:<%=dml.getNa()*am%> 아미노산:<%=dml.getCh()*am%></span>
+					탄수화물:<%=dml.getCh()*am%> 단백질:<%=dml.getProt()*am%> 지방:<%=dml.getFat()*am%> </span>
 					<input type="hidden" name="menudaytime" value="<%=dml.getMenuDaytime()%>">
 				</div>
 				<%} %>
@@ -140,7 +140,7 @@
 				<%for(DailyMenu dm:dmlist){ %>
 				<div class="exc_list menuday2">
 					<input type="hidden" name="menudate" value="<%=dm.getMenuDate()%>">
-					<span><%=dm.getmLogNo() %></span><span class="date"><%=dm.getMenuDate()%></span>
+					<span><%=dm.getmLogNo() %></span><span class="date"><%=dm.getMenuDate()%></span><span class="plancheck"><%=dm.getMenuPlanCheck()%></span>
 				</div>
 				<%} %>
 				<div id="pageBar" class="row">
@@ -158,6 +158,17 @@
 .date { pointer-events: none; }
 </style>
 <script>
+$(".plancheck").each((i,v)=>{
+	console.log($(v).text())
+	if($(v).text()=="Y"){
+		$(v).parent().css("background-color","green");
+	}else if($(v).text()=="C"){
+		$(v).parent().css("background-color","yellow");
+	}else{
+		$(v).parent().css("background-color","red");
+	}
+	$(v).text("");
+})
 $(".excday2").click(e=>{	
 	e.stopPropagation();
 	var week = ['일', '월', '화', '수', '목', '금', '토'];
@@ -212,7 +223,7 @@ $(".excday2").click(e=>{
 			console.log(data)
 			$("input[name=getday]").val(data[0].menuWeek);			
 			for(var i=0;i<data.length;i++){		
-				let am =data[i].amount;
+				let am =1;
 				let div=$("<div>").attr("class","exc_plan_list row");
 				let span=$("<span>")			
 				div.append($("<input>").attr({
@@ -222,7 +233,7 @@ $(".excday2").click(e=>{
 				})
 				)
 				$("#menudown").append(div.append(span.html(data[i].menuName+" "+data[i].menuDaytime)));
-				div.append($("<span>").attr("class","menuData").html("칼로리:"+data[i].kcal*am+"탄수화물:"+data[i].prot*am+"지방:"+data[i].fat*am+"나트륨:"+data[i].na*am+"아미노산:"+data[i].ch*am));
+				div.append($("<span>").attr("class","menuData").html("칼로리:"+data[i].kcal*am+"탄수화물:"+data[i].ch*am+"지방:"+data[i].fat*am+"단백질:"+data[i].prot*am));
 				div.append($("<input>").attr({
 					type:"hidden",
 					name:"menudaytime",
@@ -252,7 +263,7 @@ $(".excday2").click(e=>{
 	 location.assign("<%=request.getContextPath()%>/daily/insertmenudaily?menuArr="+menunoArray);
 }
 	
-	$(function(){
+<%--	$(function(){
 		$("input[name=excdate]").each((i,v)=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/dailylogcheck",
@@ -285,7 +296,7 @@ $(".excday2").click(e=>{
 			}
 		})
 	})
-});
+});--%>
 	
 	$.ajax({
 		url:"<%=request.getContextPath()%>/ajax/dailyrecord",

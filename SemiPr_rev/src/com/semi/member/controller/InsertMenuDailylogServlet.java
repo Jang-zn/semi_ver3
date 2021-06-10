@@ -43,8 +43,8 @@ public class InsertMenuDailylogServlet extends HttpServlet {
 		System.out.println(sysdate+"여기체크");
 		String msg="";
 		String loc="";
-		if(sysdate==null||sysdate.equals("")) { 
-			new MemberService().insertMenuDaliylog(menuarr);
+		if(sysdate.equals("C")) { 
+			new MemberService().updateMenuDaliylog(memberid);
 		
 			msg="일지를 등록했습니다.";
 			loc="/member/dailyLog";

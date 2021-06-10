@@ -38,6 +38,7 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 	    	String memberId = member.getMemberId();
 	    	Calendar cal = Calendar.getInstance();
 			int last = cal.getActualMaximum(cal.DAY_OF_MONTH); //월 길이 (length로 사용)
+			int today = cal.get(cal.DATE); //오늘 날짜
 			
 			
 			int y = cal.get(cal.YEAR);
@@ -51,10 +52,10 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 			}else {
 				month="0"+(m+1);
 			}
-			String[] arrayCal = new String[last];
+			String[] arrayCal = new String[last-today+1];
 			
-			for(int i = 0;i<last;i++) {
-				cal.set(y, m, i+1);
+			for(int i = 0 ;i<last-today+1;i++) {
+				cal.set(y, m, today+i);
 				int wnum = cal.get(cal.DAY_OF_WEEK);
 				String week ="";
 				switch(wnum) {
@@ -66,31 +67,33 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 					case 6: week="금"; break;
 					case 7: week="토"; break;
 				}
-				if(i<9) {
-					arrayCal[i] = (""+year+"/"+month+"/0"+(i+1)+","+week);
+				if(today+i<9) {
+					arrayCal[i] = (""+year+"/"+month+"/0"+(today+i)+","+week);
 				}else {
-					arrayCal[i] = (""+year+"/"+month+"/"+(i+1)+","+week);
+					arrayCal[i] = (""+year+"/"+month+"/"+(today+i)+","+week);
 				}		
 			}
-	    	
-			//arrayCal에는 한달치 yy/mm/dd,요일 이 저장됨
+			ExcService ex = new ExcService();
+			MenuService ms = new MenuService();
+			//arrayCal에는 오늘~말일 yy/mm/dd,요일 이 저장됨
 			for(String s : arrayCal) {
-				List<MemberExercise> wlist = new ExcService().getWlist(memberId, s);
-				List<MemberMenu> mlist = new MenuService().getWlist(memberId, s);
+				
+				List<MemberExercise> wlist = ex.getWlist(memberId, s);
+				List<MemberMenu> mlist = ms.getWlist(memberId, s);
 				if(wlist.size()==0) {
 					continue;
 				}else {
 					//해당일에 계획 등록됐는지 확인
-					int planCheck = new ExcService().getPlanCheck(memberId, s);
+					int planCheck = ex.getPlanCheck(memberId, s);
 					if(planCheck==0) {
 						//안돼있으면 등록해줌
-						int result = new ExcService().setMonthlyPlan(wlist, s);
+						int result = ex.setMonthlyPlan(wlist, s);
 					}
 					
-					int planCheckM = new MenuService().getPlanCheck(memberId, s);
+					int planCheckM = ms.getPlanCheck(memberId, s);
 					if(planCheckM==0) {
 						//안돼있으면 등록해줌
-						int result = new MenuService().setMonthlyPlan(mlist, s);
+						int result = ms.setMonthlyPlan(mlist, s);
 					}else {
 						continue;
 					}
@@ -98,11 +101,11 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 				
 			}
 	    	//오늘날짜는 PlanCheck='C' 로 표기
-			new ExcService().todayCheck(memberId);
-			new MenuService().todayCheck(memberId);
+			ex.todayCheck(memberId);
+			ms.todayCheck(memberId);
 			//날짜 지났는데 C면 자동으로 N으로 바꿈
-			int tr = new ExcService().autoN(memberId);
-			int trm = new MenuService().autoN(memberId);
+			int tr = ex.autoN(memberId);
+			int trm = ms.autoN(memberId);
 			
     	}
     }

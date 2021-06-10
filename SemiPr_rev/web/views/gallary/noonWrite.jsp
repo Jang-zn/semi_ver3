@@ -18,75 +18,54 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/views/board/editor/js/service/HuskyEZCreator.js"
 	charset="utf-8"></script>
-<div class="row">
-	<div class="col-md-1"></div>
-	<div id="n_title" class="col-md-10">
-		<h2>눈바디</h2>
-	</div>
-	<div class="col-md-1"></div>
-</div>
-<form action="<%=request.getContextPath() %>/gallary/writeEnd" method="post" enctype="multipart/form-data" id="frm">
+
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-1"></div>
-
-		<div id="n_content_area" class="col-md-10">
-
-
-
-
-
-			<div id="n_content" class="col-md-6">
-				<div class="col-md-1"></div>
-				<div id="n_date" class="col-md-5">
-					<input type="text" name="title" value="<%= sf.format(nowTime)%> / <%=sf2.format(nowTime) %> " readonly
-						style="font-size: 20px; font-weight: bold;">
-					<input type="text" name ="writer" value="<%=m.getNickname() %>님의 기록 " readonly />
-					<input type="hidden" name="memberId" value="<%=m.getMemberId() %>" />
-				</div>
-<!--				<div class="col-md-2"></div>
- 				<div id="n_date" class="col-md-4">
-					<label>자유게시판공유하기 : <input type="checkbox" name="share">
-					</label>
-				</div> -->
-				<div class="row">
-					<div id="n_content_img" class="col-md-12">
-						<img id="img_preview" src="#">
-					</div>
-				</div>
-			</div>
-
-
-			<div id="n_list" class="col-md-6">
-				<br><br>
-				
-				<div id="comment_area" class="row">
-					<textarea name="content" id="ir1" rows="19" cols="100" required> 내용을 입력하세요 </textarea>
-				</div>
-				
-
-
-				<div id="upload_area" class="row">
-					<div class="col-md-1 btn">+</div>
-					<div class="col-md-10"><input type="file" name="imgUp" id="imgInput"/></div>
-				</div>
-
-				<br>
-				<div id="submit_area" class="row">
-					<div class="col-md-9"></div>
-					<div class="col-md-3 btn">
-						<div class="col-md-1"></div>
-						<div class="col-md-4"><img src="<%=request.getContextPath()%>/Resource/img/btn-check.png"></div>
-						<div class="col-md-5"><button type="submit" id="submit"><img src="<%=request.getContextPath()%>/Resource/img/btn-check.png"><span>등록</span></button></div>
-					</div>
-				</div>
-			</div>
+	<form action="<%=request.getContextPath() %>/gallary/writeEnd" method="post" enctype="multipart/form-data" id="frm">
+		<div id="n_title" class="col-md-12">
+			<img src="<%=request.getContextPath()%>/Resource/img/noonbody.png"><hr/>
 		</div>
-		
-		
-		<div class="col-md-1"></div>
 	</div>
-</form>
-
+	<div class="row"> <!-- write 전체 -->	
+		<div class="col-md-5"> <!-- write 프리뷰 시작 -->
+			<div class="row">
+				<div id="n_title" class="col-md-12">
+						<p><%= sf.format(nowTime)%> / <%=sf2.format(nowTime) %><p><br/>
+					<input type="text" name ="writer" value="<%=m.getNickname() %>님의 기록 " readonly />
+					<input type="hidden" name="memberId" value="<%=m.getMemberId() %>" />	
+				</div>
+			</div>
+			<div class="row">
+				<div id="n_content_img" class="col-md-12">
+					<img id="img_preview" src="<%=request.getContextPath()%>/Resource/img/noonwrite.png">
+				</div>
+			</div>
+		</div> <!--Write 프리뷰 끝  -->	
+		
+		<div class="col-md-7"> <!-- write작성란 -->
+			<div id ="writegap" class="row">
+				<div  class="col-md-12"> </div>
+			</div>
+			
+			<div id="comment_area" class="row">
+	        	<div class="col-md-12">
+					<textarea name="content" id="ir1" rows="19" cols="" required> 내용을 입력하세요 </textarea>
+				</div>
+			</div>
+			<div class="row" >
+				<div id="upload_area" class="col-md-5" >
+					<input type="file" name="imgUp" id="imgInput"/>								
+				</div>
+				<div id="submit_area" class="col-md-7">
+					<input type="submit" id="submit" value="등록"/>					
+				</div>
+			</div>
+			</form>	
+		</div>
+		 
+		
+	</div> <!-- 전체 row끝 -->
+</div> <!-- container 끝 -->
 
 <script type="text/javascript">
 		
