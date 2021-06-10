@@ -33,6 +33,7 @@
 		<div class="col-md-1"></div>
 		<div id="select_weekday" class="col-md-10" style="align-text:center;">
 			<div class="row">
+				<div class="col-md-3"></div>
 				<div class="day_myList col-md-1" style="background-color:#df4833;">월</div>
 				<div class="day_myList col-md-1" style="background-color:orange">화</div>
 				<div class="day_myList col-md-1" style="background-color:#e6c050">수</div>
@@ -74,15 +75,17 @@
 	<!-- 운동 / 식단 리스트 -->
 	<div class="row">
 		<div id="list_container_myList" class="col-md-12">
-			<!-- 운동리스트 -->		
+			<!-- 운동리스트 -->	
+						
 			<div id="my_list_exc" class="col-md-6">
+				<%int ecount=1; %>
 				<%for(MemberExcList mel : exclist) {%>
 				<div class="col-md-12 excinfocho">
 					<div class="list_img_area col-md-2"  style="height:80px;">
  					<img src="" class="excimg"> <br> <br> <br>
 					</div>
 					<div class="list_name_area col-md-9">
-						<input type="hidden" name="excid" value="<%=mel.getExcId() %>">
+						<input type="hidden" id="excid" name="excid<%=ecount++%>" value="<%=mel.getExcId()%>">
 						<div class="excname data row">대충 저장한 운동이름1</div> 
 						<div class="row data">
 							<div class="data col-md-4 categoryLine data">무게 : <%=mel.getWeight() %>kg</div>
@@ -106,22 +109,24 @@
 			</div>
 			
 			
-			<!-- 식단리스트 -->			
+			
+			<!-- 식단리스트 -->	
+				
 			<div id="my_list_menu" class="col-md-6">
+				<%int mcount=1; %>
 				<%for(MemberMenuList mml:menulist){%>
 				<div class="col-md-12 menuinfocho">
-				
 					<div class="list_img_area col-md-2" style="height:80px;">
-						<br> <img src="" class="menuimg"> <br> <br> <br>
+						<img src="" class="menuimg">
 					</div>
 					<div class="list_name_area col-md-9">
-						<input type="hidden" name="menuid" value=<%=mml.getMenuId() %>>
-						<div class="menuname data row">대충 저장한 메뉴이름1</div>
+						<input type="hidden" id="menuid<%=mcount++%>" name="menuid" value=<%=mml.getMenuId() %>>
+						<div class="menuname data row"></div>
 						<div class="row data">
 							<div class="menuamount data col-md-3 categoryLine data"><%=mml.getAmount() %></div>
-							<div class="menukcal data col-md-3 categoryLine data">칼로리: xx kcal</div>
-							<div class="menuget data col-md-3 data categoryLine">영양소 : ~~~~</div>
-							<div class="menuget2 data col-md-3 data">영양소 : ~~~~</div>
+							<div class="menukcal data col-md-3 categoryLine data"></div>
+							<div class="menuget data col-md-3 data categoryLine"></div>
+							<div class="menuget2 data col-md-3 data"></div>
 						</div>
 					</div>
 					<div class="list_button_area col-md-1">
@@ -142,6 +147,7 @@
 					<%=menupagebar %>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 	
@@ -184,7 +190,7 @@
 			url:"<%=request.getContextPath()%>/ajax/exclist",
 			type:"get",
 			data:{
-				excid:$(e.target).children(1).eq(0).val()
+				excid:$("excid").val()
 				},
 			success:data=>{
 				
@@ -203,11 +209,13 @@
 		
 	$(".menuinfocho").click(e=>{	
 		$("#myMenu_info_box").html("");
+		console.log($(e.target).parents(".menuinfocho"));
+		console.log($())
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/selectmenu",
-			type:"get",
+			type:"post",
 			data:{
-				Menuid:$(e.target).children(1).eq(0).val()
+				Menuid:$("#menuid").val()
 				},
 			success:data=>{
 				
@@ -254,7 +262,6 @@
 				Menuid:$("input[name=menuid]").eq(i).val()
 				},
 				success:data=>{
-					console.log("이거니",data)
 					$(".menuimg").eq(i).attr({
 						"src":data.fileList[0],
 						"width":"50px",

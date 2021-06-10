@@ -195,7 +195,7 @@
 	
 	
         <!-- 일일 계획 -->
-        <div class="row">
+        <div class="row todayPlan">
             <div class="col-md-6">
                 <!-- 운동 -->
                 <div class="row">
@@ -211,9 +211,9 @@
                     <div class="row">
                     	<div class="col-md-12">
                     		<div class="row list01">
-	                    		<div class="col-md-3">운동 이름</div>
-		                    	<div class="col-md-3">reps</div>
-		                    	<div class="col-md-3">sets</div>
+	                    		<div class="col-md-5">운동 이름</div>
+		                    	<div class="col-md-2">reps</div>
+		                    	<div class="col-md-2">sets</div>
 		                    	<div class="col-md-3">weight</div>
                     		</div>
                     	</div>
@@ -227,10 +227,10 @@
                     <div class="row">
                     	<div class="col-md-12">
                     		<div class="row list02">
-	                    		<div class="col-md-3 categoryLine"><%=m.getExcId_c() %></div>
-		                    	<div class="col-md-3 categoryLine"><%=m.getReps() %> reps</div>
-		                    	<div class="col-md-3 categoryLine"><%=m.getSets()%> sets</div>
-		                    	<div class="col-md-3"><%=m.getWeight() %> weight</div>
+	                    		<div class="col-md-5 categoryLine todayPlan_l"><%=m.getExcId_c() %></div>
+		                    	<div class="col-md-2 categoryLine todayPlan_l"><%=m.getReps() %> reps</div>
+		                    	<div class="col-md-2 categoryLine todayPlan_l"><%=m.getSets()%> sets</div>
+		                    	<div class="col-md-3 todayPlan_l"><%=m.getWeight() %> weight</div>
                     		</div>
                     	</div>                    	
                     </div>
@@ -275,9 +275,9 @@
 	                    <div class="row">
 							<div class="col-md-9">
 								<div class="row list01">
-									<div class="col-md-4">식단 이름</div>
-			                    	<div class="col-md-4">양</div>
-			                    	<div class="col-md-4">언제</div>
+									<div class="col-md-6">식단 이름</div>
+			                    	<div class="col-md-3">양</div>
+			                    	<div class="col-md-3">언제</div>
 								</div>
 							</div>	                    
 	                    	
@@ -290,9 +290,9 @@
 	                    <div class="row">
 	                    	<div class="col-md-9">
 								<div class="row list02">
-									<div class="col-md-4 categoryLine"><%=m.getMenuId_c() %></div>
-			                    	<div class="col-md-4 categoryLine"><%=m.getAmount() %> g</div>
-			                    	<div class="col-md-4" ><%=m.getMenuDaytime() %></div>
+									<div class="col-md-6 categoryLine todayPlan_l"><%=m.getMenuId_c() %></div>
+			                    	<div class="col-md-3 categoryLine todayPlan_l"><%=m.getAmount() %> g</div>
+			                    	<div class="col-md-3 todayPlan_l" ><%=m.getMenuDaytime() %></div>
 								</div>
 							</div>	    
 	                    </div>
@@ -313,6 +313,7 @@
                     <div class="col-md-4"><button onclick="menuUpdate();" class="btn01">달성 확인</button></div>
                 </div>
             </div>
+		</div>
 			 <script>
 			    	const excUpdate=()=>{
 			    		location.replace("<%=request.getContextPath()%>/member/todayExcUpdate");
@@ -322,7 +323,10 @@
 			    		location.replace("<%=request.getContextPath()%>/member/todayMenuUpdate");
 			    	}
 			    </script>
-
+		</div>
+	<br><br>
+	<div class="container">
+		<div class="row" >
             <!-- 주간 통계 -->
             <div class="col-md-6">
                 <!-- 운동 -->
@@ -358,7 +362,7 @@
                     </div>
                 </div> 
             </div>
-                
+            </div>   
 
         </div>
 
