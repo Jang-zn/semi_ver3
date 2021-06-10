@@ -214,7 +214,7 @@
 					</div>
 					<div class="col-md-12">
 						<div class="col-md-10 box">
-							<input type="text" id="height" placeholder="키 입력" name="height" maxlength="3" required >
+							<input type="number" id="height" min="100" max="290" step="0.01" placeholder="키 입력" name="height" maxlength="6" oninput="numberMaxLength(this)" required >
 						</div>
 						<div class="col-md-2">
 							<div class="sta_height">cm</div>
@@ -230,7 +230,7 @@
 					</div>
 					<div class="col-md-12">
 						<div class="col-md-10 box ">
-							<input type="text" id="weight" placeholder="체중 입력" name="weight" required maxlength="3">
+							<input type="number" min="15" max="200" step="0.01" id="weight"  maxlength="6"   placeholder="체중 입력" name="weight" oninput="numberMaxLength(this)" required >
 						</div>
 						<div class="col-md-2">
 							<div class="sta_weight">kg</div>
