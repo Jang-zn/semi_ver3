@@ -87,7 +87,7 @@
 					</div>
 					<div id="email_chk" class="col-md-12"> </div>
 					<div class="col-md-12">
-						<div id="email-chk"	class="col-md-4" value="이메일 인증" onclick="emailCheck(insertform.email.value);" >
+						<div id="email-chk"	class="col-md-4 btn01" value="이메일 인증" onclick="emailCheck(insertform.email.value);" >
 							이메일 인증
 						</div>
 					</div>				
@@ -132,39 +132,41 @@
 					</div>				
 					<div id="bir_wrap" class="col-md-12">
 						<!-- BIRTH_YY -->
-						<div id="bir_yy" class="col-md-4">						
-							<div class="box02 col-md-12"> 
-								<input type="text" id="yy" class="int" name="yy" maxlength="4" placeholder="년(4자)" required>
+						<div class="row">
+							<div id="bir_yy" class="col-md-3">						
+								<div class="box02"> 
+									<input type="text" id="yy" class="int" name="yy" maxlength="4" placeholder="년(4자)" required>
+								</div>
 							</div>
-						</div>
-
-						<!-- BIRTH_MM -->
-						<div id="bir_mm" class="col-md-4">
-							<div class="box02 col-md-12"> 
-								<select id="mm" class="sel" name="mm" required style="width:100%; height:100%">
-									<option>월</option>
-									<option value="01">1</option>
-									<option value="02">2</option>
-									<option value="03">3</option>
-									<option value="04">4</option>
-									<option value="05">5</option>
-									<option value="06">6</option>
-									<option value="07">7</option>
-									<option value="08">8</option>
-									<option value="09">9</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-								</select>
+	
+							<!-- BIRTH_MM -->
+							<div id="bir_mm" class="col-md-3">
+								<div class="box02"> 
+									<select id="mm" class="sel" name="mm" required style="width:100%; height:100%">
+										<option>월</option>
+										<option value="01">1</option>
+										<option value="02">2</option>
+										<option value="03">3</option>
+										<option value="04">4</option>
+										<option value="05">5</option>
+										<option value="06">6</option>
+										<option value="07">7</option>
+										<option value="08">8</option>
+										<option value="09">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+									</select>
+								</div>
 							</div>
-						</div>
-
-
-						<!-- BIRTH_DD -->
-						<div id="bir_dd" class="col-md-4">
-							<div class="box02 col-md-12"> 
-								<input type="text" id="dd" class="int" name="dd" maxlength="2" placeholder="일" required>
-							</div>
+	
+	
+							<!-- BIRTH_DD -->
+							<div id="bir_dd" class="col-md-3">
+								<div class="box02"> 
+									<input type="text" id="dd" class="int" name="dd" maxlength="2" placeholder="일" required>
+								</div>
+							</div>	
 						</div>					
 					</div>
 					<div class="error_next_box"></div>
@@ -177,16 +179,14 @@
 						<label for="gender">성별</label>
 					</div>
 					<div class="col-md-12">
-						<div class="box gender_code col-md-12"> 
+						<div class="box gender_code"> 
 							<select id="gender" name="gender" required class="sel" style="width:100%; height:100%">
 								<option>성별</option>
 								<option value="M">남자</option>
 								<option value="F">여자</option>
 							</select>
 						</div> 
-						<div class="error_next_box col-md-12">
-							필수 정보입니다.
-						</div>
+						<div class="error_next_box col-md-12">필수 정보입니다.</div>
 					</div>
 				</div>
 
@@ -211,11 +211,11 @@
 						<label>키</label>
 					</div>
 					<div class="col-md-12">
-						<div class="box int_mobile col-md-11">
-							<input type="text" id="height" placeholder="키 입력" name="height" maxlength="3" required>
+						<div class="col-md-10 box">
+							<input type="text" id="height" placeholder="키 입력" name="height" maxlength="3" required >
 						</div>
-						<div class="col-md-1">
-							<div class="sta_height col-md-12">cm</div>
+						<div class="col-md-2">
+							<div class="sta_height">cm</div>
 						</div>
 					</div>
 				</div>
@@ -227,11 +227,11 @@
 						<label>체중</label>
 					</div>
 					<div class="col-md-12">
-						<div class="box int_mobile col-md-11">
+						<div class="col-md-10 box ">
 							<input type="text" id="weight" placeholder="체중 입력" name="weight" required maxlength="3">
 						</div>
-						<div class="col-md-1">
-							<div class="sta_weight col-md-12">kg</div>
+						<div class="col-md-2">
+							<div class="sta_weight">kg</div>
 						</div>
 					</div>
 				</div>
@@ -243,7 +243,7 @@
 						<label>프로필 사진</label>
 					<!-- onchange="setThumbnail(event);" -->
 					</div>
-					<div class="col-md-12"><input type="file" id="image" accept="image/*" name="userProfile"/></div>
+					<div class="col-md-12 inputFile"><input type="file" id="image" accept="image/*" name="userProfile"/></div>
 					<div id="image_container" class="col-md-12"></div>
 					<!-- <button class="btn-delete">삭제</button> -->
 					<div id="btn-container" class="col-md-12"></div>
@@ -253,9 +253,7 @@
 				<!-- JOIN BTN-->
 				<div class="btn_area row">
 					<div class="col-md-12">
-						<button type="submit" id="btnJoin">
-							가입하기
-						</button>
+						<button type="submit" id="btnJoin">가입하기</button>
 					</div>
 				</div>
 			</div>
@@ -300,11 +298,13 @@
 				success:data=>{
 					console.log(data);
 					if(data=="fail"){
-						$("#idCheck").css('color','red')
-						$("#idCheck").html("사용할 수 없는 아이디입니다.")
+						$("#idCheck").css('color','#da7316');
+						$("#idCheck").css('font-family', 'GongGothiclight');
+						$("#idCheck").html("사용할 수 없는 아이디입니다.");
 					}else{
-						$("#idCheck").css('color','green')
-						$("#idCheck").html("아주 멋지네요!")
+						$("#idCheck").css('color','cadetblue');
+						$("#idCheck").css('font-family', 'GongGothiclight');
+						$("#idCheck").html("아주 멋지네요!");
 					}
 				}
 			})
@@ -321,7 +321,8 @@
 		var pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
 		if(pw1.trim().length==0){
 			
-			$("#pw-chk").css('color','red');
+			$("#pw-chk").css('color','#da7316');						
+			$("#pw-chk").css('font-family', 'GongGothiclight');
 			$("#pw-chk").html("공백없이 패스워드를 입력하세요");
 			
 			
@@ -329,7 +330,8 @@
 			alert("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
 			return;
 		}else {
-			$("#pw-chk").css('color','green');
+			$("#pw-chk").css('color','cadetblue');						
+			$("#pw-chk").css('font-family', 'GongGothiclight');
 			$("#pw-chk").html("아름다운 비밀번호입니다.");
 		}
 	});
@@ -338,10 +340,12 @@
 		var pw1 = $("#pswd1").val();
 		var pw2 = $("#pswd2").val();
 		if(pw1 != pw2){
-			$("#pw-chk2").css('color','red');
+			$("#pw-chk2").css('color','#da7316');
+			$("#pw-chk2").css('font-family', 'GongGothiclight');
 			$("#pw-chk2").html("비밀번호가 맞지않습니다. 다시 확인해주세요.");
 		}else{
-			$("#pw-chk2").css('color','green');
+			$("#pw-chk2").css('color','cadetblue');
+			$("#pw-chk2").css('font-family', 'GongGothiclight');
 			$("#pw-chk2").html("비밀번호가 일치합니다.");
 		}
 	})
@@ -440,12 +444,14 @@ $("#email").blur(function(email){
 				console.log(data);
 				
 				if(data=='fail'){
-					$("#email_chk").css('color','red')
-					$("#email_chk").html("사용할 수 없는 이메일입니다.")
+					$("#email_chk").css('color','#da7316');	
+					$("#email_chk").css('font-family', 'GongGothiclight');
+					$("#email_chk").html("사용할 수 없는 이메일입니다.");
 					
 				}else{
-					$("#email_chk").css('color','blue')
-					$("#email_chk").html("사용할 수 있는 이메일입니다.")
+					$("#email_chk").css('color','cadetblue');
+					$("#email_chk").css('font-family', 'GongGothiclight');
+					$("#email_chk").html("사용할 수 있는 이메일입니다.");
 				}
 				
 				}
@@ -490,11 +496,13 @@ $("#nickName_").blur(function(){
 				success:data=>{
 					
 					if(data=="fail"){
-						$("#nickCheck").css('color','red')
-						$("#nickCheck").html("이미 사용중인 닉네임입니다.")
+						$("#nickCheck").css('color','#da7316');						
+					$("#nickCheck").css('font-family', 'GongGothiclight');
+						$("#nickCheck").html("이미 사용중인 닉네임입니다.");
 					}else{
-						$("#nickCheck").css('color','green')
-						$("#nickCheck").html("아주 멋지네요!")
+						$("#nickCheck").css('color','cadetblue');						
+						$("#nickCheck").css('font-family', 'GongGothiclight');
+						$("#nickCheck").html("아주 멋지네요!");
 					}
 				}
 				})

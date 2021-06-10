@@ -5,6 +5,7 @@ import static com.semi.common.JdbcTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,6 @@ import java.util.Properties;
 
 import com.semi.member.model.vo.MemberExcList;
 import com.semi.member.model.vo.MemberMenuList;
-import com.semi.statistic.model.service.StatisticService;
 import com.semi.statistic.model.vo.ExcInfo;
 import com.semi.statistic.model.vo.MenuInfo;
 
@@ -39,9 +39,8 @@ public class StatisticDao {
 		ResultSet rs=null;
 		List<MemberExcList> list=new ArrayList();
 		try {
-			//결과 보기 위해서 SYSDATE를 SYSDATE-1로 두었음. SQL문 수정할 것
 			pstmt=conn.prepareStatement(prop.getProperty("todayExcList"));
-			pstmt.setString(1, memberId); //아이디 대신 test1 넣었음
+			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				MemberExcList m=new MemberExcList();			
@@ -70,7 +69,7 @@ public class StatisticDao {
 		try {
 			//결과 보기 위해서 SYSDATE를 SYSDATE-n로 두었음. SQL문 수정할 것
 			pstmt=conn.prepareStatement(prop.getProperty("todayMenuList"));
-			pstmt.setString(1, memberId); //아이디 대신 test1 넣었음
+			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				MemberMenuList m=new MemberMenuList();		
@@ -78,11 +77,6 @@ public class StatisticDao {
 				m.setAmount(rs.getInt("amount"));
 				m.setMenuId(rs.getString("menu_id"));
 				m.setMenuDaytime(rs.getString("menu_daytime"));
-				
-//				//menuId_c를 menuName으로 대치시킴 String menuName=new
-//				 StatisticService().menuInfo(rs.getString("menu_id")).getMenuName();
-//				 m.setMenuId_c(menuName);
-//				 
 				list.add(m);				
 			}
 					
@@ -96,55 +90,6 @@ public class StatisticDao {
 		}return list;
 	}
 	
-
-//	//excId로 정보 조회해오기
-//	public ExcInfo excInfo(Connection conn, String excId){
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//
-//		ExcInfo eInfo=new ExcInfo();	
-//		try {
-//			pstmt=conn.prepareStatement(prop.getProperty("excInfo"));
-//			pstmt.setString(1, excId); 
-//			rs=pstmt.executeQuery();
-//			while(rs.next()) {		
-//				eInfo.setExcName(rs.getString("exc_name"));
-//			}
-//					
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}catch(NullPointerException e){
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstmt);
-//		}return eInfo;
-//	}
-//	
-//	//menuId로 정보 조회해오기
-//	public MenuInfo menuInfo(Connection conn, String menuId){
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//
-//		MenuInfo mInfo=new MenuInfo();	
-//		try {
-//			pstmt=conn.prepareStatement(prop.getProperty("menuInfo"));
-//			pstmt.setString(1, menuId); 
-//			rs=pstmt.executeQuery();
-//			while(rs.next()) {		
-//				mInfo.setMenuName(rs.getString("menu_name"));
-//			}
-//					
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}catch(NullPointerException e){
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstmt);
-//		}return mInfo;
-//	}
-
 	
 	public String weekExcCheck(Connection conn, String weekCheck, String memberId) {
 		PreparedStatement pstmt=null;
@@ -168,7 +113,7 @@ public class StatisticDao {
 			
 			if(weekNum==su) { //오늘날짜 조회시
 				pstmt=conn.prepareStatement(prop.getProperty("todayExcCheck"));
-				pstmt.setString(1, memberId); //아이디 대신 test1 넣었음		
+				pstmt.setString(1, memberId);
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					if(rs.getString("max(exc_plan_check)")==null) {
@@ -181,7 +126,7 @@ public class StatisticDao {
 			}else {
 				pstmt=conn.prepareStatement(prop.getProperty("weekExcCheck"));
 				pstmt.setString(1, weekCheck);
-				pstmt.setString(2, memberId);	//아이디 대신 test1 넣었음		
+				pstmt.setString(2, memberId);	
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					result=rs.getString("exc_plan_check");
@@ -221,7 +166,7 @@ public class StatisticDao {
 			
 			if(weekNum==su) { //오늘날짜 조회시
 				pstmt=conn.prepareStatement(prop.getProperty("todayMenuCheck"));
-				pstmt.setString(1, memberId); //아이디 대신 test1 넣었음		
+				pstmt.setString(1, memberId);	
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					if(rs.getString("max(menu_plan_check)")==null) {
@@ -234,7 +179,7 @@ public class StatisticDao {
 			}else {
 				pstmt=conn.prepareStatement(prop.getProperty("weekMenuCheck"));
 				pstmt.setString(1, weekCheck);
-				pstmt.setString(2, memberId);	//아이디 대신 test1 넣었음		
+				pstmt.setString(2, memberId);	
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					result=rs.getString("menu_plan_check");
@@ -259,16 +204,24 @@ public class StatisticDao {
 		int count=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("excAchieveCount"));
-			pstmt.setString(1, memberId);	//아이디 대신 test1 넣었음			
+			pstmt.setString(1, memberId);			
 			rs=pstmt.executeQuery();
+			Calendar cal = Calendar.getInstance(); //오늘 날짜 생성			
 			here:
 			while(rs.next()) {	
-				if(rs.getString("max(exc_plan_check)").equals("Y")){
-					count++;
+				Date d=new Date(cal.getTimeInMillis());
+				if(d==rs.getDate("exc_date")) { //해당 날짜 값이 null이 아니면
+					if(rs.getString("max(exc_plan_check)").equals("Y")){
+						count++;						
+					}else {
+						break here;
+					}
+					cal.add(Calendar.DATE, -1); //1일 마이너스
 				}else {
 					break here;
 				}
-			}			
+				
+			}				
 			
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -288,15 +241,23 @@ public class StatisticDao {
 		int count=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("menuAchieveCount"));
-			pstmt.setString(1, memberId);	//아이디 대신 test1 넣었음			
+			pstmt.setString(1, memberId);		
 			rs=pstmt.executeQuery();
+			Calendar cal = Calendar.getInstance(); //오늘 날짜 생성			
 			here:
 			while(rs.next()) {	
-				if(rs.getString("max(menu_plan_check)").equals("Y")){
-					count++;
+				Date d=new Date(cal.getTimeInMillis());
+				if(d==rs.getDate("menu_date")) { //해당 날짜 값이 null이 아니면
+					if(rs.getString("max(menu_plan_check)").equals("Y")){
+						count++;						
+					}else {
+						break here;
+					}
+					cal.add(Calendar.DATE, -1); //1일 마이너스
 				}else {
 					break here;
 				}
+				
 			}			
 			
 		}catch(SQLException e){
@@ -319,7 +280,7 @@ public class StatisticDao {
 		List<ExcInfo> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("weeklyExc"));
-			pstmt.setString(1, memberId); //아이디 대신 test1 넣었음
+			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				ExcInfo e=new ExcInfo();		
@@ -347,7 +308,7 @@ public class StatisticDao {
 		int fat=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("weeklyMenu")); //1주일간 영양 합계를 받아올거임
-			pstmt.setString(1, memberId);	//아이디 대신 test1 넣었음			
+			pstmt.setString(1, memberId);		
 			rs=pstmt.executeQuery();
 			while(rs.next()) {	
 				ch=rs.getInt("sum(ch)");
