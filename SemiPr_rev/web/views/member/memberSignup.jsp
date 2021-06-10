@@ -183,12 +183,13 @@
 					</div>
 					<div class="col-md-12">
 						<div class="box gender_code"> 
-							<select id="gender" name="gender" required class="sel" style="width:100%; height:100%">
+							<select id="gender" name="gender" 	onblur="genderCheck();"	required class="sel" style="width:100%; height:100%">
 								<option>성별</option>
 								<option value="M">남자</option>
 								<option value="F">여자</option>
 							</select>
 						</div> 
+							<div id="genBox" class="col-md-12"></div>
 					</div>
 				</div>
 
@@ -272,6 +273,22 @@
 
 
 <script>
+
+var genCheck = false;
+function genderCheck(){
+	var gender = $("#gender").val();
+	console.log(gender);
+	if(gender == '성별'){
+		$("#genBox").css('color','#da7316');
+		$("#genBox").css('font-family', 'GongGothiclight');
+		$("#genBox").html("확인하세요.");
+		genCheck = false;
+	}else{
+		$("#genBox").html("");
+		genCheck = true;
+	}
+}
+
 
 
 //<------------------------------ 아이디 시작 ---------------------------->
@@ -764,7 +781,6 @@ function dayCheck(){
 
 
 
-
 // <---------------------------------------- 프로필 시작 ---------------------------------------->
 
 
@@ -813,7 +829,7 @@ $("#image").on('change',function(){
 function vaildation(){
 	console.log(pwCheck2);
 		if(ddCheck == false || mmCheck == false || yyCheck == false ||pwCheck2 == false || pwCheck == false 
-				|| phCheck == false || userIdCheck == false){
+				|| phCheck == false || userIdCheck == false || genCheck == false){
 			alert("수정 후 다시 시도해주세요.");
 			return false;
 		}else{
