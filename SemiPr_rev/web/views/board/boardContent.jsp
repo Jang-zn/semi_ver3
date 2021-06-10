@@ -372,7 +372,7 @@
 		 		<%-- <%for(Board b : list) {%> --%>
 		 		<%for(int i=0; i<list.size(); i++){ %>
 		 			<%Board bb = (Board)list.get(i); %>
-						<div id="board_body" class="row" style="padding-bottom: 10px; text-align: center;
+						<div id="board_body" class="row " style="padding-bottom: 10px; text-align: center;
     align-self: center;
     font-family: 'GongGothicLight';
     font-size: 1.7rem;
@@ -394,7 +394,7 @@
 											<%} %>
 										<%} %>
 								</div>
-								<div class="col-md-11"><%=bb.getTitle() %></div>
+								<div class="col-md-11 categoryLine"><%=bb.getTitle() %></div>
 							</div>
 							<div class="board_content_info col-md-2 categoryLine">
 								<%=bb.getWriter() %>

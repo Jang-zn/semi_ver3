@@ -1,27 +1,30 @@
 @charset "UTF-8";
 
-#sub_change {
+*{
+	    font-family: 'GongGothicMedium';
+}
+#exc_name{
+	padding:5px;
+	    margin-left: -6px;
+}
+#sub_change>div:hover {
+	color:cadetblue;
+	transition: all 0.3s;
 }
 #sub_change>span>a {
 	background-color:lightblue;
 }
 
 #list_container {
-	display: flex;
-	border: 1px solid black;
-	
 }
 
 div#exc_list {
-	
-	border: 1px solid black;
 	
 	
 }
 
 div#exc_list_info {
 	
-	border: 1px solid black;
 	transition:all 0.2s;
 	
 
@@ -29,19 +32,16 @@ div#exc_list_info {
 
 #exc_select {
 	display: flex;
-	border: 1px solid black;
 }
 
 div#exc_img {
 	
 	height: 300px;
-	border: 1px solid black;
 	
 }
 
 div#exc_submit {
 
-	border: 1px solid black;
 	margin-top: 2%;
 	margin-bottom: 2%;
 	
@@ -49,7 +49,6 @@ div#exc_submit {
 
 div#exc_detail_info_container {
 	margin-top: 1%;
-	border: 1px solid black;
 }
 
 .list {
@@ -60,8 +59,10 @@ div#exc_detail_info_container {
 	border:1px solid #ccc;
 }
 .border{
-	border:1px solid #bbb;
-	
+	padding-bottom:3px;	
+}
+.border>img{
+	margin-top:8px;
 }
 img{
 	width:100%;
@@ -70,6 +71,7 @@ img{
 }
 .clickcheck{
 	transition:all 0.3s;
+	padding-bottom:20px;
 }
 .clickcheck:hover{
 	cursor:pointer;
@@ -78,7 +80,8 @@ img{
 #exc_video{
 	position: relative;
 	width:100%;
-	padding-bottom:56.25%;
+	padding-left: 20px;
+	padding-bottom: 58%;
 	
 }
 #exc_video iframe {

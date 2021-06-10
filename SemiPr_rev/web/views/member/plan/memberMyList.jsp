@@ -76,16 +76,16 @@
 			<div id="my_list_exc" class="col-md-6">
 				<%for(MemberExcList mel : exclist) {%>
 				<div class="col-md-12 excinfocho">
-					<div class="list_img_area col-md-2">
- <img src="" class="excimg"> <br> <br> <br>
+					<div class="list_img_area col-md-2"  style="height:80px;">
+ 					<img src="" class="excimg"> <br> <br> <br>
 					</div>
 					<div class="list_name_area col-md-9">
 						<input type="hidden" name="excid" value="<%=mel.getExcId() %>">
 						<div class="excname data row">대충 저장한 운동이름1</div> 
-						<div class="row">
-							<div class="data col-md-4 categoryLine">무게 : <%=mel.getWeight() %>kg</div>
-							<div class="data col-md-4 categoryLine">횟수 : <%=mel.getReps() %>reps</div>
-							<div class="data col-md-4">세트수 : <%=mel.getSets() %>sets</div>
+						<div class="row data">
+							<div class="data col-md-4 categoryLine data">무게 : <%=mel.getWeight() %>kg</div>
+							<div class="data col-md-4 categoryLine data">횟수 : <%=mel.getReps() %>reps</div>
+							<div class="data col-md-4 data">세트수 : <%=mel.getSets() %>sets</div>
 						</div>
 					</div>
 					<div class="list_button_area col-md-1">
@@ -109,16 +109,17 @@
 				<%for(MemberMenuList mml:menulist){%>
 				<div class="col-md-12 menuinfocho">
 				
-					<div class="list_img_area col-md-2">
+					<div class="list_img_area col-md-2" style="height:80px;">
 						<br> <img src="" class="menuimg"> <br> <br> <br>
 					</div>
 					<div class="list_name_area col-md-9">
 						<input type="hidden" name="menuid" value=<%=mml.getMenuId() %>>
 						<div class="data row">대충 저장한 메뉴이름1</div>
-						<div class="row">
-							<div class="menuamount data col-md-4 categoryLine"><%=mml.getAmount() %></div>
-							<div class="menukcal data col-md-4 categoryLine">칼로리: xx kcal</div>
-							<div class="menuget data col-md-4">영양소 : ~~~~</div>
+						<div class="row data">
+							<div class="menuamount data col-md-3 categoryLine data"><%=mml.getAmount() %></div>
+							<div class="menukcal data col-md-3 categoryLine data">칼로리: xx kcal</div>
+							<div class="menuget data col-md-3 data categoryLine">영양소 : ~~~~</div>
+							<div class="menuget2 data col-md-3 data">영양소 : ~~~~</div>
 						</div>
 					</div>
 					<div class="list_button_area col-md-1">
@@ -146,20 +147,20 @@
 	<div class="row">
 		<div id="mylist_info_container" class="col-md-12">
 			<div id="myExc_info" class="mylist_info col-md-6">
-				<h3>대충 선택한 운동 정보</h3>
+				<h3>운동 정보</h3>
 				<div id="myExc_info_box" class="mylist_box"></div>
 			</div>
 			<div id="myMenu_info" class="mylist_info col-md-6">
-				<h3>대충 선택한 메뉴 정보</h3>
+				<h3>메뉴 정보</h3>
 				<div id="myMenu_info_box" class="mylist_box"></div>
 			</div>
 		</div>
 	</div>
 </div>
-<%@ include file="/views/common/footer.jsp"%>
-<style>
+
+<!-- <style>
 .data { pointer-events: none; }
-</style>
+</style> -->
 <script>
 	
 	$(".day_myList").click(e=>{
@@ -186,11 +187,14 @@
 			success:data=>{
 				console.log(data);
 				const div=$("<div>");
-				const div2=$("<div>");
+				const excvideo=$("<iframe>").attr({
+					"src":data.excVideo,
+					"width":"550px",
+					"height":"300px"
+				})
 				div.html(data.excManual);
-				div2.html(data.excVideo);
 				$("#myExc_info_box").append(div);
-				$("#myExc_info_box").append(div2);
+				$("#myExc_info_box").append(excvideo);
 				}
 			})
 		})
@@ -206,11 +210,14 @@
 			success:data=>{
 				console.log(data);
 				const div=$("<div>");
-				const div2=$("<div>");
+				const menuvideo=$("<img>").attr({
+					"src":data.menuVideo,
+					"width":"550px",
+					"height":"300px"
+				})
 				div.html(data.menuManual);
-				div2.html(data.menuVideo);
 				$("#myMenu_info_box").append(div);
-				$("#myMenu_info_box").append(div2);
+				$("#myMenu_info_box").append(menuvideo);
 				}
 			})
 		})
@@ -225,7 +232,11 @@
 				},
 				success:data=>{
 				console.log(data);
-				$(".excimg").eq(i).attr("src",data.fileList[0]);
+				$(".excimg").eq(i).attr({
+					"src":data.fileList[0],
+					"width":"50px",
+					"height":"50px"
+				});
 				$(".excname").eq(i).html(data.excName);
 							
 					}
@@ -243,14 +254,20 @@
 				},
 				success:data=>{
 					console.log(data)
-					let amount =$(".menuamount").eq(i).text();
-					$(".menuimg").eq(i).attr("src",data.fileList[0]);
-					$(".menukcal").eq(i).html("kcal:"+Math.ceil((data.kcal)/amount));		
-					$(".menuget").eq(i).html("ch:"+Math.ceil(data.ch/amount))
+					$(".menuimg").eq(i).attr({
+						"src":data.fileList[0],
+						"width":"50px",
+						"height":"50px"
+					})
+					$(".menuamount").eq(i).html("칼로리"+"<br>"+data.kcal);
+					$(".menukcal").eq(i).html("탄수화물"+"<br>"+data.ch);		
+					$(".menuget").eq(i).html("지방"+"<br>"+data.fat);
+					$(".menuget2").eq(i).html("단백질"+"<br>"+data.prot);
+					
 					}
 				})
 			})
 		});
 
 </script>	
-	
+	<%@ include file="/views/common/footer.jsp"%>

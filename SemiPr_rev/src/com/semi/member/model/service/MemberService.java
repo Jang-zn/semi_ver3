@@ -122,26 +122,26 @@ public class MemberService {
 		close(conn);		
 		return list;
 	}
-	public int insertExcDaliylog(String[] excarr) {
-		Connection conn =getConnection();
-		int result=0;
-		for(int i=1;i<excarr.length;i++) {
-		result =dao.insertExcDaliylog(conn,excarr[i]);
-		if(result>0) commit(conn);
-		else rollback(conn);		
-		}
-		return result;
-	}
-	public int insertMenuDaliylog(String[] menuarr) {
-		Connection conn =getConnection();
-		int result=0;
-		for(int i=1;i<menuarr.length;i++) {
-		result =dao.insertMenuDaliylog(conn,menuarr[i]);
-		if(result>0) commit(conn);
-		else rollback(conn);		
-		}
-		return result;
-	}
+//	public int insertExcDaliylog(String[] excarr) {
+//		Connection conn =getConnection();
+//		int result=0;
+//		for(int i=1;i<excarr.length;i++) {
+//		result =dao.insertExcDaliylog(conn,excarr[i]);
+//		if(result>0) commit(conn);
+//		else rollback(conn);		
+//		}
+//		return result;
+//	}
+//	public int insertMenuDaliylog(String[] menuarr) {
+//		Connection conn =getConnection();
+//		int result=0;
+//		for(int i=1;i<menuarr.length;i++) {
+//		result =dao.insertMenuDaliylog(conn,menuarr[i]);
+//		if(result>0) commit(conn);
+//		else rollback(conn);		
+//		}
+//		return result;
+//	}
 
 	////////////////////////////////////////////daliy log 
 	
@@ -375,5 +375,20 @@ public class MemberService {
 		int result= dao.MemberPwdCheck(conn,id,pwd);
 		close(conn);		
 		return result;
+	}
+	public void updateExcDaliylog(String memberid) {
+		Connection conn = getConnection();
+		int result= dao.updateExcDaliylog(conn,memberid);
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		close(conn);		
+		
+	}
+	public void updateMenuDaliylog(String memberid) {
+		Connection conn = getConnection();
+		int result= dao.updateMenuDaliylog(conn,memberid);
+		if(result>0) commit(conn);
+		else rollback(conn);		
+		close(conn);	
 	}
 }
