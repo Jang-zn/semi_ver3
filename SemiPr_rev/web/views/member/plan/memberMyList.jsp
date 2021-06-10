@@ -85,7 +85,7 @@
  					<img src="" class="excimg"> <br> <br> <br>
 					</div>
 					<div class="list_name_area col-md-9">
-						<input type="hidden" id="excid" name="excid<%=ecount++%>" value="<%=mel.getExcId()%>">
+						<input type="hidden" class="excid" name="excid" value="<%=mel.getExcId()%>">
 						<div class="excname data row">대충 저장한 운동이름1</div> 
 						<div class="row data">
 							<div class="data col-md-4 categoryLine data">무게 : <%=mel.getWeight() %>kg</div>
@@ -120,7 +120,7 @@
 						<img src="" class="menuimg">
 					</div>
 					<div class="list_name_area col-md-9">
-						<input type="hidden" id="menuid<%=mcount++%>" name="menuid" value=<%=mml.getMenuId() %>>
+						<input type="hidden" class="menuid" name="menuid" value=<%=mml.getMenuId() %>>
 						<div class="menuname data row"></div>
 						<div class="row data">
 							<div class="menuamount data col-md-3 categoryLine data"><%=mml.getAmount() %></div>
@@ -186,11 +186,17 @@
 	
 	$(".excinfocho").click(e=>{	
 		$("#myExc_info_box").html("");
+		let tlist
+		if($(e.target).parents(".excinfocho").length!=0){
+			 tlist= $(e.target).parents(".excinfocho");
+		}else{
+			tlist = $(e.target);
+		}
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/exclist",
-			type:"get",
+			type:"post",
 			data:{
-				excid:$("excid").val()
+				excid:tlist.children(".list_name_area").children(".excid").val()
 				},
 			success:data=>{
 				
@@ -209,13 +215,18 @@
 		
 	$(".menuinfocho").click(e=>{	
 		$("#myMenu_info_box").html("");
-		console.log($(e.target).parents(".menuinfocho"));
-		console.log($())
+		let tlist
+		if($(e.target).parents(".menuinfocho").length!=0){
+			 tlist= $(e.target).parents(".menuinfocho");
+		}else{
+			tlist = $(e.target);
+		}
+
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/selectmenu",
 			type:"post",
 			data:{
-				Menuid:$("#menuid").val()
+				Menuid:tlist.children(".list_name_area").children(".menuid").val()
 				},
 			success:data=>{
 				

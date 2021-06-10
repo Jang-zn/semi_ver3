@@ -115,8 +115,12 @@
 	background-color:white;
 }
 
-.menuinfocho{
+.menuinfocho, .excinfocho{
 	border-bottom:1px dashed gray;
+}
+.excinfocho:hover,
+.menuinfocho:hover{
+	background-color:rgba(104, 255, 12, 0.26);
 }
 .list_img_area{
 	padding-top:10px;

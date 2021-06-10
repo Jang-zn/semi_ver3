@@ -549,7 +549,7 @@ public class ExcDao {
 				result = rs.getInt(1);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}finally {
 			close(rs);
 			close(pstmt);
@@ -576,7 +576,7 @@ public class ExcDao {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}finally {
 			close(pstmt);
 		}
@@ -596,7 +596,7 @@ public class ExcDao {
 			result=pstmt.executeUpdate();
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}finally {
 			close(pstmt);
 		}
@@ -617,7 +617,7 @@ public class ExcDao {
 			result=pstmt.executeUpdate();
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}finally {
 			close(pstmt);
 		}
