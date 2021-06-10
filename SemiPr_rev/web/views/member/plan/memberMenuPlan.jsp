@@ -17,17 +17,19 @@ String pageBar = (String)request.getAttribute("pageBar");
 		<div style="font-family: 'GongGothicMedium';
     font-size: 2.3rem;
     font-weight: bold;"id="sub_change" class="">
-		        <div class="btn col-md-2">식단 List</div>
+		       <div class="title02 col-md-2">식단 List</div>
 		        
     	</div>
-    	<div id="sort_container" style="margin-top: 13px;" class="col-md-2">
-    	<div class="col-md-3" style="margin-top: 8px;">
-    			<select id="excSort">
-	                		<option>분류 선택</option>
-		                    <option value="고기">- 고기 -</option>
-		                    <option value="채소">- 채소 -</option>
-	                	</select></div>
-  	  </div>
+		<div id="sort_container" class="col-md-2">
+			<div class="row">&nbsp;</div>
+			<div class="row paddingb">
+				<select id="excSort">
+					<option>분류 선택</option>
+					<option value="고기">- 고기 -</option>
+					<option value="채소">- 채소 -</option>
+				</select>
+			</div>
+		</div>
   	  </div>
     
     <div class=row style="
@@ -46,11 +48,14 @@ String pageBar = (String)request.getAttribute("pageBar");
 	            
 	            <%for(Menu me : list){ %>
 	            	<div id="sort_list" class="row clickcheck">
-	            		<div class="border col-md-2 listimgbox"><img src="<%=me.getFileList().get(0)%>"></div>
-	            		<div id="exc_box" class="border col-md-10" style="padding-top:1%;padding-bottom:1%; ">
-	            			<div id="exc_box_name" class="col-md-12"><%=me.getMenuName() %></div>
-	            			<div id="exc_box_info" class="col-md-12"><%=me.getMenuManual()%></div>
-	            			<div id="exc_box_sort" class="col-md-12"><%=me.getMenuSort() %></div>
+	            		<div class="border col-md-3 listimgbox">
+	            			<img src="<%=me.getFileList().get(0)%>">
+	            		</div>
+	            		<div id="exc_box" class="border col-md-9" style="padding-top:1%;padding-bottom:1%;">
+	            			<div id="exc_box_name" class="col-md-9" style="margin-bottom:6px;"><%=me.getMenuName() %></div>
+	            			<div id="exc_box_sort" class="col-md-3"><%=me.getMenuSort() %></div>
+	            			<div id="exc_box_info" class="col-md-12" style="overflow:hidden"><%=me.getMenuManual()%></div>
+	        	
 	            		</div>
 	            	</div>
 	            <%} %>
@@ -96,15 +101,25 @@ String pageBar = (String)request.getAttribute("pageBar");
 	            	<%for(int i=1;i<list.get(0).getFileList().size();i++){ %>
 	            		<div class="col-md-12"><img style="width:40%" src="<%=list.get(0).getFileList().get(i)%>"></div>
 	            	<%} %>
-	                <div class="col-md-12"><%=list.get(0).getMenuManual()%></div>
+	                <div class="col-md-12" style="font-size:18px"><%=list.get(0).getMenuManual()%></div>
 	            </div>
-	            <div id="exc_video" style="padding-bottom:0px" class="row">
-	            	<h2>열량 : <%=list.get(0).getKcal() %> kcal</h2><br>
-	            	<h2>당질 : <%=list.get(0).getCh() %> g</h2><br>
-	            	<h2>단백질 : <%=list.get(0).getProt() %> g</h2><br>
-	            	<h2>지질 : <%=list.get(0).getFat() %> g</h2><br>
+	 			<style>
+	 			#exc_video>h2{
+	 				margin:20px;
+	 				border-right:1.5px dashed darkgray;
+	 				border-left:1.5px dashed darkgray;
+	 				padding:10px;
+	 				font-size:27px;
+	 			}
+	 			</style>
+	            <div id="exc_video" style="padding-bottom:0px;display:flex;margin-top:40px" class="row">
+	            	<h2>열량 <br> <%=list.get(0).getKcal() %> kcal</h2><br>
+	            	<h2>당질 <br> <%=list.get(0).getCh() %> g</h2><br>
+	            	<h2>단백질 <br> <%=list.get(0).getProt() %> g</h2><br>
+	            	<h2>지질 <br> <%=list.get(0).getFat() %> g</h2><br>
 	            </div>
 	        <!-- Ajax 적용영역 --> 
+	        
 	            
 	        </div>
 	    </div>
@@ -134,7 +149,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 				}
 				let div = $("<div>").addClass("col-md-12");
 				div.text(data.menuManual);
-				$("#exc_video").html("<h2>열량 : "+data.kcal+" kcal</h2><br>"+"<h2>당질 : "+data.ch+" g</h2><br>"+"<h2>단백질 : "+data.prot+" g</h2><br>"+"<h2>지질 : "+data.fat+" g</h2><br>");
+				$("#exc_video").html("<h2>열량 <br>"+data.kcal+"kcal</h2><br>"+"<h2>당질 <br> "+data.ch+" g</h2><br>"+"<h2>단백질 <br> "+data.prot+" g</h2><br>"+"<h2>지질 <br> "+data.fat+" g</h2><br>");
 			}
 		});
 	});
