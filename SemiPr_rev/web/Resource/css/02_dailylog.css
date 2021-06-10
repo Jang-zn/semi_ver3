@@ -25,7 +25,8 @@
 
 #dailyExc_content_container {
 	display: flex;
-	border: lightgreen 1px solid;
+	border:1.5px dashed darkgray;	
+	border-radius:0.2em;
 }
 #dailyExc_title{
 	color:red;
@@ -33,25 +34,37 @@
 #dailyExc_title {
 	padding: 1%;
 	font-family: 'PFStardust';
-	color: red;
+	color: black;
+
 }
 
+#personal_record_container{
+	 font-family: 'GongGothicMedium';
 
+}
 #dailyExc_content {
 	margin: 1%;
 	width: 50%;
 	border: lightgreen 1px solid;
+	font-family: 'GongGothicLight';
+	border-radius:0.2em;
+	 border:1.5px dashed darkgray;	
 }
+
 
 #dailyExc_list {
 	margin: 1%;
 	width: 50%;
 	border: lightgreen 1px solid;
+	font-family: 'GongGothicLight';
+	
+  	border:1.5px dashed darkgray;	
 }
 
 .exc_plan_list, .exc_list {
 	list-style: none;
-	border-bottom: greenyellow 1px solid;
+	border:1.5px dashed darkgray;
+	padding-left:15px;
 }
 
 .exc_plan_list>span, .exc_list>span {
@@ -68,7 +81,7 @@ ul#exc_list, ul#exc_plan_list {
 	margin: 2%
 }
 
-#pageBar h4{
+#pageBar>div{
 	text-align: center;
 	margin-top: 2%;
 }
@@ -78,9 +91,26 @@ ul#exc_list, ul#exc_plan_list {
 }
 
 .exc_plan_title {
-	list-style: none;
-	border-bottom: #009688 solid 2px;
+	border-bottom: 1.5px dashed darkgray;
 	margin-bottom: 3%;
-	width: 98%;
 	padding: 1%;
+}
+.centername{
+	text-align: center;
+}
+.exc_plan_title>span{
+	padding-left:15px;
+	padding-right:15px;
+}
+.categoryLine{
+	border-right:1px dashed gray;
+	width:50px;
+}
+
+.exc_list>span{
+	padding-left:10px;
+	padding-right:20px;
+}
+.date{
+	margin-left:15px;
 }

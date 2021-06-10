@@ -18,7 +18,7 @@
 
 %>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/Resource/css/dailyExc.css">
+	href="<%=request.getContextPath()%>/Resource/css/02_dailylog.css">
 
 <div class="row">
 	
@@ -39,9 +39,9 @@
 		</div>
 
 		<div id=dailyExc_content_container class="row">
-			<div id="dailyExc_content" class="col-md-6" style="overflow:scroll; height:450px;">
+			<div id="dailyExc_content" class="col-md-6" style="overflow:auto; overflow-x:hidden; height:498px;">
 				<div class="exc_plan_title row" >
-					<span>(제목)운동 계획 날짜 +요일+ 실행여부로 색표현</span>
+					<span>운동 목록</span>
 				</div>
 				<div id="excdown">
 				<%for(MemberExcList mel :list){ %>
@@ -60,12 +60,12 @@
 			</div>
 			<div id="dailyExc_list" class="col-md-6">
 				<div class="exc_plan_title row">
-					<span>No</span><span>기록일</span>
+					<span class="categoryLine">No</span><span>기록일</span>
 				</div>
 				<%for(DailyExercise de:delist){ %>
 				<div class="exc_list row excday2">
 					<input type="hidden" name="excdate" value="<%=de.getExcDate()%>">
-					<span><%=de.geteLogNo() %></span><span class="date"><%=de.getExcDate()%></span><span class="plancheck"><%=de.getExcPlanCheck()%></span>
+					<span class="categoryLine"><%=de.geteLogNo() %></span><span class="date categoryLine2"><%=de.getExcDate()%></span><span class="plancheck"><%=de.getExcPlanCheck()%></span>
 				</div>
 				<%} %>
 			
@@ -109,10 +109,10 @@
 		</div>
 		
 		<div id="dailyExc_content_container" class="row">
-			<div id="dailyExc_content" class="col-md-6" style="overflow:scroll; height:500px;">
+			<div id="dailyExc_content" class="col-md-6" style="overflow:auto; overflow-x:hidden; height:498px;">
 
 				<div class="exc_plan_title row">
-					<span>(제목)운동 계획 날짜 +요일+실행여부로 색표현</span>
+					<span>식단 목록</span>
 				</div>
 				<input type="hidden" name="getday" value="<%=day%>">
 				<div id="menudown">
@@ -135,12 +135,12 @@
 			</div>
 			<div id="dailyExc_list" class="col-md-6">
 				<div class="exc_plan_title">
-					<span>No</span><span>기록일</span>
+					<span class="categoryLine">No</span><span>기록일</span>
 				</div>
 				<%for(DailyMenu dm:dmlist){ %>
 				<div class="exc_list menuday2">
 					<input type="hidden" name="menudate" value="<%=dm.getMenuDate()%>">
-					<span><%=dm.getmLogNo() %></span><span class="date"><%=dm.getMenuDate()%></span><span class="plancheck"><%=dm.getMenuPlanCheck()%></span>
+					<span class="categoryLine"><%=dm.getmLogNo() %></span><span class="date categoryLine2"><%=dm.getMenuDate()%></span><span class="plancheck"><%=dm.getMenuPlanCheck()%></span>
 				</div>
 				<%} %>
 				<div id="pageBar" class="row">
@@ -161,11 +161,11 @@
 $(".plancheck").each((i,v)=>{
 	console.log($(v).text())
 	if($(v).text()=="Y"){
-		$(v).parent().css("background-color","green");
+		$(v).parent().css("background-color","rgba(84, 166, 53, 0.7)");
 	}else if($(v).text()=="C"){
-		$(v).parent().css("background-color","yellow");
+		$(v).parent().css("background-color","rgba(223, 72, 51, 0.7)");
 	}else{
-		$(v).parent().css("background-color","red");
+		$(v).parent().css("background-color","rgba(230, 192, 80, 0.7)");
 	}
 	$(v).text("");
 })
