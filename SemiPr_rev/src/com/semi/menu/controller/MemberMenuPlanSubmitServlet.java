@@ -43,6 +43,7 @@ public class MemberMenuPlanSubmitServlet extends HttpServlet {
 			memberId = m.getMemberId();
 		}
 		Menu me = new MenuService().getMenuInfo(request.getParameter("menuName"));
+		System.out.println(request.getParameter("menuName"));
 		MemberMenu mm = new MemberMenu();
 		mm.setMenuId(me.getMenuId());
 		mm.setMemberId(memberId);
