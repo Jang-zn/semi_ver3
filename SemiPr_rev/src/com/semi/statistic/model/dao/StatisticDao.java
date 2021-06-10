@@ -300,7 +300,7 @@ public class StatisticDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				ExcInfo e=new ExcInfo();		
-				e.setExcName(rs.getString("exc_name"));//				 
+				e.setExcName(rs.getString("exc_name"));			 
 				list.add(e);				
 			}
 					
@@ -311,7 +311,15 @@ public class StatisticDao {
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return list;
+		}
+//		if(list.isEmpty()) {
+//			for(int i=0; i<5; i++) {
+//				ExcInfo e=new ExcInfo();		
+//				e.setExcName("dummy");			 
+//				list.add(e);	
+//			}
+//		}		
+		return list;
 	}
 	
 	//주간 식단 %
@@ -322,11 +330,16 @@ public class StatisticDao {
 		int ch=0;
 		int prot=0;
 		int fat=0;
+		menuStatistic.setCh(ch);
+		menuStatistic.setProt(prot);
+		menuStatistic.setFat(fat);	
+		
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("weeklyMenu")); //1주일간 영양 합계를 받아올거임
 			pstmt.setString(1, memberId);		
 			rs=pstmt.executeQuery();
 			while(rs.next()) {	
+			
 				ch=rs.getInt("sum(ch)");
 				prot=rs.getInt("sum(prot)");
 				fat=rs.getInt("sum(fat)");

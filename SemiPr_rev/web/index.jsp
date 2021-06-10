@@ -93,7 +93,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="content02">더이상 어려운 건강관리는 No</div>
+                <div class="content02">더이상 어려운 건강관리는 No 🚫</div>
             </div>
         </div>
         <div class="row">

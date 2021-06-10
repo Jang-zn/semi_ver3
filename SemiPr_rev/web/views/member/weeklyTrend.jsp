@@ -325,11 +325,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                        	<!-- DB에서 데이터 받아와 순위 계산해서 값 넣기 -->
-                        	<%for(int i=0; i<5; i++){ %>
-                        		<div class="col-md-1 num01"><%=i+1 %>. </div>
-                        		<div class="col-md-11 num02"><%=excStatistic.get(i).getExcName() %></div>
-                        	<%} %>
+                        	<!-- DB에서 데이터 받아와 순위 계산해서 값 넣기 -->                        	 
+                        	 <%for(int i=0; i<5; i++){ %>
+                        	 		<%if(excStatistic.isEmpty() || excStatistic.get(i)==null){ %>
+	                        	 		<div class="col-md-1 num01"><%=i+1 %>. </div>
+	                        			<div class="col-md-11 num02">회원 통계 자료가 없습니다.</div>
+                        	 		<%}else{ %>
+	                        	 		<div class="col-md-1 num01"><%=i+1 %>. </div>
+	                        			<div class="col-md-11 num02"><%=excStatistic.get(i).getExcName() %></div>
+                        	 		<%} %>
+                        	 <%} %>
+			
                         </div>
                     </div>
                 </div>                    
@@ -341,9 +347,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div>
                         	<canvas id="menuChart" style="width='100%', height='auto'"></canvas>
-                        </div>
                     </div>
                 </div> 
             </div>
@@ -357,10 +361,7 @@
     <br>
     <br>
     <br>
-	<script>
-	
-	/* 임시 식단 pie차트 */
-	
+	<script>	
          /* DB에서 데이터 받아와 주간 평균 내서 값 넣기 */
 		var ch=<%=menuStatistic.getCh()%>;
 		var prot=<%=menuStatistic.getProt()%>;
@@ -403,8 +404,7 @@
             } 
             } 
         }); 
-    	
-    	
+    
 	</script>
 	
 	
