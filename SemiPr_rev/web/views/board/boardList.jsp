@@ -20,18 +20,17 @@
 
 <br>
 <div class="row">
-	<!-- <div class="col-md-1"></div> -->
 	
 	<div id="board_container" class="col-md-12">
 		<!-- 글 수 + 검색창 -->
 			<div id="content_count" class="row">
-				<div class="col-md-1">전체 글 </div>
-				<div style="color: orange;" class="col-md-1"><%=boardListCount %></div>
+				<div class="col-md-1" style="    margin-top: 7px;">전체 글 </div>
+				<div style="color: orange; margin-top: 7px;" class="col-md-1" ><%=boardListCount %></div>
 				<div class="col-md-5"></div>
 
 				<div id="board_search" class="col-md-5">
 					<div class="row">
-						<div class="col-md-9 inputBox">
+						<div class="col-md-8 inputBox">
 									<div id="search-Title" >
 										<form action="<%=request.getContextPath()%>/board/boardSearch" method="GET">
 											<input type="text" placeholder="제목을 입력하세요" name="searchKeyword" 
@@ -69,7 +68,7 @@
 								</form>
 							</div>
 						</div> 
-						<div class="col-md-3">
+						<div class="col-md-2" style="margin-top: 10px;">
 							<select id="search-Type">
 								<option value="Title" <%=searchType!=null&&searchType.equals("title")?"selected":"" %>>제목</option>
 								<option value="Content"  <%=searchType!=null&&searchType.equals("content")?"selected":"" %>>내용</option>
@@ -84,7 +83,12 @@
 
 
 
-		<div id="board_head" class="row">
+		<div style="text-align: center;
+    align-self: center;
+    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray;"id="board_head" class="row">
 		<!-- 글 리스트 헤드 -->
 			<div class="board_sort col-md-1">
 				<select name="b_sort">
@@ -93,8 +97,8 @@
 					<option value="눈바디" <%=sortType!=null&&sortType.equals("눈바디")?"selected":""%>>눈바디</option>
 				</select>
 			</div>
-			<div class="board_title col-md-7">제목</div>
-			<div class="board_content_info col-md-1">
+			<div class="board_title col-md-5">제목</div>
+			<div class="board_content_info col-md-2">
 				<span>글쓴이</span>
 			</div>
 			<div class="board_content_info col-md-2">
@@ -115,9 +119,14 @@
 		 		<%-- <%for(Board b : list) {%> --%>
 		 		<%for(int i=0; i<list.size(); i++){ %>
 		 			<%Board b = (Board)list.get(i); %>
-						<div id="board_body" class="row">
+						<div id="board_body" class="row" style="padding-bottom: 10px; text-align: center;
+    align-self: center;
+    font-family: 'GongGothicLight';
+    font-size: 1.7rem;
+    border-radius: 0.2em;
+    border: 1.5px solid lightgray; padding-top: 15px;">
 							<div class="board_sort col-md-1 categoryLine"><%=b.getCategory() %></div>
-							<div class="board_title col-md-7 "  onclick="boardContent(<%=b.getContentNo()%>);">
+							<div class="board_title col-md-5 "  onclick="boardContent(<%=b.getContentNo()%>);">
 								<div class="board_file_img col-md-1">
 										<%if(fileyumu==null) {%>
 											불러온 request가 없네요
@@ -134,7 +143,7 @@
 								</div>
 								<div class="col-md-11 categoryLine"><%=b.getTitle() %></div>
 							</div>
-							<div class="board_content_info col-md-1 categoryLine">
+							<div class="board_content_info col-md-2 categoryLine">
 								<%=b.getWriter() %>
 							</div>
 							<div class="board_content_info col-md-2 categoryLine">
@@ -143,22 +152,20 @@
 							<div class="board_content_info col-md-1">
 								<%=b.getReadCount() %>
 							</div>
-							<div class="board_content_info col-md-1">
 							<%if(loginMember!=null) {%>
 								<%if(loginMember.getMemberId().equals("admin")||loginMember.getMemberId().equals(b.getMemberId())){ %>
-								<button value = "<%=b.getContentNo() %>" onclick="deleteBoard(event)">삭제하기</button>
+								<button style="position:relative;bottom:5px;"class="btn btnb"value = "<%=b.getContentNo() %>" onclick="deleteBoard(event)">삭제하기</button>
 								 <%} %> 
 							 <%} %>
 							
-							</div>
 						</div>
 					<%} %>
 				<%} %>
 
 		<div id="board_pageBar" class="row">
-			<div class="col-md-5"></div>
+			<div class="col-md-4"></div>
 			
-			<div class="col-md-3"><%=pageBar %></div>
+			<div class="col-md-3" style="margin-top: 10px;"><%=pageBar %></div>
 			<div class="col-md-3"></div>
 			<div id ="loginCheckId" class="col-md-1 btn01"
 				onclick="location.assign('<%=request.getContextPath()%>/board/write');">글쓰기</div>
