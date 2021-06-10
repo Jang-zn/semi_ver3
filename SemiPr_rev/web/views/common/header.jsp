@@ -17,6 +17,10 @@
         <script src="<%=request.getContextPath()%>/Resource/js/chart.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        
+        <link rel="shortcut icon" href="<%=request.getContextPath()%>/Resource/img/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="<%=request.getContextPath()%>/Resource/img/favicon.ico" type="image/x-icon">
+		
         <link href="<%=request.getContextPath()%>/Resource/css/bootstrap.min.css" rel="stylesheet">	
         <script src="<%=request.getContextPath()%>/Resource/js/bootstrap.min.js"></script>
         <script>
