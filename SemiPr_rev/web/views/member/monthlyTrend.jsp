@@ -240,20 +240,19 @@ $.ajax({
 	url:"<%=request.getContextPath()%>/member/monthlyTrend/piecall?length="+list.length+"&yymm01="+yymm01,
 	dataType:"json",
 	success:data=>{
-		console.log(data);
 		let dataE = [0,0,0,0,0];
 		let dataM = [0,0,0,0,0];
 		data[0].forEach(function(ep){
 			if(ep!=null&&ep.check=='N'){
 				dataE[ep.reason]+=1
-			}else{
+			}else if(ep==null){
 				dataE[4]+=1
 			}
 		});
 		data[1].forEach(function(mp){
 			if(mp!=null&&mp.check=='N'){
 				dataM[mp.reason]+=1
-			}else{
+			}else if(mp==null){
 				dataM[4]+=1
 			}
 		});
@@ -272,7 +271,7 @@ $.ajax({
 
 
 const callPlan=()=>{
-	let list = $("div.thism");
+	let list = $("span.thism");
 	let yymm01=null;
 	if(viewMonth<10){
 		yymm01=viewYear+"/0"+(viewMonth+1)+"/01"
@@ -283,6 +282,7 @@ const callPlan=()=>{
 		url:"<%=request.getContextPath()%>/member/monthlyTrend/plancall?length="+list.length+"&yymm01="+yymm01,
 		dataType:"json",
 		success:data=>{
+			console.log(data);
 			let ey=0;
 			let en=0;
 			let my=0;
@@ -700,7 +700,6 @@ const chartCall=()=>{
 				url:"<%=request.getContextPath()%>/member/monthlyChart?length="+length+"&sysdate="+sysdate+"&key=stackKcals",
 				dataType:"json",
 				success:data=>{
-					console.log(data);
 					//labels
 					let labels=[];
 					let countIndex=0;
