@@ -232,7 +232,7 @@ const Line=()=>{
 	    	plugins: {
 	            legend: {
 	                display: false,
-	            }
+	            },
 	        },
 	    	maintainAspectRatio : false,
 	    	scales:{
@@ -241,7 +241,8 @@ const Line=()=>{
 	                display:false
 	            },
 	            
-	    	}
+	    	},
+	        
 		}
 	};
 	
@@ -293,6 +294,8 @@ $("#trendSort").change(e=>{
 					data.forEach(function(el){
 						if(el.check!=null){
 							labels[countIndex++]=el.date;
+						}else{
+							labels[countIndex++]='0/0';
 						}
 					});
 					
@@ -305,10 +308,11 @@ $("#trendSort").change(e=>{
 						if(el.check!=null){
 							planYN[countIndex++]=el.check=='Y'?1:0;
 							el.check=='Y'?y++:n++;
+						}else{
+							planYN[countIndex++]=0;
 						}
 					});
 					reloadPie(pieChart,y,n,length);
-					console.log(pieChart);
 					
 					
 					lineChart.options={
@@ -319,7 +323,8 @@ $("#trendSort").change(e=>{
 							},
 							title: {
 			            		display: true,
-			            		text: '운동 실천현황'
+			            		text: '운동 실천현황',
+			            		fontSize:20
 			    			}
 						},    
 						maintainAspectRatio : false,
@@ -362,6 +367,8 @@ $("#trendSort").change(e=>{
 					data.forEach(function(el){
 						if(el.check!=null){
 							labels[countIndex++]=el.date;
+						}else{
+							labels[countIndex++]='0/0';
 						}
 					});
 					//YN check
@@ -373,6 +380,8 @@ $("#trendSort").change(e=>{
 						if(el.check!=null){
 							planYN[countIndex++]=el.check=='Y'?1:0;
 							el.check=='Y'?y++:n++;
+						}else{
+							planYN[countIndex++]=0;
 						}
 					});
 					reloadPie(pieChart,y,n,length);
@@ -385,7 +394,7 @@ $("#trendSort").change(e=>{
 							},
 							title: {
 			            		display: true,
-			            		text: '식단 실천현황'
+			            		text: '식단 실천현황',
 			    			}
 						},    
 						maintainAspectRatio : false,
