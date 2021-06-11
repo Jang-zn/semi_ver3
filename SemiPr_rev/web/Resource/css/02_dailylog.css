@@ -39,8 +39,8 @@
 }
 
 #personal_record_container{
-	 font-family: 'GongGothicMedium';
-
+	 font-family: 'GongGothicLight';
+	font-size:3rem;
 }
 #dailyExc_content {
 	margin: 1%;
@@ -50,7 +50,11 @@
 	border-radius:0.2em;
 	 border:1.5px dashed darkgray;	
 }
-
+#timecho>select{
+	border-radius:0.2em;
+border:1px solid lightgray;
+	
+}
 
 #dailyExc_list {
 	margin: 1%;

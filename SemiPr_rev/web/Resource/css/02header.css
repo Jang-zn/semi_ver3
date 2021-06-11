@@ -19,26 +19,26 @@
 	}
 	.sub a:link {
 		color : white;
-		font-family: 'PFStardust' !important;
+		font-family: 'GongGothicMedium' !important;
 		font-size: 2rem;
 		font-weight: light;
 }
 	.sub a:visited {
 	  color : white;
-	  font-family: 'PFStardust' !important;
+	  font-family: 'GongGothicMedium' !important;
 	  font-size: 2rem;
 		font-weight: light;
 	}
 	.sub a:hover {
 	  color : white;
-	  font-family: 'PFStardust' !important;
+	  font-family: 'GongGothicMedium' !important;
 	  font-size: 2rem;
 		font-weight: light;
 		cursor:pointer;
 	}
 	.sub a:active {
 	  color : white;
-	  font-family: 'PFStardust' !important;
+	  font-family: 'GongGothicMedium' !important;
 	  font-size: 2rem;
 		font-weight: light;
 	}

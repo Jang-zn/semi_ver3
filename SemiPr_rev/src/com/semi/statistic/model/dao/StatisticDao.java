@@ -262,8 +262,8 @@ public class StatisticDao {
 				String day2=d2.toString();
 				String day=rs.getDate("menu_date").toString();
 				if(day.equals(day1)||day.equals(day2)) { //해당 날짜 값이 null이 아니면
+					System.out.println(day1+" : "+day2+" : "+day);
 					if(rs.getString("max(menu_plan_check)").equals("Y")){
-						System.out.println(day1+" : "+day2+" : "+day);
 						count++;						
 					}else {
 						break here;

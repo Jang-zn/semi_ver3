@@ -121,7 +121,7 @@
 }
 .excinfocho:hover,
 .menuinfocho:hover{
-	background-color:rgba(104, 255, 12, 0.26);
+	background-color:rgba(95, 158, 160, 0.25);
 }
 .list_img_area{
 	padding-top:10px;
@@ -149,4 +149,6 @@
 .list_button_area{
 		margin-top:3%;
 }
-
+#pageBar_myList_exc,#pageBar_myList_menu{
+	padding-top:1rem;
+}

@@ -287,4 +287,7 @@
   color:#000; font-size:20px; font-weight: bold;
   right:10px; top:10px;
 }
-
+select:focus, select>option>focus{
+	border:0;
+	outline:none;
+}

@@ -23,7 +23,7 @@
 <div class="row">
 	
 	<div id="dailyExc_title" class="col-md-12">
-		<h2>운동일지</h2>
+		<h2>> 운동일지</h2>
 	</div>
 </div>
 
@@ -84,7 +84,7 @@
 <div class="row">
 	
 	<div id="dailyExc_title" class="col-md-12">
-		<h2>식단일지</h2>
+		<h2>> 식단일지</h2>
 	</div>
 	
 </div>
