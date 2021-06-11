@@ -11,7 +11,18 @@ String pageBar = (String)request.getAttribute("pageBar");
 %>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/memberExcPlan.css">
+	</div>
+<!--------------- 배너 ---------->
+     <div id="banner_home" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_memberExcPlan.png" alt="" style="width:100%; height:auto; margin:0;">
+    		</div>
+    	</div>
+    </div>
+ <br>
 <br>
+<div class="container">
 <div class=row>
 
 	<div class="row">
