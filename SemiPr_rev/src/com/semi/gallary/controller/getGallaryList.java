@@ -36,9 +36,7 @@ public class getGallaryList extends HttpServlet {
 			
 		int galNo= Integer.parseInt(request.getParameter("gal_no"));
 		Gallary g=new GallaryService().getNoonList(galNo);
-		System.out.println("galNO :" +galNo);
-		System.out.println("img,content " + g.getContent()+""+g.getImgName()+""+g.getGalNo());
-		System.out.println("date :" +g.getGallaryDate());
+		
 		
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
@@ -46,7 +44,7 @@ public class getGallaryList extends HttpServlet {
 		
 		
 		String galdate=dateFormat.format(g.getGallaryDate());
-		System.out.println("galdate :" +g.getGallaryDate());
+		
 
 		JSONObject jo=new JSONObject();
 		jo.put("imgName", g.getImgName());
@@ -55,7 +53,7 @@ public class getGallaryList extends HttpServlet {
 
 		jo.put("galDate", galdate);
 		
-		System.out.println("jo:"+jo);
+	
 		
 		
 		response.setContentType("application/json;charset=utf-8");

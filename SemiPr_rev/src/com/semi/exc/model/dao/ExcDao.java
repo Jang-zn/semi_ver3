@@ -357,7 +357,7 @@ public class ExcDao {
 		
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}finally {
 			close(rs);
 			close(pstmt);

@@ -101,9 +101,8 @@
 								<p>⌚<%= sf.format(g.getGallaryDate())%></p> 																		
 							</div>
 					 																		
-						<% 
-						}
-					}%>	
+					<%}%>
+				<%}%>	
 				</div>				
 				<div id="n_pageBar" class="row" style="text-align:center;">
 					<div class="col-md-12"><%=pageBar %></div>
@@ -117,18 +116,9 @@
 
 <script>
 	$(".img_obj").click(e=>{
-		console.log($(e.target));
-/* 		console.log("gal_no: "+$(".gal_no").val());
-		var gal_no =$(".gal_no").val(); */
-		/* var gal_no =$(e.target).children(".gal_no").val(); */
+
 		var gal_no =$(e.target).prev().val();
-		console.log("gal_no: "+ gal_no);
-	
-		
-/* 	function noonList(){}
-		console.log("gal_no: "+$(".gal_no").val());
-		var gal_no =$(".gal_no").val(); */
-	//onclick = cilck
+
 		$.ajax({
 			url:"<%=request.getContextPath()%>/gallary/getGallaryList",
 			type:"post",
@@ -142,9 +132,9 @@
 	});
 		function getNoon(data){ 	
 			var imgname=data["imgName"];
-			console.log("imgname:"+imgname);
+
  			var galdate=data["galDate"];
-			console.log(galdate); 
+
 			
 			 	$(".content_img").attr("src", "<%=request.getContextPath()%>/upload/gallary/"+imgname);			 	
 				$("#comment_area").html(data["content"]);
@@ -160,8 +150,7 @@
 		const gal_delete=()=>{
 			var no =$(".deleteNo").val();
 			var src = $('.content_img').attr("src");
-			console.log("no: "+no);
-			console.log("src "+src);
+
 			if(confirm("삭제하시겠습니까?")){
 								
 				location.replace("<%=request.getContextPath()%>/gallary/deleteGallary?no="+no+"&filepath="+src);
@@ -172,8 +161,7 @@
 		const gal_update=()=>{
 			var no =$(".deleteNo").val();
 			var src = $('.content_img').attr("src");
-			console.log("no: "+no);
-			console.log("src "+src);
+
 			
 			if(confirm("수정하시겠습니까?")){
 			location.assign("<%=request.getContextPath()%>/gallary/updateGallary?no="+no);
