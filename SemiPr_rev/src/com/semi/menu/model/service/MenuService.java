@@ -161,4 +161,20 @@ public class MenuService {
 		
 	}
 	
+	public int updateMonthlyPlan(String memberId, List<MemberMenu> wlist, String date) {
+		Connection conn = getConnection();
+		int dResult = dao.deletePlan(conn, memberId, date.split(",")[0]);
+		int result = dao.setMonthlyPlan(conn, wlist, date);
+		if(result!=0) {
+			commit(conn);
+			close(conn);
+		}else {
+			rollback(conn);
+			close(conn);
+		}
+		return result;
+	}
+	
+	
+	
 }

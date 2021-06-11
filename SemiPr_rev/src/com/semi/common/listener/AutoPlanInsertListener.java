@@ -85,17 +85,21 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 				}else {
 					//해당일에 계획 등록됐는지 확인
 					int planCheck = ex.getPlanCheck(memberId, s);
+					int result=0;
 					if(planCheck==0) {
 						//안돼있으면 등록해줌
-						int result = ex.setMonthlyPlan(wlist, s);
+						result = ex.setMonthlyPlan(wlist, s);
+					}else {
+						//돼있으면 업데이트
+						result = ex.updateMonthlyPlan(memberId, wlist,s);
 					}
 					
 					int planCheckM = ms.getPlanCheck(memberId, s);
 					if(planCheckM==0) {
 						//안돼있으면 등록해줌
-						int result = ms.setMonthlyPlan(mlist, s);
+						result = ms.setMonthlyPlan(mlist, s);
 					}else {
-						continue;
+						result = ms.updateMonthlyPlan(memberId, mlist,s);
 					}
 				}
 				

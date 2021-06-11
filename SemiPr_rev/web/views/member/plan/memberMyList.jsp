@@ -31,7 +31,7 @@
 	<!-- 요일선택 -->
 	<div class="row">
 		<div class="col-md-1"></div>
-		<div id="select_weekday" class="col-md-10" style="align-text:center;">
+		<div id="select_weekday" class="col-md-9" style="align-text:center;">
 			<div class="row">
 				<div class="col-md-3"></div>
 				<div class="day_myList col-md-1" style="background-color:#df4833;">월</div>
@@ -43,7 +43,10 @@
 				<div class="day_myList col-md-1" style="background-color:#7850b4">일</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<br><br><br>
+			<div class="col-md-12 btn01" onclick="location.assign('<%=request.getContextPath()%>/plan/submit')">모든 계획 등록하기</div>
+		</div>
 	</div>
 
 
