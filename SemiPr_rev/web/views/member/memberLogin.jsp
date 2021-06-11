@@ -70,7 +70,7 @@
 
 	<div id="sign_page row">
 		<div class="col-md-4 signup">
-			<a href="<%=request.getContextPath()%>/member/signup">회원가입</a>
+			<a href="<%=request.getContextPath()%>/member/agreement">회원가입</a>
 		</div>
 		<div class="col-md-8 signup">
 			<a href="<%=request.getContextPath()%>/member/find">아이디 찾기 / 비밀번호 찾기</a>

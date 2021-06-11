@@ -56,11 +56,11 @@ public class AESEncrypt {
 	}
 	
 	public static String decrypt(String value) throws Exception{
-		Cipher cipher = Cipher.getInstance("AES");
+		Cipher cipher=Cipher.getInstance("AES");
 		cipher.init(Cipher.DECRYPT_MODE, AESEncrypt.key);
-		byte[] byteVal = value.getBytes(Charset.forName("utf-8"));
-		byte[] beforeDec = Base64.getDecoder().decode(byteVal);
-		byte[] afterDec = cipher.doFinal(beforeDec);
-		return new String(afterDec);
+		byte[] decodeStr=Base64.getDecoder().decode(value.getBytes(Charset.forName("utf-8")));
+		byte[] decResult=cipher.doFinal(decodeStr); 
+		
+		return new String(decResult);
 	}
 }

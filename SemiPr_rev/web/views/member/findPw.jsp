@@ -1,21 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-      <%@ page import="com.semi.member.model.vo.Member" %>
-    <%
-    Member m = (Member)session.getAttribute("m");
-    
-    %>
+      
+ 
 <%@ include file="/../views/common/header.jsp"%>
 
-  <%if(m==null) {%>
-  <div id="">
-  	<p>찾으신 결과 없습니다.</p>
-  	<div class="">
-			<a href="<%=request.getContextPath()%>/member/signup">회원가입</a>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6">
+			<h1>패스워드 재설정</h1>
 		</div>
 	</div>
-  <%}else{ %>
-  <p><%=m.getMemberId()%>님의 비밀번호는 <%=m.getMemberPw() %> 입니다.</p>
-  
-  <%} %>
+	<div class="row">
+		<div class="col-lg-6">
+			<input type="password" name="password1">
+		</div>
+	</div>
+		<div >
+			<input type="password" name="password2">
+		</div>
+		 <div class="form-element">
+      <button id="submit-btn">Sign Up</button>
+    </div>
+</div>
+
+
+
+   
+
+
 <%@ include file="/../views/common/footer.jsp"%>

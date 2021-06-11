@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.common.AESEncrypt;
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
 
@@ -33,6 +34,12 @@ public class MemberFindIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("forgot_name");
 		String email = request.getParameter("forgot_email");
+		
+		try {
+			email=AESEncrypt.encrypt(email);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		Member m  = new MemberService().findId(name,email);
 		String msg="";
