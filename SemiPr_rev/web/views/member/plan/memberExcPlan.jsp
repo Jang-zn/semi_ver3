@@ -15,7 +15,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 <div class=row>
 
 	<div class="row">
-		<div class="title02 col-md-2">운동 List</div>
+		<div class="title02 col-md-2">> 운동 List</div>
 		<div id="sort_container" class="col-md-2">
 			<div class="row">&nbsp;</div>
 			<div class="row paddingb">
