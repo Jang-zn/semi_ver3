@@ -199,16 +199,16 @@
     <div class="con row">
     	<div class="row">
 	      	<div class="col-md-6 modalCheck">
-	      		<input type="radio" name="reason" value="0"> 1. 게으름
+	      		<input type="radio" name="reason-m" value="0"> 1. 게으름
 	      	</div>
 	      	<div class="col-md-6 modalCheck">
-	      		<input type="radio" name="reason" value="1"> 2. 회식
+	      		<input type="radio" name="reason-m" value="1"> 2. 회식
 	      	</div>
 	      	<div class="col-md-6 modalCheck">
-	      		<input type="radio" name="reason" value="2"> 3. 야식
+	      		<input type="radio" name="reason-m" value="2"> 3. 야식
 	      	</div>
 	      	<div class="col-md-6 modalCheck">
-	      		<input type="radio" name="reason" value="3"> 4. 기타
+	      		<input type="radio" name="reason-m" value="3"> 4. 기타
 	      	</div>
       	</div>
       	<div class="row">
@@ -265,7 +265,13 @@ const eReason=(r)=>{
 		},
 		dataType:'text',
 		success:data=>{
-			callPlan();
+			let msg = data;
+			if(msg=='"등록 완료"'){
+				callPlan();
+				alert(msg);
+			}else{
+				alert(msg+" : 사유가 등록된 날짜입니다.");
+			}
 		}
 	})
 }
@@ -280,10 +286,52 @@ $("#modalbtnE").click(e=>{
 		$(".modal-con").fadeOut(300);
 		eReason(reason);
 	}else{
-		alert("이유를 선택해주세요");
+		alert("사유를 선택해주세요");
 	}
 	
 });
+
+
+const mReason=(r)=>{
+	let memberId = '<%=m.getMemberId()%>';
+	let reason = r;
+	let Date = eventDate
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/modalM",
+		data:{
+			"memberId":memberId,
+			"reason":reason,
+			"date":Date,
+		},
+		dataType:'text',
+		success:data=>{
+			let msg = data;
+			if(msg=='"등록 완료"'){
+				callPlan();
+				alert(msg);
+			}else{
+				alert(msg+" : 사유가 등록된 날짜입니다.");
+			}
+		}
+	})
+}
+
+
+$("#modalbtnM").click(e=>{
+	let reason = $("input:radio[name=reason-m]:checked").val();
+	
+	if(reason==0||reason==1||reason==2||reason==3){
+		$("input:radio[name=reason-m]:checked").prop("checked", false);
+		$("#modal").fadeOut(300);
+		$(".modal-con").fadeOut(300);
+		mReason(reason);
+	}else{
+		alert("사유를 선택해주세요");
+	}
+	
+});
+
+
 
 
 
