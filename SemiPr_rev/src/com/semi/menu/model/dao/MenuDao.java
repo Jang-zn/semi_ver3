@@ -630,4 +630,25 @@ public class MenuDao {
 		
 		return result;
 	}
+	
+	public int deletePlan(Connection conn, String memberId, String date) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			String path = ExcDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("deleteMonthlyPlan"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2,date);
+			result=pstmt.executeUpdate();
+		} catch (Exception e) {
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

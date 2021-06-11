@@ -45,7 +45,7 @@
 		</div>
 		<div class="col-md-2">
 			<br><br><br>
-			<div class="col-md-12 btn01" onclick="location.assign('<%=request.getContextPath()%>/plan/submit')">계획 등록하기</div>
+			<div class="col-md-12 btn01" onclick="location.assign('<%=request.getContextPath()%>/plan/submit')">모든 계획 등록하기</div>
 		</div>
 	</div>
 
