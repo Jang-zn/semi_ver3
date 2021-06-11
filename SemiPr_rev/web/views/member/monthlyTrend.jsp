@@ -164,14 +164,61 @@
 	</div>
 </div>
 
-
-<div class="modal-con modalE">
-    <a href="javascript:openModal(modalE);" class="close">X</a>
-    <p class="title">미실천 사유를 골라주세요</p>
-    <div class="con">
-      
+<div id="modal"></div>
+<div class="modal-con modalE row">
+    <div class="col-md-12">
+    	<div class="title01 row">운동계획 미실천 사유를 골라주세요</div>
+    </div>
+    <div class="con row">
+    	<div class="row">
+	      	<div class="col-md-6 modalCheck">
+	      		1. 게으름 <input type="radio" name="reason-e" value="0"> 
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		2. 다른 일정 <input type="radio" name="reason-e" value="1"> 
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		3. 피치못할 사정 <input type="radio" name="reason-e" value="2"> 
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		4. 기타 <input type="radio" name="reason-e" value="3"> 
+	      	</div>
+      	</div>
+      	<div class="row">
+	      	<div class="col-md-3"></div>
+	      	<div class="col-md-6 modalbtn" id="modalbtnE">미실천 사유 등록</div>
+	      	<div class="col-md-3"></div>
+      	</div>
     </div>
 </div>
+
+<div class="modal-con modalM">
+    <div class="col-md-12">
+    	<div class="title01 row">식단계획 미실천 사유를 골라주세요</div>
+    </div>
+    <div class="con row">
+    	<div class="row">
+	      	<div class="col-md-6 modalCheck">
+	      		<input type="radio" name="reason" value="0"> 1. 게으름
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		<input type="radio" name="reason" value="1"> 2. 회식
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		<input type="radio" name="reason" value="2"> 3. 야식
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		<input type="radio" name="reason" value="3"> 4. 기타
+	      	</div>
+      	</div>
+      	<div class="row">
+	      	<div class="col-md-3"></div>
+	      	<div class="col-md-6 modalbtn" id="modalbtnM">미실천 사유 등록</div>
+	      	<div class="col-md-3"></div>
+      	</div>
+    </div>
+</div>
+
 
 
 <link rel="stylesheet" type="text/css"
@@ -187,6 +234,59 @@
 
 
 <script>
+
+
+let eventDate;
+
+function openModal(modalname, e){
+	  eventDate = $(e.target).siblings("span").text();
+	  document.get
+	  $("#modal").fadeIn(300);
+	  $("."+modalname).fadeIn(300);
+}
+	
+
+$("#modal, .close").on('click',function(){
+	  $("#modal").fadeOut(300);
+	  $(".modal-con").fadeOut(300);
+});
+
+
+const eReason=(r)=>{
+	let memberId = '<%=m.getMemberId()%>';
+	let reason = r;
+	let Date = eventDate
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/modalE",
+		data:{
+			"memberId":memberId,
+			"reason":reason,
+			"date":Date,
+		},
+		dataType:'text',
+		success:data=>{
+			callPlan();
+		}
+	})
+}
+
+
+$("#modalbtnE").click(e=>{
+	let reason = $("input:radio[name=reason-e]:checked").val();
+	
+	if(reason==0||reason==1||reason==2||reason==3){
+		$("input:radio[name=reason-e]:checked").prop("checked", false);
+		$("#modal").fadeOut(300);
+		$(".modal-con").fadeOut(300);
+		eReason(reason);
+	}else{
+		alert("이유를 선택해주세요");
+	}
+	
+});
+
+
+
 
 //Piechart(10, 11) 작성 : 미실천 분류
 const pieE = $("#chart10");
@@ -294,7 +394,6 @@ const callPlan=()=>{
 		url:"<%=request.getContextPath()%>/member/monthlyTrend/plancall?length="+list.length+"&yymm01="+yymm01,
 		dataType:"json",
 		success:data=>{
-			console.log(data);
 			let ey=0;
 			let en=0;
 			let my=0;
@@ -339,7 +438,14 @@ const callPlan=()=>{
 				reloadChart(mChart, my, mn, list.length);
 			}
 			pieCall();
-		}		
+			
+			$(".eReason").click(e=>{
+				openModal('modalE',e);
+			});
+			$(".mReason").click(e=>{
+				openModal('modalM',e);
+			});
+		}
 	});
 }
 
@@ -859,21 +965,9 @@ const chartCall=()=>{
 
 window.onload=chartCall();
 
-$(".eReason").click(e=>{
-	console.log(e.target);
-	openModal('modalE');
-});
 
-function openModal(modalname){
-	  document.get
-	  $("#modalE").fadeIn(300);
-	  $("."+modalname).fadeIn(300);
-}
 
-$("#modalE, .close").on('click',function(){
-	  $("#modalE").fadeOut(300);
-	  $(".modal-con").fadeOut(300);
-});
+
 
 </script>
 <script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>
