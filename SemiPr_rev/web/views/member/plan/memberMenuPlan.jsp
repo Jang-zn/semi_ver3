@@ -27,6 +27,10 @@ String pageBar = (String)request.getAttribute("pageBar");
 					<option>분류 선택</option>
 					<option value="고기">- 고기 -</option>
 					<option value="채소">- 채소 -</option>
+					<option value="생선">- 생선 -</option>
+					<option value="곡류">- 곡류 -</option>
+					<option value="면/떡">- 면/떡 -</option>
+					<option value="간식">- 간식 -</option>
 				</select>
 			</div>
 		</div>

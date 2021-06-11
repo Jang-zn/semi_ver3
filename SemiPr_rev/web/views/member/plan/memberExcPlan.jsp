@@ -23,6 +23,8 @@ String pageBar = (String)request.getAttribute("pageBar");
 					<option>분류 선택</option>
 					<option value="상체">- 상체 -</option>
 					<option value="하체">- 하체 -</option>
+					<option value="전신">- 전신 -</option>
+					<option value="스트레칭">- 스트레칭 -</option>
 				</select>
 			</div>
 		</div>
