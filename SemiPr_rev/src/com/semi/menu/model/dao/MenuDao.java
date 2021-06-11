@@ -324,17 +324,42 @@ public class MenuDao {
 				if(list[i]!=null) {
 					
 				}else {
-					map = new HashMap();
-					String trashD = (String)list[length-1].get("date");
-				    SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
-				    Date trashDate = format1.parse(trashD);			    
-				    Calendar cal = Calendar.getInstance();
-				    cal.setTime(trashDate);
-				    cal.add(Calendar.DATE,-period);
-				    String res = format1.format(cal.getTime());
-				    map.put("date", res);
-					list[i]= map;
-					period--;
+					try {
+						map = new HashMap();
+						String trashD = (String)list[length-1].get("date");
+					    SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
+					    Date trashDate = format1.parse(trashD);			    
+					    Calendar cal = Calendar.getInstance();
+					    cal.setTime(trashDate);
+					    cal.add(Calendar.DATE,-period);
+					    String res = format1.format(cal.getTime());
+					    map.put("date", res);
+						list[i]= map;
+						period--;
+					}catch(Exception e) {
+						map = new HashMap();
+						Calendar cal = Calendar.getInstance();
+						int last = cal.getActualMaximum(cal.DAY_OF_MONTH);  //월 길이 (mm/ dd부분에 사용)
+						int m = cal.get(cal.MONTH);
+						String month="";		//MM
+						if(m>10) {
+							month=""+(m+1);
+						}else {
+							month="0"+(m+1);
+						}						
+						String trashD = month+"-"+last;
+						
+						//몬가..몬가 된거같음
+						SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
+					    Date trashDate = format1.parse(trashD);			    
+					    Calendar calR = Calendar.getInstance();
+					    calR.setTime(trashDate);
+					    calR.add(Calendar.DATE,-period);
+					    String res = format1.format(cal.getTime());
+					    map.put("date", res);
+						list[i]= map;
+						period--;
+					}
 				}
 			}
 			
@@ -382,17 +407,42 @@ public class MenuDao {
 				if(list[i]!=null) {
 					
 				}else {
-					map = new HashMap();
-					String trashD = (String)list[length-1].get("date");
-				    SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
-				    Date trashDate = format1.parse(trashD);			    
-				    Calendar cal = Calendar.getInstance();
-				    cal.setTime(trashDate);
-				    cal.add(Calendar.DATE,-period);
-				    String res = format1.format(cal.getTime());
-				    map.put("date", res);
-					list[i]= map;
-					period--;
+					try {
+						map = new HashMap();
+						String trashD = (String)list[length-1].get("date");
+					    SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
+					    Date trashDate = format1.parse(trashD);			    
+					    Calendar cal = Calendar.getInstance();
+					    cal.setTime(trashDate);
+					    cal.add(Calendar.DATE,-period);
+					    String res = format1.format(cal.getTime());
+					    map.put("date", res);
+						list[i]= map;
+						period--;
+					}catch(Exception e) {
+						map = new HashMap();
+						Calendar cal = Calendar.getInstance();
+						int last = cal.getActualMaximum(cal.DAY_OF_MONTH);  //월 길이 (mm/ dd부분에 사용)
+						int m = cal.get(cal.MONTH);
+						String month="";		//MM
+						if(m>10) {
+							month=""+(m+1);
+						}else {
+							month="0"+(m+1);
+						}						
+						String trashD = month+"-"+last;
+						
+						//몬가..몬가 된거같음
+						SimpleDateFormat format1 = new SimpleDateFormat("MM-dd");
+					    Date trashDate = format1.parse(trashD);			    
+					    Calendar calR = Calendar.getInstance();
+					    calR.setTime(trashDate);
+					    calR.add(Calendar.DATE,-period);
+					    String res = format1.format(cal.getTime());
+					    map.put("date", res);
+						list[i]= map;
+						period--;
+					}
 				}
 			}
 			
@@ -559,5 +609,46 @@ public class MenuDao {
 		return result;
 	}
 	
+	public int reasonUpdate(Connection conn, String memberId, String date, int reason) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			String path = ExcDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("reasonUpdate"));
+			pstmt.setInt(1, reason);
+			pstmt.setString(2, memberId);
+			pstmt.setString(3, date);
+			result=pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	public int deletePlan(Connection conn, String memberId, String date) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			String path = ExcDao.class.getResource("/sql/menuList_sql.properties").getPath();
+			Properties p = new Properties();
+			p.load(new FileReader(path));
+			pstmt=conn.prepareStatement(p.getProperty("deleteMonthlyPlan"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2,date);
+			result=pstmt.executeUpdate();
+		} catch (Exception e) {
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

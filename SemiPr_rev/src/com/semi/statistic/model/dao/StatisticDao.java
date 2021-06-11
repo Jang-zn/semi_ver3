@@ -262,8 +262,8 @@ public class StatisticDao {
 				String day2=d2.toString();
 				String day=rs.getDate("menu_date").toString();
 				if(day.equals(day1)||day.equals(day2)) { //해당 날짜 값이 null이 아니면
+					System.out.println(day1+" : "+day2+" : "+day);
 					if(rs.getString("max(menu_plan_check)").equals("Y")){
-						System.out.println(day1+" : "+day2+" : "+day);
 						count++;						
 					}else {
 						break here;
@@ -361,4 +361,34 @@ public class StatisticDao {
 		return menuStatistic;
 	}
 
+	
+	public int excUpdate(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateExc")); //1주일간 영양 합계를 받아올거임
+			pstmt.setString(1, memberId);
+			result=pstmt.executeUpdate();			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int menuUpdate(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateMenu")); //1주일간 영양 합계를 받아올거임
+			pstmt.setString(1, memberId);
+			result=pstmt.executeUpdate();			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

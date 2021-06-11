@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.annotation.WebListener;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -32,7 +34,20 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
      * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
      */
     public void attributeAdded(HttpSessionBindingEvent se)  { 
+
     	HttpSession session = se.getSession();
+    	HttpServletRequest request = (HttpServletRequest)session.getAttribute("request");
+    	if(request!=null) {
+    		Cookie[] cs = request.getCookies();
+    		if(cs!=null) {
+    			for(Cookie c : cs) {
+    				if(c.getName().equals("saveId")) {
+    					return;
+    				}
+    			}
+    		}
+    	}
+    	
     	Member member = (Member)session.getAttribute("logged");
     	if(member!=null) {
 	    	String memberId = member.getMemberId();
@@ -85,17 +100,21 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
 				}else {
 					//해당일에 계획 등록됐는지 확인
 					int planCheck = ex.getPlanCheck(memberId, s);
+					int result=0;
 					if(planCheck==0) {
 						//안돼있으면 등록해줌
-						int result = ex.setMonthlyPlan(wlist, s);
+						result = ex.setMonthlyPlan(wlist, s);
+					}else {
+						//돼있으면 업데이트
+						result = ex.updateMonthlyPlan(memberId, wlist,s);
 					}
 					
 					int planCheckM = ms.getPlanCheck(memberId, s);
 					if(planCheckM==0) {
 						//안돼있으면 등록해줌
-						int result = ms.setMonthlyPlan(mlist, s);
+						result = ms.setMonthlyPlan(mlist, s);
 					}else {
-						continue;
+						result = ms.updateMonthlyPlan(memberId, mlist,s);
 					}
 				}
 				

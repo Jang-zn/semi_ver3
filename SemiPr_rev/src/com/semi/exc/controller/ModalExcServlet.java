@@ -1,7 +1,7 @@
 package com.semi.exc.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.common.PageBar;
+import com.google.gson.Gson;
 import com.semi.exc.model.service.ExcService;
-import com.semi.member.exc.model.vo.Exercise;
 
 /**
- * Servlet implementation class MemberExcPlanServlet
+ * Servlet implementation class ModalExcServlet
  */
-@WebServlet("/member/excPlan")
-public class MemberExcPlanServlet extends HttpServlet {
+@WebServlet("/ajax/modalE")
+public class ModalExcServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberExcPlanServlet() {
+    public ModalExcServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +31,35 @@ public class MemberExcPlanServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String sort = request.getParameter("excSort");
-		if(sort==null) {
-			sort="상체";
+		Calendar cal = Calendar.getInstance();
+		int today = cal.get(cal.DATE); //오늘 날짜
+		int y = cal.get(cal.YEAR);
+		String year = (""+y).substring(2); //YY
+		int m = cal.get(cal.MONTH);
+		String month="";  //MM
+		if(m>10) {
+			month=""+(m+1);
+		}else {
+			month="0"+(m+1);
 		}
-		int totalData = new ExcService().getExcListCount(sort);
+		String memberId = request.getParameter("memberId");
+		int d =Integer.parseInt(request.getParameter("date"));
+		String date="";
+		if(d<10) {
+			date = year+"/"+month+"/0"+d;
+		}else {
+			date = year+"/"+month+"/"+d;
+		}
+		int reason = Integer.parseInt(request.getParameter("reason"));
+		int result = new ExcService().reasonUpdate(memberId, date, reason);
 		
-		PageBar p = new PageBar(request, totalData, 4, "/member/excPlan","excSort="+sort);
-		int cPage = p.getCPage();
-		int numPerpage = p.getNumPerpage();
-		String pageBar = p.getPageBar();
-		List<Exercise> list = new ExcService().getExcList(sort, cPage, numPerpage); //Exercise List
-		
-		
-		
-		request.setAttribute("excList", list);
-		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/views/member/plan/memberExcPlan.jsp").forward(request, response);
+		String msg="";
+		if(result>0) {
+			msg="등록 완료";
+		}else {
+			msg="등록 실패";
+		}
+		new Gson().toJson(msg, response.getWriter());
 		
 		
 	}

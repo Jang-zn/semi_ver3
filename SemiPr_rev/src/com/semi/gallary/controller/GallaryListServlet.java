@@ -41,7 +41,7 @@ public class GallaryListServlet extends HttpServlet {
 		String memberId = loginMember.getMemberId();
 		
 		
-		int totalData = new GallaryService().selectGallaryCount();
+		int totalData = new GallaryService().selectGallaryCount(memberId);
 		String location ="/gallary/list";
 		
 		PageBar pb = new PageBar(request,totalData,5,location);

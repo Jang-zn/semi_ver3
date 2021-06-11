@@ -22,12 +22,23 @@
 	href="<%=request.getContextPath()%>/Resource/css/noonList.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/font.css">	
 
+</div>
+<!--------------- 배너 ---------->
+     <div id="banner_home" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_noonList.png" alt="" style="width:100%; height:auto; margin:0;">
+    		</div>
+    	</div>
+    </div>
+<br><br>
 <div class="container">
 	<div class="row">
-		<div id="n_title" class="col-md-12">
-			<img src="<%=request.getContextPath()%>/Resource/img/noonbody.png"><hr/>
+		<div id="n_title" class="col-md-12 title01">> 눈바디</div>		
+			<%-- <img src="<%=request.getContextPath()%>/Resource/img/noonbody.png"><hr/> --%>
+	</div>	
+	<br>
 		<div class="row">	
-			<div class="col-md-1"></div> <!-- 공백 -->
 			<div id="n_content_area" class="col-md-6"> <!-- 상세눈바디 column시작 -->
 				<!-- <span class="gal_no"></span> -->
 				<div class="row">
@@ -37,7 +48,7 @@
 					</div>
 				</div>
 				<div class="row">					
-					<div class="col-md-12 nickname" ><p><%=m.getNickname() %>님의 기록</p></div>
+					<div class="col-md-12 nickname02"><p><%=m.getNickname() %>님의 기록</p></div>
 				</div>
 				<div class="row">
 					<div id="n_date" class="col-md-12"></div>
@@ -56,17 +67,18 @@
 		<!-- </div> -->
 		</div> <!-- 상세눈바디 column끝  -->
 
+			<div class="col-md-1"></div> <!-- 공백 -->
 
 		<div id="n_list" class="col-md-4"> <!-- 갤러리 리스트 cloumn 시작-->
 			<div class="row">
-				<div class="col-md-3 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진등록</div>				
+				<div class="col-md-3 btn" onclick="location.assign('<%=request.getContextPath()%>/gallary/write');">사진 등록</div>				
 				<div class="col-md-9">
 						<form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="get">
 						
 						<%-- <form action="<%=request.getContextPath() %>/gallary/noonListSearch" method="post"> --%>
-							<input type="text" name="searchKeyword" size="20" placeholder="검색할 월/일을 입력해주세요 "/>
+							<input type="text" name="searchKeyword" size="20" placeholder=" 검색할 월/일을 입력해주세요 " class="searchLine">
 						
-						<input type="submit" value="검색"/>
+						<input type="submit" value="검색" class="btn02">
 					</form>
 				</div>
 			</div>
@@ -87,24 +99,23 @@
                 
 								
 				
-				<%}else{ %> <div class="row">
+				<%}else{ %> 
+				<div class="row">
 				<% 	for(Gallary g : list) {%>
 					
 							<!-- if (m.getMemberId().equals(g.getMemberId())){ -->
 						<!-- <div class="row">  -->
 							<div class="img_obj col-md-6">
-								<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>"/>
-								<img class="upload_img" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" />
+								<input type="hidden" class="gal_no" value="<%=g.getGalNo()%>">
+								<img class="upload_img" src="<%=request.getContextPath()%>/upload/gallary/<%=g.getImgName()%>" style="margin-bottom:0;">
 								<p>⌚<%= sf.format(g.getGallaryDate())%></p> 																		
 							</div>
 					 																		
-						<% 
-						}
-					}%>	
-				</div>				
-				<div id="n_pageBar" class="row">
-					<div class="col-md-5"></div>
-					<div class="col-md-7"><%=pageBar %></div>
+					<%}%>
+					</div>
+				<%}%>	
+				<div id="n_pageBar" class="row" style="text-align:center;">
+					<div class="col-md-12"><%=pageBar %></div>
 				</div> 
 			</div><!-- 갤러리 리스트 cloumn 끝-->
 			<div class="col-md-1"></div>
@@ -115,18 +126,9 @@
 
 <script>
 	$(".img_obj").click(e=>{
-		console.log($(e.target));
-/* 		console.log("gal_no: "+$(".gal_no").val());
-		var gal_no =$(".gal_no").val(); */
-		/* var gal_no =$(e.target).children(".gal_no").val(); */
+
 		var gal_no =$(e.target).prev().val();
-		console.log("gal_no: "+ gal_no);
-	
-		
-/* 	function noonList(){}
-		console.log("gal_no: "+$(".gal_no").val());
-		var gal_no =$(".gal_no").val(); */
-	//onclick = cilck
+
 		$.ajax({
 			url:"<%=request.getContextPath()%>/gallary/getGallaryList",
 			type:"post",
@@ -140,9 +142,9 @@
 	});
 		function getNoon(data){ 	
 			var imgname=data["imgName"];
-			console.log("imgname:"+imgname);
+
  			var galdate=data["galDate"];
-			console.log(galdate); 
+
 			
 			 	$(".content_img").attr("src", "<%=request.getContextPath()%>/upload/gallary/"+imgname);			 	
 				$("#comment_area").html(data["content"]);
@@ -158,8 +160,7 @@
 		const gal_delete=()=>{
 			var no =$(".deleteNo").val();
 			var src = $('.content_img').attr("src");
-			console.log("no: "+no);
-			console.log("src "+src);
+
 			if(confirm("삭제하시겠습니까?")){
 								
 				location.replace("<%=request.getContextPath()%>/gallary/deleteGallary?no="+no+"&filepath="+src);
@@ -170,8 +171,7 @@
 		const gal_update=()=>{
 			var no =$(".deleteNo").val();
 			var src = $('.content_img').attr("src");
-			console.log("no: "+no);
-			console.log("src "+src);
+
 			
 			if(confirm("수정하시겠습니까?")){
 			location.assign("<%=request.getContextPath()%>/gallary/updateGallary?no="+no);

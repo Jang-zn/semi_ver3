@@ -9,7 +9,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>ForMuscle</title>
         <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/header.css"> --%>
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/02header.css">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/font.css">
@@ -17,6 +17,10 @@
         <script src="<%=request.getContextPath()%>/Resource/js/chart.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        
+        <link rel="shortcut icon" href="<%=request.getContextPath()%>/Resource/img/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="<%=request.getContextPath()%>/Resource/img/favicon.ico" type="image/x-icon">
+		
         <link href="<%=request.getContextPath()%>/Resource/css/bootstrap.min.css" rel="stylesheet">	
         <script src="<%=request.getContextPath()%>/Resource/js/bootstrap.min.js"></script>
         <script>
@@ -37,7 +41,7 @@
     <body>
         <div id="header_container" class="row container-fluid">
 <!-- 로고 3 -->
-            <div id="logo_area" class="col-md-3"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
+            <div id="logo_area" class="col-md-2"><img src="<%=request.getContextPath()%>/Resource/img/logo.png" onclick="location.assign('<%=request.getContextPath()%>')"></div>
 <!-- 공백 -->
 			<div class="col-md-1"></div>
 <!-- 주메뉴(6) -->           	
@@ -71,19 +75,21 @@
             </div>
 <!-- 로그인 3->1  -->            
             <% if(loginMember!=null){ %>
-            	<div id="profile_area" class="col-md-2">
+            	<div id="profile_area" class="col-md-3">
             		<div class="row">
+            		<div class="col-md-1"></div>
             			<div class="col-md-6">
             				<div class="nickName"><%=loginMember.getNickname()%> 님</div> 
             			</div>
-            			<div class="col-md-6">            				
+            			<div class="col-md-4">            				
             				<div class="logout" onclick="location.assign('<%=request.getContextPath()%>/member/logout')">로그아웃</div>
             			</div>
+            			
             		</div>
             	</div>
             <%}else{ %>
             	<!-- <div class="col-md-1"></div> -->
-            	<div id="login_area" class="col-md-2" onclick="login();">
+            	<div id="login_area" class="col-md-3" onclick="login();">
             		login
             	</div>
             <%} %>            

@@ -71,8 +71,8 @@
             </div>
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-1 title02" style:"text-align:right; font-weight:bolder;">운동</div>
-                    <div id="weeklyExcStatus" style="margin-bottom:3rem;">
+                    <div class="col-md-1 title02" style="text-align:right; font-weight:bolder;  margin-top:1rem;">운동</div>
+                    <div id="weeklyExcStatus">
                         <div class="col-md-1"><div class="weeklyExcStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">화</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">수</div></div>
@@ -81,12 +81,12 @@
                         <div class="col-md-1"><div class="weeklyExcStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">일</div></div>
                     </div>
-                    <div class="col-md-3 title01">연속 <%=excAchieve %> 일 달성</div>
+                    <div class="col-md-3 title01" >연속 <span id="excrecord2"></span>일 달성</div>
                 </div>
             </div>  
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-1 title02" style:"text-align:right; font-weight:bolder;">식단</div>
+                    <div class="col-md-1 title02" style="text-align:right; font-weight:bolder;  margin-top:1rem;">식단</div>
                     <div id="weeklyMenuStatus">
                         <div class="col-md-1"><div class="weeklyMenuStatus">월</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">화</div></div>
@@ -95,9 +95,8 @@
                         <div class="col-md-1"><div class="weeklyMenuStatus">금</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">일</div></div>
-                    </div>                    
-
-                    <div class="col-md-3 title01">연속 <%=menuAchieve %> 일 달성 </div>                    
+                    </div>
+                    <div class="col-md-3 title01" style="margin-top:1.2rem;">연속 <span id="menurecord2"></span>일 달성 </div>                    
                     
                 </div>
             </div>         
@@ -196,7 +195,7 @@
 	
 	
         <!-- 일일 계획 -->
-        <div class="row">
+        <div class="row todayPlan">
             <div class="col-md-6">
                 <!-- 운동 -->
                 <div class="row">
@@ -207,14 +206,14 @@
                 <div class="row listContainer01">
                     <div class="col-md-12">
                     <%if(excList.isEmpty()){  %>
-                    	<div class="list02" style="font-size:2rem; color:#da7316; margin-top:3rem;margin-bottom:2rem;"> 오늘 예정된 운동이 없습니다.</div>
+                    	<div class="list02 noPlan"> 오늘 예정된 운동이 없습니다.</div>
                     <%}else{%>
                     <div class="row">
                     	<div class="col-md-12">
                     		<div class="row list01">
-	                    		<div class="col-md-3">운동 이름</div>
-		                    	<div class="col-md-3">reps</div>
-		                    	<div class="col-md-3">sets</div>
+	                    		<div class="col-md-5">운동 이름</div>
+		                    	<div class="col-md-2">reps</div>
+		                    	<div class="col-md-2">sets</div>
 		                    	<div class="col-md-3">weight</div>
                     		</div>
                     	</div>
@@ -228,10 +227,10 @@
                     <div class="row">
                     	<div class="col-md-12">
                     		<div class="row list02">
-	                    		<div class="col-md-3 categoryLine"><%=m.getExcId_c() %></div>
-		                    	<div class="col-md-3 categoryLine"><%=m.getReps() %> reps</div>
-		                    	<div class="col-md-3 categoryLine"><%=m.getSets()%> sets</div>
-		                    	<div class="col-md-3"><%=m.getWeight() %> weight</div>
+	                    		<div class="col-md-5 categoryLine todayPlan_l"><%=m.getExcId_c() %></div>
+		                    	<div class="col-md-2 categoryLine todayPlan_l"><%=m.getReps() %> reps</div>
+		                    	<div class="col-md-2 categoryLine todayPlan_l"><%=m.getSets()%> sets</div>
+		                    	<div class="col-md-3 todayPlan_l"><%=m.getWeight() %> weight</div>
                     		</div>
                     	</div>                    	
                     </div>
@@ -252,11 +251,23 @@
                 </div> -->
                 <div class="row">
                     <div class="col-md-4"></div>
-                    <div class="col-md-4"><button onclick="" class="btn01">달성 확인</button></div>
+                    <div class="col-md-4"><button onclick="excUpdate();" class="btn01">달성 확인</button></div>
                 </div>
             </div>
             
-                
+             <script>
+             $.ajax({
+         		url:"<%=request.getContextPath()%>/ajax/dailyrecord",
+         			type:"get",
+         			dataType:"text",
+         			success:data=>{
+         				data=data.split(",");
+         				$("#excrecord2").text(data[0].replace("[",""));
+         				$("#menurecord2").text(data[1].replace("]",""));
+         				console.log(data);
+         			}		
+         	});
+             </script>
             
             
             
@@ -271,14 +282,14 @@
                 <div class="row listContainer">
                     <div class="col-md-12">
                     	<%if(excList.isEmpty()){  %>
-	                    	<div class="list02" style="font-size:2rem; color:#da7316; margin-top:3rem;margin-bottom:2rem;"> 오늘 예정된 식단이 없습니다.</div>
+	                    	<div class="list02 noPlan"> 오늘 예정된 식단이 없습니다.</div>
 	                    <%}else{%>
 	                    <div class="row">
 							<div class="col-md-9">
 								<div class="row list01">
-									<div class="col-md-4">식단 이름</div>
-			                    	<div class="col-md-4">양</div>
-			                    	<div class="col-md-4">언제</div>
+									<div class="col-md-6">식단 이름</div>
+			                    	<div class="col-md-3">양</div>
+			                    	<div class="col-md-3">언제</div>
 								</div>
 							</div>	                    
 	                    	
@@ -291,9 +302,9 @@
 	                    <div class="row">
 	                    	<div class="col-md-9">
 								<div class="row list02">
-									<div class="col-md-4 categoryLine"><%=m.getMenuId_c() %></div>
-			                    	<div class="col-md-4 categoryLine"><%=m.getAmount() %> g</div>
-			                    	<div class="col-md-4" ><%=m.getMenuDaytime() %></div>
+									<div class="col-md-6 categoryLine todayPlan_l"><%=m.getMenuId_c() %></div>
+			                    	<div class="col-md-3 categoryLine todayPlan_l"><%=m.getAmount() %> g</div>
+			                    	<div class="col-md-3 todayPlan_l" ><%=m.getMenuDaytime() %></div>
 								</div>
 							</div>	    
 	                    </div>
@@ -311,11 +322,23 @@
                 </div> -->
                 <div class="row">
                     <div class="col-md-4"></div>
-                    <div class="col-md-4"><button onclick="" class="btn01">달성 확인</button></div>
+                    <div class="col-md-4"><button onclick="menuUpdate();" class="btn01">달성 확인</button></div>
                 </div>
             </div>
-
-
+		</div>
+			 <script>
+			    	const excUpdate=()=>{
+			    		location.replace("<%=request.getContextPath()%>/member/todayExcUpdate");
+			    	}
+			    	
+			    	const menuUpdate=()=>{
+			    		location.replace("<%=request.getContextPath()%>/member/todayMenuUpdate");
+			    	}
+			    </script>
+		</div>
+	<br><br>
+	<div class="container">
+		<div class="row" >
             <!-- 주간 통계 -->
             <div class="col-md-6">
                 <!-- 운동 -->
@@ -329,7 +352,7 @@
                         	 <%for(int i=0; i<5; i++){ %>
                         	 		<%if(excStatistic.isEmpty() || excStatistic.get(i)==null){ %>
 	                        	 		<div class="col-md-1 num01"><%=i+1 %>. </div>
-	                        			<div class="col-md-11 num02">회원 통계 자료가 없습니다.</div>
+	                        			<div class="col-md-11 num02" style="color:gray; font-weight:light;">회원 통계 자료가 없습니다.</div>
                         	 		<%}else{ %>
 	                        	 		<div class="col-md-1 num01"><%=i+1 %>. </div>
 	                        			<div class="col-md-11 num02"><%=excStatistic.get(i).getExcName() %></div>
@@ -351,7 +374,7 @@
                     </div>
                 </div> 
             </div>
-                
+            </div>   
 
         </div>
 

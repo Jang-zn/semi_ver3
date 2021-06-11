@@ -15,28 +15,29 @@
 	*{
 		margin:0;
 		padding:0;
-		/* border: 0.1px solid red; */
+		/* border: 0.1px solid red;  */
 	}
 	.sub a:link {
-		color : black;
+		color : white;
 		font-family: 'GongGothicMedium' !important;
 		font-size: 2rem;
 		font-weight: light;
 }
 	.sub a:visited {
-	  color : black;
+	  color : white;
 	  font-family: 'GongGothicMedium' !important;
 	  font-size: 2rem;
 		font-weight: light;
 	}
 	.sub a:hover {
-	  color : black;
+	  color : white;
 	  font-family: 'GongGothicMedium' !important;
 	  font-size: 2rem;
 		font-weight: light;
+		cursor:pointer;
 	}
 	.sub a:active {
-	  color : black;
+	  color : white;
 	  font-family: 'GongGothicMedium' !important;
 	  font-size: 2rem;
 		font-weight: light;
@@ -73,7 +74,12 @@
 		height: 70%;
 		width: auto; 	
 	}
-
+	
+	#logo_area img:hover{
+		cursor:pointer;
+	}
+	
+	
 	.profilePhoto {
 		width: auto;
 		height: 30%;
@@ -94,6 +100,7 @@
 	}
 	.logout:hover{
 		color:#da7316;
+		cursor:pointer;
 	}
 	.navigator_menu {
 		list-style: none;
@@ -123,9 +130,9 @@
 	
 	div#menu_line>div:hover {
 		background: #009688;
-		font-size: 1.7rem;
 		color: #fff;
 		text-decoration:underline;
+		cursor:pointer;
 	}	
 	
         /*로그인 버튼*/
@@ -147,7 +154,7 @@
 	#login_area:hover{
 		color: #009688;
 		text-decoration:underline;
-		font-size: 1.8rem;
+		cursor:pointer;
 	}	
 
          /* 하위메뉴 */
@@ -160,15 +167,16 @@
 		padding-bottom: 1px;
 		width: 100%;
 		list-style: none;
-		background-color:darkgrey;
+		background-color:black;
 		transition: all 0.2s;
+
 	}
 	
 	.sub {
 		font-family: "gothic";
 		display: none;
 		float: unset;
-		top: 34px;
+		top: 27px;
 		left: 0;
 		z-index: 1;
 		width: 100%;
@@ -179,6 +187,7 @@
 	.sub>div:hover {
 		background: #009688;
 		color: #fff;
+		cursor:pointer;
 	}	
 
 
@@ -197,5 +206,17 @@
 		text-align: center;
 		font-size: 20px;
 	}
-       
+    .photo01{
+	    border-radius:0.2em;
+		border:1.5px solid lightgray;
+		text-align:center;
+		font-family: 'GongGothicMedium';
+		font-size:2rem;
+		margin:1rem;
+		padding:0.5rem;
+    }   
+    .photo02{
+    	border-top: 1px dashed lightgray;
+    	padding:0.5rem;
+    }
     

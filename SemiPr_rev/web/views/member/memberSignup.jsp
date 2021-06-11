@@ -5,7 +5,8 @@
 	href="<%=request.getContextPath()%>/Resource/css/memberSignup.css"> --%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/02memberSignup.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/font.css">
-        
+<br>
+<br>        
 <div id="logo" class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
@@ -13,7 +14,19 @@
 	</div>
 	<div class="col-md-4"></div>
 </div>
-
+<style>
+//jsp
+#pw-chk,#pw-chk2,#pw-chk3{font-family: 'GongGothicLight';}
+#gender{border:none;}
+#email-chk>p{font-family: 'GongGothicLight';}
+#email-chk>button{	border-radius:0.2em;
+  	border:1px solid black;
+  	background-color:lightgray;
+  	font-family: 'GongGothicLight';
+  	font-size:1.5rem;
+  	text-align: center;
+  	margin-bottom:0.1rem;}
+</style>
 
 <div class="row">
 	<div class="col-md-4"></div>
@@ -130,68 +143,69 @@
 				<div class="row">
 					<div class="join_title col-md-12">
 						<label for="yy">생년월일</label>
-					</div>				
+					</div>
 					<div id="bir_wrap" class="col-md-12">
-					
-          <!-- BIRTH_YY -->
-          <div class="row">
-					 	<div id="bir_yy" class="col-md-4">						
-							<div class="box02 col-md-12"> 
-								<input type="text" id="yy" class="int" name="yy" maxlength="4" placeholder="년(4자)" onblur="yearCheck();" required>
+
+						<!-- BIRTH_YY -->
+						<div class="row">
+							<div id="bir_yy" class="col-md-4">
+								<div class="box02 col-md-12">
+									<input type="text" id="yy" class="int" name="yy" maxlength="4"
+										placeholder="년(4자)" onblur="yearCheck();" required>
+								</div>
+								<div class="col-sm-12" id="yyError"></div>
 							</div>
-							<div class="col-sm-12" id="yyError"></div>
+
+							<!-- BIRTH_MM -->
+							<div id="bir_mm" class="col-md-4">
+								<div class="box02 col-md-12">
+									<select id="mm" class="sel col-md-12" name="mm" onblur="monthCheck();" required">
+										<option>월</option>
+										<option value="01">1</option>
+										<option value="02">2</option>
+										<option value="03">3</option>
+										<option value="04">4</option>
+										<option value="05">5</option>
+										<option value="06">6</option>
+										<option value="07">7</option>
+										<option value="08">8</option>
+										<option value="09">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+									</select>
+								</div>
+								<div class="col-sm-12" id="mmError"></div>
+							</div>
+
+
+							<!-- BIRTH_DD -->
+							<div id="bir_dd" class="col-md-4">
+								<div class="box02 col-md-12">
+									<input type="text" id="dd" class="int" name="dd"
+										onblur="dayCheck();" maxlength="2" placeholder="일" required>
+								</div>
+								<div class="col-sm-12" id="ddError"></div>
+							</div>
 						</div>
-
-						<!-- BIRTH_MM -->
-						<div id="bir_mm" class="col-md-4">
-							<div class="box02 col-md-12"> 
-								<select style="font-size:21px;"  id="mm" class="sel" name="mm" onblur="monthCheck();" required style="width:100%; height:100%">
-									<option>월</option>
-									<option value="01">1</option>
-									<option value="02">2</option>
-									<option value="03">3</option>
-									<option value="04">4</option>
-									<option value="05">5</option>
-									<option value="06">6</option>
-									<option value="07">7</option>
-									<option value="08">8</option>
-									<option value="09">9</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
-									<option value="12">12</option>
-								</select>
-							</div>
-							<div class="col-sm-12" id="mmError"></div>
-						</div>
-
-
-						<!-- BIRTH_DD -->
-						<div id="bir_dd" class="col-md-4">
-							<div class="box02 col-md-12"> 
-								<input type="text" id="dd" class="int" name="dd" onblur="dayCheck();" maxlength="2" placeholder="일" required>
-							</div>
-							<div class="col-sm-12" id="ddError"></div>
-						</div>					
 					</div>
 				</div>
-
-
 				<!-- GENDER -->
-				<div class="row">
-					<div class="join_title col-md-12">
-						<label for="gender">성별</label>
-					</div>
-					<div class="col-md-12">
-						<div class="box gender_code"> 
-							<select id="gender" name="gender" 	onblur="genderCheck();"	required class="sel" style="width:100%; height:100%">
-								<option>성별</option>
-								<option value="M">남자</option>
-								<option value="F">여자</option>
-							</select>
-						</div> 
-							<div id="genBox" class="col-md-12"></div>
-					</div>
-				</div>
+		<div class="row">
+			<div class="join_title col-md-12">
+				<label for="gender">성별</label>
+			</div>
+			<div class="col-md-12">
+				<div class="box gender_code"> 
+					<select id="gender" name="gender" 	onblur="genderCheck();"	required class="sel" style="width:100%; height:100%; border:none;">
+						<option>성별</option>
+						<option value="M">남자</option>
+						<option value="F">여자</option>
+					</select>
+				</div> 
+				<div id="genBox" class="col-md-12"></div>
+			</div>
+		</div>
 
 		
 				<!-- MOBILE -->
@@ -208,7 +222,7 @@
 				</div>
 
 
-					<!-- height -->
+				<!-- height -->
 				<div class="row">
 					<div class="join_title col-md-12">
 						<label>키</label>
@@ -246,7 +260,8 @@
 						<label>프로필 사진</label>
 					
 					</div>
-					<div class="col-md-12 inputFile"><input type="file" id="image" accept="image/*" name="userProfile"/></div>
+					<div class="col-md-12 inputFile">
+						<input type="file" id="image" accept="image/*" name="userProfile"/></div>
 					<div id="image_container" class="col-md-12"></div>
 					<div id="btn-container" class="col-md-12"></div>
 				</div>
@@ -254,13 +269,14 @@
 
 				<!-- JOIN BTN-->
 				<div class="btn_area row">
+					<br>
 					<div class="col-md-12">
-
+						<div class="col-md-3"></div>
 						<button type="submit" id="btnJoin" onsubmit="emailAuthCheck();">
 							가입하기
 						</button>
 					</div>
-				</div>			</div>
+				</div>
 			<!-- content-->
 
 		</form>

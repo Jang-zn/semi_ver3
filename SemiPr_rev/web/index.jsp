@@ -14,6 +14,7 @@
     		</div>
     	</div>
     </div>
+    
     <br><br><br>
     
     <div id="main_content" class="container"> 
@@ -108,38 +109,40 @@
     <br>
    <br>
     <!-- 서비스 소개 사진 -->
-   <div class="container, photo01">
+   <div class="container">
        <div class="row">
-           <div class="col-md-2"></div>
-           <div class="col-md-4">
+           <div class="col-md-1"></div>
+           <div class="col-md-4  photo01">
                <div class="row">
-                   <div class="col-md-12"> <img src=""  alt="" style="width: 100%; "></div>
+                   <div class="col-md-12 "> <img src="<%=request.getContextPath()%>/Resource/img/excPlan.png"  alt="" style="width: 100%;"></div>
                    <div class="col-md-3"></div>
-                   <div class="col-md-6">사진설명</div>
+                   <div class="col-md-6 photo02">가벼운 계획 수립</div>
                </div>
            </div>
-           <div class="col-md-4">
+           <div class="col-md-1"></div>
+           <div class="col-md-4  photo01">
                <div class="row">
-                   <div class="col-md-12"> <img src=""  alt="" style="width: 100%;"></div>
+                   <div class="col-md-12"> <img src="<%=request.getContextPath()%>/Resource/img/home_daily.png"  alt="" style="width: 100%;"></div>
                    <div class="col-md-3"></div>
-                   <div class="col-md-6">사진설명</div>
+                   <div class="col-md-6 photo02">간단한 계획 확인</div>
                </div>
            </div>
        </div>
        <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-4  photo01">
             <div class="row">
-                <div class="col-md-12"> <img src=""  alt="" style="width: 100%;"></div>
+                <div class="col-md-12"> <img src="<%=request.getContextPath()%>/Resource/img/home_noon.png"  alt="" style="width: 100%;"></div>
                 <div class="col-md-3"></div>
-                <div class="col-md-6">사진설명</div>
+                <div class="col-md-6 photo02">달성 현황 확인</div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-4  photo01">
             <div class="row">
-                <div class="col-md-12"> <img src=""  alt="" style="width: 100%;"></div>
+                <div class="col-md-12"> <img src="<%=request.getContextPath()%>/Resource/img/home_weekly.png"  alt="" style="width: 100%;"></div>
                 <div class="col-md-3"></div>
-                <div class="col-md-6">사진설명</div>
+                <div class="col-md-6 photo02">개인 기록 추적</div>
             </div>
         </div>
     </div>

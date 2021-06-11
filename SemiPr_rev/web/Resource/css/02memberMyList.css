@@ -38,6 +38,10 @@
    	margin-right:2rem;
    	margin-bottom:3rem;
 }
+.day_myList:hover{
+	background-color:black;
+	opacity:0.8;
+}
 
 .list_title_area{	
 	border-radius:0.2em;
@@ -50,7 +54,7 @@
   	font-family: 'GongGothicMedium';
   	font-size:2.3rem;
   	font-weight:bold;
-  	text-align:center;  	
+  	 	
 }
 
 #my_list_exc, #my_list_menu{	
@@ -71,6 +75,7 @@
 }
 
 .btn01{
+	margin-top:0.1rem;
 	border-radius:0.2em;
   	border:1px solid black;
   	background-color:lightgray;
@@ -111,3 +116,39 @@
 	background-color:white;
 }
 
+.menuinfocho, .excinfocho{
+	border-bottom:1px dashed gray;
+}
+.excinfocho:hover,
+.menuinfocho:hover{
+	background-color:rgba(95, 158, 160, 0.25);
+}
+.list_img_area{
+	padding-top:10px;
+}
+
+
+#myExc_info_box,
+#myMenu_info_box{
+	border:1px dashed gray;
+	font-family: 'GongGothicLight';
+}
+
+#myExc_info_box *,
+#myMenu_info_box *{
+	width:100%;
+	margin-top:1.5%;
+}
+.list_name_area{
+	margin-top:3%;
+}
+
+.list_name_area2{
+	margin-top:1.5%;
+}
+.list_button_area{
+		margin-top:3%;
+}
+#pageBar_myList_exc,#pageBar_myList_menu{
+	padding-top:1rem;
+}

@@ -6,17 +6,27 @@
 %>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/monthlyTrend.css">
-
-
+</div>
+     <div id="banner_home" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_monthlyTrend.png" alt="" style="width:100%; height:auto; margin:0;">
+    		</div>
+    	</div>
+    </div>
+<br>
+<br>
+<div class="container">
 
 <div id="container_progress_trend" class="row">
-	<div class="col-md-12">
-	<br>
-		
+	<div class="col-md-12">		
 	<div class="row">
         <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/weeklyTrend" class="btn1">주간 현황</a></div>
         <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/monthlyTrend" class="btn1">월간 현황</a></div>
     </div>
+	<br><br>
+	<div class="row"><div class="col-md-12 title02">월간 차트</div></div>
+	<div class="main row"></div>
 	<br>
 	<div class="row">
 		<div id="container_content_progress_trend" class="col-md-12">
@@ -40,7 +50,9 @@
 			
 			<!-- Sort select -->
 			<div id="select_sort" class="col-md-2">
-				<div class="col-md-12">
+			<br>
+			<br>
+				<div class="col-md-12 box">
 					<select id="dataType_select" style="width:100%">
 						<option name="dataType" value="monthlyExc">운동 실천현황</option>
 						<option name="dataType" value="monthlyMenu">식단 실천현황</option>
@@ -49,7 +61,9 @@
 					</select>
 				</div>
 				<br>
-				<div class="col-md-12">
+				<br>
+				<br>
+				<div class="col-md-12 box">
 					<select id="dataPeriod" style="width:100%">
 						<option name="term" value="1m">1개월 </option>
 						<option name="term" value="3m"> 3개월 </option> 
@@ -57,16 +71,22 @@
 						<option name="term" value="12m"> 1년 </option>
 					</select>
 				</div>
-				<div id="read_trend" class="col-md-12" name="read_trend" onclick="chartCall();">조회하기</div>
+				<br>
+				<br>
+				<br>
+				<div id="read_trend" class="col-md-12 btn01" name="read_trend" onclick="chartCall();">조회하기</div>
 			</div>
 		</div>
 	</div>
 	
-	
+	<br>
+	<br>
 	<!-- 운동 실천 현황 doughnut pie -->
 	<div class="row">
 		<div id="statistics_container" class="col-md-12">
-			<div id="excMonth" class="row"></div>
+			<div id="excMonth" class="row title02"></div>
+			<div class="main row"></div>
+			<br>
 			<div id="data_container" class="row">
 				<div id="" class="col-md-6 pieChart">
 					<div class="row cContainer">
@@ -75,19 +95,21 @@
 				</div>
 				<div id="" class="col-md-6 rank">
 					<div class="row">
-						<div class="col-md-8 cContainer"><canvas id="chart10" ></canvas></div>
-						<div class="col-md-4"></div>		
+						<div class="col-md-12 cContainer"><canvas id="chart10" ></canvas></div>	
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
+<br>
+<br>
 	<!-- 식단 실천 현황 doughnut pie -->
 	<div class="row">
 		<div id="statistics_container" class="col-md-12">
-			<div id="menuMonth" class="row"></div>
+			<div id="menuMonth" class="row title02"></div>
+			<div class="main row"></div>
+			<br>
 			<div id="data_container" class="row">
 				<div id="" class="col-md-6 pieChart">
 					<div class="row cContainer">
@@ -96,17 +118,17 @@
 				</div>
 				<div id="" class="col-md-6 rank">
 					<div class="row">
-						<div class="col-md-8 cContainer">
+						<div class="col-md-12 cContainer">
 							<canvas id="chart11" ></canvas>
 						</div>
-						<div class="col-md-4"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
+	<br>
+	<br>
 
 
 
@@ -148,6 +170,64 @@
 		</div>
 	</div>
 </div>
+
+<div id="modal"></div>
+<div class="modal-con modalE row">
+    <div class="col-md-12">
+    	<div class="title01 row">운동계획 미실천 사유를 골라주세요</div>
+    </div>
+    <div class="con row">
+    	<div class="row">
+	      	<div class="col-md-6 modalCheck">
+	      		1. 게으름 <input type="radio" name="reason-e" value="0"> 
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		2. 다른 일정 <input type="radio" name="reason-e" value="1"> 
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		3. 피치못할 사정 <input type="radio" name="reason-e" value="2"> 
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		4. 기타 <input type="radio" name="reason-e" value="3"> 
+	      	</div>
+      	</div>
+      	<div class="row">
+	      	<div class="col-md-3"></div>
+	      	<div class="col-md-6 modalbtn" id="modalbtnE">미실천 사유 등록</div>
+	      	<div class="col-md-3"></div>
+      	</div>
+    </div>
+</div>
+
+<div class="modal-con modalM">
+    <div class="col-md-12">
+    	<div class="title01 row">식단계획 미실천 사유를 골라주세요</div>
+    </div>
+    <div class="con row">
+    	<div class="row">
+	      	<div class="col-md-6 modalCheck">
+	      		<input type="radio" name="reason-m" value="0"> 1. 게으름
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		<input type="radio" name="reason-m" value="1"> 2. 회식
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		<input type="radio" name="reason-m" value="2"> 3. 야식
+	      	</div>
+	      	<div class="col-md-6 modalCheck">
+	      		<input type="radio" name="reason-m" value="3"> 4. 기타
+	      	</div>
+      	</div>
+      	<div class="row">
+	      	<div class="col-md-3"></div>
+	      	<div class="col-md-6 modalbtn" id="modalbtnM">미실천 사유 등록</div>
+	      	<div class="col-md-3"></div>
+      	</div>
+    </div>
+</div>
+
+
+
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/calendar.css">
 
@@ -161,15 +241,117 @@
 
 
 <script>
+
+
+let eventDate;
+
+function openModal(modalname, e){
+	  eventDate = $(e.target).siblings("span").text();
+	  document.get
+	  $("#modal").fadeIn(300);
+	  $("."+modalname).fadeIn(300);
+}
+	
+
+$("#modal, .close").on('click',function(){
+	  $("#modal").fadeOut(300);
+	  $(".modal-con").fadeOut(300);
+});
+
+
+const eReason=(r)=>{
+	let memberId = '<%=m.getMemberId()%>';
+	let reason = r;
+	let Date = eventDate
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/modalE",
+		data:{
+			"memberId":memberId,
+			"reason":reason,
+			"date":Date,
+		},
+		dataType:'text',
+		success:data=>{
+			let msg = data;
+			if(msg=='"등록 완료"'){
+				callPlan();
+				alert(msg);
+			}else{
+				alert(msg+" : 사유가 등록된 날짜입니다.");
+			}
+		}
+	})
+}
+
+
+$("#modalbtnE").click(e=>{
+	let reason = $("input:radio[name=reason-e]:checked").val();
+	
+	if(reason==0||reason==1||reason==2||reason==3){
+		$("input:radio[name=reason-e]:checked").prop("checked", false);
+		$("#modal").fadeOut(300);
+		$(".modal-con").fadeOut(300);
+		eReason(reason);
+	}else{
+		alert("사유를 선택해주세요");
+	}
+	
+});
+
+
+const mReason=(r)=>{
+	let memberId = '<%=m.getMemberId()%>';
+	let reason = r;
+	let Date = eventDate
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/modalM",
+		data:{
+			"memberId":memberId,
+			"reason":reason,
+			"date":Date,
+		},
+		dataType:'text',
+		success:data=>{
+			let msg = data;
+			if(msg=='"등록 완료"'){
+				callPlan();
+				alert(msg);
+			}else{
+				alert(msg+" : 사유가 등록된 날짜입니다.");
+			}
+		}
+	})
+}
+
+
+$("#modalbtnM").click(e=>{
+	let reason = $("input:radio[name=reason-m]:checked").val();
+	
+	if(reason==0||reason==1||reason==2||reason==3){
+		$("input:radio[name=reason-m]:checked").prop("checked", false);
+		$("#modal").fadeOut(300);
+		$(".modal-con").fadeOut(300);
+		mReason(reason);
+	}else{
+		alert("사유를 선택해주세요");
+	}
+	
+});
+
+
+
+
+
+
 //Piechart(10, 11) 작성 : 미실천 분류
 const pieE = $("#chart10");
 const pieChartE = new Chart(pieE, {
 	type:'pie',
 	data:{
-		labels:["게으름","다른 일정","피치못할사정","기타"],
+		labels:["게으름","다른 일정","피치못할사정","기타","예정"],
 		datasets: [{
-		    data: [0,0,0,0],
-		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)"],
+		    data: [0,0,0,0,0],
+		    backgroundColor: ["rgba(95,158,160,0.5)","rgba(218,115,22,0.5)", "rgba(223,72,51,0.5)","rgba(230,192,80,0.5)", "rgba(15, 28, 65, 0.3)"],
 		}]
 	},
 	options: {
@@ -191,10 +373,10 @@ const pieM = $("#chart11");
 const pieChartM = new Chart(pieM, {
 	type:'pie',
 	data:{
-		labels:["게으름","회식","야식","기타"],
+		labels:["게으름","회식","야식","기타","예정"],
 		datasets: [{
-		    data: [0,0,0,0],
-		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)"],
+		    data: [0,0,0,0,0],
+		    backgroundColor: ["rgba(95,158,160,0.5)","rgba(218,115,22,0.5)", "rgba(223,72,51,0.5)","rgba(230,192,80,0.5)", "rgba(15, 28, 65, 0.3)"],
 		}]
 	},
 	options: {
@@ -225,17 +407,20 @@ $.ajax({
 	url:"<%=request.getContextPath()%>/member/monthlyTrend/piecall?length="+list.length+"&yymm01="+yymm01,
 	dataType:"json",
 	success:data=>{
-		console.log(data);
-		let dataE = [0,0,0,0];
-		let dataM = [0,0,0,0];
+		let dataE = [0,0,0,0,0];
+		let dataM = [0,0,0,0,0];
 		data[0].forEach(function(ep){
 			if(ep!=null&&ep.check=='N'){
 				dataE[ep.reason]+=1
+			}else if(ep.check==null&&ep.count>0){
+				dataE[4]+=1
 			}
 		});
 		data[1].forEach(function(mp){
 			if(mp!=null&&mp.check=='N'){
 				dataM[mp.reason]+=1
+			}else if(mp.check==null&&mp.count>0){
+				dataM[4]+=1
 			}
 		});
 		
@@ -253,7 +438,7 @@ $.ajax({
 
 
 const callPlan=()=>{
-	let list = $("div.thism");
+	let list = $("span.thism");
 	let yymm01=null;
 	if(viewMonth<10){
 		yymm01=viewYear+"/0"+(viewMonth+1)+"/01"
@@ -272,25 +457,30 @@ const callPlan=()=>{
 				if(data[0][i]!=null && data[0][i].date==$($("span.thism")[i]).text() && data[0][i].count>0){
 					$($(".eCheck.thism")[i]).text("운동계획");
 					if(data[0][i].check=="Y"){
-						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(84, 166, 53, 0.7); color:rgba(15, 28, 65, 0.38);");
 						ey++;
 					}else if(data[0][i].check=="N"){
-						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("eReason");
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(223, 72, 51, 0.7); color:rgba(15, 28, 65, 0.38);").addClass("eReason");
 						en++
+					}else if(data[0][i].check=="C"){
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(230, 192, 80, 0.7); color:rgba(15, 28, 65, 0.38);");
 					}else{
-						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(204,204,204,0.8); color:white;");
+						$($(".eCheck.thism")[i]).attr("style","background-color:rgba(15, 10, 12, 0.4); color:rgba(15, 28, 65, 0.38);");
 					}
 				}
 				if(data[1][i]!=null && data[1][i].date==$($("span.thism")[i]).text() && data[1][i].count>0){
 					$($(".mCheck.thism")[i]).text("식단계획");
 					if(data[1][i].check=="Y"){
-						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(0,150,255,0.7); color:white;");
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(84, 166, 53, 0.7); color:rgba(15, 28, 65, 0.38);");
 						my++;
 					}else if(data[1][i].check=="N"){
-						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(255,0,0,0.6); color:white;").addClass("mReason");
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(223, 72, 51, 0.7); color:rgba(15, 28, 65, 0.38);").addClass("mReason");
 						mn++;
+					}else if(data[1][i].check=="C"){
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(230, 192, 80, 0.7); color:rgba(15, 28, 65, 0.38);");
+						
 					}else{
-						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(204,204,204,0.8); color:white;");
+						$($(".mCheck.thism")[i]).attr("style","background-color:rgba(15, 10, 12, 0.4); color:rgba(15, 28, 65, 0.38);");
 						
 					}
 				}
@@ -303,7 +493,14 @@ const callPlan=()=>{
 				reloadChart(mChart, my, mn, list.length);
 			}
 			pieCall();
-		}		
+			
+			$(".eReason").click(e=>{
+				openModal('modalE',e);
+			});
+			$(".mReason").click(e=>{
+				openModal('modalM',e);
+			});
+		}
 	});
 }
 
@@ -318,7 +515,7 @@ const excPie=(y, n, l)=>{
 	
 	    datasets: [{
 	        data: [y, n, l-y-n],
-	        backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
+	        backgroundColor: ["rgba(84,166,53,0.5)","rgba(223,72,51,0.5)", "rgba(15, 28, 65, 0.3)"],
 	    }]
 	};
 	
@@ -342,7 +539,7 @@ const menuPie=(y, n, l)=>{
 		labels: ["실천","미실천","남은 일자"],
 		datasets: [{
 		    data: [y, n, l-y-n],
-		    backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
+		    backgroundColor: ["rgba(84,166,53,0.5)","rgba(223,72,51,0.5)", "rgba(15, 28, 65, 0.3)"],
 		}]
 	};
 	mConfig ={
@@ -452,6 +649,8 @@ const chartCall=()=>{
 					data.forEach(function(el){
 						if(el!=null&&el.check!=null){
 							labels[countIndex++]=el.date;
+						}else{
+							labels[countIndex++]='0/0';
 						}
 					});
 					
@@ -461,6 +660,8 @@ const chartCall=()=>{
 					data.forEach(function(el){
 						if(el.check!=null){
 							planYN[countIndex++]=el.check=='Y'?1:0;
+						}else{
+							planYN[countIndex++]=0;
 						}
 					});
 					
@@ -489,8 +690,8 @@ const chartCall=()=>{
 			        	lineChart.data={
 							datasets:[{
 								label: '운동',
-						        borderColor : 'blue',
-						        backgroundColor:'rgba(0,0,255,0.3)',
+						        borderColor : '#5f9ea0',
+						        backgroundColor:'rgba(95,158,160,0.5)',
 						        borderWidth:2,
 						        fill:true,
 						        pointRadius:2
@@ -499,8 +700,8 @@ const chartCall=()=>{
 			        :	lineChart.data={
 							datasets:[{
 								label: '운동',
-							       borderColor : 'blue',
-							       backgroundColor:'rgba(0,0,255,0.3)',
+							       borderColor : '#5f9ea0',
+							       backgroundColor:'rgba(95,158,160,0.5)',
 							       borderWidth:2,
 							       fill:true,
 							}]
@@ -523,10 +724,11 @@ const chartCall=()=>{
 					//labels
 					let labels=[];
 					let countIndex=0;
-					if(el!=null){
 						data.forEach(function(el){
 							if(el.check!=null){
 								labels[countIndex++]=el.date;
+							}else{
+								labels[countIndex++]='0/0';
 							}
 						});
 						//YN check
@@ -535,7 +737,10 @@ const chartCall=()=>{
 						data.forEach(function(el){
 							if(el.check!=null){
 								planYN[countIndex++]=el.check=='Y'?1:0;
+							}else{
+								planYN[countIndex++]=0;
 							}
+							
 						});
 						lineChart.options={
 							plugins: {
@@ -559,8 +764,8 @@ const chartCall=()=>{
 							lineChart.data={
 								datasets:[{
 									label: '식단',
-							          borderColor : 'green',
-							          backgroundColor:'rgba(0,255,0,0.3)',
+							          borderColor : '#da7316',
+							          backgroundColor:'rgba(218,155,22,0.5)',
 							          borderWidth:2,
 							          fill:true,
 							          pointRadius:2
@@ -569,8 +774,8 @@ const chartCall=()=>{
 				        :lineChart.data={
 								datasets:[{
 									label: '식단',
-							           borderColor : 'green',
-							           backgroundColor:'rgba(0,255,0,0.3)',
+							           borderColor : '#da7316',
+							           backgroundColor:'rgba(218,155,22,0.5)',
 							           borderWidth:2,
 							           fill:true,
 								}]
@@ -579,10 +784,7 @@ const chartCall=()=>{
 						lineChart.data.labels=labels;
 						lineChart.data.datasets[0].data=planYN;
 						lineChart.update();
-					}else{
-						$("#Practice_trend").html("<div class='lineEmpty col-md-12'>계획을 세우고 실천해보세요! 결과를 그래프로 확인해 볼 수 있습니다</div>");
 					}
-				}
 			});
 			break;
 			
@@ -640,8 +842,8 @@ const chartCall=()=>{
 							lineChart.data={
 							datasets:[{
 								label: '운동무게(rep*set*weight)',
-					            borderColor : 'blue',
-					            backgroundColor:'rgba(0,0,255,0.3)',
+					            borderColor : '#5f9ea0',
+					            backgroundColor:'rgba(95,158,160,0.5)',
 					            borderWidth:2,
 					            pointBorderWidth:1,
 							    pointRadius:2
@@ -650,8 +852,8 @@ const chartCall=()=>{
 				        :	lineChart.data={
 								datasets:[{
 									label: '운동무게(rep*set*weight)',
-						            borderColor : 'blue',
-						            backgroundColor:'rgba(0,0,255,0.3)',
+						            borderColor : '#5f9ea0',
+						            backgroundColor:'rgba(95,158,160,0.5)',
 						            borderWidth:2,
 						            pointBorderWidth:1,
 						            
@@ -671,7 +873,6 @@ const chartCall=()=>{
 				url:"<%=request.getContextPath()%>/member/monthlyChart?length="+length+"&sysdate="+sysdate+"&key=stackKcals",
 				dataType:"json",
 				success:data=>{
-					console.log(data);
 					//labels
 					let labels=[];
 					let countIndex=0;
@@ -746,22 +947,6 @@ const chartCall=()=>{
 							lineChart.data={
 							datasets:[{
 								label: 'Kcal',
-					            borderColor : 'rgba(0,255,0,1)',
-					            backgroundColor:'rgba(0,255,0,0.3)',
-					            borderWidth:2,
-					            pointBorderWidth:1,
-					            pointRadius:1
-					            
-							},{
-								label: '탄수화물',
-					            borderColor : 'rgba(102,102,153,1)',
-					            backgroundColor:'rgba(102,102,153,0.3)',
-					            borderWidth:2,
-					            pointBorderWidth:1,
-					            pointRadius:1
-					            
-							},{
-								label: '단백질',
 					            borderColor : 'rgba(255,51,51,1)',
 					            backgroundColor:'rgba(255,51,51,0.3)',
 					            borderWidth:2,
@@ -769,9 +954,25 @@ const chartCall=()=>{
 					            pointRadius:1
 					            
 							},{
+								label: '탄수화물',
+					            borderColor : 'rgba(230,192,80,1)',
+					            backgroundColor:'rgba(230,192,80,0.3)',
+					            borderWidth:2,
+					            pointBorderWidth:1,
+					            pointRadius:1
+					            
+							},{
+								label: '단백질',
+					            borderColor : 'rgba(223,72,51,1)',
+					            backgroundColor:'rgba(223,72,51,0.3)',
+					            borderWidth:2,
+					            pointBorderWidth:1,
+					            pointRadius:1
+					            
+							},{
 								label: '지방',
-					            borderColor : 'rgba(204,153,51,1)',
-					            backgroundColor:'rgba(204,153,51,0.3)',
+					            borderColor : 'rgba(84,166,53,1)',
+					            backgroundColor:'rgba(84,166,53,0.3)',
 					            borderWidth:2,
 					            pointBorderWidth:1,
 					            pointRadius:1
@@ -780,37 +981,32 @@ const chartCall=()=>{
 				        :lineChart.data={
 								datasets:[{
 									label: 'Kcal',
-						            borderColor : 'rgba(0,255,0,1)',
-						            backgroundColor:'rgba(0,255,0,0.3)',
-						            borderWidth:2,
-						            pointBorderWidth:1,
-								},{
-									label: '탄수화물',
-						            borderColor : 'rgba(102,102,153,1)',
-						            backgroundColor:'rgba(102,102,153,0.3)',
-						            borderWidth:2,
-						            pointBorderWidth:1,
-								},{
-									label: '단백질',
 						            borderColor : 'rgba(255,51,51,1)',
 						            backgroundColor:'rgba(255,51,51,0.3)',
 						            borderWidth:2,
 						            pointBorderWidth:1,
 								},{
+									label: '탄수화물',
+						            borderColor : 'rgba(230,192,80,1)',
+						            backgroundColor:'rgba(230,192,80,0.3)',
+						            borderWidth:2,
+						            pointBorderWidth:1,
+								},{
+									label: '단백질',
+						            borderColor : 'rgba(223,72,51,1)',
+						            backgroundColor:'rgba(223,72,51,0.3)',
+						            borderWidth:2,
+						            pointBorderWidth:1,
+								},{
 									label: '지방',
-						            borderColor : 'rgba(204,153,51,1)',
-						            backgroundColor:'rgba(204,153,51,0.3)',
+						            borderColor : 'rgba(84,166,53,1)',
+						            backgroundColor:'rgba(84,166,53,0.3)',
 						            borderWidth:2,
 						            pointBorderWidth:1,
 								}]
 							}
 
 					lineChart.data.labels=labels;
-					console.log(lineChart.data.datasets);
-					console.log(stackKcal);
-					console.log(stackCH);
-					console.log(stackProt);
-					
 					lineChart.data.datasets[0].data=stackKcal;
 					lineChart.data.datasets[1].data=stackCH;
 					lineChart.data.datasets[2].data=stackProt;
@@ -823,6 +1019,10 @@ const chartCall=()=>{
 };
 
 window.onload=chartCall();
+
+
+
+
 
 </script>
 <script src="<%=request.getContextPath()%>/Resource/js/calendar.js"></script>

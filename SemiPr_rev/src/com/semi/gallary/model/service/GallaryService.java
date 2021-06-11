@@ -37,9 +37,9 @@ public class GallaryService {
 		return result;	
 	}
 	
-	public int selectGallaryCount() {
+	public int selectGallaryCount(String memberId) {
 		Connection conn=getConnection();
-		int result=dao.selectGallaryCount(conn);
+		int result=dao.selectGallaryCount(conn, memberId);
 		close(conn);
 		return result;
 	}

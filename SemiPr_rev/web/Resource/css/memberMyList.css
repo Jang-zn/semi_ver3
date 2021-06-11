@@ -96,3 +96,16 @@ div.list_button_area {
 .mylist_box {
 	
 }
+
+.btn01{
+	font-family:'GongGothiclight';	
+	border-radius:0.2em;
+	border:1px solid black;
+	background-color:lightgray;	
+	font-size:16px;
+	width:110px;
+	padding:1px;
+	margin-top:0.5rem;
+	margin-left:0.3rem;
+	text-align:center;
+}
