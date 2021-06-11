@@ -222,12 +222,13 @@
 		}else{
 			tlist = $(e.target);
 		}
-
+		console.log(tlist);
+		
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/selectmenu",
 			type:"post",
 			data:{
-				Menuid:tlist.children(".list_name_area").children(".menuid").val()
+				Menuid:tlist.children(".list_name_area2").children(".menuid").val()
 				},
 			success:data=>{
 				
