@@ -316,4 +316,7 @@
 .modalbtn:hover{
 	background-color: rgba(221, 92, 73, 0.78);
 }
-
+select:focus, select>option>focus{
+	border:0;
+	outline:none;
+}

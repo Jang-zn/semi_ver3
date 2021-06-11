@@ -17,7 +17,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 		<div style="font-family: 'GongGothicMedium';
     font-size: 2.3rem;
     font-weight: bold;"id="sub_change" class="">
-		       <div class="title02 col-md-2">식단 List</div>
+		       <div class="title02 col-md-2">> 식단 List</div>
 		        
     	</div>
 		<div id="sort_container" class="col-md-2">

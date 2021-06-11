@@ -344,7 +344,7 @@ const pieChartE = new Chart(pieE, {
 		labels:["게으름","다른 일정","피치못할사정","기타","예정"],
 		datasets: [{
 		    data: [0,0,0,0,0],
-		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)", "rgba(15, 28, 65, 0.49)"],
+		    backgroundColor: ["rgba(95,158,160,0.5)","rgba(218,115,22,0.5)", "rgba(223,72,51,0.5)","rgba(230,192,80,0.5)", "rgba(15, 28, 65, 0.3)"],
 		}]
 	},
 	options: {
@@ -369,7 +369,7 @@ const pieChartM = new Chart(pieM, {
 		labels:["게으름","회식","야식","기타","예정"],
 		datasets: [{
 		    data: [0,0,0,0,0],
-		    backgroundColor: ["rgba(255,0,0,0.7)","rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)","rgba(255,255,0,0.7)", "rgba(15, 28, 65, 0.49)"],
+		    backgroundColor: ["rgba(95,158,160,0.5)","rgba(218,115,22,0.5)", "rgba(223,72,51,0.5)","rgba(230,192,80,0.5)", "rgba(15, 28, 65, 0.3)"],
 		}]
 	},
 	options: {
@@ -508,7 +508,7 @@ const excPie=(y, n, l)=>{
 	
 	    datasets: [{
 	        data: [y, n, l-y-n],
-	        backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
+	        backgroundColor: ["rgba(84,166,53,0.5)","rgba(223,72,51,0.5)", "rgba(15, 28, 65, 0.3)"],
 	    }]
 	};
 	
@@ -532,7 +532,7 @@ const menuPie=(y, n, l)=>{
 		labels: ["실천","미실천","남은 일자"],
 		datasets: [{
 		    data: [y, n, l-y-n],
-		    backgroundColor: ["rgba(0,150,255,0.7)","rgba(255,0,0,0.6)", "#AAA"],
+		    backgroundColor: ["rgba(84,166,53,0.5)","rgba(223,72,51,0.5)", "rgba(15, 28, 65, 0.3)"],
 		}]
 	};
 	mConfig ={
@@ -683,8 +683,8 @@ const chartCall=()=>{
 			        	lineChart.data={
 							datasets:[{
 								label: '운동',
-						        borderColor : 'blue',
-						        backgroundColor:'rgba(0,0,255,0.3)',
+						        borderColor : '#5f9ea0',
+						        backgroundColor:'rgba(95,158,160,0.5)',
 						        borderWidth:2,
 						        fill:true,
 						        pointRadius:2
@@ -693,8 +693,8 @@ const chartCall=()=>{
 			        :	lineChart.data={
 							datasets:[{
 								label: '운동',
-							       borderColor : 'blue',
-							       backgroundColor:'rgba(0,0,255,0.3)',
+							       borderColor : '#5f9ea0',
+							       backgroundColor:'rgba(95,158,160,0.5)',
 							       borderWidth:2,
 							       fill:true,
 							}]
@@ -757,8 +757,8 @@ const chartCall=()=>{
 							lineChart.data={
 								datasets:[{
 									label: '식단',
-							          borderColor : 'green',
-							          backgroundColor:'rgba(0,255,0,0.3)',
+							          borderColor : '#da7316',
+							          backgroundColor:'rgba(218,155,22,0.5)',
 							          borderWidth:2,
 							          fill:true,
 							          pointRadius:2
@@ -767,8 +767,8 @@ const chartCall=()=>{
 				        :lineChart.data={
 								datasets:[{
 									label: '식단',
-							           borderColor : 'green',
-							           backgroundColor:'rgba(0,255,0,0.3)',
+							           borderColor : '#da7316',
+							           backgroundColor:'rgba(218,155,22,0.5)',
 							           borderWidth:2,
 							           fill:true,
 								}]
@@ -835,8 +835,8 @@ const chartCall=()=>{
 							lineChart.data={
 							datasets:[{
 								label: '운동무게(rep*set*weight)',
-					            borderColor : 'blue',
-					            backgroundColor:'rgba(0,0,255,0.3)',
+					            borderColor : '#5f9ea0',
+					            backgroundColor:'rgba(95,158,160,0.5)',
 					            borderWidth:2,
 					            pointBorderWidth:1,
 							    pointRadius:2
@@ -845,8 +845,8 @@ const chartCall=()=>{
 				        :	lineChart.data={
 								datasets:[{
 									label: '운동무게(rep*set*weight)',
-						            borderColor : 'blue',
-						            backgroundColor:'rgba(0,0,255,0.3)',
+						            borderColor : '#5f9ea0',
+						            backgroundColor:'rgba(95,158,160,0.5)',
 						            borderWidth:2,
 						            pointBorderWidth:1,
 						            
@@ -940,22 +940,6 @@ const chartCall=()=>{
 							lineChart.data={
 							datasets:[{
 								label: 'Kcal',
-					            borderColor : 'rgba(0,255,0,1)',
-					            backgroundColor:'rgba(0,255,0,0.3)',
-					            borderWidth:2,
-					            pointBorderWidth:1,
-					            pointRadius:1
-					            
-							},{
-								label: '탄수화물',
-					            borderColor : 'rgba(102,102,153,1)',
-					            backgroundColor:'rgba(102,102,153,0.3)',
-					            borderWidth:2,
-					            pointBorderWidth:1,
-					            pointRadius:1
-					            
-							},{
-								label: '단백질',
 					            borderColor : 'rgba(255,51,51,1)',
 					            backgroundColor:'rgba(255,51,51,0.3)',
 					            borderWidth:2,
@@ -963,9 +947,25 @@ const chartCall=()=>{
 					            pointRadius:1
 					            
 							},{
+								label: '탄수화물',
+					            borderColor : 'rgba(230,192,80,1)',
+					            backgroundColor:'rgba(230,192,80,0.3)',
+					            borderWidth:2,
+					            pointBorderWidth:1,
+					            pointRadius:1
+					            
+							},{
+								label: '단백질',
+					            borderColor : 'rgba(223,72,51,1)',
+					            backgroundColor:'rgba(223,72,51,0.3)',
+					            borderWidth:2,
+					            pointBorderWidth:1,
+					            pointRadius:1
+					            
+							},{
 								label: '지방',
-					            borderColor : 'rgba(204,153,51,1)',
-					            backgroundColor:'rgba(204,153,51,0.3)',
+					            borderColor : 'rgba(84,166,53,1)',
+					            backgroundColor:'rgba(84,166,53,0.3)',
 					            borderWidth:2,
 					            pointBorderWidth:1,
 					            pointRadius:1
@@ -974,26 +974,26 @@ const chartCall=()=>{
 				        :lineChart.data={
 								datasets:[{
 									label: 'Kcal',
-						            borderColor : 'rgba(0,255,0,1)',
-						            backgroundColor:'rgba(0,255,0,0.3)',
-						            borderWidth:2,
-						            pointBorderWidth:1,
-								},{
-									label: '탄수화물',
-						            borderColor : 'rgba(102,102,153,1)',
-						            backgroundColor:'rgba(102,102,153,0.3)',
-						            borderWidth:2,
-						            pointBorderWidth:1,
-								},{
-									label: '단백질',
 						            borderColor : 'rgba(255,51,51,1)',
 						            backgroundColor:'rgba(255,51,51,0.3)',
 						            borderWidth:2,
 						            pointBorderWidth:1,
 								},{
+									label: '탄수화물',
+						            borderColor : 'rgba(230,192,80,1)',
+						            backgroundColor:'rgba(230,192,80,0.3)',
+						            borderWidth:2,
+						            pointBorderWidth:1,
+								},{
+									label: '단백질',
+						            borderColor : 'rgba(223,72,51,1)',
+						            backgroundColor:'rgba(223,72,51,0.3)',
+						            borderWidth:2,
+						            pointBorderWidth:1,
+								},{
 									label: '지방',
-						            borderColor : 'rgba(204,153,51,1)',
-						            backgroundColor:'rgba(204,153,51,0.3)',
+						            borderColor : 'rgba(84,166,53,1)',
+						            backgroundColor:'rgba(84,166,53,0.3)',
 						            borderWidth:2,
 						            pointBorderWidth:1,
 								}]

@@ -53,7 +53,7 @@
 		<div id="weekly_check" class="col-md-8">
 			<div id="weekly_check_title_main" class="row">
 				<div class="col-md-10 title01" style="margin-right:4.8rem;">> 주간 달성 현황</div>
-				<div class="col-md-2 btn01" >상세보기</div>
+				<div class="col-md-2 btn01" onclick="location.assign('<%=request.getContextPath()%>/member/weeklyTrend')">상세보기</div>
 			</div>
 			<div id="weekly_check_daybyday_exc" class="row">
 				<div class="text_plan col-md-4 title02" style="width:15rem; margin-top:1rem; text-align:right">운동 현황</div>

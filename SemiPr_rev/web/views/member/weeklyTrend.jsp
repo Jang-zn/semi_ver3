@@ -81,7 +81,7 @@
                         <div class="col-md-1"><div class="weeklyExcStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyExcStatus">일</div></div>
                     </div>
-                    <div class="col-md-3 title01" >연속 <%=excAchieve %> 일 달성</div>
+                    <div class="col-md-3 title01" >연속 <span id="excrecord2"></span>일 달성</div>
                 </div>
             </div>  
             <div class="col-md-12">
@@ -96,7 +96,7 @@
                         <div class="col-md-1"><div class="weeklyMenuStatus">토</div></div>
                         <div class="col-md-1"><div class="weeklyMenuStatus">일</div></div>
                     </div>
-                    <div class="col-md-3 title01" style="margin-top:1.2rem;">연속 <%=menuAchieve %> 일 달성 </div>                    
+                    <div class="col-md-3 title01" style="margin-top:1.2rem;">연속 <span id="menurecord2"></span>일 달성 </div>                    
                     
                 </div>
             </div>         
@@ -255,7 +255,19 @@
                 </div>
             </div>
             
-                
+             <script>
+             $.ajax({
+         		url:"<%=request.getContextPath()%>/ajax/dailyrecord",
+         			type:"get",
+         			dataType:"text",
+         			success:data=>{
+         				data=data.split(",");
+         				$("#excrecord2").text(data[0].replace("[",""));
+         				$("#menurecord2").text(data[1].replace("]",""));
+         				console.log(data);
+         			}		
+         	});
+             </script>
             
             
             
