@@ -1,4 +1,4 @@
-package com.semi.exc.controller;
+package com.semi.menu.controller;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.semi.exc.model.service.ExcService;
+import com.semi.menu.model.service.MenuService;
 
 /**
- * Servlet implementation class ModalExcServlet
+ * Servlet implementation class ModalMenuServlet
  */
-@WebServlet("/ajax/modalE")
-public class ModalExcServlet extends HttpServlet {
+@WebServlet("/ajax/modalM")
+public class ModalMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModalExcServlet() {
+    public ModalMenuServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,7 +51,7 @@ public class ModalExcServlet extends HttpServlet {
 			date = year+"/"+month+"/"+d;
 		}
 		int reason = Integer.parseInt(request.getParameter("reason"));
-		int result = new ExcService().reasonUpdate(memberId, date, reason);
+		int result = new MenuService().reasonUpdate(memberId, date, reason);
 		
 		String msg="";
 		if(result>0) {
@@ -60,8 +60,6 @@ public class ModalExcServlet extends HttpServlet {
 			msg="등록 실패";
 		}
 		new Gson().toJson(msg, response.getWriter());
-		
-		
 	}
 
 	/**
