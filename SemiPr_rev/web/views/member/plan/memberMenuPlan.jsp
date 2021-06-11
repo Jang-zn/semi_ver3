@@ -156,10 +156,15 @@ String pageBar = (String)request.getAttribute("pageBar");
 	
 	$("#excSort").change(e=>{
 		let menuSort = $(e.target).val();
-		location.assign("<%=request.getContextPath()%>/member/menuPlan?numPerpage=10&menuSort="+menuSort);
+		location.assign("<%=request.getContextPath()%>/member/menuPlan?numPerpage=6&menuSort="+menuSort);
 	});
 	
-	 
+
+	$(function() {
+		let sort = $("#exc_box_sort").text();
+		$("#excSort").val(sort);
+	}); 
+	
 	// 서브밋하면 확인창만 띄워주고 그 페이지 유지하게 처리
 
 	const menuSubmit=()=>{

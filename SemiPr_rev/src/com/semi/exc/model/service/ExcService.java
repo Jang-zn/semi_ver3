@@ -159,4 +159,18 @@ public class ExcService {
 		}
 		return result;
 	}
+	
+	public int reasonUpdate(String memberId, String date, int reason) {
+		Connection conn = getConnection();
+		int result = dao.reasonUpdate(conn, memberId, date, reason);
+		if(result!=0) {
+			commit(conn);
+			close(conn);
+		}else {
+			rollback(conn);
+			close(conn);
+		}
+		return result;
+		
+	}
 }
