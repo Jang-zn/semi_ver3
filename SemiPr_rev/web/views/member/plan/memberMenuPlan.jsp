@@ -80,6 +80,7 @@ String pageBar = (String)request.getAttribute("pageBar");
 	                <div id="exc_img" class="col-md-8"><img src="<%=list.get(0).getFileList().get(0)%>"></div>
 	                <div id="exc_submit" class="col-md-4">
 	                    <form action="<%=request.getContextPath()%>/member/menuPlan/submit" method="post" onsubmit="return menuSubmit();">
+	                    	<br><br><br>
 	                        <select name="week">
 	                            <option value="월">월</option>
 	                            <option value="화">화</option>
@@ -88,12 +89,12 @@ String pageBar = (String)request.getAttribute("pageBar");
 	                            <option value="금">금</option>
 	                            <option value="토">토</option>
 	                            <option value="일">일</option>
-	                        </select><br>
+	                        </select><br><br>
 	                        <select name="dayTime">
 	                            <option value="아침">아침</option>
 	                            <option value="점심">점심</option>
 	                            <option value="저녁">저녁</option>
-	                        </select><br>
+	                        </select><br><br>
 	                        <input type="submit" value="등록하기"><br>
 	                        <input id="excName" type="hidden" name="menuName">
 	                    </form>
