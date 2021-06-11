@@ -68,12 +68,13 @@ public class GallaryDao {
 		}
 		return result;				
 	}
-	public int selectGallaryCount(Connection conn){
+	public int selectGallaryCount(Connection conn, String memberId){
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		int result = 0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectGallaryCount"));
+			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);
 			

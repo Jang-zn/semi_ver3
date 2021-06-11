@@ -90,7 +90,8 @@
                 
 								
 				
-				<%}else{ %> <div class="row">
+				<%}else{ %> 
+				<div class="row">
 				<% 	for(Gallary g : list) {%>
 					
 							<!-- if (m.getMemberId().equals(g.getMemberId())){ -->
@@ -102,8 +103,8 @@
 							</div>
 					 																		
 					<%}%>
+					</div>
 				<%}%>	
-				</div>				
 				<div id="n_pageBar" class="row" style="text-align:center;">
 					<div class="col-md-12"><%=pageBar %></div>
 				</div> 
