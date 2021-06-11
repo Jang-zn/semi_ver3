@@ -114,7 +114,7 @@
            <div class="col-md-1"></div>
            <div class="col-md-4  photo01">
                <div class="row">
-                   <div class="col-md-12 "> <img src=""  alt="" style="width: 100%; "></div>
+                   <div class="col-md-12 "> <img src="<%=request.getContextPath()%>/Resource/img/excPlan.png"  alt="" style="width: 100%;"></div>
                    <div class="col-md-3"></div>
                    <div class="col-md-6 photo02">가벼운 계획 수립</div>
                </div>
