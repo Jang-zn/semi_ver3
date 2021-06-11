@@ -6,13 +6,20 @@
 %>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/Resource/css/monthlyTrend.css">
-
-
+</div>
+     <div id="banner_home" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_monthlyTrend.png" alt="" style="width:100%; height:auto; margin:0;">
+    		</div>
+    	</div>
+    </div>
+<br>
+<br>
+<div class="container">
 
 <div id="container_progress_trend" class="row">
-	<div class="col-md-12">
-	<br>
-		
+	<div class="col-md-12">		
 	<div class="row">
         <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/weeklyTrend" class="btn1">주간 현황</a></div>
         <div class="col-md-2 title00"><a href="<%=request.getContextPath()%>/member/monthlyTrend" class="btn1">월간 현황</a></div>

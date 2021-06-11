@@ -22,8 +22,17 @@
 	href="<%=request.getContextPath()%>/Resource/css/noonList.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Resource/css/font.css">	
 
-<div class="container">
+</div>
+<!--------------- 배너 ---------->
+     <div id="banner_home" class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<img src="<%=request.getContextPath()%>/Resource/img/banner_noonList.png" alt="" style="width:100%; height:auto; margin:0;">
+    		</div>
+    	</div>
+    </div>
 <br><br>
+<div class="container">
 	<div class="row">
 		<div id="n_title" class="col-md-12 title01">> 눈바디</div>		
 			<%-- <img src="<%=request.getContextPath()%>/Resource/img/noonbody.png"><hr/> --%>
