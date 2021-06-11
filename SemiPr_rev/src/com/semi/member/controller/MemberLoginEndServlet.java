@@ -50,6 +50,7 @@ public class MemberLoginEndServlet extends HttpServlet {
 		
 		if(m!=null) {
 			HttpSession session = request.getSession();
+			session.setAttribute("request", request);
 			session.setAttribute("logged", m);
 			response.sendRedirect(request.getContextPath());
 		}else {

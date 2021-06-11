@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.annotation.WebListener;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -32,7 +34,20 @@ public class AutoPlanInsertListener implements HttpSessionAttributeListener {
      * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
      */
     public void attributeAdded(HttpSessionBindingEvent se)  { 
+
     	HttpSession session = se.getSession();
+    	HttpServletRequest request = (HttpServletRequest)session.getAttribute("request");
+    	if(request!=null) {
+    		Cookie[] cs = request.getCookies();
+    		if(cs!=null) {
+    			for(Cookie c : cs) {
+    				if(c.getName().equals("saveId")) {
+    					return;
+    				}
+    			}
+    		}
+    	}
+    	
     	Member member = (Member)session.getAttribute("logged");
     	if(member!=null) {
 	    	String memberId = member.getMemberId();

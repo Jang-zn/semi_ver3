@@ -56,9 +56,9 @@ public class MemberMyListServlet extends HttpServlet {
 	        dayval=days[calendar.get(Calendar.DAY_OF_WEEK)-1];
 		}
 		
-		System.out.println(dayval);
+		
 		int totalData=new MemberService().SelectMemberExcListCount(dayval,memberid);
-		System.out.println(totalData);
+		
 		int cPage2;
 		try {
 			cPage2 = Integer.parseInt(request.getParameter("cPage2"));
